@@ -1,0 +1,45 @@
+﻿/* Improve search input appearance */
+.dataTables_filter input {
+   border: 1px solid #ccc;
+   border-radius: 20px;
+   padding: 6px 12px;
+   margin-left: 10px;
+}
+
+/* Style the "entries per page" dropdown */
+.dataTables_length select {
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   padding: 4px 8px;
+}
+
+/* Improve table header appearance */
+#tblDataU thead th {
+   background-color: #343a40;
+   color: white;
+}
+
+/* Add some padding to the DataTable */
+.dataTables_wrapper {
+   padding: 20px;
+}
+
+/* Style pagination buttons */
+.dataTables_paginate .paginate_button {
+   border-radius: 4px;
+   margin: 0 2px;
+}
+
+   .dataTables_paginate .paginate_button.current {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: white !important;
+   }
+
+/* Improve responsive layout on small screens */
+@media (max-width: 767px) {
+   .dataTables_filter, .dataTables_length {
+      text-align: left;
+      margin-bottom: 10px;
+   }
+}

@@ -1,0 +1,121 @@
+﻿@model IEnumerable<University>
+<style>
+    .university-card {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .university-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        width: 100%;
+
+
+    }
+
+    .university-image {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .image-container:hover .university-image {
+        transform: scale(1.1);
+    }
+
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .image-container:hover .image-overlay {
+        opacity: 1;
+    }
+
+    .university-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .university-title {
+        height: 50px;
+        overflow: hidden;
+        margin-top: 10px;
+    }
+
+    .university-location {
+        height: 30px;
+        overflow: hidden;
+    }
+
+    .university-price {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .details-button {
+        margin-top: auto;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+        .details-button:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="row mb-3">
+    <div class="col-md-6 offset-md-3">
+        <form asp-action="UniversityView" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" name="searchString" placeholder="Search universities...">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row pb-3">
+    @foreach (var university in Model)
+    {
+        <div class="col-lg-3 col-sm-6 mb-4">
+            <div class="card border-0 p-3 shadow border-top border-5 rounded university-card">
+                <div class="image-container">
+                    <img src="@university.ImageUrl" class="university-image" alt="@university.Name" />
+                    <div class="image-overlay"></div>
+                </div>
+                <div class="card-body pb-0 university-body">
+                    <h5 class="card-title text-dark opacity-75 text-uppercase text-center university-title">@university.Name</h5>
+                    <p class="card-text text-warning text-center university-location">@university.location</p>
+                    <div class="university-price">
+                        <p class="text-opacity-75 text-dark text-center mb-0">
+                            <span class="text-decoration">@university.type</span>
+                        </p>
+                        <p class="text-opacity-75 text-dark text-center">
+                            Rank In Kuwait:
+                            <span>@university.KuwaitRank.ToString()</span>
+                        </p>
+                    </div>
+                    <a asp-action="UniDetails" asp-route-UniversityId="@university.Id" class="btn btn-primary bg-gradient border-0 form-control mt-2 details-button">Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

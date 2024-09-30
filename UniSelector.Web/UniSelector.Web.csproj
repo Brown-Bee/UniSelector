@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\UniSelector.DataAccess\UniSelector.DataAccess.csproj" />
+        <ProjectReference Include="..\UniSelector.Utility\UniSelector.Utility.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Areas\University\Controllers\" />
+        <Folder Include="Areas\University\Views\" />
+        <Folder Include="wwwroot\Images\University\Gallery\" />
+        <Folder Include="wwwroot\Images\University\" />
+        <Folder Include="wwwroot\Images\Product\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\UniSelector.DataAccess\UniSelector.DataAccess.csproj" />
+      <ProjectReference Include="..\UniSelector.Models\UniSelector.Models.csproj" />
+      <ProjectReference Include="..\UniSelector.Utility\UniSelector.Utility.csproj" />
+    </ItemGroup>
+
+</Project>

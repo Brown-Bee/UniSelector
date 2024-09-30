@@ -1,0 +1,47 @@
+﻿@page
+@using UniSelector.Web.Areas.Identity.Pages.Account.Manage
+@model UniSelector.Web.Areas.Identity.Pages.Account.Manage.ExternalLoginsModel
+@{
+    ViewData["Title"] = "Manage your external logins";
+    ViewData["ActivePage"] = ManageNavPages.ExternalLogins;
+}
+
+<partial name="_StatusMessage" for="StatusMessage" />
+@if (Model.CurrentLogins?.Count > 0)
+{
+    <h3>Registered Logins</h3>
+    <table class="table">
+        <tbody>
+            @foreach (var login in Model.CurrentLogins)
+            {
+                <tr>
+                    <td>@login.ProviderDisplayName</td>
+                    <td>
+                        @if (Model.ShowRemoveButton)
+                        {
+                            <form asp-page-handler="RemoveLogin" method="post">
+                                <input type="hidden" name="LoginProvider" value="@login.LoginProvider" />
+                                <input type="hidden" name="ProviderKey" value="@login.ProviderKey" />
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@if (Model.OtherLogins?.Count > 0)
+{
+    <h4>Add External Logins</h4>
+    <hr />
+    <form method="post" asp-page-handler="LinkLogin">
+        @foreach (var provider in Model.OtherLogins)
+        {
+            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name">
+                Link @provider.DisplayName
+            </button>
+        }
+    </form>
+}
+
