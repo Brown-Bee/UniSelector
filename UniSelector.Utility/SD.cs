@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
-namespace BulkyBook.Utility
+namespace UniSelector.Utility
 {
 
     public static class SD
     {
-        public const string Role_Customer = "Customer";
-        public const string Role_Company = "Company";
+        public const string Role_User = "User";
+        public const string Role_University = "University";
         public const string Role_Admin = "Admin";
         public const string Role_Employee = "Employee";
     }

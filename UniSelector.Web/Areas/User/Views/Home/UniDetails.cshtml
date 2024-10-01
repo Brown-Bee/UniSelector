@@ -61,6 +61,37 @@
                     <h4 class="text-primary mt-4">Description</h4>
                     <hr />
                     <p>@Html.Raw(Model.Description)</p>
+                    <hr />
+                    <h4 class="text-primary mt-4">Faculties</h4>
+                    <hr />
+                    @if (Model.Faculties != null && Model.Faculties.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Average Price</th>
+                                        <th>Credits</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var faculty in Model.Faculties)
+                                    {
+                                        <tr>
+                                            <td>@faculty.CombinedName</td>
+                                            <td>@faculty.AveragePrice.ToString("C2")</td>
+                                            <td>@faculty.Credits</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p>No faculties available for this university.</p>
+                    }
                 </div>
             </div>
 

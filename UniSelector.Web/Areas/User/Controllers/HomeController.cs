@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
@@ -22,10 +23,44 @@ namespace BulkyBookWeb.Areas.User.Controllers
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return View(productList);
         }
-        public IActionResult UniversityView()
+        public IActionResult UniversityView(string searchString, int? facultyId, decimal? maxFees, int? maxRank)
         {
-            IEnumerable<University> objUniversityList = _unitOfWork.University.GetAll().ToList();
-            return View(objUniversityList);
+            IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                universities = universities.Where(u =>
+                    u.Name.ToLower().Contains(searchString) ||
+                    u.location.ToLower().Contains(searchString) ||
+                    u.Description.ToLower().Contains(searchString) ||
+                    u.Faculties.Any(f => f.CombinedName.ToLower().Contains(searchString)));
+            }
+            // Filter According to the Faculty
+            if (facultyId.HasValue)
+            {
+                universities = universities.Where(u => u.Faculties.Any(f => f.Id == facultyId));
+            }
+            // Filter According to the AvaragePrice
+            if (maxFees.HasValue)
+            {
+                universities = universities.Where(u => u.Faculties.Any(f => f.AveragePrice <= maxFees.Value));
+            }
+            // Filter According to the Rank in Kuwait
+            if (maxRank.HasValue)
+            {
+                universities = universities.Where(u => u.KuwaitRank <= maxRank.Value);
+            }
+            ViewBag.Faculties = _unitOfWork.Faculty.GetAll().Select(f => new SelectListItem
+            {
+                Text = f.CombinedName,
+                Value = f.Id.ToString()
+            });
+            ViewBag.CurrentSearchString = searchString;
+            ViewBag.CurrentFacultyId = facultyId;
+            ViewBag.CurrentMaxFees = maxFees;
+            ViewBag.CurrentMaxRank = maxRank;
+            return View(universities);
         }
         public IActionResult UniDetails(int UniversityId)
         {

@@ -21,28 +21,6 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        /*modelBuilder.Entity<Faculty>().HasData(
-            new Faculty { Id = 1, Name = "Engineering"},
-            new Faculty {Id = 2, Name = "Medicine" },
-            new Faculty {Id = 3, Name = "Information Technology" },
-            new Faculty {Id = 4, Name = "Business Administration" },
-            new Faculty {Id = 5, Name = "Accounting" },
-            new Faculty {Id = 6, Name = "Marketing" },
-            new Faculty {Id = 7, Name = "Law" },
-            new Faculty {Id = 8, Name = "Science" },
-            new Faculty {Id = 9, Name = "Arts and Humanities" },
-            new Faculty {Id = 10, Name = "Education" },
-            new Faculty {Id = 11, Name = "Pharmacy" },
-            new Faculty {Id = 12, Name = "Dentistry" },
-            new Faculty {Id = 13, Name = "Architecture" },
-            new Faculty {Id = 14, Name = "Nursing" },
-            new Faculty {Id = 15, Name = "Allied Health Sciences" },
-            new Faculty {Id = 16, Name = "Psychology" },
-            new Faculty {Id = 17, Name = "Economics" },
-            new Faculty {Id = 18, Name = "Political Science" },
-            new Faculty {Id = 19, Name = "Islamic Studies" },
-            new Faculty {Id = 20, Name = "Computer Science" }
-            );*/
         modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
             new Category { Id = 2, Name = "Scifi", DisplayOrder = 2 },
@@ -136,50 +114,59 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
                 }
             );
         modelBuilder.Entity<University>().HasData(
-            new University {
+            new University
+            {
                 Id = 1,
-                Name = "Arab Open Universities",
+                Name = "Arab Open University (AOU)",
                 type = "Private",
-                Description = "Good university",
+                Description = "A leading open education institution in the Arab world.",
                 location = "العارضية-Ardya",
                 KuwaitRank = 1,
-                Budget = 0,
-                ImageUrl = ""
+                Budget = 4500,
+                ImageUrl = "/images/University/AOU.png"
             },
             new University
             {
                 Id = 2,
-                Name = "American Universities In Middle East (AUM)",
+                Name = "American University In Middle East (AUM)",
                 type = "Private",
-                Description = "Good university",
+                Description = "Offering American-style education with a Middle Eastern perspective.",
                 location = "العقيلة-Egila",
                 KuwaitRank = 2,
-                Budget = 0,
-                ImageUrl = ""
+                Budget = 25000,
+                ImageUrl = "/images/University/AUM.png"
             },
             new University
             {
                 Id = 3,
-                Name = "American Universities Of Kuwait",
+                Name = "American University Of Kuwait (AUK)",
                 type = "Private",
-                Description = "Good university",
+                Description = "Providing a comprehensive American liberal arts education.",
                 location = "السالمية-Salmya",
                 KuwaitRank = 3,
-                Budget = 0,
-                ImageUrl = ""
+                Budget = 15000,
+                ImageUrl = "/images/University/AUK.png"
             },
             new University
             {
                 Id = 4,
-                Name = "Kuwait Universities",
+                Name = "Kuwait University (KU)",
                 type = "Public",
-                Description = "Good university",
+                Description = "The premier public institution of higher education in Kuwait.",
                 location = "الشويخ-Shwaikh",
                 KuwaitRank = 4,
-                Budget = 0,
-                ImageUrl = ""
-            }
-            );
+                Budget = 13000,
+                ImageUrl = "/images/university/KU.png"
+            });
+
+        // Adding sample gallery images
+        modelBuilder.Entity<GalleryImage>().HasData(
+            new GalleryImage { Id = 1, UniversityId = 1, ImageUrl = "" },
+            new GalleryImage { Id = 2, UniversityId = 1, ImageUrl = "" },
+            new GalleryImage { Id = 3, UniversityId = 2, ImageUrl = "" },
+            new GalleryImage { Id = 4, UniversityId = 3, ImageUrl = "" },
+            new GalleryImage { Id = 5, UniversityId = 4, ImageUrl = "" }
+        );
     }
 
 }

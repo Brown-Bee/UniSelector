@@ -82,13 +82,31 @@
 </style>
 
 <div class="row mb-3">
-    <div class="col-md-6 offset-md-3">
-        <form asp-action="UniversityView" method="get">
-            <div class="input-group">
-                <input type="text" class="form-control" name="searchString" placeholder="Search universities...">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </div>
-        </form>
+    <div class="col-md-3">
+        <input type="number" id="maxFees" name="maxFees" class="form-control" placeholder="Max Fees" value="@ViewBag.CurrentMaxFees">
+    </div>
+    <div class="col-md-3">
+        <select id="facultyId" name="facultyId" class="form-control">
+            <option value="">All Faculties</option>
+            @foreach (var faculty in ViewBag.Faculties)
+            {
+                @* var isSelected = ViewBag.CurrentFacultyId.ToString() == (faculty.Value ? "Selected" : ""); *@
+                <option value="@faculty.Value">@faculty.Text</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <input type="number" id="maxRank" name="maxRank" class="form-control" placeholder="Max Rank" value="@ViewBag.CurrentMaxRank">
+    </div>
+    <div class="col-md-3">
+        <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+        <button id="clearFilters" class="btn btn-secondary">Clear Filters</button>
+    </div>
+</div>
+
+<div class="row mb-3">
+    <div class="col-md-12">
+        <input type="text" id="searchString" name="searchString" class="form-control" placeholder="Search universities..." value="@ViewBag.CurrentSearchString">
     </div>
 </div>
 
@@ -119,3 +137,44 @@
         </div>
     }
 </div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#applyFilters').click(function () {
+                applyFilters();
+            });
+
+            $('#clearFilters').click(function () {
+                clearFilters();
+            });
+
+            $('#searchString').keypress(function (e) {
+                if (e.which == 13) {
+                    applyFilters();
+                    return false;
+                }
+            });
+
+            function applyFilters() {
+                var maxFees = $('#maxFees').val();
+                var facultyId = $('#facultyId').val();
+                var maxRank = $('#maxRank').val();
+                var searchString = $('#searchString').val();
+
+                var url = '@Url.Action("UniversityView", "Home")' +
+                    '?maxFees=' + maxFees +
+                    '&facultyId=' + facultyId +
+                    '&maxRank=' + maxRank +
+                    '&searchString=' + encodeURIComponent(searchString);
+
+                window.location.href = url;
+            }
+
+            function clearFilters() {
+                window.location.href = '@Url.Action("UniversityView", "Home")';
+            }
+        });
+    </script>
+}

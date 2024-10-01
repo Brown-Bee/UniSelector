@@ -31,8 +31,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Areas\University\Controllers\" />
-        <Folder Include="Areas\University\Views\" />
         <Folder Include="wwwroot\Images\University\Gallery\" />
         <Folder Include="wwwroot\Images\University\" />
         <Folder Include="wwwroot\Images\Product\" />

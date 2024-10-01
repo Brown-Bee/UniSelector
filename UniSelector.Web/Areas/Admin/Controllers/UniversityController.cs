@@ -1,4 +1,4 @@
-﻿using BulkyBook.Utility;
+﻿using UniSelector.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniSelector.DataAccess.Repository.IRepository;
@@ -33,7 +33,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             }
             else
             { // Update
-                university = _unitOfWork.University.Get(u => u.Id == Id);
+                university = _unitOfWork.University.Get(u => u.Id == Id, includeProperties: "Faculties");
                 return View(university);
             }
         }

@@ -1,4 +1,4 @@
-﻿using BulkyBook.Utility;
+﻿using UniSelector.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UniSelector.DataAccess.Repository.IRepository;

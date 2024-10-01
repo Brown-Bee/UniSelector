@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241001192246_SeedUniversityFacultyGalleryImagesTablesToDb")]
+    partial class SeedUniversityFacultyGalleryImagesTablesToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -300,6 +303,44 @@ namespace UniSelector.DataAccess.Migrations
                     b.HasIndex("UniversityId");
 
                     b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AveragePrice = 5000m,
+                            Credits = 130,
+                            NameArabic = "كلية الهندسة",
+                            NameEnglish = "Engineering",
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AveragePrice = 8000m,
+                            Credits = 180,
+                            NameArabic = "كلية الطب",
+                            NameEnglish = "Medicine",
+                            UniversityId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AveragePrice = 4500m,
+                            Credits = 120,
+                            NameArabic = "كلية إدارة الأعمال",
+                            NameEnglish = "Business Administration",
+                            UniversityId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AveragePrice = 3500m,
+                            Credits = 125,
+                            NameArabic = "كلية العلوم",
+                            NameEnglish = "Science",
+                            UniversityId = 4
+                        });
                 });
 
             modelBuilder.Entity("UniSelector.Models.GalleryImage", b =>

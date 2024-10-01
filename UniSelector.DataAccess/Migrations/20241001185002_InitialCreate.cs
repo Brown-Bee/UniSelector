@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace BulkyBook.DataAccess.Migrations
+namespace UniSelector.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -230,8 +230,9 @@ namespace BulkyBook.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AvaragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    NameArabic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Credits = table.Column<int>(type: "int", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
                 },

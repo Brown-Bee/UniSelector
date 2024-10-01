@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241001185002_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -322,38 +325,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.HasIndex("UniversityId");
 
                     b.ToTable("GalleryImages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ImageUrl = "",
-                            UniversityId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            ImageUrl = "",
-                            UniversityId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            ImageUrl = "",
-                            UniversityId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            ImageUrl = "",
-                            UniversityId = 3
-                        },
-                        new
-                        {
-                            Id = 5,
-                            ImageUrl = "",
-                            UniversityId = 4
-                        });
                 });
 
             modelBuilder.Entity("UniSelector.Models.Product", b =>
@@ -532,44 +503,44 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Budget = 4500m,
-                            Description = "A leading open education institution in the Arab world.",
-                            ImageUrl = "/images/University/AOU.png",
+                            Budget = 0m,
+                            Description = "Good university",
+                            ImageUrl = "",
                             KuwaitRank = 1,
-                            Name = "Arab Open University (AOU)",
+                            Name = "Arab Open Universities",
                             location = "العارضية-Ardya",
                             type = "Private"
                         },
                         new
                         {
                             Id = 2,
-                            Budget = 25000m,
-                            Description = "Offering American-style education with a Middle Eastern perspective.",
-                            ImageUrl = "/images/University/AUM.png",
+                            Budget = 0m,
+                            Description = "Good university",
+                            ImageUrl = "",
                             KuwaitRank = 2,
-                            Name = "American University In Middle East (AUM)",
+                            Name = "American Universities In Middle East (AUM)",
                             location = "العقيلة-Egila",
                             type = "Private"
                         },
                         new
                         {
                             Id = 3,
-                            Budget = 15000m,
-                            Description = "Providing a comprehensive American liberal arts education.",
-                            ImageUrl = "/images/University/AUK.png",
+                            Budget = 0m,
+                            Description = "Good university",
+                            ImageUrl = "",
                             KuwaitRank = 3,
-                            Name = "American University Of Kuwait (AUK)",
+                            Name = "American Universities Of Kuwait",
                             location = "السالمية-Salmya",
                             type = "Private"
                         },
                         new
                         {
                             Id = 4,
-                            Budget = 13000m,
-                            Description = "The premier public institution of higher education in Kuwait.",
-                            ImageUrl = "/images/university/KU.png",
+                            Budget = 0m,
+                            Description = "Good university",
+                            ImageUrl = "",
                             KuwaitRank = 4,
-                            Name = "Kuwait University (KU)",
+                            Name = "Kuwait Universities",
                             location = "الشويخ-Shwaikh",
                             type = "Public"
                         });
