@@ -4,7 +4,7 @@
     <input asp-for="Id" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
-            <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Create") Faculty</h2>
+            <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Add") Faculty</h2>
             <hr />
         </div>
         <div class="mb-3">
@@ -34,7 +34,7 @@
             </select>
             <span asp-validation-for="UniversityId" class="text-danger"></span>
         </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">@(Model.Id != 0 ? "Update" : "Create")</button>
+        <button type="submit" class="btn btn-primary" style="width:150px">@(Model.Id != 0 ? "Update" : "Add")</button>
         <a asp-controller="Faculty" asp-action="Index" class="btn btn-secondary" style="width:150px">
             Back to List
         </a>
