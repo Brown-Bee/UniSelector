@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241002155613_AddAtributesToApplicationUser")]
+    partial class AddAtributesToApplicationUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -585,8 +588,8 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int?>("DateOfBirth")
                         .HasColumnType("int");
 
-                    b.Property<float?>("Grade")
-                        .HasColumnType("real");
+                    b.Property<bool?>("Grade")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("HighSchoolGraduationYear")
                         .HasColumnType("int");
