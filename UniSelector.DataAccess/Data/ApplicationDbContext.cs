@@ -17,6 +17,7 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Faculty> Faculties { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     public DbSet<GalleryImage> GalleryImages { get; set; }
+    public DbSet<StandardFaculty> StandardFaculties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
