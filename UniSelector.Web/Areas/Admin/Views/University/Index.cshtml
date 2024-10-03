@@ -13,7 +13,7 @@
             <div class="row  pb-3">
                 <div class=" col-6"></div>
                 <div class=" col-6 text-end">
-                    <a asp-controller="University" asp-action="Upsert" class="btn btn-primary">
+                    <a asp-controller="@Constants.ControllerUniversity" asp-action="@Constants.ActionUpsert" class="btn btn-primary">
                         <i class="bi bi-plus-circle"></i> Add new university
                     </a>
                 </div>
@@ -21,7 +21,7 @@
 
             <table class="table table-hover table-striped table-bordered display" style="width:100%">
                 <div class="row mb-3">
-                    <div class="col-md-3">
+                    @* <div class="col-md-3">
                         <input type="number" id="feesFilter" class="form-control" placeholder="Max Fees">
                     </div>
                     <div class="col-md-3">
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-3">
                         <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
-                    </div>
+                    </div> *@
                 </div>
                 <thead class="thead-dark text-light">
                     <tr>
@@ -60,7 +60,7 @@
                             <td>@obj.Budget</td>
                             <td>
                                 <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="University" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                                    <a asp-controller="@Constants.ControllerUniversity" asp-action="@Constants.ActionUpsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
                                         <i class=" bi bi-pencil-square"></i> Edit
                                     </a>
                                     <a onclick="Delete('/Admin/University/Delete?id=@obj.Id')" class="btn btn-danger mx-2">

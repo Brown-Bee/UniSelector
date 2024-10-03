@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
+using UniSelector.Utility;
 
 namespace BulkyBookWeb.Areas.User.Controllers
 {
-    [Area("User")]
+    [Area(Constants.AreaUser)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -20,47 +21,48 @@ namespace BulkyBookWeb.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category");
-            return View(productList);
+            /*IEnumerable<Product> ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            return View(ProductList);*/
+            return RedirectToAction("UniversityView");
         }
         public IActionResult UniversityView(string searchString, int? facultyId, decimal? maxFees, int? maxRank)
         {
-            IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
+            IEnumerable<University> Universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 searchString = searchString.ToLower();
-                universities = universities.Where(u =>
+                Universities = Universities.Where(u =>
                     u.Name.ToLower().Contains(searchString) ||
                     u.location.ToLower().Contains(searchString) ||
                     u.Description.ToLower().Contains(searchString) ||
-                    u.Faculties.Any(f => f.CombinedName.ToLower().Contains(searchString)));
+                    u.Faculties.Any(f => f.StandardFaculty.CombinedName.ToLower().Contains(searchString)));
             }
             // Filter According to the Faculty
             if (facultyId.HasValue)
             {
-                universities = universities.Where(u => u.Faculties.Any(f => f.Id == facultyId));
+                Universities = Universities.Where(u => u.Faculties.Any(f => f.Id == facultyId));
             }
             // Filter According to the AvaragePrice
             if (maxFees.HasValue)
             {
-                universities = universities.Where(u => u.Faculties.Any(f => f.AveragePrice <= maxFees.Value));
+                Universities = Universities.Where(u => u.Faculties.Any(f => f.AveragePrice <= maxFees.Value));
             }
             // Filter According to the Rank in Kuwait
             if (maxRank.HasValue)
             {
-                universities = universities.Where(u => u.KuwaitRank <= maxRank.Value);
+                Universities = Universities.Where(u => u.KuwaitRank <= maxRank.Value);
             }
             ViewBag.Faculties = _unitOfWork.Faculty.GetAll().Select(f => new SelectListItem
             {
-                Text = f.CombinedName,
+                Text = f.StandardFaculty.CombinedName,
                 Value = f.Id.ToString()
             });
             ViewBag.CurrentSearchString = searchString;
             ViewBag.CurrentFacultyId = facultyId;
             ViewBag.CurrentMaxFees = maxFees;
             ViewBag.CurrentMaxRank = maxRank;
-            return View(universities);
+            return View(Universities);
         }
         public IActionResult UniDetails(int UniversityId)
         {

@@ -7,7 +7,7 @@ $(document).ready(function () {
             { responsivePriority: 2, targets: -1 }
         ],
         "ajax": {
-            url: "/Admin/University/GetAll",
+            url: "/" + "@Constants.AreaAdmin" + "/" + "@Constants.ControllerUniversity" + "/GetAll",
             type: "POST",
             data: function (d) {
                 d.maxFees = $('#feesFilter').val();

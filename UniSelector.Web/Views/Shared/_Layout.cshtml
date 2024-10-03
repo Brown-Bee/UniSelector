@@ -37,21 +37,21 @@
                         <li class="nav-item">
                             <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.IsInRole(SD.Role_Admin))
+                        @if (User.IsInRole(Constants.RoleAdmin))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Content Manegement
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                    @* <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerCategory" asp-action="@Constants.ActionIndex">Category</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
-                                    </li>
+                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerProduct" asp-action="@Constants.ActionIndex">Product</a>
+                                    </li> *@
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="Admin" asp-controller="University" asp-action="Index">University</a>
+                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerUniversity" asp-action="@Constants.ActionIndex">University</a>
                                     </li>
 
                                 </ul>
