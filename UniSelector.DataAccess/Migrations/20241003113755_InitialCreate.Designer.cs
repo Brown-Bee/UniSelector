@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241001192246_SeedUniversityFacultyGalleryImagesTablesToDb")]
-    partial class SeedUniversityFacultyGalleryImagesTablesToDb
+    [Migration("20241003113755_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -287,60 +287,19 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
-                    b.Property<string>("NameArabic")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEnglish")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StandardFacultyId")
+                        .HasColumnType("int");
 
                     b.Property<int>("UniversityId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StandardFacultyId");
+
                     b.HasIndex("UniversityId");
 
                     b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AveragePrice = 5000m,
-                            Credits = 130,
-                            NameArabic = "كلية الهندسة",
-                            NameEnglish = "Engineering",
-                            UniversityId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AveragePrice = 8000m,
-                            Credits = 180,
-                            NameArabic = "كلية الطب",
-                            NameEnglish = "Medicine",
-                            UniversityId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AveragePrice = 4500m,
-                            Credits = 120,
-                            NameArabic = "كلية إدارة الأعمال",
-                            NameEnglish = "Business Administration",
-                            UniversityId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AveragePrice = 3500m,
-                            Credits = 125,
-                            NameArabic = "كلية العلوم",
-                            NameEnglish = "Science",
-                            UniversityId = 4
-                        });
                 });
 
             modelBuilder.Entity("UniSelector.Models.GalleryImage", b =>
@@ -532,6 +491,149 @@ namespace UniSelector.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("NameArabic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEnglish")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StandardFaculty");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NameArabic = "كلية الهندسة",
+                            NameEnglish = "College of Engineering"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            NameArabic = "كلية الطب",
+                            NameEnglish = "College of Medicine"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NameArabic = "كلية العلوم",
+                            NameEnglish = "College of Science"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NameArabic = "كلية إدارة الأعمال",
+                            NameEnglish = "College of Business Administration"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            NameArabic = "كلية الآداب",
+                            NameEnglish = "College of Arts"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            NameArabic = "كلية التربية",
+                            NameEnglish = "College of Education"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            NameArabic = "كلية الشريعة والدراسات الإسلامية",
+                            NameEnglish = "College of Sharia and Islamic Studies"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            NameArabic = "كلية الحقوق",
+                            NameEnglish = "College of Law"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            NameArabic = "كلية العلوم الاجتماعية",
+                            NameEnglish = "College of Social Sciences"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            NameArabic = "كلية طب الأسنان",
+                            NameEnglish = "College of Dentistry"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            NameArabic = "كلية الصيدلة",
+                            NameEnglish = "College of Pharmacy"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            NameArabic = "كلية العلوم الطبية المساعدة",
+                            NameEnglish = "College of Allied Health Sciences"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            NameArabic = "كلية العمارة",
+                            NameEnglish = "College of Architecture"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            NameArabic = "كلية علوم وهندسة الحاسوب",
+                            NameEnglish = "College of Computing Sciences and Engineering"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            NameArabic = "كلية الصحة العامة",
+                            NameEnglish = "College of Public Health"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            NameArabic = "كلية العلوم الحياتية",
+                            NameEnglish = "College of Life Sciences"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            NameArabic = "كلية الدراسات العليا",
+                            NameEnglish = "College of Graduate Studies"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            NameArabic = "كلية التمريض",
+                            NameEnglish = "College of Nursing"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            NameArabic = "كلية الدراسات الإسلامية",
+                            NameEnglish = "College of Islamic Studies"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            NameArabic = "كلية الفنون والإعلام",
+                            NameEnglish = "College of Arts and Media"
+                        });
+                });
+
             modelBuilder.Entity("UniSelector.Models.University", b =>
                 {
                     b.Property<int>("Id")
@@ -620,19 +722,26 @@ namespace UniSelector.DataAccess.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("City")
+                    b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Name")
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float?>("Grade")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("HighSchoolGraduationYear")
                         .HasColumnType("int");
 
-                    b.Property<string>("PostalCode")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
+                    b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StateAdress")
+                    b.Property<string>("PlaceOfBirth")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
@@ -691,11 +800,19 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
+                    b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
+                        .WithMany("Faculties")
+                        .HasForeignKey("StandardFacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("UniSelector.Models.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("StandardFaculty");
 
                     b.Navigation("University");
                 });
@@ -718,6 +835,11 @@ namespace UniSelector.DataAccess.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
+                {
+                    b.Navigation("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>

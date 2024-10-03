@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241001185002_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241003125442_SeedCridits")]
+    partial class SeedCridits
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -284,21 +284,15 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<decimal>("AveragePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Credits")
+                    b.Property<int>("StandardFacultyId")
                         .HasColumnType("int");
-
-                    b.Property<string>("NameArabic")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameEnglish")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("UniversityId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("StandardFacultyId");
 
                     b.HasIndex("UniversityId");
 
@@ -325,6 +319,38 @@ namespace UniSelector.DataAccess.Migrations
                     b.HasIndex("UniversityId");
 
                     b.ToTable("GalleryImages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "",
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "",
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "",
+                            UniversityId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "",
+                            UniversityId = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "",
+                            UniversityId = 4
+                        });
                 });
 
             modelBuilder.Entity("UniSelector.Models.Product", b =>
@@ -462,6 +488,172 @@ namespace UniSelector.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Credits")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NameArabic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NameEnglish")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StandardFaculty");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Credits = 130,
+                            NameArabic = "كلية الهندسة",
+                            NameEnglish = "College of Engineering"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Credits = 240,
+                            NameArabic = "كلية الطب",
+                            NameEnglish = "College of Medicine"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Credits = 120,
+                            NameArabic = "كلية العلوم",
+                            NameEnglish = "College of Science"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Credits = 126,
+                            NameArabic = "كلية إدارة الأعمال",
+                            NameEnglish = "College of Business Administration"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Credits = 120,
+                            NameArabic = "كلية الآداب",
+                            NameEnglish = "College of Arts"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Credits = 126,
+                            NameArabic = "كلية التربية",
+                            NameEnglish = "College of Education"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Credits = 120,
+                            NameArabic = "كلية الشريعة والدراسات الإسلامية",
+                            NameEnglish = "College of Sharia and Islamic Studies"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Credits = 126,
+                            NameArabic = "كلية الحقوق",
+                            NameEnglish = "College of Law"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Credits = 120,
+                            NameArabic = "كلية العلوم الاجتماعية",
+                            NameEnglish = "College of Social Sciences"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Credits = 240,
+                            NameArabic = "كلية طب الأسنان",
+                            NameEnglish = "College of Dentistry"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Credits = 160,
+                            NameArabic = "كلية الصيدلة",
+                            NameEnglish = "College of Pharmacy"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Credits = 120,
+                            NameArabic = "كلية العلوم الطبية المساعدة",
+                            NameEnglish = "College of Allied Health Sciences"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Credits = 130,
+                            NameArabic = "كلية العمارة",
+                            NameEnglish = "College of Architecture"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Credits = 130,
+                            NameArabic = "كلية علوم وهندسة الحاسوب",
+                            NameEnglish = "College of Computing Sciences and Engineering"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Credits = 120,
+                            NameArabic = "كلية الصحة العامة",
+                            NameEnglish = "College of Public Health"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Credits = 120,
+                            NameArabic = "كلية العلوم الحياتية",
+                            NameEnglish = "College of Life Sciences"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Credits = 36,
+                            NameArabic = "كلية الدراسات العليا",
+                            NameEnglish = "College of Graduate Studies"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Credits = 130,
+                            NameArabic = "كلية التمريض",
+                            NameEnglish = "College of Nursing"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Credits = 120,
+                            NameArabic = "كلية الدراسات الإسلامية",
+                            NameEnglish = "College of Islamic Studies"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Credits = 120,
+                            NameArabic = "كلية الفنون والإعلام",
+                            NameEnglish = "College of Arts and Media"
+                        });
+                });
+
             modelBuilder.Entity("UniSelector.Models.University", b =>
                 {
                     b.Property<int>("Id")
@@ -503,44 +695,44 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Budget = 0m,
-                            Description = "Good university",
-                            ImageUrl = "",
+                            Budget = 4500m,
+                            Description = "A leading open education institution in the Arab world.",
+                            ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 1,
-                            Name = "Arab Open Universities",
+                            Name = "Arab Open University (AOU)",
                             location = "العارضية-Ardya",
                             type = "Private"
                         },
                         new
                         {
                             Id = 2,
-                            Budget = 0m,
-                            Description = "Good university",
-                            ImageUrl = "",
+                            Budget = 25000m,
+                            Description = "Offering American-style education with a Middle Eastern perspective.",
+                            ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
-                            Name = "American Universities In Middle East (AUM)",
+                            Name = "American University In Middle East (AUM)",
                             location = "العقيلة-Egila",
                             type = "Private"
                         },
                         new
                         {
                             Id = 3,
-                            Budget = 0m,
-                            Description = "Good university",
-                            ImageUrl = "",
+                            Budget = 15000m,
+                            Description = "Providing a comprehensive American liberal arts education.",
+                            ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 3,
-                            Name = "American Universities Of Kuwait",
+                            Name = "American University Of Kuwait (AUK)",
                             location = "السالمية-Salmya",
                             type = "Private"
                         },
                         new
                         {
                             Id = 4,
-                            Budget = 0m,
-                            Description = "Good university",
-                            ImageUrl = "",
+                            Budget = 13000m,
+                            Description = "The premier public institution of higher education in Kuwait.",
+                            ImageUrl = "/images/university/KU.png",
                             KuwaitRank = 4,
-                            Name = "Kuwait Universities",
+                            Name = "Kuwait University (KU)",
                             location = "الشويخ-Shwaikh",
                             type = "Public"
                         });
@@ -550,19 +742,26 @@ namespace UniSelector.DataAccess.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("City")
+                    b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Name")
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float?>("Grade")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("HighSchoolGraduationYear")
                         .HasColumnType("int");
 
-                    b.Property<string>("PostalCode")
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("State")
+                    b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("StateAdress")
+                    b.Property<string>("PlaceOfBirth")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
@@ -621,11 +820,19 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
+                    b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
+                        .WithMany("Faculties")
+                        .HasForeignKey("StandardFacultyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("UniSelector.Models.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("StandardFaculty");
 
                     b.Navigation("University");
                 });
@@ -648,6 +855,11 @@ namespace UniSelector.DataAccess.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
+                {
+                    b.Navigation("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
