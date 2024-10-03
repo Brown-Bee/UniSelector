@@ -41,7 +41,7 @@ namespace BulkyBookWeb.Areas.User.Controllers
             // Filter According to the Faculty
             if (facultyId.HasValue)
             {
-                Universities = Universities.Where(u => u.Faculties.Any(f => f.Id == facultyId));
+                Universities = Universities.Where(u => u.Faculties.Any(f => f.StandardFacultyId == facultyId));
             }
             // Filter According to the AvaragePrice
             if (maxFees.HasValue)
@@ -53,10 +53,10 @@ namespace BulkyBookWeb.Areas.User.Controllers
             {
                 Universities = Universities.Where(u => u.KuwaitRank <= maxRank.Value);
             }
-            ViewBag.Faculties = _unitOfWork.Faculty.GetAll().Select(f => new SelectListItem
+            ViewBag.Faculties = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
             {
-                Text = f.StandardFaculty.CombinedName,
-                Value = f.Id.ToString()
+                Text = sf.CombinedName,
+                Value = sf.Id.ToString()
             });
             ViewBag.CurrentSearchString = searchString;
             ViewBag.CurrentFacultyId = facultyId;

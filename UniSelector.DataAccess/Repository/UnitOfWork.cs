@@ -11,7 +11,7 @@ namespace UniSelector.DataAccess.Repository
         public IUniversityRepository University { get; private set; }
         public IFacultyRepository Faculty { get; private set; }
 
-
+        public IStandardFacultyRepository StandardFaculty { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -20,6 +20,7 @@ namespace UniSelector.DataAccess.Repository
             Product = new ProductRepository(_db);
             University = new UniversityRepository(_db);
             Faculty = new FacultyRepository(_db);
+            StandardFaculty = new StandardFacultyRepository(_db);
         }
 
         public void Save()

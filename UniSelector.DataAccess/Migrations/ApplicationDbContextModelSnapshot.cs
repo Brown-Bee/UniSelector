@@ -247,7 +247,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -296,7 +296,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties");
+                    b.ToTable("Faculties", (string)null);
                 });
 
             modelBuilder.Entity("UniSelector.Models.GalleryImage", b =>
@@ -318,7 +318,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("GalleryImages");
+                    b.ToTable("GalleryImages", (string)null);
 
                     b.HasData(
                         new
@@ -399,7 +399,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.HasData(
                         new
@@ -506,7 +506,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StandardFaculties");
+                    b.ToTable("StandardFaculties", (string)null);
 
                     b.HasData(
                         new
@@ -666,7 +666,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities");
+                    b.ToTable("Universities", (string)null);
 
                     b.HasData(
                         new
