@@ -159,27 +159,27 @@ public class ApplicationDbContext : IdentityDbContext<IdentityUser>
                 ImageUrl = "/images/university/KU.png"
             });
         modelBuilder.Entity<StandardFaculty>().HasData(
-            new StandardFaculty { Id = 1, NameArabic = "كلية الهندسة", NameEnglish = "College of Engineering", Credits = 130 },
-            new StandardFaculty { Id = 2, NameArabic = "كلية الطب", NameEnglish = "College of Medicine", Credits = 240 },
-            new StandardFaculty { Id = 3, NameArabic = "كلية العلوم", NameEnglish = "College of Science", Credits = 120 },
-            new StandardFaculty { Id = 4, NameArabic = "كلية إدارة الأعمال", NameEnglish = "College of Business Administration", Credits = 126 },
-            new StandardFaculty { Id = 5, NameArabic = "كلية الآداب", NameEnglish = "College of Arts", Credits = 120 },
-            new StandardFaculty { Id = 6, NameArabic = "كلية التربية", NameEnglish = "College of Education", Credits = 126 },
-            new StandardFaculty { Id = 7, NameArabic = "كلية الشريعة والدراسات الإسلامية", NameEnglish = "College of Sharia and Islamic Studies", Credits = 120 },
-            new StandardFaculty { Id = 8, NameArabic = "كلية الحقوق", NameEnglish = "College of Law", Credits = 126 },
-            new StandardFaculty { Id = 9, NameArabic = "كلية العلوم الاجتماعية", NameEnglish = "College of Social Sciences", Credits = 120 },
-            new StandardFaculty { Id = 10, NameArabic = "كلية طب الأسنان", NameEnglish = "College of Dentistry", Credits = 240 },
-            new StandardFaculty { Id = 11, NameArabic = "كلية الصيدلة", NameEnglish = "College of Pharmacy", Credits = 160 },
-            new StandardFaculty { Id = 12, NameArabic = "كلية العلوم الطبية المساعدة", NameEnglish = "College of Allied Health Sciences", Credits = 120 },
-            new StandardFaculty { Id = 13, NameArabic = "كلية العمارة", NameEnglish = "College of Architecture", Credits = 130 },
-            new StandardFaculty { Id = 14, NameArabic = "كلية علوم وهندسة الحاسوب", NameEnglish = "College of Computing Sciences and Engineering", Credits = 130 },
-            new StandardFaculty { Id = 15, NameArabic = "كلية الصحة العامة", NameEnglish = "College of Public Health", Credits = 120 },
-            new StandardFaculty { Id = 16, NameArabic = "كلية العلوم الحياتية", NameEnglish = "College of Life Sciences", Credits = 120 },
-            new StandardFaculty { Id = 17, NameArabic = "كلية الدراسات العليا", NameEnglish = "College of Graduate Studies", Credits = 36 },
-            new StandardFaculty { Id = 18, NameArabic = "كلية التمريض", NameEnglish = "College of Nursing", Credits = 130 },
-            new StandardFaculty { Id = 19, NameArabic = "كلية الدراسات الإسلامية", NameEnglish = "College of Islamic Studies", Credits = 120 },
-            new StandardFaculty { Id = 20, NameArabic = "كلية الفنون والإعلام", NameEnglish = "College of Arts and Media", Credits = 120 }
-        );
+            new StandardFaculty { Id = 1, NameArabic = "كلية الهندسة", NameEnglish = "College of Engineering" },
+            new StandardFaculty { Id = 2, NameArabic = "كلية الطب", NameEnglish = "College of Medicine" },
+            new StandardFaculty { Id = 3, NameArabic = "كلية العلوم", NameEnglish = "College of Science" },
+            new StandardFaculty { Id = 4, NameArabic = "كلية إدارة الأعمال", NameEnglish = "College of Business Administration" },
+            new StandardFaculty { Id = 5, NameArabic = "كلية الآداب", NameEnglish = "College of Arts" },
+            new StandardFaculty { Id = 6, NameArabic = "كلية التربية", NameEnglish = "College of Education" },
+            new StandardFaculty { Id = 7, NameArabic = "كلية الشريعة والدراسات الإسلامية", NameEnglish = "College of Sharia and Islamic Studies" },
+            new StandardFaculty { Id = 8, NameArabic = "كلية الحقوق", NameEnglish = "College of Law" },
+            new StandardFaculty { Id = 9, NameArabic = "كلية العلوم الاجتماعية", NameEnglish = "College of Social Sciences" },
+            new StandardFaculty { Id = 10, NameArabic = "كلية طب الأسنان", NameEnglish = "College of Dentistry" },
+            new StandardFaculty { Id = 11, NameArabic = "كلية الصيدلة", NameEnglish = "College of Pharmacy" },
+            new StandardFaculty { Id = 12, NameArabic = "كلية العلوم الطبية المساعدة", NameEnglish = "College of Allied Health Sciences" },
+            new StandardFaculty { Id = 13, NameArabic = "كلية العمارة", NameEnglish = "College of Architecture" },
+            new StandardFaculty { Id = 14, NameArabic = "كلية علوم وهندسة الحاسوب", NameEnglish = "College of Computing Sciences and Engineering" },
+            new StandardFaculty { Id = 15, NameArabic = "كلية الصحة العامة", NameEnglish = "College of Public Health" },
+            new StandardFaculty { Id = 16, NameArabic = "كلية العلوم الحياتية", NameEnglish = "College of Life Sciences" },
+            new StandardFaculty { Id = 17, NameArabic = "كلية الدراسات العليا", NameEnglish = "College of Graduate Studies" },
+            new StandardFaculty { Id = 18, NameArabic = "كلية التمريض", NameEnglish = "College of Nursing" },
+            new StandardFaculty { Id = 19, NameArabic = "كلية الدراسات الإسلامية", NameEnglish = "College of Islamic Studies" },
+            new StandardFaculty { Id = 20, NameArabic = "كلية الفنون والإعلام", NameEnglish = "College of Arts and Media" }
+);
 
 
         // Adding sample gallery images

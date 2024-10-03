@@ -23,9 +23,9 @@
             <span asp-validation-for="AveragePrice" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <label asp-for="StandardFaculty.Credits"></label>
-            <input asp-for="StandardFaculty.Credits" class="form-control" />
-            <span asp-validation-for="StandardFaculty.Credits" class="text-danger"></span>
+            <label asp-for="Credits"></label>
+            <input asp-for="Credits" class="form-control" />
+            <span asp-validation-for="Credits" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="UniversityId"></label>
@@ -35,7 +35,7 @@
             <span asp-validation-for="UniversityId" class="text-danger"></span>
         </div>
         <button type="submit" class="btn btn-primary" style="width:150px">@(Model.Id != 0 ? "Update" : "Add")</button>
-        <a asp-controller="Faculty" asp-action="Index" class="btn btn-secondary" style="width:150px">
+        <a asp-controller="Faculty" asp-action="@Constants.ActionIndex" class="btn btn-secondary" style="width:150px">
             Back to List
         </a>
     </div>

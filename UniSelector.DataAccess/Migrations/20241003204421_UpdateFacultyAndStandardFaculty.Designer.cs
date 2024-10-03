@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241003113755_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241003204421_UpdateFacultyAndStandardFaculty")]
+    partial class UpdateFacultyAndStandardFaculty
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -801,7 +801,7 @@ namespace UniSelector.DataAccess.Migrations
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
-                        .WithMany("Faculties")
+                        .WithMany()
                         .HasForeignKey("StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -835,11 +835,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
-                {
-                    b.Navigation("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>

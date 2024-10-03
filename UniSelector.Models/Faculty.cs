@@ -10,6 +10,7 @@ namespace UniSelector.Models
         public int StandardFacultyId { get; set; }
         [ForeignKey("StandardFacultyId")]
         public StandardFaculty StandardFaculty { get; set; }
+        public int Credits { get; set; }
         public decimal AveragePrice { get; set; }
         public int UniversityId { get; set; }
 

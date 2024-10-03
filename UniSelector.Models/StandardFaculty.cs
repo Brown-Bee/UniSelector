@@ -11,8 +11,7 @@ namespace UniSelector.Models
         public int Id { get; set; }
         public string NameArabic { get; set; }
         public string NameEnglish { get; set; }
-        public int Credits { get; set; }
         public string CombinedName => $"{NameArabic} / {NameEnglish}";
-        public ICollection<Faculty> Faculties { get; set; }
+         
     }
 }

@@ -81,7 +81,8 @@ namespace UniSelector.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameArabic = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NameEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NameEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -248,7 +249,6 @@ namespace UniSelector.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false),
                     AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Credits = table.Column<int>(type: "int", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -300,29 +300,29 @@ namespace UniSelector.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "StandardFaculty",
-                columns: new[] { "Id", "NameArabic", "NameEnglish" },
+                columns: new[] { "Id", "Credits", "NameArabic", "NameEnglish" },
                 values: new object[,]
                 {
-                    { 1, "كلية الهندسة", "College of Engineering" },
-                    { 2, "كلية الطب", "College of Medicine" },
-                    { 3, "كلية العلوم", "College of Science" },
-                    { 4, "كلية إدارة الأعمال", "College of Business Administration" },
-                    { 5, "كلية الآداب", "College of Arts" },
-                    { 6, "كلية التربية", "College of Education" },
-                    { 7, "كلية الشريعة والدراسات الإسلامية", "College of Sharia and Islamic Studies" },
-                    { 8, "كلية الحقوق", "College of Law" },
-                    { 9, "كلية العلوم الاجتماعية", "College of Social Sciences" },
-                    { 10, "كلية طب الأسنان", "College of Dentistry" },
-                    { 11, "كلية الصيدلة", "College of Pharmacy" },
-                    { 12, "كلية العلوم الطبية المساعدة", "College of Allied Health Sciences" },
-                    { 13, "كلية العمارة", "College of Architecture" },
-                    { 14, "كلية علوم وهندسة الحاسوب", "College of Computing Sciences and Engineering" },
-                    { 15, "كلية الصحة العامة", "College of Public Health" },
-                    { 16, "كلية العلوم الحياتية", "College of Life Sciences" },
-                    { 17, "كلية الدراسات العليا", "College of Graduate Studies" },
-                    { 18, "كلية التمريض", "College of Nursing" },
-                    { 19, "كلية الدراسات الإسلامية", "College of Islamic Studies" },
-                    { 20, "كلية الفنون والإعلام", "College of Arts and Media" }
+                    { 1, 130, "كلية الهندسة", "College of Engineering" },
+                    { 2, 240, "كلية الطب", "College of Medicine" },
+                    { 3, 120, "كلية العلوم", "College of Science" },
+                    { 4, 126, "كلية إدارة الأعمال", "College of Business Administration" },
+                    { 5, 120, "كلية الآداب", "College of Arts" },
+                    { 6, 126, "كلية التربية", "College of Education" },
+                    { 7, 120, "كلية الشريعة والدراسات الإسلامية", "College of Sharia and Islamic Studies" },
+                    { 8, 126, "كلية الحقوق", "College of Law" },
+                    { 9, 120, "كلية العلوم الاجتماعية", "College of Social Sciences" },
+                    { 10, 240, "كلية طب الأسنان", "College of Dentistry" },
+                    { 11, 160, "كلية الصيدلة", "College of Pharmacy" },
+                    { 12, 120, "كلية العلوم الطبية المساعدة", "College of Allied Health Sciences" },
+                    { 13, 130, "كلية العمارة", "College of Architecture" },
+                    { 14, 130, "كلية علوم وهندسة الحاسوب", "College of Computing Sciences and Engineering" },
+                    { 15, 120, "كلية الصحة العامة", "College of Public Health" },
+                    { 16, 120, "كلية العلوم الحياتية", "College of Life Sciences" },
+                    { 17, 36, "كلية الدراسات العليا", "College of Graduate Studies" },
+                    { 18, 130, "كلية التمريض", "College of Nursing" },
+                    { 19, 120, "كلية الدراسات الإسلامية", "College of Islamic Studies" },
+                    { 20, 120, "كلية الفنون والإعلام", "College of Arts and Media" }
                 });
 
             migrationBuilder.InsertData(

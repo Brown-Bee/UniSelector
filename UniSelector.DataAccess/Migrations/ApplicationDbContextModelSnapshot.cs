@@ -281,6 +281,9 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<decimal>("AveragePrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("Credits")
+                        .HasColumnType("int");
+
                     b.Property<int>("StandardFacultyId")
                         .HasColumnType("int");
 
@@ -493,9 +496,6 @@ namespace UniSelector.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
                     b.Property<string>("NameArabic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -512,140 +512,120 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            Credits = 130,
                             NameArabic = "كلية الهندسة",
                             NameEnglish = "College of Engineering"
                         },
                         new
                         {
                             Id = 2,
-                            Credits = 240,
                             NameArabic = "كلية الطب",
                             NameEnglish = "College of Medicine"
                         },
                         new
                         {
                             Id = 3,
-                            Credits = 120,
                             NameArabic = "كلية العلوم",
                             NameEnglish = "College of Science"
                         },
                         new
                         {
                             Id = 4,
-                            Credits = 126,
                             NameArabic = "كلية إدارة الأعمال",
                             NameEnglish = "College of Business Administration"
                         },
                         new
                         {
                             Id = 5,
-                            Credits = 120,
                             NameArabic = "كلية الآداب",
                             NameEnglish = "College of Arts"
                         },
                         new
                         {
                             Id = 6,
-                            Credits = 126,
                             NameArabic = "كلية التربية",
                             NameEnglish = "College of Education"
                         },
                         new
                         {
                             Id = 7,
-                            Credits = 120,
                             NameArabic = "كلية الشريعة والدراسات الإسلامية",
                             NameEnglish = "College of Sharia and Islamic Studies"
                         },
                         new
                         {
                             Id = 8,
-                            Credits = 126,
                             NameArabic = "كلية الحقوق",
                             NameEnglish = "College of Law"
                         },
                         new
                         {
                             Id = 9,
-                            Credits = 120,
                             NameArabic = "كلية العلوم الاجتماعية",
                             NameEnglish = "College of Social Sciences"
                         },
                         new
                         {
                             Id = 10,
-                            Credits = 240,
                             NameArabic = "كلية طب الأسنان",
                             NameEnglish = "College of Dentistry"
                         },
                         new
                         {
                             Id = 11,
-                            Credits = 160,
                             NameArabic = "كلية الصيدلة",
                             NameEnglish = "College of Pharmacy"
                         },
                         new
                         {
                             Id = 12,
-                            Credits = 120,
                             NameArabic = "كلية العلوم الطبية المساعدة",
                             NameEnglish = "College of Allied Health Sciences"
                         },
                         new
                         {
                             Id = 13,
-                            Credits = 130,
                             NameArabic = "كلية العمارة",
                             NameEnglish = "College of Architecture"
                         },
                         new
                         {
                             Id = 14,
-                            Credits = 130,
                             NameArabic = "كلية علوم وهندسة الحاسوب",
                             NameEnglish = "College of Computing Sciences and Engineering"
                         },
                         new
                         {
                             Id = 15,
-                            Credits = 120,
                             NameArabic = "كلية الصحة العامة",
                             NameEnglish = "College of Public Health"
                         },
                         new
                         {
                             Id = 16,
-                            Credits = 120,
                             NameArabic = "كلية العلوم الحياتية",
                             NameEnglish = "College of Life Sciences"
                         },
                         new
                         {
                             Id = 17,
-                            Credits = 36,
                             NameArabic = "كلية الدراسات العليا",
                             NameEnglish = "College of Graduate Studies"
                         },
                         new
                         {
                             Id = 18,
-                            Credits = 130,
                             NameArabic = "كلية التمريض",
                             NameEnglish = "College of Nursing"
                         },
                         new
                         {
                             Id = 19,
-                            Credits = 120,
                             NameArabic = "كلية الدراسات الإسلامية",
                             NameEnglish = "College of Islamic Studies"
                         },
                         new
                         {
                             Id = 20,
-                            Credits = 120,
                             NameArabic = "كلية الفنون والإعلام",
                             NameEnglish = "College of Arts and Media"
                         });
@@ -818,7 +798,7 @@ namespace UniSelector.DataAccess.Migrations
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
-                        .WithMany("Faculties")
+                        .WithMany()
                         .HasForeignKey("StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -852,11 +832,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
-                {
-                    b.Navigation("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>

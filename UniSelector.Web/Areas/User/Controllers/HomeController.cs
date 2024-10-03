@@ -21,9 +21,9 @@ namespace BulkyBookWeb.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            /*IEnumerable<Product> ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
-            return View(ProductList);*/
-            return RedirectToAction("UniversityView");
+            IEnumerable<Product> ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            return View(ProductList);
+            /*return RedirectToAction("UniversityView");*/
         }
         public IActionResult UniversityView(string searchString, int? facultyId, decimal? maxFees, int? maxRank)
         {
