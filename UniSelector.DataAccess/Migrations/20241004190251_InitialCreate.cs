@@ -34,7 +34,7 @@ namespace UniSelector.DataAccess.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Grade = table.Column<float>(type: "real", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -75,18 +75,17 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StandardFaculty",
+                name: "StandardFaculties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameArabic = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NameEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Credits = table.Column<int>(type: "int", nullable: false)
+                    NameEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StandardFaculty", x => x.Id);
+                    table.PrimaryKey("PK_StandardFaculties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -248,6 +247,7 @@ namespace UniSelector.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false),
                     AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -255,9 +255,9 @@ namespace UniSelector.DataAccess.Migrations
                 {
                     table.PrimaryKey("PK_Faculties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Faculties_StandardFaculty_StandardFacultyId",
+                        name: "FK_Faculties_StandardFaculties_StandardFacultyId",
                         column: x => x.StandardFacultyId,
-                        principalTable: "StandardFaculty",
+                        principalTable: "StandardFaculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -299,30 +299,30 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "StandardFaculty",
-                columns: new[] { "Id", "Credits", "NameArabic", "NameEnglish" },
+                table: "StandardFaculties",
+                columns: new[] { "Id", "NameArabic", "NameEnglish" },
                 values: new object[,]
                 {
-                    { 1, 130, "كلية الهندسة", "College of Engineering" },
-                    { 2, 240, "كلية الطب", "College of Medicine" },
-                    { 3, 120, "كلية العلوم", "College of Science" },
-                    { 4, 126, "كلية إدارة الأعمال", "College of Business Administration" },
-                    { 5, 120, "كلية الآداب", "College of Arts" },
-                    { 6, 126, "كلية التربية", "College of Education" },
-                    { 7, 120, "كلية الشريعة والدراسات الإسلامية", "College of Sharia and Islamic Studies" },
-                    { 8, 126, "كلية الحقوق", "College of Law" },
-                    { 9, 120, "كلية العلوم الاجتماعية", "College of Social Sciences" },
-                    { 10, 240, "كلية طب الأسنان", "College of Dentistry" },
-                    { 11, 160, "كلية الصيدلة", "College of Pharmacy" },
-                    { 12, 120, "كلية العلوم الطبية المساعدة", "College of Allied Health Sciences" },
-                    { 13, 130, "كلية العمارة", "College of Architecture" },
-                    { 14, 130, "كلية علوم وهندسة الحاسوب", "College of Computing Sciences and Engineering" },
-                    { 15, 120, "كلية الصحة العامة", "College of Public Health" },
-                    { 16, 120, "كلية العلوم الحياتية", "College of Life Sciences" },
-                    { 17, 36, "كلية الدراسات العليا", "College of Graduate Studies" },
-                    { 18, 130, "كلية التمريض", "College of Nursing" },
-                    { 19, 120, "كلية الدراسات الإسلامية", "College of Islamic Studies" },
-                    { 20, 120, "كلية الفنون والإعلام", "College of Arts and Media" }
+                    { 1, "كلية الهندسة", "College of Engineering" },
+                    { 2, "كلية الطب", "College of Medicine" },
+                    { 3, "كلية العلوم", "College of Science" },
+                    { 4, "كلية إدارة الأعمال", "College of Business Administration" },
+                    { 5, "كلية الآداب", "College of Arts" },
+                    { 6, "كلية التربية", "College of Education" },
+                    { 7, "كلية الشريعة والدراسات الإسلامية", "College of Sharia and Islamic Studies" },
+                    { 8, "كلية الحقوق", "College of Law" },
+                    { 9, "كلية العلوم الاجتماعية", "College of Social Sciences" },
+                    { 10, "كلية طب الأسنان", "College of Dentistry" },
+                    { 11, "كلية الصيدلة", "College of Pharmacy" },
+                    { 12, "كلية العلوم الطبية المساعدة", "College of Allied Health Sciences" },
+                    { 13, "كلية العمارة", "College of Architecture" },
+                    { 14, "كلية علوم وهندسة الحاسوب", "College of Computing Sciences and Engineering" },
+                    { 15, "كلية الصحة العامة", "College of Public Health" },
+                    { 16, "كلية العلوم الحياتية", "College of Life Sciences" },
+                    { 17, "كلية الدراسات العليا", "College of Graduate Studies" },
+                    { 18, "كلية التمريض", "College of Nursing" },
+                    { 19, "كلية الدراسات الإسلامية", "College of Islamic Studies" },
+                    { 20, "كلية الفنون والإعلام", "College of Arts and Media" }
                 });
 
             migrationBuilder.InsertData(
@@ -455,7 +455,7 @@ namespace UniSelector.DataAccess.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "StandardFaculty");
+                name: "StandardFaculties");
 
             migrationBuilder.DropTable(
                 name: "Universities");
