@@ -219,7 +219,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
             {
                 var user = Activator.CreateInstance<ApplicationUser>();
                 user.Name = Input.Name;
-                user.Adress = Input.Address; // Note: You might want to correct the spelling to "Address" in your ApplicationUser model
+                user.Address = Input.Address; // Note: You might want to correct the spelling to "Address" in your ApplicationUser model
                 user.Grade = Input.Grade;
                 user.PhoneNumber = Input.PhoneNumber;
                 user.BirthDate = Input.BirthDate;
