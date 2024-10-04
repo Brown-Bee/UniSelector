@@ -18,6 +18,22 @@ using UniSelector.Models;
 
 namespace UniSelector.Web.Areas.Identity.Pages.Account
 {
+    // Custom Validation for Graduation Year Attribute
+    public class ValidGraduationYearAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value is int year)
+            {
+                int currentYear = DateTime.Now.Year;
+                if (year < 1900 || year > currentYear)
+                {
+                    return new ValidationResult($"Graduation year must be between 1900 and {currentYear}.");
+                }
+            }
+            return ValidationResult.Success;
+        }
+    }
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -70,35 +86,52 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
 
-            /// <summary>
-            ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
-            ///     directly from your code. This API may change or be removed in future releases.
-            /// </summary>
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            public string? Role { get; set; }
+            [Required]
+            [Display(Name = "Name")]
+            public string Name { get; set; }
+            public string PhoneNumber { get; set; }
+
+            [Display(Name = "Address")]
+            public string Address { get; set; }
+
+            [Display(Name = "Grade")]
+            [Range(0, 100, ErrorMessage = "Grade must be between 0 and 100")]
+            public float? Grade { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Birth Date")]
+            public DateTime BirthDate { get; set; }
+
+            [Display(Name = "Nationality")]
+            public string Nationality { get; set; }
+
+            [Display(Name = "Place of Birth")]
+            public string PlaceOfBirth { get; set; }
+
+            [Display(Name = "High School Graduation Year")]
+            [ValidGraduationYear]
+            public int? HighSchoolGraduationYear { get; set; }
+
+            [Display(Name = "Role")]
+            public string Role { get; set; }
+
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
         }
@@ -184,7 +217,16 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
         {
             try
             {
-                return Activator.CreateInstance<ApplicationUser>();
+                var user = Activator.CreateInstance<ApplicationUser>();
+                user.Name = Input.Name;
+                user.Adress = Input.Address; // Note: You might want to correct the spelling to "Address" in your ApplicationUser model
+                user.Grade = Input.Grade;
+                user.PhoneNumber = Input.PhoneNumber;
+                user.BirthDate = Input.BirthDate;
+                user.Nationality = Input.Nationality;
+                user.PlaceOfBirth = Input.PlaceOfBirth;
+                user.HighSchoolGraduationYear = Input.HighSchoolGraduationYear;
+                return user;
             }
             catch
             {

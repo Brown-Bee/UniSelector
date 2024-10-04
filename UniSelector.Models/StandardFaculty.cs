@@ -12,6 +12,6 @@ namespace UniSelector.Models
         public string NameArabic { get; set; }
         public string NameEnglish { get; set; }
         public string CombinedName => $"{NameArabic} / {NameEnglish}";
-         
+
     }
 }
