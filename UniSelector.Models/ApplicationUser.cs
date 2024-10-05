@@ -14,6 +14,7 @@ namespace UniSelector.Models
         public string? Nationality { get; set; }
         public string? PlaceOfBirth { get; set; }
         public int? HighSchoolGraduationYear { get; set; }
+        
 
     }
 }

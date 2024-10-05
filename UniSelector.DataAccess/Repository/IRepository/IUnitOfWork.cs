@@ -7,6 +7,7 @@
         IUniversityRepository University { get; }
         IFacultyRepository Faculty { get; }
         IStandardFacultyRepository StandardFaculty { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

@@ -25,6 +25,7 @@ namespace UniSelector.Utility
 
         // Controller names
         public const string ControllerUniversity = "University";
+        public const string ControllerUserManagement = "UserManagement";
         public const string ControllerProduct = "Product";
         public const string ControllerCategory = "Category";
 
