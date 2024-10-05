@@ -73,8 +73,11 @@
                             
 
                             <div class="form-floating mb-3 col-md-6">
-                                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select">
+                                <select asp-for="Input.Role"  class="form-select">
                                     <option>-Select Role-</option>
+                                    <option>User</option>
+                                    <option>University</option>
+                                    <option>Admin</option>
                                 </select>
                                 <label asp-for="Input.Role" class="text-muted">Role</label>
                             </div>

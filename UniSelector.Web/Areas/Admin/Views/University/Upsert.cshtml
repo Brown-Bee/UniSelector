@@ -50,11 +50,6 @@
                                 <input type="file" name="file" class="form-control border-0 shadow" />
                                 <label asp-for="ImageUrl" class="ms-2">Main Image</label>
                             </div>
-
-                            <div class="mb-3">
-                                <label>Gallery Images</label>
-                                <input type="file" name="galleryFiles" multiple class="form-control" />
-                            </div>
                             <div class="row ">
                                 <div class="col-6 col-md-3">
                                     @if (Model.Id == 0)
@@ -67,7 +62,7 @@
                                     }
                                 </div>
                                 <div class=" col-6 col-md-3">
-                                    <a asp-controller="University" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
+                                    <a asp-controller="@Constants.ControllerUniversity" asp-action="@Constants.ActionIndex" class="btn btn-outline-primary form-control">Back To List</a>
                                 </div>
                             </div>
                         </div>

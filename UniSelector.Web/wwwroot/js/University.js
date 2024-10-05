@@ -8,12 +8,8 @@ $(document).ready(function () {
         ],
         "ajax": {
             url: "/" + "@Constants.AreaAdmin" + "/" + "@Constants.ControllerUniversity" + "/GetAll",
-            type: "POST",
-            data: function (d) {
-                d.maxFees = $('#feesFilter').val();
-                d.faculty = $('#facultyFilter').val();
-                d.maxRank = $('#rankFilter').val();
-            }
+            type: "GET",
+            dataType: "json",
             error: function (xhr, error, thrown) {
                 console.log('Error:', error);
             }
@@ -45,6 +41,7 @@ $(document).ready(function () {
     });
     
 });
+
 function Delete(url) {
     Swal.fire({
         title: "Are you sure?",

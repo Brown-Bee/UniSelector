@@ -20,25 +20,7 @@
             </div>
 
             <table class="table table-hover table-striped table-bordered display" style="width:100%">
-                <div class="row mb-3">
-                    @* <div class="col-md-3">
-                        <input type="number" id="feesFilter" class="form-control" placeholder="Max Fees">
-                    </div>
-                    <div class="col-md-3">
-                        <select id="facultyFilter" class="form-control">
-                            <option value="">All Faculties</option>
-                            <option value="Engineering">Engineering</option>
-                            <option value="Medicine">Medicine</option>
-                            <!-- Add more faculty options -->
-                        </select>
-                    </div>
-                    <div class="col-md-3">
-                        <input type="number" id="rankFilter" class="form-control" placeholder="Max Rank">
-                    </div>
-                    <div class="col-md-3">
-                        <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
-                    </div> *@
-                </div>
+
                 <thead class="thead-dark text-light">
                     <tr>
                         <th>Name</th>
@@ -48,7 +30,7 @@
                         <th>Budget</th>
                         <th></th>
                     </tr>
-                </thead>   
+                </thead>
                 <tbody>
                     @foreach (var obj in Model.OrderBy(u => u.KuwaitRank))
                     {
@@ -77,7 +59,7 @@
 </div>
 
 
-@section Scripts{
-    <script src = "~/js/university.js"></script>
-    <script src = "~/js/Delete.js"></script>
+@section Scripts {
+    <script src="~/js/university.js"></script>
+    <script src="~/js/Delete.js"></script>
 }
