@@ -22,7 +22,6 @@ namespace UniSelector.Models
         public string? ImageUrl { get; set; }
         public ICollection<Faculty> Faculties { get; set; } = new Collection<Faculty>();
 
-        public List<GalleryImage> GalleryImages { get; set; } = new List<GalleryImage>();
         
     }
 }

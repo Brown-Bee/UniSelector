@@ -16,7 +16,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<University> Universities { get; set; }
     public DbSet<Faculty> Faculties { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-    public DbSet<GalleryImage> GalleryImages { get; set; }
     public DbSet<StandardFaculty> StandardFaculties { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -183,14 +182,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 );
 
 
-        // Adding sample gallery images
-        modelBuilder.Entity<GalleryImage>().HasData(
-            new GalleryImage { Id = 1, UniversityId = 1, ImageUrl = "" },
-            new GalleryImage { Id = 2, UniversityId = 1, ImageUrl = "" },
-            new GalleryImage { Id = 3, UniversityId = 2, ImageUrl = "" },
-            new GalleryImage { Id = 4, UniversityId = 3, ImageUrl = "" },
-            new GalleryImage { Id = 5, UniversityId = 4, ImageUrl = "" }
-        );
+       
     }
 
 }

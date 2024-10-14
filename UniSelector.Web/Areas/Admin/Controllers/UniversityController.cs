@@ -42,7 +42,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             }
         }
         [HttpPost]
-        public IActionResult Upsert(University university, IFormFile? file, List<IFormFile> GalleryFiles)
+        public IActionResult Upsert(University university, IFormFile? file)
         {
 
             if (ModelState.IsValid)

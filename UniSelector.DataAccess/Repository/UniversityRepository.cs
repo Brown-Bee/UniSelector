@@ -39,7 +39,7 @@ namespace UniSelector.DataAccess.Repository
         }
         public University GetWithGalleryImages(int id)
         {
-            return _db.Universities.Include(u => u.GalleryImages).Include(f => f.Faculties).FirstOrDefault(u => u.Id == id);
+            return _db.Universities.Include(f => f.Faculties).FirstOrDefault(u => u.Id == id);
         }
     }
 }
