@@ -25,6 +25,8 @@ namespace BulkyBookWeb.Areas.User.Controllers
             return View(ProductList);
             /*return RedirectToAction("UniversityView");*/
         }
+
+        /*----------------- University Actions -----------------*/
         public IActionResult UniversityView(string searchString, int? facultyId, decimal? maxFees, int? maxRank)
         {
             IEnumerable<University> Universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
@@ -69,6 +71,13 @@ namespace BulkyBookWeb.Areas.User.Controllers
             University university = _unitOfWork.University.GetWithGalleryImages(UniversityId);
             return View(university);
         }
+
+        public IActionResult Application(int UniversityId)
+        {
+            return View();
+        }
+
+        /*----------------- Product Actions -----------------*/
         public IActionResult Details(int ProductId)
         {
             Product product = _unitOfWork.Product.Get(u => u.Id == ProductId, includeProperties: "Category");

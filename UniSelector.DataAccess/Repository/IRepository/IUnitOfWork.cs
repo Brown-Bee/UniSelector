@@ -8,6 +8,7 @@
         IFacultyRepository Faculty { get; }
         IStandardFacultyRepository StandardFaculty { get; }
         IApplicationUserRepository ApplicationUser { get; }
+        IStudentRequestRepository StudentRequest { get; }
         void Save();
     }
 }

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSelector.DataAccess", "UniSelector.DataAccess\UniSelector.DataAccess.csproj", "{C25947F6-8725-455A-A3DE-DB62AC2CFCBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniSelector.DataAccess", "UniSelector.DataAccess\UniSelector.DataAccess.csproj", "{C25947F6-8725-455A-A3DE-DB62AC2CFCBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSelector.Utility", "UniSelector.Utility\UniSelector.Utility.csproj", "{8A6F5C56-5274-4776-9A4B-86F5C212563F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniSelector.Utility", "UniSelector.Utility\UniSelector.Utility.csproj", "{8A6F5C56-5274-4776-9A4B-86F5C212563F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSelector.Models", "UniSelector.Models\UniSelector.Models.csproj", "{D2D45876-8BB5-4B63-B0AB-1DB1774B5E43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniSelector.Models", "UniSelector.Models\UniSelector.Models.csproj", "{D2D45876-8BB5-4B63-B0AB-1DB1774B5E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSelector.Web", "UniSelector.Web\UniSelector.Web.csproj", "{851A750A-541B-4D73-9564-26C3D827EA6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniSelector.Web", "UniSelector.Web\UniSelector.Web.csproj", "{851A750A-541B-4D73-9564-26C3D827EA6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

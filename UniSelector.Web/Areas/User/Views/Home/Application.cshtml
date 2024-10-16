@@ -1,7 +1,7 @@
 ﻿@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.RegisterModel
 @{
-    ViewData["Title"] = "Create Account";
+    ViewData["Title"] = "Application";
 }
 
 <div class="container mt-5">
@@ -24,16 +24,6 @@
                                 <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" placeholder="Full Name" />
                                 <label asp-for="Input.PhoneNumber" class="text-muted">Phone Number</label>
                                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating mb-3 col-md-6">
-                                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Password" />
-                                <label asp-for="Input.Password" class="text-muted">Password</label>
-                                <span asp-validation-for="Input.Password" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating mb-3 col-md-6">
-                                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="Confirm password" />
-                                <label asp-for="Input.ConfirmPassword" class="text-muted">Confirm Password</label>
-                                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
                             </div>
                             <div class="form-floating mb-3 col-md-12">
                                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
@@ -70,38 +60,14 @@
                                 <label asp-for="Input.HighSchoolGraduationYear" class="text-muted">High School Graduation Year</label>
                                 <span asp-validation-for="Input.HighSchoolGraduationYear" class="text-danger"></span>
                             </div>
-                            
-
-                            <div class="form-floating mb-3 col-md-6">
-                                <select asp-for="Input.Role"  class="form-select">
-                                    <option>-Select Role-</option>
-                                    <option>User</option>
-                                    <option>Institution</option>
-                                    <option>Admin</option>
-                                </select>
-                                <label asp-for="Input.Role" class="text-muted">Role</label>
-                            </div>
                         </div>
                         <div class="d-grid">
-                            <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">Register</button>
+                            <button type="submit" class="btn btn-primary btn-lg">Send Request</button>
                         </div>
                     </form>
                 </div>
                 <div class="card-footer text-center py-3">
-                    <p class="mb-3">Already have an account? <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl" class="text-primary">Log in</a></p>
-                    <div class="text-center">
-                        <h5>Or register with:</h5>
-                        <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins!)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    </div>
+                    
                 </div>
             </div>
         </div>

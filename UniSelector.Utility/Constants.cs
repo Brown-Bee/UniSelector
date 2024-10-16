@@ -26,11 +26,13 @@ namespace UniSelector.Utility
         // Controller names
         public const string ControllerUniversity = "University";
         public const string ControllerUserManagement = "UserManagement";
+        public const string ControllerStudentRequest = "UserManagement";
         public const string ControllerProduct = "Product";
         public const string ControllerCategory = "Category";
 
         // Area names
         public const string AreaAdmin = "Admin";
+        public const string AreaInstitution = "Institution";
         public const string AreaUser = "User";
     }
 }

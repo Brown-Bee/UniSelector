@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241015180439_AddUniversityIdCulomn")]
+    partial class AddUniversityIdCulomn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,7 +263,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -309,7 +312,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties", (string)null);
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Product", b =>
@@ -358,7 +361,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -465,7 +468,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StandardFaculties", (string)null);
+                    b.ToTable("StandardFaculties");
 
                     b.HasData(
                         new
@@ -620,7 +623,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UnibersityId");
 
-                    b.ToTable("StudetsRequests", (string)null);
+                    b.ToTable("StudetsRequests");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
@@ -658,7 +661,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities", (string)null);
+                    b.ToTable("Universities");
 
                     b.HasData(
                         new

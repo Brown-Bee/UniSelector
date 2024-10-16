@@ -18,6 +18,8 @@ namespace UniSelector.DataAccess.Repository
 
         public IApplicationUserRepository ApplicationUser { get; private set; }
 
+        public IStudentRequestRepository StudentRequest { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
@@ -28,6 +30,7 @@ namespace UniSelector.DataAccess.Repository
             Faculty = new FacultyRepository(_db);
             StandardFaculty = new StandardFacultyRepository(_db);
             ApplicationUser = new ApplicationUserRepository(_userManager);
+            StudentRequest = new StudentRequestRepository(_db);
         }
 
         public void Save()

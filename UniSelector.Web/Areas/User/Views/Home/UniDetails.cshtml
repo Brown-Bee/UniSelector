@@ -14,11 +14,7 @@
             </div>
         </div>
         <div class="card-body">
-            <div class="text-center mt-4 text-md-end">
-                <a asp-action="UniversityView" class="btn btn-outline-primary">
-                    <i class="bi bi-arrow-left"></i> Back to Universities
-                </a>
-            </div>
+            
             <div class="row">
                 <div class="col-md-4 mb-4">
                     <img src="@Model.ImageUrl" class="img-fluid rounded shadow" alt="@Model.Name" />
@@ -65,7 +61,14 @@
                 </div>
             </div>
 
-            <div></div>
+            <div class="text-center mt-2 text-md">
+                <a asp-action="UniversityView" class="btn btn-outline-primary bg-gradient w-15 py-2 text-uppercase fw-semibold">
+                    <i class="bi bi-arrow-left"></i> Back to Universities
+                </a>
+                <a asp-action="Application" class=" btn btn-outline-primary bg-gradient w-15 py-2 text-uppercase fw-semibold">
+                    <i class="bi popover-arrow"></i> Apply
+                </a>
+            </div>
         </div>
     </div>
 </div>

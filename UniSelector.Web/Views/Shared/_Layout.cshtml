@@ -31,11 +31,11 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link " asp-area="@Constants.AreaUser" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link " asp-area="@Constants.AreaUser" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         @if (User.IsInRole(Constants.RoleAdmin))
                         {
@@ -64,8 +64,15 @@
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
+                            <a class="nav-link " asp-area="@Constants.AreaUser" asp-controller="Home" asp-action="UniversityView">Universities</a>
                         </li>
+                        @if (User.IsInRole(Constants.RoleUniversity))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="@Constants.AreaInstitution" asp-controller="StudentRequest" asp-action="Index">Requests</a>
+                            </li>
+                        }
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
