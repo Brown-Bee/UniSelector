@@ -57,7 +57,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
 
         [HttpPost]
         public IActionResult Upsert(FacultyVM facultyVM)
-        {
+            {
             if (ModelState.IsValid)
             {
                 if (facultyVM.faculty.Id == 0)
