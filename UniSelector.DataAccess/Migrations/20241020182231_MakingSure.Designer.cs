@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241014194249_AddStudentsRequestsTable")]
-    partial class AddStudentsRequestsTable
+    [Migration("20241020182231_MakingSure")]
+    partial class MakingSure
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -595,11 +595,11 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StudentRequestId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentRequestId"));
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
@@ -614,9 +614,14 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<float?>("TOEFL")
                         .HasColumnType("real");
 
-                    b.HasKey("Id");
+                    b.Property<int>("UnibersityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentRequestId");
 
                     b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("UnibersityId");
 
                     b.ToTable("StudetsRequests");
                 });
@@ -792,11 +797,21 @@ namespace UniSelector.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("UniSelector.Models.University", "University")
+                        .WithMany("AcceptedStudents")
+                        .HasForeignKey("UnibersityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("University");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
                 {
+                    b.Navigation("AcceptedStudents");
+
                     b.Navigation("Faculties");
                 });
 #pragma warning restore 612, 618

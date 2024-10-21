@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.IdentityModel.Tokens;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
+using UniSelector.Models.ViewModel;
 using UniSelector.Utility;
 
 namespace UniSelector.Web.Areas.Admin.Controllers
@@ -22,55 +23,68 @@ namespace UniSelector.Web.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<Faculty> objFacultyList = _unitOfWork.Faculty.GetAll(includeProperties: "University").ToList();
+            List<Faculty> objFacultyList = _unitOfWork.Faculty.GetAll(includeProperties: "University,StandardFaculty").ToList();
             return View(objFacultyList);
-            }
+        }
 
         public IActionResult Upsert(int? id)
         {
-                Faculty faculty = new Faculty();
-                IEnumerable<SelectListItem> UniversityList = _unitOfWork.University
-                    .GetAll().Select(u => new SelectListItem
-                    {
-                        Text = u.Name,
-                        Value = u.Id.ToString()
-                    });
-                ViewBag.UniversityList = UniversityList;
+            FacultyVM facultyVM = new FacultyVM
+            {
+                faculty = new Faculty(),
+                facultyList = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
+                {
+                    Text = sf.CombinedName,
+                    Value = sf.Id.ToString()
+                }),
+                UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                })
+            };
 
-                if (id == null || id == 0)
-                {
-                    return View(faculty);
-                }
-                else
-                {
-                    faculty = _unitOfWork.Faculty.Get(u => u.Id == id);
-                    return View(faculty);
-                }
+            if (id == null || id == 0)
+            {
+                return View(facultyVM);
             }
+            else
+            {
+                facultyVM.faculty = _unitOfWork.Faculty.Get(u => u.Id == id, includeProperties: "StandardFaculty");
+                return View(facultyVM);
+            }
+        }
 
         [HttpPost]
-        public IActionResult Upsert(Faculty faculty)
+        public IActionResult Upsert(FacultyVM facultyVM)
         {
             if (ModelState.IsValid)
             {
-                    if (faculty.Id == 0)
-                    {
-                        _unitOfWork.Faculty.Add(faculty);
-                    }
-                    else
-                    {
-                        _unitOfWork.Faculty.Update(faculty);
-                    }
-                    _unitOfWork.Save();
-                    TempData["success"] = "Faculty created successfully";
-                    return RedirectToAction("Index", "Faculty");
+                if (facultyVM.faculty.Id == 0)
+                {
+                    _unitOfWork.Faculty.Add(facultyVM.faculty);
                 }
-            ViewBag.UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
+                else
+                {
+                    _unitOfWork.Faculty.Update(facultyVM.faculty);
+                }
+                _unitOfWork.Save();
+                TempData["success"] = "Faculty created successfully";
+                return RedirectToAction("Index");
+            }
+
+            facultyVM.facultyList = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
+            {
+                Text = sf.CombinedName,
+                Value = sf.Id.ToString()
+            });
+            facultyVM.UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
             {
                 Text = u.Name,
                 Value = u.Id.ToString()
             });
-            return View(faculty);   
+
+            return View(facultyVM);
         }
 
         public IActionResult Delete(int id)
@@ -82,8 +96,8 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                 }
                 _unitOfWork.Faculty.Remove(facultyToBeDeleted);
                 _unitOfWork.Save();
-                TempData["success"] = "Faculty deleted successfully";
-                return RedirectToAction("Index", "Faculty");
+                TempData["success"] = "faculty deleted successfully";
+                return RedirectToAction("Index", "faculty");
             }
     }
 }

@@ -283,7 +283,7 @@ namespace UniSelector.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.faculty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -592,11 +592,11 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StudentRequestId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentRequestId"));
 
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
@@ -614,7 +614,7 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("UnibersityId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("StudentRequestId");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -758,7 +758,7 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
                         .WithMany()
@@ -795,7 +795,7 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired();
 
                     b.HasOne("UniSelector.Models.University", "University")
-                        .WithMany()
+                        .WithMany("AcceptedStudents")
                         .HasForeignKey("UnibersityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -807,6 +807,8 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
                 {
+                    b.Navigation("AcceptedStudents");
+
                     b.Navigation("Faculties");
                 });
 #pragma warning restore 612, 618

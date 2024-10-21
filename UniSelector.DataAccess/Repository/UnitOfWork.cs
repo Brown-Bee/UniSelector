@@ -20,6 +20,7 @@ namespace UniSelector.DataAccess.Repository
 
         public IStudentRequestRepository StudentRequest { get; private set; }
 
+
         public UnitOfWork(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;

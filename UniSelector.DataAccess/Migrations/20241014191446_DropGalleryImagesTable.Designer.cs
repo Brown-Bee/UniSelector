@@ -286,7 +286,7 @@ namespace UniSelector.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.faculty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -728,7 +728,7 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
                         .WithMany()

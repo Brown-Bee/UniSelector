@@ -66,9 +66,9 @@ namespace BulkyBookWeb.Areas.User.Controllers
             ViewBag.CurrentMaxRank = maxRank;
             return View(Universities);
         }
-        public IActionResult UniDetails(int UniversityId)
+        public IActionResult UniDetails(int universityId)
         {
-            University university = _unitOfWork.University.GetWithGalleryImages(UniversityId);
+            University university = _unitOfWork.University.Get(u => u.Id == universityId, includeProperties: "Faculties");
             return View(university);
         }
 
