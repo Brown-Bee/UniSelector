@@ -68,7 +68,7 @@ namespace BulkyBookWeb.Areas.User.Controllers
         }
         public IActionResult UniDetails(int universityId)
         {
-            University university = _unitOfWork.University.Get(u => u.Id == universityId, includeProperties: "Faculties");
+            University? university = _unitOfWork.University.GetUniversityWithFaculties(universityId);
             return View(university);
         }
 

@@ -7,5 +7,6 @@ namespace UniSelector.DataAccess.Repository.IRepository
         void Update(University obj);
         IEnumerable<University> Search(string searchString);
         University GetWithGalleryImages(int id);
+        University? GetUniversityWithFaculties(int id);
     }
 }

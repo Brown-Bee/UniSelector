@@ -41,5 +41,15 @@ namespace UniSelector.DataAccess.Repository
         {
             return _db.Universities.Include(f => f.Faculties).FirstOrDefault(u => u.Id == id);
         }
+
+        public University? GetUniversityWithFaculties(int id)
+        {
+            return _db.Universities
+                .Include(u => u.Faculties)
+                .ThenInclude(u => u.StandardFaculty)
+                .FirstOrDefault(u => u.Id == id);
+            
+        }
+        
     }
 }
