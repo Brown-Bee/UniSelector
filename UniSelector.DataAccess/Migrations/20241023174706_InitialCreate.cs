@@ -32,11 +32,10 @@ namespace UniSelector.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Grade = table.Column<float>(type: "real", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PlaceOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HighSchoolGraduationYear = table.Column<int>(type: "int", nullable: true),
@@ -269,23 +268,50 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GalleryImages",
+                name: "StudetsRequests",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UniversityId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UniversityId = table.Column<int>(type: "int", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    IELTSScore = table.Column<float>(type: "real", nullable: true),
+                    TOEFLScore = table.Column<float>(type: "real", nullable: true),
+                    KUAptitudeTestScore = table.Column<float>(type: "real", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    SubmissionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ReviewDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Comments = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    UniversityId1 = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GalleryImages", x => x.Id);
+                    table.PrimaryKey("PK_StudetsRequests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GalleryImages_Universities_UniversityId",
+                        name: "FK_StudetsRequests_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudetsRequests_Faculties_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "Faculties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudetsRequests_Universities_UniversityId",
                         column: x => x.UniversityId,
                         principalTable: "Universities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudetsRequests_Universities_UniversityId1",
+                        column: x => x.UniversityId1,
+                        principalTable: "Universities",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.InsertData(
@@ -334,18 +360,6 @@ namespace UniSelector.DataAccess.Migrations
                     { 2, 25000m, "Offering American-style education with a Middle Eastern perspective.", "/images/University/AUM.png", 2, "American University In Middle East (AUM)", "العقيلة-Egila", "Private" },
                     { 3, 15000m, "Providing a comprehensive American liberal arts education.", "/images/University/AUK.png", 3, "American University Of Kuwait (AUK)", "السالمية-Salmya", "Private" },
                     { 4, 13000m, "The premier public institution of higher education in Kuwait.", "/images/university/KU.png", 4, "Kuwait University (KU)", "الشويخ-Shwaikh", "Public" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "GalleryImages",
-                columns: new[] { "Id", "ImageUrl", "UniversityId" },
-                values: new object[,]
-                {
-                    { 1, "", 1 },
-                    { 2, "", 1 },
-                    { 3, "", 2 },
-                    { 4, "", 3 },
-                    { 5, "", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -411,14 +425,29 @@ namespace UniSelector.DataAccess.Migrations
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GalleryImages_UniversityId",
-                table: "GalleryImages",
-                column: "UniversityId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudetsRequests_FacultyId",
+                table: "StudetsRequests",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudetsRequests_UniversityId",
+                table: "StudetsRequests",
+                column: "UniversityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudetsRequests_UniversityId1",
+                table: "StudetsRequests",
+                column: "UniversityId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudetsRequests_UserId",
+                table: "StudetsRequests",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -440,28 +469,28 @@ namespace UniSelector.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Faculties");
-
-            migrationBuilder.DropTable(
-                name: "GalleryImages");
-
-            migrationBuilder.DropTable(
                 name: "Products");
+
+            migrationBuilder.DropTable(
+                name: "StudetsRequests");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "StandardFaculties");
 
             migrationBuilder.DropTable(
                 name: "Universities");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
         }
     }
 }

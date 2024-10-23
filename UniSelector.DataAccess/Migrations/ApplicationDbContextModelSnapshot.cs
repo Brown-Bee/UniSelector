@@ -260,7 +260,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -283,7 +283,7 @@ namespace UniSelector.DataAccess.Migrations
                         });
                 });
 
-            modelBuilder.Entity("UniSelector.Models.faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,7 +309,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties", (string)null);
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Product", b =>
@@ -358,7 +358,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -465,7 +465,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StandardFaculties", (string)null);
+                    b.ToTable("StandardFaculties");
 
                     b.HasData(
                         new
@@ -592,35 +592,61 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
-                    b.Property<int>("StudentRequestId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentRequestId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("ApplicationUserId")
+                    b.Property<string>("Comments")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("FacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<float?>("IELTSScore")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<float?>("KUAptitudeTestScore")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime?>("ReviewDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float?>("TOEFLScore")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UniversityId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UniversityId1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<float?>("IELTS")
-                        .HasColumnType("real");
+                    b.HasKey("Id");
 
-                    b.Property<bool?>("KUAcademicAptitudeTests")
-                        .HasColumnType("bit");
+                    b.HasIndex("FacultyId");
 
-                    b.Property<float?>("TOEFL")
-                        .HasColumnType("real");
+                    b.HasIndex("UniversityId");
 
-                    b.Property<int>("UnibersityId")
-                        .HasColumnType("int");
+                    b.HasIndex("UniversityId1");
 
-                    b.HasKey("StudentRequestId");
+                    b.HasIndex("UserId");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("UnibersityId");
-
-                    b.ToTable("StudetsRequests", (string)null);
+                    b.ToTable("StudetsRequests");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
@@ -658,7 +684,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities", (string)null);
+                    b.ToTable("Universities");
 
                     b.HasData(
                         new
@@ -758,7 +784,7 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("UniSelector.Models.faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
                         .WithMany()
@@ -788,21 +814,33 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
-                    b.HasOne("UniSelector.Models.ApplicationUser", "ApplicationUser")
+                    b.HasOne("UniSelector.Models.Faculty", "Faculty")
                         .WithMany()
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("UniSelector.Models.University", "University")
-                        .WithMany("AcceptedStudents")
-                        .HasForeignKey("UnibersityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany()
+                        .HasForeignKey("UniversityId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.HasOne("UniSelector.Models.University", null)
+                        .WithMany("AcceptedStudents")
+                        .HasForeignKey("UniversityId1");
+
+                    b.HasOne("UniSelector.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Faculty");
 
                     b.Navigation("University");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>

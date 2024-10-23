@@ -27,6 +27,30 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             new Category { Id = 2, Name = "Scifi", DisplayOrder = 2 },
             new Category { Id = 3, Name = "History", DisplayOrder = 3 }
             );
+
+
+        modelBuilder.Entity<StudentRequest>()
+            .HasOne(sr => sr.User)
+            .WithMany()
+            .HasForeignKey(sr => sr.UserId)
+            .OnDelete(DeleteBehavior.Restrict
+            );
+
+        modelBuilder.Entity<StudentRequest>()
+            .HasOne(sr => sr.University)
+            .WithMany()
+            .HasForeignKey(sr => sr.UniversityId)
+            .OnDelete(DeleteBehavior.Restrict
+            );
+
+        modelBuilder.Entity<StudentRequest>()
+            .HasOne(sr => sr.Faculty)
+            .WithMany()
+            .HasForeignKey(sr => sr.FacultyId)
+            .OnDelete(DeleteBehavior.Restrict
+            );
+
+
         modelBuilder.Entity<Product>().HasData(
             new Product
             {
@@ -183,7 +207,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 );
 
 
-       
+
     }
 
 }
