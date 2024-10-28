@@ -40,7 +40,7 @@
                                 <label asp-for="Input.Email" class="text-muted">Email</label>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
-                            <div class="form-floating mb-3 col-md-12">
+                            <div class="form-floating mb-3 col-md-6">
                                 <input asp-for="Input.Address" class="form-control" placeholder="Address" />
                                 <label asp-for="Input.Address" class="text-muted">Address</label>
                                 <span asp-validation-for="Input.Address" class="text-danger"></span>
@@ -81,6 +81,12 @@
                                 </select>
                                 <label asp-for="Input.Role" class="text-muted">Role</label>
                             </div>
+                            <div class="form-floating mb-3 col-md-6">
+                                <select asp-for="Input.UniversityId" asp-items="@Model.Input.UniversityList" class="form-select">
+                                    <option>-Select University-</option>
+                                </select>
+                                <label asp-for="Input.UniversityId" class="text-muted">University</label>
+                            </div>
                         </div>
                         <div class="d-grid">
                             <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">Register</button>
@@ -115,6 +121,22 @@
             var graduationYearInput = document.querySelector('.graduation-year');
             var currentYear = new Date().getFullYear();
             graduationYearInput.max = currentYear;
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Hide university field initially
+            $('#Input_UniversityId, label[for="Input_UniversityId"]').hide();
+
+            // Listen for role selection changes
+            $('#Input_Role').change(function () {
+                var selection = $(this).val();
+                if (selection == 'Institution') {
+                    $('#Input_UniversityId, label[for="Input_UniversityId"]').show();
+                } else {
+                    $('#Input_UniversityId, label[for="Input_UniversityId"]').hide();
+                }
+            });
         });
     </script>
 }

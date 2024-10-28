@@ -29,7 +29,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             );
 
 
-        modelBuilder.Entity<StudentRequest>()
+        /*modelBuilder.Entity<StudentRequest>()
             .HasOne(sr => sr.User)
             .WithMany()
             .HasForeignKey(sr => sr.UserId)
@@ -48,7 +48,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
             .WithMany()
             .HasForeignKey(sr => sr.FacultyId)
             .OnDelete(DeleteBehavior.Restrict
-            );
+            );*/
 
 
         modelBuilder.Entity<Product>().HasData(

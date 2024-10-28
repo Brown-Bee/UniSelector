@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿  using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.VisualBasic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UniSelector.Models
 {
@@ -14,7 +16,12 @@ namespace UniSelector.Models
         public string? Nationality { get; set; }
         public string? PlaceOfBirth { get; set; }
         public int? HighSchoolGraduationYear { get; set; }
-        
+        public int? UniversityId { get; set; }
+        [ForeignKey("UniversityId")]
+        [ValidateNever]
+        public University university { get; set; }
+
+
 
     }
 }

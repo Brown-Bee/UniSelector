@@ -13,11 +13,10 @@ namespace UniSelector.Utility
         // Roles
         public const string RoleAdmin = "Admin";
         public const string RoleUser = "User";
-        public const string RoleUniversity = "University";
+        public const string RoleUniversity = "Institution";
 
         // Image paths
         public const string UniversityImagePath = @"\Images\University\";
-        public const string GalleryImagePath = @"\Images\University\Gallery\";
 
         // Action names
         public const string ActionIndex = "Index";

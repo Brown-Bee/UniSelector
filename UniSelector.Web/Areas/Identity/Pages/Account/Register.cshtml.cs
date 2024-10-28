@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.WebUtilities;
 using UniSelector.Models;
+using UniSelector.DataAccess.Repository.IRepository;
 
 namespace UniSelector.Web.Areas.Identity.Pages.Account
 {
@@ -43,6 +44,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IUnitOfWork _unitOfWork;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -50,7 +52,8 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IUnitOfWork unitOfWork )
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -59,6 +62,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _unitOfWork = unitOfWork;
         }
 
         /// <summary>
@@ -136,6 +140,9 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
+            public int? UniversityId { get; set; }
+            [ValidateNever]
+            public IEnumerable<SelectListItem> UniversityList { get; set; }
         }
 
 
@@ -157,6 +164,11 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
                 {
                     Text = i,
                     Value = i
+                }),
+                UniversityList = _unitOfWork.University.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
                 })
             };
         }
@@ -171,6 +183,13 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                if (Input.Role == Constants.RoleUniversity)
+                {
+                    user.UniversityId = Input.UniversityId;
+                }
+
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
