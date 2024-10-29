@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace UniSelector.Models
@@ -14,6 +16,11 @@ namespace UniSelector.Models
         public string type { get; set; }
         public string Description { get; set; }
         public string location { get; set; }
+        [DisplayName("Phone Number")]
+        public string PhoneNumber { get; set; }
+        
+        [NotMapped]
+        public string Email { get; set; }
         
         [Range(1,30)]
         public int KuwaitRank { get; set; }

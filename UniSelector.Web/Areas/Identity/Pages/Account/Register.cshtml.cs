@@ -140,7 +140,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
-            public int? UniversityId { get; set; }
+            /*public int? UniversityId { get; set; }*/
             [ValidateNever]
             public IEnumerable<SelectListItem> UniversityList { get; set; }
         }
@@ -184,10 +184,10 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
-                if (Input.Role == Constants.RoleUniversity)
+                /*if (Input.Role == Constants.RoleUniversity)
                 {
                     user.UniversityId = Input.UniversityId;
-                }
+                }*/
 
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
