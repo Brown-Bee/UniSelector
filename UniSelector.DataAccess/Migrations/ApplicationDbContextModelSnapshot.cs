@@ -225,9 +225,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("UniversityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -241,8 +238,6 @@ namespace UniSelector.DataAccess.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
-
-                    b.HasIndex("UniversityId");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -653,6 +648,10 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -674,6 +673,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 1,
                             Name = "Arab Open University (AOU)",
+                            PhoneNumber = "99999999",
                             location = "العارضية-Ardya",
                             type = "Private"
                         },
@@ -685,6 +685,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
                             Name = "American University In Middle East (AUM)",
+                            PhoneNumber = "99999999",
                             location = "العقيلة-Egila",
                             type = "Private"
                         },
@@ -696,6 +697,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 3,
                             Name = "American University Of Kuwait (AUK)",
+                            PhoneNumber = "99999999",
                             location = "السالمية-Salmya",
                             type = "Private"
                         },
@@ -707,6 +709,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/university/KU.png",
                             KuwaitRank = 4,
                             Name = "Kuwait University (KU)",
+                            PhoneNumber = "99999999",
                             location = "الشويخ-Shwaikh",
                             type = "Public"
                         });
@@ -761,15 +764,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("UniSelector.Models.ApplicationUser", b =>
-                {
-                    b.HasOne("UniSelector.Models.University", "university")
-                        .WithMany()
-                        .HasForeignKey("UniversityId");
-
-                    b.Navigation("university");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>

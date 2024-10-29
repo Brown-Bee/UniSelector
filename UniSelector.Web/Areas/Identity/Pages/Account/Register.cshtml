@@ -74,19 +74,18 @@
 
                             <div class="form-floating mb-3 col-md-6">
                                 <select asp-for="Input.Role"  class="form-select">
-                                    <option>-Select Role-</option>
-                                    <option>User</option>
+                                    <option selected>User</option>
                                     <option>Institution</option>
                                     <option>Admin</option>
                                 </select>
                                 <label asp-for="Input.Role" class="text-muted">Role</label>
                             </div>
-                            <div class="form-floating mb-3 col-md-6">
+                            @*<div class="form-floating mb-3 col-md-6">
                                 <select asp-for="Input.UniversityId" asp-items="@Model.Input.UniversityList" class="form-select">
                                     <option>-Select University-</option>
                                 </select>
                                 <label asp-for="Input.UniversityId" class="text-muted">University</label>
-                            </div>
+                            </div>*@
                         </div>
                         <div class="d-grid">
                             <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">Register</button>

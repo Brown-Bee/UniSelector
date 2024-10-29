@@ -148,6 +148,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 location = "العارضية-Ardya",
                 KuwaitRank = 1,
                 Budget = 4500,
+                PhoneNumber = "99999999",
+
                 ImageUrl = "/images/University/AOU.png"
             },
             new University
@@ -159,6 +161,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 location = "العقيلة-Egila",
                 KuwaitRank = 2,
                 Budget = 25000,
+                PhoneNumber = "99999999",
+
                 ImageUrl = "/images/University/AUM.png"
             },
             new University
@@ -170,6 +174,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 location = "السالمية-Salmya",
                 KuwaitRank = 3,
                 Budget = 15000,
+                PhoneNumber = "99999999",
+
                 ImageUrl = "/images/University/AUK.png"
             },
             new University
@@ -181,6 +187,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 location = "الشويخ-Shwaikh",
                 KuwaitRank = 4,
                 Budget = 13000,
+                PhoneNumber = "99999999",
                 ImageUrl = "/images/university/KU.png"
             });
         modelBuilder.Entity<StandardFaculty>().HasData(

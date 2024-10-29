@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241023174706_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241028204653_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -595,59 +595,33 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("StudentRequestId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentRequestId"));
 
-                    b.Property<string>("Comments")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("FacultyId")
-                        .HasColumnType("int");
-
-                    b.Property<float?>("IELTSScore")
-                        .HasColumnType("real");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<float?>("KUAptitudeTestScore")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime?>("ReviewDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("SubmissionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<float?>("TOEFLScore")
-                        .HasColumnType("real");
-
-                    b.Property<int>("UniversityId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UniversityId1")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
+                    b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+                    b.Property<float?>("IELTS")
+                        .HasColumnType("real");
 
-                    b.HasIndex("FacultyId");
+                    b.Property<bool?>("KUAcademicAptitudeTests")
+                        .HasColumnType("bit");
 
-                    b.HasIndex("UniversityId");
+                    b.Property<float?>("TOEFL")
+                        .HasColumnType("real");
 
-                    b.HasIndex("UniversityId1");
+                    b.Property<int>("UnibersityId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("UserId");
+                    b.HasKey("StudentRequestId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("UnibersityId");
 
                     b.ToTable("StudetsRequests");
                 });
@@ -677,6 +651,10 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -698,6 +676,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 1,
                             Name = "Arab Open University (AOU)",
+                            PhoneNumber = "99999999",
                             location = "العارضية-Ardya",
                             type = "Private"
                         },
@@ -709,6 +688,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
                             Name = "American University In Middle East (AUM)",
+                            PhoneNumber = "99999999",
                             location = "العقيلة-Egila",
                             type = "Private"
                         },
@@ -720,6 +700,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 3,
                             Name = "American University Of Kuwait (AUK)",
+                            PhoneNumber = "99999999",
                             location = "السالمية-Salmya",
                             type = "Private"
                         },
@@ -731,6 +712,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/university/KU.png",
                             KuwaitRank = 4,
                             Name = "Kuwait University (KU)",
+                            PhoneNumber = "99999999",
                             location = "الشويخ-Shwaikh",
                             type = "Public"
                         });
@@ -817,33 +799,21 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
-                    b.HasOne("UniSelector.Models.Faculty", "Faculty")
+                    b.HasOne("UniSelector.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
-                        .HasForeignKey("FacultyId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("UniSelector.Models.University", "University")
-                        .WithMany()
-                        .HasForeignKey("UniversityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("UniSelector.Models.University", null)
                         .WithMany("AcceptedStudents")
-                        .HasForeignKey("UniversityId1");
-
-                    b.HasOne("UniSelector.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasForeignKey("UnibersityId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Faculty");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("University");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>

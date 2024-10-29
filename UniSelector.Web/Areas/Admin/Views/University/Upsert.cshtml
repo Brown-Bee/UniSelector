@@ -11,6 +11,7 @@
         </div>
         <div calss="card-body p-4 ">
             <form method="post" class="row " style="margin-left: 0px; margin-right: 0px;" enctype="multipart/form-data">
+                <div asp-validation-summary="All"></div>
                 <input asp-for="Id" hidden/>
                 <input asp-for="ImageUrl" hidden/>
                 <div class="row">
@@ -18,12 +19,22 @@
                         <div class="border-primary p-3 bg-white ">
                             @* <div asp-validation-summary="All"></div> *@
                             <div class="form-floating py-2 col-12">
-                                <input asp-for="Name" class="form-control border-0 shadow" />
+                                <input asp-for="Name" class="form-control border-0 shadow"/>
                                 <label asp-for="Name" class="ms-2 bg-white"></label>
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                             <div class="form-floating py-2 col-12">
-                                <input asp-for="type" class="form-control border-0 shadow" />
+                                <input asp-for="Email" class="form-control border-0 shadow"/>
+                                <label asp-for="Email" class="ms-2 bg-white"></label>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="PhoneNumber" type="number" class="form-control border-0 shadow"/>
+                                <label asp-for="PhoneNumber" class="ms-2 bg-white"></label>
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="type" class="form-control border-0 shadow"/>
                                 <label asp-for="type" class="ms-2"></label>
                                 <span asp-validation-for="type" class="text-danger"></span>
                             </div>
@@ -32,22 +43,22 @@
                                 <textarea asp-for="Description" class="form-control border-0 shadow"></textarea>
                             </div>
                             <div class="form-floating py-2 col-12">
-                                <input asp-for="location" class="form-control border-0 shadow" />
+                                <input asp-for="location" class="form-control border-0 shadow"/>
                                 <label asp-for="location" class="ms-2"></label>
                                 <span asp-validation-for="location" class="text-danger"></span>
                             </div>
                             <div class="form-floating py-2 col-12">
-                                <input asp-for="KuwaitRank" class="form-control border-0 shadow" />
+                                <input asp-for="KuwaitRank" class="form-control border-0 shadow"/>
                                 <label asp-for="KuwaitRank" class="ms-2"></label>
                                 <span asp-validation-for="KuwaitRank" class="text-danger"></span>
                             </div>
                             <div class="form-floating py-2 col-12">
-                                <input asp-for="Budget" class="form-control border-0 shadow" />
+                                <input asp-for="Budget" class="form-control border-0 shadow"/>
                                 <label asp-for="Budget" class="ms-2"></label>
                                 <span asp-validation-for="Budget" class="text-danger"></span>
                             </div>
                             <div class="form-floating py-2 col-12">
-                                <input type="file" name="file" class="form-control border-0 shadow" />
+                                <input type="file" name="file" class="form-control border-0 shadow"/>
                                 <label asp-for="ImageUrl" class="ms-2">Main Image</label>
                             </div>
                             <div class="row ">
@@ -68,7 +79,7 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <img src="@Model.ImageUrl" style="box-shadow: 0 0 10px rgba(0,0,0,0.5); width: 100%; max-width: 300px; max-height: 300px; object-fit: contain; border: 3px;" />
+                        <img src="@Model.ImageUrl" style="box-shadow: 0 0 10px rgba(0,0,0,0.5); width: 100%; max-width: 300px; max-height: 300px; object-fit: contain; border: 3px;"/>
                     </div>
                 </div>
             </form>

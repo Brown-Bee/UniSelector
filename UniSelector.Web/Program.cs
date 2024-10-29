@@ -5,9 +5,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using UniSelector.DataAccess.Repository;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Utility;
-using System.Configuration;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.Google;
 using UniSelector.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +15,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
 
@@ -38,11 +35,18 @@ builder.Services.ConfigureApplicationCookie(option =>
 
         googleOptions.ClientId = googleAuthNSection["ClientId"];
         googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
-    });*/
+});*/
 
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IMailer, Mailer>();
+builder.Services.AddScoped<IEmailSender, EmailSenderAdapter>();
+
+/*
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+*/
+
+
 
 var app = builder.Build();
 
