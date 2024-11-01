@@ -30,9 +30,15 @@ namespace UniSelector.DataAccess.Repository
             return query.FirstOrDefault();
         }
 
-        public IEnumerable<T> GetAll(string? includeProperties = null)
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
             IQueryable<T> query = dbSet;
+            if (filter is not null)
+            {
+                query = dbSet.Where(filter);
+
+            }
+
             if (!string.IsNullOrEmpty(includeProperties))
             {
                 foreach (var IncludeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))

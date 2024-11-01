@@ -9,10 +9,16 @@
         </div>
         <div class="mb-3">
             <label asp-for="faculty.StandardFacultyId">Standard Faculty</label>
-            <select asp-for="faculty.StandardFacultyId" asp-items="@Model.facultyList" class="form-control">
+            <select asp-for="faculty.StandardFacultyId" asp-items="@Model.facultyList" class="form-control" id="standardFacultySelect">
                 <option disabled selected>--Select Standard Faculty--</option>
             </select>
             <span asp-validation-for="faculty.StandardFacultyId" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label>Major</label>
+            <select id="majorSelect" class="form-control">
+                <option disabled selected>--Select Major--</option>
+            </select>
         </div>
         <div class="mb-3">
             <label asp-for="faculty.AveragePrice"></label>
@@ -39,7 +45,33 @@
 </form>
 
 @section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
+    <partial name="_ValidationScriptsPartial" />
+    
+    <script>
+        $(document).ready(function () {
+            $('#standardFacultySelect').change(function () {
+                let selectedFacultyId = $(this).val();
+                if (selectedFacultyId) {
+                    let url = '@Url.Action("GetMajors", "Faculty", new { area = "Admin" })';
+                    console.log("Making AJAX request to:", url);
+
+                    $.ajax({
+                        url: url,  
+                        type: 'GET',
+                        data: { facultyId: selectedFacultyId },
+                        success: function (majors) {
+                            let majorSelect = $('#majorSelect');
+                            majorSelect.empty();
+                            majorSelect.append('<option disabled selected>--Select Major--</option>');
+                            $.each(majors, function (index, major) {
+                                majorSelect.append($('<option></option>')
+                                    .attr('value', major.id)
+                                    .text(major.name));
+                            });
+                        }
+                    });
+                }
+            });
+        });
+</script>
 }
