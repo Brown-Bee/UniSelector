@@ -9,6 +9,7 @@
         IStandardFacultyRepository StandardFaculty { get; }
         IApplicationUserRepository ApplicationUser { get; }
         IStudentRequestRepository StudentRequest { get; }
+        IMajorRepository Major { get; }
         void Save();
     }
 }

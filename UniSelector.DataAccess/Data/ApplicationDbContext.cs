@@ -18,6 +18,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     public DbSet<StandardFaculty> StandardFaculties { get; set; }
     public DbSet<StudentRequest> StudetsRequests { get; set; }
+    public DbSet<Major> Majors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

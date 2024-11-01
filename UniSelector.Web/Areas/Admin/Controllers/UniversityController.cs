@@ -12,7 +12,7 @@ using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 
 namespace UniSelector.Web.Areas.Admin.Controllers
-{
+{    
     [Area(Constants.AreaAdmin)]
     [Authorize(Roles = Constants.RoleAdmin)]
     public class UniversityController : Controller
