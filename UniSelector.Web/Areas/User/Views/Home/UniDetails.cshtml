@@ -44,13 +44,16 @@
                         <div class="d-flex flex-wrap gap-2">
                             @foreach (var faculty in Model.Faculties)
                             {
-                                <span class="badge rounded-pill bg-primary fs-6 p-2"
+                                <a class="badge rounded-pill bg-primary fs-6 p-2"
+                                      style="text-decoration: none;"
+                                      href="@Url.Action("GetMajorId", "Major", new { area = "Admin", facultyId = faculty.Id})"
                                       data-bs-toggle="popover"
                                       data-bs-trigger="hover focus"
                                       data-bs-title="@faculty.StandardFaculty.CombinedName"
-                                      data-bs-content="Credits: @faculty.Credits">
+                                      data-bs-content="Credits: @faculty.Credits"
+                                      >
                                     @faculty.StandardFaculty.CombinedName
-                                </span>
+                                </a>
                             }
                         </div>
                     }

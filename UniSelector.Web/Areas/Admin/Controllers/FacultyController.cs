@@ -22,70 +22,51 @@ public class FacultyController : Controller
 
     public IActionResult Index()
     {
-        List<Faculty> objFacultyList =
+        var objFacultyList =
             _unitOfWork.Faculty.GetAll(includeProperties: "University,StandardFaculty").ToList();
         return View(objFacultyList);
     }
 
     public IActionResult Upsert(int? id)
     {
-        FacultyVM facultyVM = new FacultyVM
+        var facultyVM = new FacultyVM
         {
             faculty = new Faculty(),
-            facultyList = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
-            {
-                Text = sf.CombinedName,
-                Value = sf.Id.ToString()
-            }),
-            UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
-            {
-                Text = u.Name,
-                Value = u.Id.ToString()
-            })
         };
+        FillSelectionData(facultyVM);
 
-        if (id == null || id == 0)
+        
+        if (id is null or 0)
         {
             return View(facultyVM);
         }
-        else
-        {
-            facultyVM.faculty = _unitOfWork.Faculty.Get(u => u.Id == id, includeProperties: "StandardFaculty");
-            return View(facultyVM);
-        }
+
+        facultyVM.faculty = _unitOfWork.Faculty.Get(u => u.Id == id, includeProperties: "StandardFaculty");
+        return View(facultyVM);
     }
 
     [HttpPost]
     public IActionResult Upsert(FacultyVM facultyVM)
     {
-        if (ModelState.IsValid)
+        if (!ModelState.IsValid)
         {
-            if (facultyVM.faculty.Id == 0)
-            {
-                _unitOfWork.Faculty.Add(facultyVM.faculty);
-            }
-            else
-            {
-                _unitOfWork.Faculty.Update(facultyVM.faculty);
-            }
-
-            _unitOfWork.Save();
-            TempData["success"] = "Faculty created successfully";
-            return RedirectToAction("Index");
+            FillSelectionData(facultyVM);
+            return View(facultyVM);
+        }
+        if (facultyVM.faculty.Id == 0)
+        {
+            _unitOfWork.Faculty.Add(facultyVM.faculty);
+        }
+        else
+        {
+            _unitOfWork.Faculty.Update(facultyVM.faculty);
         }
 
-        facultyVM.facultyList = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
-        {
-            Text = sf.CombinedName,
-            Value = sf.Id.ToString()
-        });
-        facultyVM.UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
-        {
-            Text = u.Name,
-            Value = u.Id.ToString()
-        });
+        _unitOfWork.Save();
+        TempData["success"] = "Faculty created successfully";
+        return RedirectToAction("Index");
 
-        return View(facultyVM);
+
     }
 
     public IActionResult Delete(int id)
@@ -100,6 +81,20 @@ public class FacultyController : Controller
         _unitOfWork.Save();
         TempData["success"] = "faculty deleted successfully";
         return RedirectToAction("Index", "faculty");
+    }
+
+    private void FillSelectionData(FacultyVM facultyVM)
+    {
+        facultyVM.facultyList = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
+        {
+            Text = sf.CombinedName,
+            Value = sf.Id.ToString()
+        });
+        facultyVM.UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
+        {
+            Text = u.Name,
+            Value = u.Id.ToString()
+        });
     }
 
     #region API CALL
