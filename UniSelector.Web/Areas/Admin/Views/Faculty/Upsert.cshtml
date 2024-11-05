@@ -1,77 +1,94 @@
-﻿@model UniSelector.Models.ViewModel.FacultyVM
+﻿    @model UniSelector.Models.ViewModel.FacultyVM
 
-<form method="post">
-    <input asp-for="faculty.Id" hidden />
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">@(Model.faculty.Id != 0 ? "Update" : "Add") Faculty</h2>
-            <hr />
+    <form method="post">
+        <input asp-for="faculty.Id" hidden />
+        <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary">@(Model.faculty.Id != 0 ? "Update" : "Add") Faculty</h2>
+                <hr />
+            </div>
+            <div class="mb-3">
+                <label asp-for="faculty.StandardFacultyId">Standard Faculty</label>
+                <select asp-for="faculty.StandardFacultyId" asp-items="@Model.facultyList" class="form-control" id="standardFacultySelect">
+                    <option disabled selected>--Select Standard Faculty--</option>
+                </select>
+                <span asp-validation-for="faculty.StandardFacultyId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label>Major</label>
+                <select id="majorSelect" class="form-control" asp-for="faculty.MajorId">
+                    <option disabled selected>--Select Major--</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label asp-for="faculty.AveragePrice"></label>
+                <input asp-for="faculty.AveragePrice" class="form-control" />
+                <span asp-validation-for="faculty.AveragePrice" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="faculty.Credits"></label>
+                <input asp-for="faculty.Credits" class="form-control" />
+                <span asp-validation-for="faculty.Credits" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="faculty.UniversityId">University</label>
+                <select asp-for="faculty.UniversityId" asp-items="@Model.UniversityList" class="form-control">
+                    <option disabled selected>--Select University--</option>
+                </select>
+                <span asp-validation-for="faculty.UniversityId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:150px">@(Model.faculty.Id != 0 ? "Update" : "Add")</button>
+            <a asp-controller="Faculty" asp-action="Index" class="btn btn-secondary" style="width:150px">
+                Back to List
+            </a>
         </div>
-        <div class="mb-3">
-            <label asp-for="faculty.StandardFacultyId">Standard Faculty</label>
-            <select asp-for="faculty.StandardFacultyId" asp-items="@Model.facultyList" class="form-control" id="standardFacultySelect">
-                <option disabled selected>--Select Standard Faculty--</option>
-            </select>
-            <span asp-validation-for="faculty.StandardFacultyId" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label>Major</label>
-            <select id="majorSelect" class="form-control">
-                <option disabled selected>--Select Major--</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label asp-for="faculty.AveragePrice"></label>
-            <input asp-for="faculty.AveragePrice" class="form-control" />
-            <span asp-validation-for="faculty.AveragePrice" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="faculty.Credits"></label>
-            <input asp-for="faculty.Credits" class="form-control" />
-            <span asp-validation-for="faculty.Credits" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="faculty.UniversityId">University</label>
-            <select asp-for="faculty.UniversityId" asp-items="@Model.UniversityList" class="form-control">
-                <option disabled selected>--Select University--</option>
-            </select>
-            <span asp-validation-for="faculty.UniversityId" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">@(Model.faculty.Id != 0 ? "Update" : "Add")</button>
-        <a asp-controller="Faculty" asp-action="Index" class="btn btn-secondary" style="width:150px">
-            Back to List
-        </a>
-    </div>
-</form>
+    </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    
-    <script>
-        $(document).ready(function () {
-            $('#standardFacultySelect').change(function () {
-                let selectedFacultyId = $(this).val();
-                if (selectedFacultyId) {
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial"/>
+
+        <script>
+            $(document).ready(function () {
+                $('#standardFacultySelect').change(function () {
+                    let selectedFacultyId = $(this).val();
+                    fillMajor(selectedFacultyId);
+                });
+
+                // Call fillMajor() after the #standardFacultySelect element has been populated
+                let standardFacultyId = @Model.faculty.StandardFacultyId;
+                let selectedMajorId = @Model.faculty.MajorId;
+                window.alert(selectedMajorId)
+                if (standardFacultyId > 0) {
+                    $('#standardFacultySelect').val(standardFacultyId);
+                    fillMajor(standardFacultyId, selectedMajorId);
+                }
+            });
+
+            function fillMajor(standardFacultyId, selectedMajorId) {
+                if (standardFacultyId) {
                     let url = '@Url.Action("GetMajors", "Faculty", new { area = "Admin" })';
                     console.log("Making AJAX request to:", url);
 
                     $.ajax({
-                        url: url,  
+                        url: url,
                         type: 'GET',
-                        data: { facultyId: selectedFacultyId },
+                        data: { facultyId: standardFacultyId },
                         success: function (majors) {
                             let majorSelect = $('#majorSelect');
                             majorSelect.empty();
                             majorSelect.append('<option disabled selected>--Select Major--</option>');
                             $.each(majors, function (index, major) {
-                                majorSelect.append($('<option></option>')
+                                let option = $('<option></option>')
                                     .attr('value', major.id)
-                                    .text(major.name));
+                                    .text(major.name);
+                                if (major.id === selectedMajorId) {
+                                    option.prop('selected', true);
+                                }
+                                majorSelect.append(option);
                             });
                         }
                     });
                 }
-            });
-        });
-</script>
-}
+            }
+        </script>
+    }

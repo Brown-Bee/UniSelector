@@ -18,10 +18,19 @@ public class MajorController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public IActionResult Index()
+    public IActionResult Index(int? facultyId)
     {
-        var majors = _unitOfWork.Major.GetAll(includeProperties:"StandardFaculty");
-        return View(majors.ToList());
+        if (!facultyId.HasValue) 
+            return View(_unitOfWork.Major.GetAll().ToList());
+        var majors = _unitOfWork.Major.GetAll(m => m.StandardFacultyId == facultyId).ToList();
+        return View(majors);
+    }
+
+    [Authorize(Roles = "User,Admin")]
+    public IActionResult GetMajorId(int facultyId)
+    {
+        var majors = _unitOfWork.Major.GetAll(m => m.StandardFacultyId == facultyId).ToList();
+        return View(majors);
     }
 
     public IActionResult Upsert(int id)

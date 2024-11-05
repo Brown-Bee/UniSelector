@@ -1,11 +1,10 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
-using UniSelector.Utility;
 
-namespace BulkyBookWeb.Areas.User.Controllers
+namespace UniSelector.Web.Areas.User.Controllers
 {
     [Area("User")]
     public class HomeController : Controller
