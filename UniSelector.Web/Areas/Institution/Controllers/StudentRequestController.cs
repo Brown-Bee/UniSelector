@@ -7,8 +7,8 @@ using UniSelector.Utility;
 
 namespace UniSelector.Web.Areas.Institution.Controllers
 {
-    [Area(Constants.AreaInstitution)]
-    [Authorize(Roles = Constants.RoleUniversity)]
+    [Area("Institution")]
+    [Authorize(Roles = "Institution")]
     public class StudentRequestController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

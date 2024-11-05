@@ -8,8 +8,8 @@ using UniSelector.Models.ViewModel;
 
 namespace UniSelector.Web.Areas.Admin.Controllers
 {
-    [Area(Constants.AreaAdmin)]
-    [Authorize(Roles = Constants.RoleAdmin)]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

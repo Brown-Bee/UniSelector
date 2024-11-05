@@ -13,8 +13,8 @@ using UniSelector.Models;
 
 namespace UniSelector.Web.Areas.Admin.Controllers
 {    
-    [Area(Constants.AreaAdmin)]
-    [Authorize(Roles = Constants.RoleAdmin)]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class UniversityController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -81,7 +81,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                 {
                     file.CopyTo(fileStream);
                 }
-                university.ImageUrl = Constants.UniversityImagePath + fileName;
+                university.ImageUrl = SD.UniversityImagePath + fileName;
             }                
             if (university.Id == 0)
             {
@@ -111,7 +111,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                 var result = await _userManager.CreateAsync(institution, $"{university.Name}X123#");
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(institution, Constants.RoleUniversity);
+                    await _userManager.AddToRoleAsync(institution, SD.RoleUniversity);
                     
                     var code = await _userManager.GeneratePasswordResetTokenAsync(institution);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

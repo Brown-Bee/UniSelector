@@ -7,8 +7,8 @@ using UniSelector.Utility;
 
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
-[Area(Constants.AreaAdmin)]
-[Authorize(Roles = Constants.RoleAdmin)]
+[Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class MajorController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;

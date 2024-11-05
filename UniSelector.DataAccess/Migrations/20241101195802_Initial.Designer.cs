@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241101192623_AddMajorPropToFaculty")]
-    partial class AddMajorPropToFaculty
+    [Migration("20241101195802_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

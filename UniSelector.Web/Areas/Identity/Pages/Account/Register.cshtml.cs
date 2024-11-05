@@ -148,11 +148,11 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!_roleManager.RoleExistsAsync(Constants.RoleUser).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(SD.RoleUser).GetAwaiter().GetResult())
             {
-                _roleManager.CreateAsync(new IdentityRole(Constants.RoleUser)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(Constants.RoleAdmin)).GetAwaiter().GetResult();
-                _roleManager.CreateAsync(new IdentityRole(Constants.RoleUniversity)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.RoleUser)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.RoleAdmin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.RoleUniversity)).GetAwaiter().GetResult();
             }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -202,7 +202,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
                     }
                     else
                     {
-                        await _userManager.AddToRoleAsync(user, Constants.RoleUser);
+                        await _userManager.AddToRoleAsync(user, SD.RoleUser);
                     }
 
                     var userId = await _userManager.GetUserIdAsync(user);

@@ -6,8 +6,8 @@ using UniSelector.Models;
 
 namespace UniSelector.Web.Areas.Admin.Controllers
 {
-    [Area(Constants.AreaAdmin)]
-    [Authorize(Roles = Constants.RoleAdmin)]
+    [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -55,7 +55,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                 }
                 _unitOfWork.Save();
                 TempData["success"] = "Category " + ((obj.Id != 0 ? "Updated" : "Created")) + " successfully";
-                return RedirectToAction(Constants.ActionIndex, Constants.ControllerCategory);
+                return RedirectToAction("Index", "Category");
             }
             return View();
         }
@@ -83,7 +83,7 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             _unitOfWork.Category.Remove(category);
             _unitOfWork.Save();
             TempData["success"] = "Category Deleted successfully";
-            return RedirectToAction(Constants.ActionIndex, Constants.ControllerCategory);
+            return RedirectToAction("Index", "Category");
         }
     }
 }

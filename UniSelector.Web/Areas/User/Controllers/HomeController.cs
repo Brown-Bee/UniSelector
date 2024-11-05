@@ -7,7 +7,7 @@ using UniSelector.Utility;
 
 namespace BulkyBookWeb.Areas.User.Controllers
 {
-    [Area(Constants.AreaUser)]
+    [Area("User")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

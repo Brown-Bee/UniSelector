@@ -31,13 +31,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="@Constants.AreaUser" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="@Constants.AreaUser" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        @if (User.IsInRole(Constants.RoleAdmin))
+                        @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -45,37 +45,37 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     @* <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerCategory" asp-action="@Constants.ActionIndex">Category</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="@Constants.ControllerCategory" asp-action="@Constants.ActionIndex">Category</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerProduct" asp-action="@Constants.ActionIndex">Product</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="@Constants.ControllerProduct" asp-action="@Constants.ActionIndex">Product</a>
                                     </li> *@
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerUserManagement" asp-action="@Constants.ActionIndex">Users Managment Table</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="UserManagement" asp-action="Index">Users Managment Table</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="@Constants.ControllerUniversity" asp-action="@Constants.ActionIndex">Universities Table</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="University" asp-action="Index">Universities Table</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-area="Admin" asp-controller="Major" asp-action="Index">Majors</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="Faculty" asp-action="@Constants.ActionIndex">Faculties Table</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="Faculty" asp-action="Index">Faculties Table</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="dropdown-item" asp-area="@Constants.AreaAdmin" asp-controller="StandardFaculty" asp-action="@Constants.ActionIndex">Standard Faculties Table</a>
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="StandardFaculty" asp-action="Index">Standard Faculties Table</a>
                                     </li>
 
                                 </ul>
                             </li>
                         }
                         <li class="nav-item">
-                            <a class="nav-link " asp-area="@Constants.AreaUser" asp-controller="Home" asp-action="UniversityView">Universities</a>
+                            <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
                         </li>
-                        @if (User.IsInRole(Constants.RoleUniversity))
+                        @if (User.IsInRole(SD.RoleUniversity))
                         {
                             <li class="nav-item">
-                                <a class="nav-link " asp-area="@Constants.AreaInstitution" asp-controller="StudentRequest" asp-action="Index">Requests</a>
+                                <a class="nav-link " asp-area="Institution" asp-controller="StudentRequest" asp-action="Index">Requests</a>
                             </li>
                         }
 

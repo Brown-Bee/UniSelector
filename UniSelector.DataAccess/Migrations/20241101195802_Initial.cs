@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UniSelector.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -241,12 +241,33 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Majors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StandardFacultyId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Majors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Majors_StandardFaculties_StandardFacultyId",
+                        column: x => x.StandardFacultyId,
+                        principalTable: "StandardFaculties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Faculties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false),
+                    MajorId = table.Column<int>(type: "int", nullable: false),
                     Credits = table.Column<int>(type: "int", nullable: false),
                     AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
@@ -408,6 +429,11 @@ namespace UniSelector.DataAccess.Migrations
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Majors_StandardFacultyId",
+                table: "Majors",
+                column: "StandardFacultyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
@@ -443,6 +469,9 @@ namespace UniSelector.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Faculties");
+
+            migrationBuilder.DropTable(
+                name: "Majors");
 
             migrationBuilder.DropTable(
                 name: "Products");
