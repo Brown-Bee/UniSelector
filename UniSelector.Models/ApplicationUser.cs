@@ -16,6 +16,11 @@ namespace UniSelector.Models
         public string? Nationality { get; set; }
         public string? PlaceOfBirth { get; set; }
         public int? HighSchoolGraduationYear { get; set; }
+        public string UserType { get; set; }  // Student/University/Admin
+        public bool IsActive { get; set; }
+
+        // Navigation properties
+        public virtual ICollection<StudentRequest> StudentRequests { get; set; }
 
     }
 }

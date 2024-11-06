@@ -241,35 +241,13 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Majors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StandardFacultyId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Majors", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Majors_StandardFaculties_StandardFacultyId",
-                        column: x => x.StandardFacultyId,
-                        principalTable: "StandardFaculties",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Faculties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false),
-                    MajorId = table.Column<int>(type: "int", nullable: false),
-                    Credits = table.Column<int>(type: "int", nullable: false),
-                    AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    majorId = table.Column<int>(type: "int", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -318,6 +296,34 @@ namespace UniSelector.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Majors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false),
+                    AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    StandardFacultyId = table.Column<int>(type: "int", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Majors", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Majors_Faculties_FacultyId",
+                        column: x => x.FacultyId,
+                        principalTable: "Faculties",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Majors_StandardFaculties_StandardFacultyId",
+                        column: x => x.StandardFacultyId,
+                        principalTable: "StandardFaculties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Categories",
                 columns: new[] { "Id", "DisplayOrder", "Name" },
@@ -360,10 +366,10 @@ namespace UniSelector.DataAccess.Migrations
                 columns: new[] { "Id", "Budget", "Description", "ImageUrl", "KuwaitRank", "Name", "PhoneNumber", "location", "type" },
                 values: new object[,]
                 {
-                    { 1, 4500m, "A leading open education institution in the Arab world.", "/images/University/AOU.png", 1, "Arab Open University (AOU)", "99999999", "العارضية-Ardya", "Private" },
-                    { 2, 25000m, "Offering American-style education with a Middle Eastern perspective.", "/images/University/AUM.png", 2, "American University In Middle East (AUM)", "99999999", "العقيلة-Egila", "Private" },
-                    { 3, 15000m, "Providing a comprehensive American liberal arts education.", "/images/University/AUK.png", 3, "American University Of Kuwait (AUK)", "99999999", "السالمية-Salmya", "Private" },
-                    { 4, 13000m, "The premier public institution of higher education in Kuwait.", "/images/university/KU.png", 4, "Kuwait University (KU)", "99999999", "الشويخ-Shwaikh", "Public" }
+                    { 1, 4500m, "A leading open education institution in the Arab world.", "/images/university/AOU.png", 1, "Arab Open university (AOU)", "99999999", "العارضية-Ardya", "Private" },
+                    { 2, 25000m, "Offering American-style education with a Middle Eastern perspective.", "/images/university/AUM.png", 2, "American university In Middle East (AUM)", "99999999", "العقيلة-Egila", "Private" },
+                    { 3, 15000m, "Providing a comprehensive American liberal arts education.", "/images/university/AUK.png", 3, "American university Of Kuwait (AUK)", "99999999", "السالمية-Salmya", "Private" },
+                    { 4, 13000m, "The premier public institution of higher education in Kuwait.", "/images/university/KU.png", 4, "Kuwait university (KU)", "99999999", "الشويخ-Shwaikh", "Public" }
                 });
 
             migrationBuilder.InsertData(
@@ -429,6 +435,11 @@ namespace UniSelector.DataAccess.Migrations
                 column: "UniversityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Majors_FacultyId",
+                table: "Majors",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Majors_StandardFacultyId",
                 table: "Majors",
                 column: "StandardFacultyId");
@@ -468,9 +479,6 @@ namespace UniSelector.DataAccess.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Faculties");
-
-            migrationBuilder.DropTable(
                 name: "Majors");
 
             migrationBuilder.DropTable(
@@ -483,13 +491,16 @@ namespace UniSelector.DataAccess.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "StandardFaculties");
+                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "StandardFaculties");
 
             migrationBuilder.DropTable(
                 name: "Universities");
