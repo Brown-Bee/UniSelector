@@ -28,12 +28,12 @@ namespace UniSelector.Web.Areas.User.Controllers
         /*----------------- University Actions -----------------*/
         public IActionResult UniversityView(string searchString, int? facultyId, decimal? maxFees, int? maxRank)
         {
-            IEnumerable<University> Universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
+            IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
 
             if (!string.IsNullOrEmpty(searchString))
             {
                 searchString = searchString.ToLower();
-                Universities = Universities.Where(u =>
+                universities = universities.Where(u =>
                     u.Name.ToLower().Contains(searchString) ||
                     u.location.ToLower().Contains(searchString) ||
                     u.Description.ToLower().Contains(searchString) ||
@@ -42,17 +42,17 @@ namespace UniSelector.Web.Areas.User.Controllers
             // Filter According to the Faculty
             if (facultyId.HasValue)
             {
-                Universities = Universities.Where(u => u.Faculties.Any(f => f.StandardFacultyId == facultyId));
+                universities = universities.Where(u => u.Faculties.Any(f => f.StandardFacultyId == facultyId));
             }
-            // Filter According to the AvaragePrice
+            /*// Filter According to the AvaragePrice
             if (maxFees.HasValue)
             {
-                Universities = Universities.Where(u => u.Faculties.Any(f => f.AveragePrice <= maxFees.Value));
-            }
+                universities = universities.Where(u => u.Faculties.Any(f => f.AveragePrice <= maxFees.Value));
+            }*/
             // Filter According to the Rank in Kuwait
             if (maxRank.HasValue)
             {
-                Universities = Universities.Where(u => u.KuwaitRank <= maxRank.Value);
+                universities = universities.Where(u => u.KuwaitRank <= maxRank.Value);
             }
             ViewBag.Faculties = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
             {
@@ -63,7 +63,7 @@ namespace UniSelector.Web.Areas.User.Controllers
             ViewBag.CurrentFacultyId = facultyId;
             ViewBag.CurrentMaxFees = maxFees;
             ViewBag.CurrentMaxRank = maxRank;
-            return View(Universities);
+            return View(universities);
         }
         public IActionResult UniDetails(int universityId)
         {
