@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106144311_Initial")]
-    partial class Initial
+    [Migration("20241106111025_MoveCreditsToMajor")]
+    partial class MoveCreditsToMajor
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -294,13 +294,13 @@ namespace UniSelector.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("MajorId")
+                        .HasColumnType("int");
+
                     b.Property<int>("StandardFacultyId")
                         .HasColumnType("int");
 
                     b.Property<int>("UniversityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("majorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -326,9 +326,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
-                    b.Property<int?>("FacultyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -337,8 +334,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FacultyId");
 
                     b.HasIndex("StandardFacultyId");
 
@@ -703,9 +698,9 @@ namespace UniSelector.DataAccess.Migrations
                             Id = 1,
                             Budget = 4500m,
                             Description = "A leading open education institution in the Arab world.",
-                            ImageUrl = "/images/university/AOU.png",
+                            ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 1,
-                            Name = "Arab Open university (AOU)",
+                            Name = "Arab Open University (AOU)",
                             PhoneNumber = "99999999",
                             location = "العارضية-Ardya",
                             type = "Private"
@@ -715,9 +710,9 @@ namespace UniSelector.DataAccess.Migrations
                             Id = 2,
                             Budget = 25000m,
                             Description = "Offering American-style education with a Middle Eastern perspective.",
-                            ImageUrl = "/images/university/AUM.png",
+                            ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
-                            Name = "American university In Middle East (AUM)",
+                            Name = "American University In Middle East (AUM)",
                             PhoneNumber = "99999999",
                             location = "العقيلة-Egila",
                             type = "Private"
@@ -727,9 +722,9 @@ namespace UniSelector.DataAccess.Migrations
                             Id = 3,
                             Budget = 15000m,
                             Description = "Providing a comprehensive American liberal arts education.",
-                            ImageUrl = "/images/university/AUK.png",
+                            ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 3,
-                            Name = "American university Of Kuwait (AUK)",
+                            Name = "American University Of Kuwait (AUK)",
                             PhoneNumber = "99999999",
                             location = "السالمية-Salmya",
                             type = "Private"
@@ -741,7 +736,7 @@ namespace UniSelector.DataAccess.Migrations
                             Description = "The premier public institution of higher education in Kuwait.",
                             ImageUrl = "/images/university/KU.png",
                             KuwaitRank = 4,
-                            Name = "Kuwait university (KU)",
+                            Name = "Kuwait University (KU)",
                             PhoneNumber = "99999999",
                             location = "الشويخ-Shwaikh",
                             type = "Public"
@@ -801,31 +796,27 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
-                    b.HasOne("UniSelector.Models.StandardFaculty", "standardFaculty")
+                    b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
                         .WithMany()
                         .HasForeignKey("StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("UniSelector.Models.University", "university")
+                    b.HasOne("UniSelector.Models.University", "University")
                         .WithMany("Faculties")
                         .HasForeignKey("UniversityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("standardFaculty");
+                    b.Navigation("StandardFaculty");
 
-                    b.Navigation("university");
+                    b.Navigation("University");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Major", b =>
                 {
-                    b.HasOne("UniSelector.Models.Faculty", null)
-                        .WithMany("majors")
-                        .HasForeignKey("FacultyId");
-
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
-                        .WithMany()
+                        .WithMany("Majors")
                         .HasForeignKey("StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -861,9 +852,9 @@ namespace UniSelector.DataAccess.Migrations
                     b.Navigation("University");
                 });
 
-            modelBuilder.Entity("UniSelector.Models.Faculty", b =>
+            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
                 {
-                    b.Navigation("majors");
+                    b.Navigation("Majors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>

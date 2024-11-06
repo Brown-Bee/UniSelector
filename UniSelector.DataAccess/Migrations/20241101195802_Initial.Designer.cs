@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106165749_UpdateApplicationUserModel")]
-    partial class UpdateApplicationUserModel
+    [Migration("20241101195802_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,9 +189,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int?>("HighSchoolGraduationYear")
                         .HasColumnType("int");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -234,10 +231,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("UserType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -301,6 +294,12 @@ namespace UniSelector.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("AveragePrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Credits")
+                        .HasColumnType("int");
+
                     b.Property<int>("MajorId")
                         .HasColumnType("int");
 
@@ -326,15 +325,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("AveragePrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FacultyId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -679,9 +669,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
                     b.Property<int>("KuwaitRank")
                         .HasColumnType("int");
 
@@ -712,7 +699,6 @@ namespace UniSelector.DataAccess.Migrations
                             Budget = 4500m,
                             Description = "A leading open education institution in the Arab world.",
                             ImageUrl = "/images/University/AOU.png",
-                            IsActive = false,
                             KuwaitRank = 1,
                             Name = "Arab Open University (AOU)",
                             PhoneNumber = "99999999",
@@ -725,7 +711,6 @@ namespace UniSelector.DataAccess.Migrations
                             Budget = 25000m,
                             Description = "Offering American-style education with a Middle Eastern perspective.",
                             ImageUrl = "/images/University/AUM.png",
-                            IsActive = false,
                             KuwaitRank = 2,
                             Name = "American University In Middle East (AUM)",
                             PhoneNumber = "99999999",
@@ -738,7 +723,6 @@ namespace UniSelector.DataAccess.Migrations
                             Budget = 15000m,
                             Description = "Providing a comprehensive American liberal arts education.",
                             ImageUrl = "/images/University/AUK.png",
-                            IsActive = false,
                             KuwaitRank = 3,
                             Name = "American University Of Kuwait (AUK)",
                             PhoneNumber = "99999999",
@@ -751,7 +735,6 @@ namespace UniSelector.DataAccess.Migrations
                             Budget = 13000m,
                             Description = "The premier public institution of higher education in Kuwait.",
                             ImageUrl = "/images/university/KU.png",
-                            IsActive = false,
                             KuwaitRank = 4,
                             Name = "Kuwait University (KU)",
                             PhoneNumber = "99999999",
@@ -853,7 +836,7 @@ namespace UniSelector.DataAccess.Migrations
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
                 {
                     b.HasOne("UniSelector.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("StudentRequests")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -867,11 +850,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("University");
-                });
-
-            modelBuilder.Entity("UniSelector.Models.ApplicationUser", b =>
-                {
-                    b.Navigation("StudentRequests");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
