@@ -34,13 +34,10 @@ namespace UniSelector.DataAccess.Repository
         {
             return _db.Universities.Where(u => u.Name.Contains(searchString)
                                             || u.location.Contains(searchString)
-                                            || u.Description.Contains(searchString))
+                                            || u.Description.Contains(searchString))                                            
                                    .ToList();
         }
-        public University GetWithGalleryImages(int id)
-        {
-            return _db.Universities.Include(f => f.Faculties).FirstOrDefault(u => u.Id == id);
-        }
+        
 
         public University? GetUniversityWithFaculties(int id)
         {

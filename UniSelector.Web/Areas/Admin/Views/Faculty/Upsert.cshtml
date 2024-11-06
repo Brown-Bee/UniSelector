@@ -21,16 +21,6 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label asp-for="faculty.AveragePrice"></label>
-                <input asp-for="faculty.AveragePrice" class="form-control" />
-                <span asp-validation-for="faculty.AveragePrice" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="faculty.Credits"></label>
-                <input asp-for="faculty.Credits" class="form-control" />
-                <span asp-validation-for="faculty.Credits" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
                 <label asp-for="faculty.UniversityId">University</label>
                 <select asp-for="faculty.UniversityId" asp-items="@Model.UniversityList" class="form-control">
                     <option disabled selected>--Select University--</option>

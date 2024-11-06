@@ -22,6 +22,9 @@
                 <tr>
                     <th>Name</th>
                     <th>Faculty</th>
+                    <th>AveragePrice</th>
+                    <th>Credits</th>
+                    <th>Number of Universites have the major</th>
                     <th></th>
                 </tr>
                 </thead>
@@ -31,6 +34,9 @@
                     <tr>
                         <td>@(obj.Name)</td>
                         <td>@(obj.StandardFaculty?.CombinedName)</td>
+                        <td>@obj.Credits</td>
+                        <td>@obj.AveragePrice.ToString("c")</td>
+                        <td></td>
                         <td>
                             <div class="w-75 btn-group" role="group">
                                 <a asp-controller="Major" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">

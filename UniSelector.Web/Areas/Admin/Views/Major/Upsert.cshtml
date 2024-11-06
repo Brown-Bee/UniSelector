@@ -19,9 +19,19 @@
                 </div>
                 <div class="form-floating py-2 col-12">
                     <select class="form-control" asp-for="Major.StandardFacultyId" asp-items="Model.StandardFaculties">
-                        <option value="" selected>--Select Major--</option>
+                        <option value="" selected>--Select Faculty--</option>
                     </select>
                     <span asp-validation-for="Major.StandardFacultyId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Major.AveragePrice"></label>
+                    <input asp-for="Major.AveragePrice" class="form-control" />
+                    <span asp-validation-for="Major.AveragePrice" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Major.Credits"></label>
+                    <input asp-for="Major.Credits" class="form-control" />
+                    <span asp-validation-for="Major.Credits" class="text-danger"></span>
                 </div>
                 <div class="row ">
                     <div class="col-6 col-md-3">
@@ -36,7 +46,7 @@
 
                     </div>
                     <div class=" col-6 col-md-3">
-                        <a asp-controller="Category" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
+                            <a asp-controller="Major" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
                     </div>
                 </div>
             </div>
