@@ -17,11 +17,9 @@ namespace UniSelector.Models
         public string Description { get; set; }
         public string location { get; set; }
         [DisplayName("Phone Number")]
-        [Phone]
         public string PhoneNumber { get; set; }
         
         [NotMapped]
-        [EmailAddress]
         public string Email { get; set; }
         
         [Range(1,30)]
@@ -31,7 +29,6 @@ namespace UniSelector.Models
         public string? ImageUrl { get; set; }
         public List<StudentRequest> AcceptedStudents { get; set; } = new List<StudentRequest>();
         public ICollection<Faculty> Faculties { get; set; } = new Collection<Faculty>();
-        public ICollection<StudentRequest> AcceptedStudents { get; set; } = new Collection<StudentRequest>();
 
         
     }
