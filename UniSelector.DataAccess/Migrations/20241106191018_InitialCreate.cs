@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UniSelector.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -247,6 +247,8 @@ namespace UniSelector.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Credits = table.Column<int>(type: "int", nullable: false),
+                    AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -268,8 +270,6 @@ namespace UniSelector.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false),
                     MajorId = table.Column<int>(type: "int", nullable: false),
-                    Credits = table.Column<int>(type: "int", nullable: false),
-                    AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

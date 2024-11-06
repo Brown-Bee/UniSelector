@@ -813,7 +813,7 @@ namespace UniSelector.DataAccess.Migrations
             modelBuilder.Entity("UniSelector.Models.Major", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
-                        .WithMany("Majors")
+                        .WithMany()
                         .HasForeignKey("StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -847,11 +847,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("University");
-                });
-
-            modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
-                {
-                    b.Navigation("Majors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
