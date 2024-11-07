@@ -12,7 +12,7 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106191018_InitialCreate")]
+    [Migration("20241106202101_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -355,7 +355,7 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("FullDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -662,7 +662,7 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<decimal>("Budget")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("FullDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

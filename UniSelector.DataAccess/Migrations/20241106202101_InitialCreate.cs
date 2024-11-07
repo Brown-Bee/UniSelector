@@ -357,7 +357,7 @@ namespace UniSelector.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Universities",
-                columns: new[] { "Id", "Budget", "Description", "ImageUrl", "KuwaitRank", "Name", "PhoneNumber", "location", "type" },
+                columns: new[] { "Id", "Budget", "FullDescription", "ImageUrl", "KuwaitRank", "Name", "PhoneNumber", "location", "type" },
                 values: new object[,]
                 {
                     { 1, 4500m, "A leading open education institution in the Arab world.", "/images/University/AOU.png", 1, "Arab Open University (AOU)", "99999999", "العارضية-Ardya", "Private" },
@@ -368,7 +368,7 @@ namespace UniSelector.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "Author", "CategoryId", "Description", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Title" },
+                columns: new[] { "Id", "Author", "CategoryId", "FullDescription", "ISBN", "ImageUrl", "ListPrice", "Price", "Price100", "Price50", "Title" },
                 values: new object[,]
                 {
                     { 1, "Billy Spark", 2, "Praesent vitae sodales libero. Praesent molestie orci augue, vitae euismod velit sollicitudin ac. Praesent vestibulum facilisis nibh ut ultricies.\r\n\r\nNunc malesuada viverra ipsum sit amet tincidunt. ", "SWD9999001", "", 99.0, 90.0, 80.0, 85.0, "Fortune of Time" },
