@@ -1,4 +1,4 @@
-﻿@page
+﻿@*@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.LoginModel
 @{
     ViewData["Title"] = "Log in";
@@ -61,6 +61,98 @@
                         </form>
                     </div>
                     
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}*@
+
+
+@page
+@model UniSelector.Web.Areas.Identity.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div class="min-vh-100 bg-light py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-lg">
+                    <!-- Header Section -->
+                    <div class="card-header bg-primary text-white text-center py-4">
+                        <h2 class="fs-4 fw-bold mb-1">Welcome Back</h2>
+                        <p class="mb-0">Enter your credentials to access your account</p>
+                    </div>
+
+                    <!-- Login Form -->
+                    <div class="card-body p-4 p-lg-5">
+                        <form id="account" method="post" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                            <!-- Email Input -->
+                            <div class="form-floating mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-envelope"></i>
+                                    </span>
+                                    <input asp-for="Input.Email" class="form-control" placeholder="name@example.com" required />
+                                    <label asp-for="Input.Email">Email Address</label>
+                                </div>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="form-floating mb-4">
+                                <div class="input-group">
+                                    <span class="input-group-text bg-light">
+                                        <i class="bi bi-lock"></i>
+                                    </span>
+                                    <input asp-for="Input.Password" class="form-control" placeholder="Password" required />
+                                    <label asp-for="Input.Password">Password</label>
+                                </div>
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+
+                            <!-- Remember Me -->
+                            <div class="form-check mb-4">
+                                <input asp-for="Input.RememberMe" class="form-check-input" />
+                                <label asp-for="Input.RememberMe" class="form-check-label">Remember me</label>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Footer Links -->
+                    <div class="card-footer bg-light text-center py-4">
+                        <div class="small mb-3">
+                            <a asp-page="./Register" class="text-primary text-decoration-none">Need an account? Sign up!</a>
+                        </div>
+                        @if (Model.ExternalLogins?.Count > 0)
+                        {
+                            <div class="external-auth">
+                                <p class="text-muted mb-3">Or sign in with:</p>
+                                <form asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                    @foreach (var provider in Model.ExternalLogins)
+                                    {
+                                        <button type="submit" class="btn btn-outline-primary mx-1" 
+                                                name="provider" value="@provider.Name">
+                                            <i class="bi bi-@(provider.Name.ToLower())"></i>
+                                            @provider.DisplayName
+                                        </button>
+                                    }
+                                </form>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

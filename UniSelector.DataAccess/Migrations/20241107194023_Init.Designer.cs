@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241106202101_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20241107194023_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,7 +355,7 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("FullDescription")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -680,6 +680,10 @@ namespace UniSelector.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("SmallDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -697,11 +701,12 @@ namespace UniSelector.DataAccess.Migrations
                         {
                             Id = 1,
                             Budget = 4500m,
-                            Description = "A leading open education institution in the Arab world.",
+                            FullDescription = "A leading open education institution in the Arab world.",
                             ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 1,
                             Name = "Arab Open University (AOU)",
                             PhoneNumber = "99999999",
+                            SmallDescription = "",
                             location = "العارضية-Ardya",
                             type = "Private"
                         },
@@ -709,11 +714,12 @@ namespace UniSelector.DataAccess.Migrations
                         {
                             Id = 2,
                             Budget = 25000m,
-                            Description = "Offering American-style education with a Middle Eastern perspective.",
+                            FullDescription = "Offering American-style education with a Middle Eastern perspective.",
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
                             Name = "American University In Middle East (AUM)",
                             PhoneNumber = "99999999",
+                            SmallDescription = "",
                             location = "العقيلة-Egila",
                             type = "Private"
                         },
@@ -721,11 +727,12 @@ namespace UniSelector.DataAccess.Migrations
                         {
                             Id = 3,
                             Budget = 15000m,
-                            Description = "Providing a comprehensive American liberal arts education.",
+                            FullDescription = "Providing a comprehensive American liberal arts education.",
                             ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 3,
                             Name = "American University Of Kuwait (AUK)",
                             PhoneNumber = "99999999",
+                            SmallDescription = "",
                             location = "السالمية-Salmya",
                             type = "Private"
                         },
@@ -733,11 +740,12 @@ namespace UniSelector.DataAccess.Migrations
                         {
                             Id = 4,
                             Budget = 13000m,
-                            Description = "The premier public institution of higher education in Kuwait.",
+                            FullDescription = "The premier public institution of higher education in Kuwait.",
                             ImageUrl = "/images/university/KU.png",
                             KuwaitRank = 4,
                             Name = "Kuwait University (KU)",
                             PhoneNumber = "99999999",
+                            SmallDescription = "",
                             location = "الشويخ-Shwaikh",
                             type = "Public"
                         });
