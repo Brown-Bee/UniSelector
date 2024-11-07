@@ -36,7 +36,7 @@ namespace UniSelector.Web.Areas.User.Controllers
                 universities = universities.Where(u =>
                     u.Name.ToLower().Contains(searchString) ||
                     u.location.ToLower().Contains(searchString) ||
-                    u.Description.ToLower().Contains(searchString) ||
+                    u.FullDescription.ToLower().Contains(searchString) ||
                     u.Faculties.Any(f => f.StandardFaculty.CombinedName.ToLower().Contains(searchString)));
             }
             // Filter According to the Faculty

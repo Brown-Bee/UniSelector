@@ -39,8 +39,13 @@
                                 <span asp-validation-for="type" class="text-danger"></span>
                             </div>
                             <div class=" py-2 col-12">
-                                <label asp-for="Description" class="ms-2 text-muted"></label>
-                                <textarea asp-for="Description" class="form-control border-0 shadow"></textarea>
+                                <label asp-for="FullDescription" class="ms-2 text-muted"></label>
+                                <textarea asp-for="FullDescription" class="form-control border-0 shadow"></textarea>
+                            </div>
+                            <div class="form-floating py-2 col-12">
+                                <input asp-for="SmallDescription" class="form-control border-0 shadow" />
+                                <label asp-for="SmallDescription" class="ms-2"></label>
+                                <span asp-validation-for="SmallDescription" class="text-danger"></span>
                             </div>
                             <div class="form-floating py-2 col-12">
                                 <input asp-for="location" class="form-control border-0 shadow"/>

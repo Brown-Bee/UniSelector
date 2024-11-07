@@ -13,8 +13,9 @@ namespace UniSelector.Models
         [Display(Name = "University Name")]
         public string Name { get; set; }
         [Display(Name = "Type")]
-        public string type { get; set; }
-        public string Description { get; set; }
+        public string type { get; set; } // Public/Private
+        public string FullDescription { get; set; } // For detailed view
+        public string SmallDescription { get; set; } // For cards/previews
         public string location { get; set; }
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }

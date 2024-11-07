@@ -20,7 +20,8 @@ namespace UniSelector.DataAccess.Repository
             {
                 objFromDb.Name = obj.Name;
                 objFromDb.type = obj.type;
-                objFromDb.Description = obj.Description;
+                objFromDb.FullDescription = obj.FullDescription;
+                objFromDb.SmallDescription = obj.SmallDescription;
                 objFromDb.location = obj.location;
                 objFromDb.KuwaitRank = obj.KuwaitRank;
                 objFromDb.Budget = obj.Budget;
@@ -34,7 +35,8 @@ namespace UniSelector.DataAccess.Repository
         {
             return _db.Universities.Where(u => u.Name.Contains(searchString)
                                             || u.location.Contains(searchString)
-                                            || u.Description.Contains(searchString))                                            
+                                            || u.FullDescription.Contains(searchString)                                           
+                                            || u.SmallDescription.Contains(searchString))                                            
                                    .ToList();
         }
         
