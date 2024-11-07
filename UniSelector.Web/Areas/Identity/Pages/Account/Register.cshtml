@@ -1,4 +1,4 @@
-﻿@page
+﻿@*@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.RegisterModel
 @{
     ViewData["Title"] = "Create Account";
@@ -80,12 +80,12 @@
                                 </select>
                                 <label asp-for="Input.Role" class="text-muted">Role</label>
                             </div>
-                            @*<div class="form-floating mb-3 col-md-6">
+                            $1$<div class="form-floating mb-3 col-md-6">
                                 <select asp-for="Input.UniversityId" asp-items="@Model.Input.UniversityList" class="form-select">
                                     <option>-Select University-</option>
                                 </select>
                                 <label asp-for="Input.UniversityId" class="text-muted">University</label>
-                            </div>*@
+                            </div>#1#
                         </div>
                         <div class="d-grid">
                             <button id="registerSubmit" type="submit" class="btn btn-primary btn-lg">Register</button>
@@ -136,6 +136,336 @@
                     $('#Input_UniversityId, label[for="Input_UniversityId"]').hide();
                 }
             });
+        });
+    </script>
+}*@
+
+@page
+@model UniSelector.Web.Areas.Identity.Pages.Account.RegisterModel
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<div class="min-vh-100 bg-light">
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card shadow-lg border-0">
+                    <!-- Header with Gradient -->
+                    <div class="card-header text-center p-4" style="background: linear-gradient(135deg, #0061f2 0%, #6610f2 100%);">
+                        <h2 class="text-white mb-2">Create Your Account</h2>
+                        <p class="text-white-50 mb-0">Fill in your information to get started</p>
+                    </div>
+
+                    <!-- Form Content -->
+                    <div class="card-body p-4">
+                        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="needs-validation" novalidate>
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger d-none" role="alert"></div>
+
+                            <!-- Step 1: Basic Information -->
+                            <div class="form-step" data-step="1">
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-person"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.Name" class="form-control" placeholder="Full Name" required />
+                                            <label asp-for="Input.Name">Full Name</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.Name" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-telephone"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Phone Number" required />
+                                            <label asp-for="Input.PhoneNumber">Phone Number</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-envelope"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.Email" type="email" class="form-control" placeholder="name@example.com" required />
+                                            <label asp-for="Input.Email">Email Address</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Security -->
+                            <div class="form-step" data-step="2" style="display: none;">
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-lock"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Password" required />
+                                            <label asp-for="Input.Password">Password</label>
+                                        </div>
+                                        <button class="btn btn-outline-secondary toggle-password" type="button">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                    </div>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-lock-fill"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Confirm Password" required />
+                                            <label asp-for="Input.ConfirmPassword">Confirm Password</label>
+                                        </div>
+                                        <button class="btn btn-outline-secondary toggle-password" type="button">
+                                            <i class="bi bi-eye"></i>
+                                        </button>
+                                    </div>
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Additional Information -->
+                            <div class="form-step" data-step="3" style="display: none;">
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-geo-alt"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.Address" class="form-control" placeholder="Address" />
+                                            <label asp-for="Input.Address">Address</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.Address" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-mortarboard"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <input asp-for="Input.Grade" class="form-control" placeholder="Grade" />
+                                            <label asp-for="Input.Grade">Grade</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.Grade" class="text-danger"></span>
+                                </div>
+
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-light">
+                                            <i class="bi bi-person-badge"></i>
+                                        </span>
+                                        <div class="form-floating">
+                                            <select asp-for="Input.Role" class="form-select">
+                                                <option value="">Select Role</option>
+                                                <option value="User">User</option>
+                                                <option value="Institution">Institution</option>
+                                                <option value="Admin">Admin</option>
+                                            </select>
+                                            <label asp-for="Input.Role">Role</label>
+                                        </div>
+                                    </div>
+                                    <span asp-validation-for="Input.Role" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <!-- Navigation Buttons -->
+                            <div class="d-flex justify-content-between mt-4">
+                                <button type="button" class="btn btn-secondary back-btn" style="display:none;">
+                                    <i class="bi bi-arrow-left me-2"></i>Back
+                                </button>
+                                <button type="button" class="btn btn-primary next-btn">
+                                    Next<i class="bi bi-arrow-right ms-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Footer -->
+                    <div class="card-footer bg-light text-center py-3">
+                        <p class="text-muted mb-0">
+                            Already have an account? 
+                            <a asp-page="./Login" class="text-primary">Sign in</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.input-group-text {
+    border-right: none;
+}
+.form-control:focus {
+    border-color: #86b7fe;
+    box-shadow: none;
+}
+.input-group:focus-within .input-group-text {
+    border-color: #86b7fe;
+}
+.form-floating > .form-control:focus ~ label {
+    color: #0d6efd;
+}
+.card {
+    transition: transform 0.2s;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+</style>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            const form = $('#registerForm');
+            let currentStep = 1;
+            const totalSteps = 3;
+
+            function validateStep(step) {
+                let isValid = true;
+                const inputs = $(`.form-step[data-step="${step}"] input:required`);
+                
+                inputs.each(function() {
+                    const input = $(this);
+                    input.removeClass('is-invalid');
+                    input.siblings('.text-danger').text('');
+
+                    if (!input.val().trim()) {
+                        isValid = false;
+                        input.addClass('is-invalid');
+                        input.siblings('.text-danger').text(`${input.attr('placeholder')} is required`);
+                    }
+
+                    @*// Email validation
+                    if (input.attr('type') === 'email' && input.val()) {
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(input.val())) {
+                            isValid = false;
+                            input.addClass('is-invalid');
+                            input.siblings('.text-danger').text('Please enter a valid email address');
+                        }
+                    }
+                    *@
+
+                    // Phone validation
+                    if (input.attr('name').includes('PhoneNumber') && input.val()) {
+                        const phoneRegex = /^[0-9]+$/;
+                        if (!phoneRegex.test(input.val())) {
+                            isValid = false;
+                            input.addClass('is-invalid');
+                            input.siblings('.text-danger').text('Please enter a valid phone number');
+                        }
+                    }
+
+                    // Password validation
+                    if (input.attr('name').includes('Password')) {
+                        const password = $('input[name="Input.Password"]').val();
+                        const confirmPassword = $('input[name="Input.ConfirmPassword"]').val();
+                        
+                        if (password && password.length < 6) {
+                            isValid = false;
+                            input.addClass('is-invalid');
+                            input.siblings('.text-danger').text('Password must be at least 6 characters');
+                        }
+
+                        if (password && confirmPassword && password !== confirmPassword) {
+                            isValid = false;
+                            $('input[name="Input.ConfirmPassword"]').addClass('is-invalid');
+                            $('input[name="Input.ConfirmPassword"]').siblings('.text-danger')
+                                .text('Passwords do not match');
+                        }
+                    }
+                });
+
+                return isValid;
+            }
+
+            // Handle next button click
+            $('.next-btn').click(function() {
+                if (validateStep(currentStep)) {
+                    if (currentStep < totalSteps) {
+                        currentStep++;
+                        updateFormStep();
+                    } else {
+                        // Submit form on last step
+                        form.submit();
+                    }
+                }
+            });
+
+            // Handle back button click
+            $('.back-btn').click(function() {
+                if (currentStep > 1) {
+                    currentStep--;
+                    updateFormStep();
+                }
+            });
+
+            function updateFormStep() {
+                // Hide all steps
+                $('.form-step').hide();
+                // Show current step
+                $(`.form-step[data-step="${currentStep}"]`).show();
+                
+                // Update buttons
+                if (currentStep === 1) {
+                    $('.back-btn').hide();
+                    $('.next-btn').html('Next<i class="bi bi-arrow-right ms-2"></i>');
+                } else {
+                    $('.back-btn').show();
+                }
+                
+                if (currentStep === totalSteps) {
+                    $('.next-btn').html('Create Account<i class="bi bi-check-lg ms-2"></i>');
+                } else {
+                    $('.next-btn').html('Next<i class="bi bi-arrow-right ms-2"></i>');
+                }
+            }
+
+            // Toggle password visibility
+            $('.toggle-password').click(function() {
+                const input = $(this).prev().find('input');
+                const icon = $(this).find('i');
+                
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    icon.removeClass('bi-eye').addClass('bi-eye-slash');
+                } else {
+                    input.attr('type', 'password');
+                    icon.removeClass('bi-eye-slash').addClass('bi-eye');
+                }
+            });
+
+            // Prevent form submission on enter
+            form.on('keypress', function(e) {
+                if (e.which === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Initialize form
+            updateFormStep();
         });
     </script>
 }
