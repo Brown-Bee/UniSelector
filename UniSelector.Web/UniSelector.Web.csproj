@@ -31,8 +31,9 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="wwwroot\Images\University\Gallery\" />
-        <Folder Include="wwwroot\Images\University\" />
+        <Folder Include="wwwroot\Images\img\pictures\" />
+        <Folder Include="wwwroot\Images\img\University\Gallery\" />
+        <Folder Include="wwwroot\Images\img\University\" />
     </ItemGroup>
 
     <ItemGroup>
