@@ -47,7 +47,6 @@
                 // Call fillMajor() after the #standardFacultySelect element has been populated
                 let standardFacultyId = @Model.faculty.StandardFacultyId;
                 let selectedMajorId = @Model.faculty.MajorId;
-                window.alert(selectedMajorId)
                 if (standardFacultyId > 0) {
                     $('#standardFacultySelect').val(standardFacultyId);
                     fillMajor(standardFacultyId, selectedMajorId);
@@ -57,8 +56,6 @@
             function fillMajor(standardFacultyId, selectedMajorId) {
                 if (standardFacultyId) {
                     let url = '@Url.Action("GetMajors", "Faculty", new { area = "Admin" })';
-                    console.log("Making AJAX request to:", url);
-
                     $.ajax({
                         url: url,
                         type: 'GET',

@@ -81,7 +81,8 @@
         }
 </style>
 
-<div class="row mb-3">
+<div class="container" style="padding-top: 4rem;">
+    <div class="row mb-3">
     <div class="col-md-3">
         <input type="number" id="maxFees" name="maxFees" class="form-control" placeholder="Max Fees" value="@ViewBag.CurrentMaxFees">
     </div>
@@ -102,15 +103,15 @@
         <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
         <button id="clearFilters" class="btn btn-secondary">Clear Filters</button>
     </div>
-</div>
+    </div>
 
-<div class="row mb-3">
+    <div class="row mb-3">
     <div class="col-md-12">
         <input type="text" id="searchString" name="searchString" class="form-control" placeholder="Search universities..." value="@ViewBag.CurrentSearchString">
     </div>
-</div>
+    </div>
 
-<div class="row pb-3">
+    <div class="row pb-3">
     @foreach (var university in Model)
     {
         <div class="col-lg-3 col-sm-6 mb-4">
@@ -136,8 +137,8 @@
             </div>
         </div>
     }
+    </div>
 </div>
-
 
 @section Scripts {
     <script>
