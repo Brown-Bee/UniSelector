@@ -4,7 +4,11 @@
     var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
     bool isHomePage = currentController == "Home" && currentAction == "Index";
 }
+@using System.Security.Claims
 @using Microsoft.AspNetCore.Mvc.TagHelpers
+@using UniSelector.Models
+@inject SignInManager<ApplicationUser> SignInManager
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,15 +104,15 @@
                         <li>
                             <a href="#about">About</a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="#features">Features</a>
-                        </li>
+                        </li>*@
                         <li>
                             <a href="#services">Services</a>
                         </li>
-                        <li>
+                        @*<li>
                             <a href="#pricing">Donations</a>
-                        </li>
+                        </li>*@
                         <li>
                             <a href="#contact">Contact</a>
                         </li>
@@ -116,15 +120,24 @@
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                var claimsIdentity = (ClaimsIdentity) User.Identity!;
+                var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                @(await Component.InvokeAsync("UserName", new { id = userId }))
+            }
+            else
+            {
+                <partial name="_LoginPartial"></partial>
 
-            <partial name="_LoginPartial" />
+            }
             @* <a class="btn-getstarted" asp-area="Identity" asp-page="/Account/Register">Get Started</a> *@
 
         </div>
     </header>
 
     <div class="container">
-        <main role="main" class="pb-4" style="margin-top: 4rem;">
+        <main role="main" class="pb-4">
             <partial name="_Notification" />
             @RenderBody()
         </main>

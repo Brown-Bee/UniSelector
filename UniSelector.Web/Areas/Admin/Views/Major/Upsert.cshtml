@@ -1,7 +1,6 @@
 @model MajorVM
-
-
-<div class="card shadow border-0 mt-4">
+   
+<div class="container" style="margin-top: 5rem;">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -9,49 +8,61 @@
             </div>
         </div>
     </div>
-    <div calss="card-body p-4">
-        <form method="post" class="row" style="margin-left: 0px; margin-right: 0px;">
-            <div class="border-primary p-3 bg-white">
-                <div class="form-floating py-2 col-12">
-                    <input asp-for="Major.Name" class="form-control border-0 shadow" />
-                    <label asp-for="Major.Name" class="ms-2 bg-white"></label>
+    <form method="post" class="bg-light">
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major.Name" class="form-label">Name</label>
+                    <input asp-for="Major.Name" type="text" class="form-control"/>
                     <span asp-validation-for="Major.Name" class="text-danger"></span>
                 </div>
-                <div class="form-floating py-2 col-12">
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major.StandardFacultyId" class="form-label">Faculty</label>
                     <select class="form-control" asp-for="Major.StandardFacultyId" asp-items="Model.StandardFaculties">
                         <option value="" selected>--Select Faculty--</option>
                     </select>
                     <span asp-validation-for="Major.StandardFacultyId" class="text-danger"></span>
                 </div>
-                <div class="mb-3">
-                    <label asp-for="Major.AveragePrice"></label>
-                    <input asp-for="Major.AveragePrice" class="form-control" />
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major.AveragePrice">Avarage</label>
+                    <input asp-for="Major.AveragePrice" class="form-control"/>
                     <span asp-validation-for="Major.AveragePrice" class="text-danger"></span>
                 </div>
-                <div class="mb-3">
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
                     <label asp-for="Major.Credits"></label>
-                    <input asp-for="Major.Credits" class="form-control" />
+                    <input asp-for="Major.Credits" class="form-control"/>
                     <span asp-validation-for="Major.Credits" class="text-danger"></span>
                 </div>
-                <div class="row ">
-                    <div class="col-6 col-md-3">
-                        @if (Model.Major.Id == 0)
-                        {
-                            <button type="submit" class="btn btn-primary form-control">Create</button>
-                        }
-                        else
-                        {
-                            <button type="submit" class="btn btn-primary form-control">Update</button>
-                        }
-
-                    </div>
-                    <div class=" col-6 col-md-3">
-                            <a asp-controller="Major" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
-                    </div>
-                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="row ">
+            <div class="col-6 col-md-3">
+                @if (Model.Major.Id == 0)
+                {
+                <button type="submit" class="btn btn-primary form-control">Create</button>
+                }
+                else
+                {
+                <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
+
+            </div>
+            <div class=" col-6 col-md-3">
+                <a asp-controller="Major" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
+            </div>
+        </div>
+        
+    </form>
 </div>
 
 
