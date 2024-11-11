@@ -1,10 +1,12 @@
 ﻿@model string
-
 @if (!String.IsNullOrEmpty(Model))
 {
     var statusMessageClass = Model.StartsWith("Error") ? "danger" : "success";
-    <div class="alert alert-@statusMessageClass alert-dismissible" role="alert">
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        @Model
+    <div class="container" style="margin-top: 1rem;">
+        <div class="alert alert-@statusMessageClass alert-dismissible fade show shadow-sm" role="alert">
+            <i class="bi bi-@(statusMessageClass == "danger" ? "exclamation-circle" : "check-circle")-fill me-2"></i>
+            @Model
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
 }

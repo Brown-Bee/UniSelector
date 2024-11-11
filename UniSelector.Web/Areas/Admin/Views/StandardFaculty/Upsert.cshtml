@@ -1,31 +1,50 @@
 ﻿@model StandardFaculty
 
-<form method="post">
-    <input asp-for="Id" hidden />
-    <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Add") Standard Faculty</h2>
-            <hr />
+<div class="container" style="margin-top: 6rem;">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.Id != 0 ? "Update" : "Create") Standard Faculty</h2>
+            </div>
         </div>
-        <div class="mb-3">
-            <label asp-for="NameArabic"></label>
-            <input asp-for="NameArabic" class="form-control" />
-            <span asp-validation-for="NameArabic" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="NameEnglish"></label>
-            <input asp-for="NameEnglish" class="form-control" />
-            <span asp-validation-for="NameEnglish" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:150px">@(Model.Id != 0 ? "Update" : "Add")</button>
-        <a asp-controller="StandardFaculty" asp-action="Index" class="btn btn-secondary" style="width:150px">
-            Back to List
-        </a>
     </div>
-</form>
+    <form method="post" class="bg-light p-3">
+        <input asp-for="Id" hidden />
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NameArabic" class="form-label">Arabic Name</label>
+                    <input asp-for="NameArabic" class="form-control" />
+                    <span asp-validation-for="NameArabic" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="NameEnglish" class="form-label">English Name</label>
+                    <input asp-for="NameEnglish" class="form-control" />
+                    <span asp-validation-for="NameEnglish" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                @if (Model.Id == 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="StandardFaculty" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
+            </div>
+        </div>
+    </form>
+</div>
 
 @section Scripts {
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

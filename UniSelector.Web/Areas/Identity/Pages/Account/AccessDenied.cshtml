@@ -1,10 +1,28 @@
 ﻿@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.AccessDeniedModel
 @{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Access Denied";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">You do not have access to this resource.</p>
-</header>
+<div class="container" style="margin-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-danger bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@ViewData["Title"]</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <i class="bi bi-exclamation-circle-fill text-danger" style="font-size: 4rem;"></i>
+                    <h4 class="text-danger mt-3">Access Restricted</h4>
+                    <p class="lead mb-4">You do not have permission to access this resource.</p>
+                    <a asp-area="User" asp-controller="Home" asp-action="Index"
+                       class="btn btn-outline-primary">Return to Home Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

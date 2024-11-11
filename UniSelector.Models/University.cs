@@ -17,9 +17,11 @@ namespace UniSelector.Models
         public string FullDescription { get; set; } // For detailed view
         public string SmallDescription { get; set; } // For cards/previews
         public string location { get; set; }
+        [Phone]
         [DisplayName("Phone Number")]
         public string PhoneNumber { get; set; }
         
+        [EmailAddress]
         [NotMapped]
         public string Email { get; set; }
         

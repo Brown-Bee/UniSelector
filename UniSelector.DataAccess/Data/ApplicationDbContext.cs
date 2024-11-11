@@ -155,7 +155,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
                 ImageUrl = "/images/University/AOU.png"
             },
             new University
-            {
+            {   
                 Id = 2,
                 Name = "American University In Middle East (AUM)",
                 type = "Private",

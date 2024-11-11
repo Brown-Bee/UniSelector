@@ -1,8 +1,23 @@
 ﻿@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.ConfirmEmailModel
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = "Confirm Email";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="container" style="margin-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@ViewData["Title"]</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light p-4">
+            <div class="text-center">
+                <partial name="_StatusMessage" model="Model.StatusMessage" />
+                <a asp-page="./Login" class="btn btn-primary mt-3">Proceed to Login</a>
+            </div>
+        </div>
+    </div>
+</div>

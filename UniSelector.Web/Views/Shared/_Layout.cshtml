@@ -1,10 +1,4 @@
-﻿@* to know the current controller and action in the view.*@
-@{
-    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
-    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
-    bool isHomePage = currentController == "Home" && currentAction == "Index";
-}
-@using System.Security.Claims
+﻿@using System.Security.Claims
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using UniSelector.Models
 @inject SignInManager<ApplicationUser> SignInManager
@@ -52,7 +46,7 @@
 
             <a asp-area="User" asp-controller="Home" asp-action="Index" class="logo d-flex align-items-center me-auto me-xl-0">
                 <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="~/Images/Logo3.png" >
+                <img src="~/Images/Logo3.png">
                 <h1 class="sitename">UniSelector</h1>
             </a>
 
@@ -96,33 +90,28 @@
                     <li>
                         <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
                     </li>
-                    @if (isHomePage)
-                    {
-                        <li>
-                            <a href="#hero" class="active">Home</a>
-                        </li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        @*<li>
-                            <a href="#features">Features</a>
-                        </li>*@
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        @*<li>
-                            <a href="#pricing">Donations</a>
-                        </li>*@
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    }
+                    <li>
+                        <a asp-area="User" asp-controller="Home" asp-action="Index" class="active">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about">About</a>
+                    </li>
+                    <li>
+                    <a href="#features">Features</a>
+                    </li>
+                    <li>
+                        <a href="#services">Services</a>
+                    </li>
+                    <li>
+                        <a href="#contact">Contact</a>
+                    </li>
+
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
             @if (SignInManager.IsSignedIn(User))
             {
-                var claimsIdentity = (ClaimsIdentity) User.Identity!;
+                var claimsIdentity = (ClaimsIdentity)User.Identity!;
                 var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier)?.Value;
                 @(await Component.InvokeAsync("UserName", new { id = userId }))
             }
@@ -154,7 +143,7 @@
 
                 <div class="col-12">
                     <div class="row justify-content-center text-center g-3">
-                        
+
                         <div class="col-auto mx-3">
                             <p class="mb-0">Hawally, Al Zahra</p>
                         </div>

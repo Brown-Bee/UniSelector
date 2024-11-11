@@ -1,23 +1,40 @@
 ﻿@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.RegisterConfirmationModel
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = "Registration Confirmation";
 }
 
-<h1>@ViewData["Title"]</h1>
-@{
-    if (@Model.DisplayConfirmAccountLink)
-    {
-<p>
-    This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
-    Normally this would be emailed: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Click here to confirm your account</a>
-</p>
-    }
-    else
-    {
-<p>
-        Please check your email to confirm your account.
-</p>
-    }
-}
-
+<div class="container" style="margin-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@ViewData["Title"]</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light p-4">
+            <div class="text-center">
+                @if (Model.DisplayConfirmAccountLink)
+                {
+                    <div class="alert alert-info">
+                        <p>
+                            This app does not currently have a real email sender registered.
+                            Normally this would be emailed. Please click the link below to confirm your account:
+                        </p>
+                        <a id="confirm-link" href="@Model.EmailConfirmationUrl"
+                           class="btn btn-primary mt-3">Confirm Account</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-success">
+                        <i class="bi bi-envelope-check me-2"></i>
+                        Please check your email to confirm your account.
+                    </div>
+                    <a asp-page="./Login" class="btn btn-primary mt-3">Return to Login</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

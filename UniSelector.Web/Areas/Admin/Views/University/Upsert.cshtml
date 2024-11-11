@@ -1,108 +1,137 @@
 ﻿@model University
 
-<div class="p-4 m-4">
-    <div class="card shadow border-0 mt-4">
-        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="text-white py-2">@(Model.Id != 0 ? "Update" : "Add" ) University</h2>
+<div class="container" style="margin-top: 6rem;">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.Id != 0 ? "Update" : "Create") University</h2>
+            </div>
+        </div>
+    </div>
+    <form method="post" class="bg-light p-3" enctype="multipart/form-data">
+        <div asp-validation-summary="All"></div>
+        <input asp-for="Id" hidden />
+        <input asp-for="ImageUrl" hidden />
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- First Row: Name, Phone, Type -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Name" class="form-label">University Name</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                            <input asp-for="PhoneNumber" type="number" class="form-control" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="type" class="form-label">Type</label>
+                            <select asp-for="type" class="form-control">
+                                <option value="Private">Private</option>
+                                <option value="Public">Public</option>
+                            </select>
+                            <span asp-validation-for="type" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Row: Email, Main Image Upload -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Email" class="form-label">Email</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Main Image</label>
+                            <input type="file" name="file" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Third Row: Full Description -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="FullDescription" class="form-label">Full Description</label>
+                            <textarea asp-for="FullDescription" class="form-control" rows="6"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fourth Row: Small Description -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label asp-for="SmallDescription" class="form-label">Small Description</label>
+                            <input asp-for="SmallDescription" class="form-control" rows="3"></input>
+                            <span asp-validation-for="SmallDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fifth Row: Location, Rank, Budget -->
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="location" class="form-label">Location</label>
+                            <input asp-for="location" class="form-control" />
+                            <span asp-validation-for="location" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="KuwaitRank" class="form-label">Kuwait Rank</label>
+                            <input asp-for="KuwaitRank" class="form-control" type="number" />
+                            <span asp-validation-for="KuwaitRank" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label asp-for="Budget" class="form-label">Budget</label>
+                            <input asp-for="Budget" class="form-control" type="number" />
+                            <span asp-validation-for="Budget" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        @if (Model.Id == 0)
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Create</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary form-control">Update</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="University" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div calss="card-body p-4 ">
-            <form method="post" class="row " style="margin-left: 0px; margin-right: 0px;" enctype="multipart/form-data">
-                <div asp-validation-summary="All"></div>
-                <input asp-for="Id" hidden/>
-                <input asp-for="ImageUrl" hidden/>
-                <div class="row">
-                    <div class="col-10">
-                        <div class="border-primary p-3 bg-white ">
-                            @* <div asp-validation-summary="All"></div> *@
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Name" class="form-control border-0 shadow"/>
-                                <label asp-for="Name" class="ms-2 bg-white"></label>
-                                <span asp-validation-for="Name" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Email" class="form-control border-0 shadow"/>
-                                <label asp-for="Email" class="ms-2 bg-white"></label>
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="PhoneNumber" type="number" class="form-control border-0 shadow"/>
-                                <label asp-for="PhoneNumber" class="ms-2 bg-white"></label>
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="type" class="form-control border-0 shadow"/>
-                                <label asp-for="type" class="ms-2"></label>
-                                <span asp-validation-for="type" class="text-danger"></span>
-                            </div>
-                            <div class=" py-2 col-12">
-                                <label asp-for="FullDescription" class="ms-2 text-muted"></label>
-                                <textarea asp-for="FullDescription" class="form-control border-0 shadow"></textarea>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="SmallDescription" class="form-control border-0 shadow" />
-                                <label asp-for="SmallDescription" class="ms-2"></label>
-                                <span asp-validation-for="SmallDescription" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="location" class="form-control border-0 shadow"/>
-                                <label asp-for="location" class="ms-2"></label>
-                                <span asp-validation-for="location" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="KuwaitRank" class="form-control border-0 shadow"/>
-                                <label asp-for="KuwaitRank" class="ms-2"></label>
-                                <span asp-validation-for="KuwaitRank" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input asp-for="Budget" class="form-control border-0 shadow"/>
-                                <label asp-for="Budget" class="ms-2"></label>
-                                <span asp-validation-for="Budget" class="text-danger"></span>
-                            </div>
-                            <div class="form-floating py-2 col-12">
-                                <input type="file" name="file" class="form-control border-0 shadow"/>
-                                <label asp-for="ImageUrl" class="ms-2">Main Image</label>
-                            </div>
-                            <div class="row ">
-                                <div class="col-6 col-md-3">
-                                    @if (Model.Id == 0)
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control">Add</button>
-                                    }
-                                    else
-                                    {
-                                        <button type="submit" class="btn btn-primary form-control">Update</button>
-                                    }
-                                </div>
-                                <div class=" col-6 col-md-3">
-                                    <a asp-controller="University" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <img src="@Model.ImageUrl" style="box-shadow: 0 0 10px rgba(0,0,0,0.5); width: 100%; max-width: 300px; max-height: 300px; object-fit: contain; border: 3px;"/>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    </form>
 </div>
-
 
 @section Scripts {
     <script>
         tinymce.init({
             selector: 'textarea',
-            plugins: [
-                // Core editing features
-                'anchor', 'autolink', 'charmap', 'codesample', 'lists', 'searchreplace', 'visualblocks', 'wordcount',
-                // Your account includes a free trial of TinyMCE premium features
-                // Try the most popular premium features until Sep 13, 2024:
-            ],
+            plugins: ['anchor', 'autolink', 'charmap', 'codesample', 'lists', 'searchreplace', 'visualblocks', 'wordcount'],
             toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | removeformat',
             tinycomments_mode: 'embedded',
             tinycomments_author: 'Author name',
@@ -113,9 +142,5 @@
             ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
         });
     </script>
-
-    @{
-        <partial name="_ValidationScriptsPartial" />
-    }
+    <partial name="_ValidationScriptsPartial" />
 }
-

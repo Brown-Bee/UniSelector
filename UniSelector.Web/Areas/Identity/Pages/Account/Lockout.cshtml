@@ -1,10 +1,25 @@
 ﻿@page
 @model UniSelector.Web.Areas.Identity.Pages.Account.LockoutModel
 @{
-    ViewData["Title"] = "Locked out";
+    ViewData["Title"] = "Account Locked";
 }
 
-<header>
-    <h1 class="text-danger">@ViewData["Title"]</h1>
-    <p class="text-danger">This account has been locked out, please try again later.</p>
-</header>
+<div class="container" style="margin-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-danger bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">@ViewData["Title"]</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light p-4">
+            <div class="text-center">
+                <i class="bi bi-lock-fill text-danger" style="font-size: 3rem;"></i>
+                <h4 class="mt-3 text-danger">Account Locked</h4>
+                <p class="lead">This account has been temporarily locked out. Please try again later.</p>
+                <a asp-page="./Login" class="btn btn-outline-primary mt-3">Return to Login</a>
+            </div>
+        </div>
+    </div>
+</div>
