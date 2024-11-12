@@ -1,100 +1,242 @@
 ﻿@model ApplicationUser
 
 <div class="container" style="margin-top: 6rem;">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">Update User</h2>
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-2">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Update User</h2>
+                </div>
             </div>
+        </div>
+        <div class="card-body bg-light p-4">
+            <form method="post">
+                <input asp-for="Id" hidden />
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!-- Civil ID Information -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Civil ID Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="CivilID" class="form-label">Civil ID</label>
+                                <input asp-for="CivilID" class="form-control" />
+                                <span asp-validation-for="CivilID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="CivilIDExpiryDate" class="form-label">Civil ID Expiry Date</label>
+                                <input asp-for="CivilIDExpiryDate" class="form-control" type="date" />
+                                <span asp-validation-for="CivilIDExpiryDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Personal Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Name" class="form-label">Full Name</label>
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Email" class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Gender" class="form-label">Gender</label>
+                                <select asp-for="Gender" class="form-select">
+                                    <option value="">Select Gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                                <span asp-validation-for="Gender" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="MaritalStatus" class="form-label">Marital Status</label>
+                                <select asp-for="MaritalStatus" class="form-select">
+                                    <option value="">Select Status</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                </select>
+                                <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Additional Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Nationality" class="form-label">Nationality</label>
+                                <input asp-for="Nationality" class="form-control" />
+                                <span asp-validation-for="Nationality" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="MothersNationality" class="form-label">Mother's Nationality</label>
+                                <input asp-for="MothersNationality" class="form-control" />
+                                <span asp-validation-for="MothersNationality" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="BirthDate" class="form-label">Date of Birth</label>
+                                <input asp-for="BirthDate" class="form-control" type="date" />
+                                <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="PlaceOfBirth" class="form-label">Place of Birth</label>
+                                <input asp-for="PlaceOfBirth" class="form-control" />
+                                <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Address -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Address Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Address" class="form-label">Address</label>
+                                <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Information -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Academic Information</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="HighSchoolType" class="form-label">High School Type</label>
+                                <select asp-for="HighSchoolType" class="form-select">
+                                    <option value="">Select Type</option>
+                                    <option value="Scientific">Scientific</option>
+                                    <option value="Literary">Literary</option>
+                                </select>
+                                <span asp-validation-for="HighSchoolType" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-check mt-4">
+                                    <input asp-for="IsPublicSchool" class="form-check-input" type="checkbox" />
+                                    <label asp-for="IsPublicSchool" class="form-check-label">Public School</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="Grade" class="form-label">High School Grade</label>
+                                <input asp-for="Grade" class="form-control" type="number" step="0.01" />
+                                <span asp-validation-for="Grade" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="HighSchoolGraduationYear" class="form-label">Graduation Year</label>
+                                <input asp-for="HighSchoolGraduationYear" class="form-control" type="number" />
+                                <span asp-validation-for="HighSchoolGraduationYear" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Test Scores -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Test Scores</h5>
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="IELTS" class="form-label">IELTS Score</label>
+                                <input asp-for="IELTS" class="form-control" type="number" step="0.5" />
+                                <span asp-validation-for="IELTS" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label asp-for="TOEFL" class="form-label">TOEFL Score</label>
+                                <input asp-for="TOEFL" class="form-control" type="number" />
+                                <span asp-validation-for="TOEFL" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-check mt-4">
+                                    <input asp-for="HasAptitudeTest" class="form-check-input" type="checkbox" />
+                                    <label asp-for="HasAptitudeTest" class="form-check-label">Has Aptitude Test</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="row">
+                    <div class="col-6">
+                        <a asp-controller="UserManagement" asp-action="Index" class="btn btn-outline-secondary form-control">
+                            <i class="bi bi-arrow-left me-2"></i>Back To List
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary form-control">
+                            <i class="bi bi-check-circle me-2"></i>Update
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
-    <form method="post" class="bg-light">
-        <input asp-for="Id" hidden />
-        <div asp-validation-summary="All" class="text-danger"></div>
-
-        <!-- Personal Information -->
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Name" class="form-label">Full Name</label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Email" class="form-label">Email</label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Address -->
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="Address" class="form-label">Address</label>
-                    <textarea asp-for="Address" class="form-control" rows="2"></textarea>
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Academic Information -->
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Grade" class="form-label">High School Grade</label>
-                    <input asp-for="Grade" class="form-control" type="number" step="0.01" />
-                    <span asp-validation-for="Grade" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="HighSchoolGraduationYear" class="form-label">Graduation Year</label>
-                    <input asp-for="HighSchoolGraduationYear" class="form-control" type="number" />
-                    <span asp-validation-for="HighSchoolGraduationYear" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Personal Details -->
-        <div class="row mb-3">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label asp-for="BirthDate" class="form-label">Date of Birth</label>
-                    <input asp-for="BirthDate" class="form-control" type="date" />
-                    <span asp-validation-for="BirthDate" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label asp-for="Nationality" class="form-label">Nationality</label>
-                    <input asp-for="Nationality" class="form-control" />
-                    <span asp-validation-for="Nationality" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label asp-for="PlaceOfBirth" class="form-label">Place of Birth</label>
-                    <input asp-for="PlaceOfBirth" class="form-control" />
-                    <span asp-validation-for="PlaceOfBirth" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Buttons -->
-        <div class="row">
-            <div class="col-6 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">Update</button>
-            </div>
-            <div class="col-6 col-md-3">
-                <a asp-controller="UserManagement" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
-            </div>
-        </div>
-    </form>
 </div>
+
+<style>
+    .section-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+        color: #495057;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
