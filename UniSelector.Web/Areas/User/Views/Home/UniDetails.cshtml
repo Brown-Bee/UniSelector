@@ -1,83 +1,175 @@
 ﻿@model University
 
-<div class="container-fluid mt-5">
-    <div class="card shadow-lg border-0">
-        <div class="card-header bg-primary text-white py-4">
+<div class="container" style="padding-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-2">
             <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h2 class="mb-0">@Model.Name</h2>
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2 mb-0">@Model.Name</h2>
                 </div>
-                <div class="col-md-4 text-md-end">
-                    <span class="badge bg-light text-primary fs-5">@Model.type</span>
-                </div>
-                
             </div>
         </div>
-        <div class="card-body">
-            
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <img src="@Model.ImageUrl" class="img-fluid rounded shadow" alt="@Model.Name" />
-                </div>
-                <div class="col-md-8">
-                    <h4 class="text-primary">University Information</h4>
-                    <hr />
-                    <dl class="row">
-                        <dt class="col-sm-3">Location:</dt>
-                        <dd class="col-sm-9">@Model.location</dd>
-
-                        <dt class="col-sm-3">Rank in Kuwait:</dt>
-                        <dd class="col-sm-9">#@Model.KuwaitRank</dd>
-
-                        <dt class="col-sm-3">Budget:</dt>
-                        <dd class="col-sm-9">@Model.Budget.ToString("C0")</dd>
-                    </dl>
-
-                    <h4 class="text-primary mt-4">Description</h4>
-                    <hr />
-                    <p>@Html.Raw(Model.FullDescription)</p>
-                    <hr />
-                    <h4 class="text-primary mt-4">Faculties</h4>
-                    <hr />
-                    @if (Model.Faculties != null && Model.Faculties.Any())
-                    {
-                        <div class="d-flex flex-wrap gap-2">
-                            @foreach (var faculty in Model.Faculties)
-                            {
-                                <a class="badge rounded-pill bg-primary fs-6 p-2"
-                                      style="text-decoration: none;"
-                                      href="@Url.Action("GetMajorId", "Major", new { area = "Admin", facultyId = faculty.Id})"
-                                      data-bs-toggle="popover"
-                                      data-bs-trigger="hover focus"
-                                      data-bs-title="@faculty.StandardFaculty.CombinedName"
-                                      data-bs-content=""
-                                      >
-                                    @faculty.StandardFaculty.CombinedName
-                                </a>
-                            }
+        <div class="card-body bg-light p-4">
+            <!-- University Overview Section -->
+            <div class="section-container">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="position-relative">
+                            <img src="@Model.ImageUrl" class="img-fluid rounded shadow" alt="@Model.Name" />
+                            <div class="position-absolute top-0 end-0 m-3">
+                                <span class="badge bg-primary fs-5 shadow">@Model.type</span>
+                            </div>
                         </div>
-                    }
-                    else
-                    {
-                        <p>No faculties available for this university.</p>
-                    }
+                    </div>
+                    <div class="col-md-8">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h5 class="section-title mb-0">Quick Information</h5>
+                        </div>
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6">
+                                <div class="info-card bg-light p-3 rounded shadow-sm">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-geo-alt text-primary fs-4 me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Location</small>
+                                            <span class="fw-medium">@Model.location</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="info-card bg-light p-3 rounded shadow-sm">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-trophy text-warning fs-4 me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Rank in Kuwait</small>
+                                            <span class="fw-medium">#@Model.KuwaitRank</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="info-card bg-light p-3 rounded shadow-sm">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-cash-stack text-success fs-4 me-2"></i>
+                                        <div>
+                                            <small class="text-muted d-block">Budget</small>
+                                            <span class="fw-medium">@Model.Budget.ToString("C0")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="text-center mt-2 text-md">
-                <a asp-action="UniversityView" class="btn btn-outline-primary bg-gradient w-15 py-2 text-uppercase fw-semibold">
-                    <i class="bi bi-arrow-left"></i> Back to Universities
-                </a>
-                <a asp-action="Application" class=" btn btn-outline-primary bg-gradient w-15 py-2 text-uppercase fw-semibold">
-                    <i class="bi popover-arrow"></i> Apply
-                </a>
+            <!-- Description Section -->
+            <div class="section-container mt-4">
+                <h5 class="section-title">About @Model.Name</h5>
+                <div class="bg-light p-4 rounded">
+                    @Html.Raw(Model.FullDescription)
+                </div>
+            </div>
+
+            <!-- Faculties Section -->
+            @* <div class="section-container mt-4">
+                <h5 class="section-title">Available Faculties</h5>
+                @if (Model.Faculties != null && Model.Faculties.Any())
+                {
+                    <div class="row g-3">
+                        @foreach (var faculty in Model.Faculties)
+                        {
+                            <div class="col-md-4">
+                                <div class="faculty-card bg-light p-3 rounded shadow-sm">
+                                    <a href="@Url.Action("GetMajorId", "Major", new { area = "Admin", facultyId = faculty.Id})"
+                                       class="text-decoration-none text-dark"
+                                       data-bs-toggle="popover"
+                                       data-bs-trigger="hover focus"
+                                       data-bs-title="@faculty.StandardFaculty.CombinedName"
+                                       data-bs-content="">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-book text-primary fs-4 me-2"></i>
+                                            <span class="fw-medium">@faculty.StandardFaculty.CombinedName</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        No faculties available for this university.
+                    </div>
+                }
+            </div> *@
+
+            <!-- Action Buttons -->
+            <div class="section-container mt-4">
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-action="UniversityView" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left me-2"></i>Back to Universities
+                    </a>
+                    <a asp-action="Application" class="btn btn-primary">
+                        <i class="bi bi-pencil-square me-2"></i>Apply Now
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<style>
+    .section-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+        color: #495057;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .info-card {
+        transition: transform 0.2s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-2px);
+    }
+
+    .faculty-card {
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+
+    .faculty-card:hover {
+        transform: translateY(-2px);
+        border-color: #0d6efd;
+        background-color: #f8f9fa !important;
+    }
+
+    .btn {
+        padding: 0.5rem 1.5rem;
+    }
+
+    .badge {
+        padding: 0.5em 1em;
+    }
+</style>
+
 @section Scripts {
     <script>
+        // Initialize popovers
         let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
         let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
             return new bootstrap.Popover(popoverTriggerEl)

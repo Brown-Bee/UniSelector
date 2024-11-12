@@ -1,144 +1,162 @@
 ﻿@model IEnumerable<University>
+
+<div class="container" style="padding-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-2">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white py-2">Universities</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body bg-light p-4">
+            <!-- Filters Section -->
+            <div class="section-container mb-4">
+                <h5 class="section-title">Search & Filters</h5>
+                <div class="row mb-3">
+                    <div class="col-md-12 mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text bg-primary text-white">
+                                <i class="bi bi-search"></i>
+                            </span>
+                            <input type="text" id="searchString" name="searchString"
+                                   class="form-control" placeholder="Search universities..."
+                                   value="@ViewBag.CurrentSearchString">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Maximum Fees</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
+                                <input type="number" id="maxFees" name="maxFees"
+                                       class="form-control" placeholder="Max Fees"
+                                       value="@ViewBag.CurrentMaxFees">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Faculty</label>
+                            <select id="facultyId" name="facultyId" class="form-select">
+                                <option value="">All Faculties</option>
+                                @foreach (var faculty in ViewBag.Faculties)
+                                {
+                                    <option value="@faculty.Value">@faculty.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="form-group">
+                            <label class="form-label">Maximum Rank</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-trophy"></i></span>
+                                <input type="number" id="maxRank" name="maxRank"
+                                       class="form-control" placeholder="Max Rank"
+                                       value="@ViewBag.CurrentMaxRank">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="form-label">&nbsp;</label>
+                        <div class="d-grid gap-2">
+                            <button id="applyFilters" class="btn btn-primary">
+                                <i class="bi bi-funnel-fill me-2"></i>Apply Filters
+                            </button>
+                            <button id="clearFilters" class="btn btn-outline-secondary">
+                                <i class="bi bi-x-circle me-2"></i>Clear
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Universities Grid -->
+            <div class="section-container">
+                <h5 class="section-title">Results</h5>
+                <div class="row pb-3">
+                    @foreach (var university in Model)
+                    {
+                        <div class="col-lg-3 col-sm-6 mb-4">
+                            <div class="card h-100 border-0 shadow rounded-3 overflow-hidden university-card">
+                                <div class="position-relative">
+                                    <img src="@university.ImageUrl"
+                                         class="card-img-top university-image"
+                                         alt="@university.Name" />
+                                    <div class="position-absolute top-0 end-0 p-2">
+                                        <span class="badge bg-primary">@university.type</span>
+                                    </div>
+                                </div>
+                                <div class="card-body p-3">
+                                    <h5 class="card-title text-center mb-3">@university.Name</h5>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-geo-alt text-primary me-2"></i>
+                                            <span>@university.location</span>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-trophy text-warning me-2"></i>
+                                            <span>#@university.KuwaitRank</span>
+                                        </div>
+                                    </div>
+                                    <a asp-action="UniDetails"
+                                       asp-route-UniversityId="@university.Id"
+                                       class="btn btn-primary w-100">
+                                        <i class="bi bi-info-circle me-2"></i>Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
     .university-card {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease;
     }
 
         .university-card:hover {
             transform: translateY(-5px);
         }
 
-    .image-container {
-        position: relative;
-        overflow: hidden;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        width: 100%;
-
-
-    }
-
     .university-image {
         height: 200px;
-        width: 100%;
         object-fit: cover;
-        transition: transform 0.3s ease-in-out;
+        transition: transform 0.3s ease;
     }
 
-    .image-container:hover .university-image {
-        transform: scale(1.1);
+    .university-card:hover .university-image {
+        transform: scale(1.05);
     }
 
-    .image-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
-        opacity: 0;
-        transition: opacity 0.3s ease-in-out;
+    .section-container {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    .image-container:hover .image-overlay {
-        opacity: 1;
+    .section-title {
+        color: #495057;
+        font-size: 1.1rem;
+        font-weight: 500;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
     }
 
-    .university-body {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
+    .form-label {
+        font-weight: 500;
+        color: #495057;
     }
-
-    .university-title {
-        height: 50px;
-        overflow: hidden;
-        margin-top: 10px;
-    }
-
-    .university-location {
-        height: 30px;
-        overflow: hidden;
-    }
-
-    .university-price {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-
-    .details-button {
-        margin-top: auto;
-        transition: background-color 0.3s ease-in-out;
-    }
-
-        .details-button:hover {
-            background-color: #0056b3;
-        }
 </style>
-
-<div class="container" style="padding-top: 6rem;">
-    <div class="row mb-3">
-    <div class="col-md-3">
-        <input type="number" id="maxFees" name="maxFees" class="form-control" placeholder="Max Fees" value="@ViewBag.CurrentMaxFees">
-    </div>
-    <div class="col-md-3">
-        <select id="facultyId" name="facultyId" class="form-control">
-            <option value="">All Faculties</option>
-            @foreach (var faculty in ViewBag.Faculties)
-            {
-                @* var isSelected = ViewBag.CurrentFacultyId.ToString() == (faculty.Value ? "Selected" : ""); *@
-                <option value="@faculty.Value">@faculty.Text</option>
-            }
-        </select>
-    </div>
-    <div class="col-md-3">
-        <input type="number" id="maxRank" name="maxRank" class="form-control" placeholder="Max Rank" value="@ViewBag.CurrentMaxRank">
-    </div>
-    <div class="col-md-3">
-        <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
-        <button id="clearFilters" class="btn btn-secondary">Clear Filters</button>
-    </div>
-    </div>
-
-    <div class="row mb-3">
-    <div class="col-md-12">
-        <input type="text" id="searchString" name="searchString" class="form-control" placeholder="Search universities..." value="@ViewBag.CurrentSearchString">
-    </div>
-    </div>
-
-    <div class="row pb-3">
-    @foreach (var university in Model)
-    {
-        <div class="col-lg-3 col-sm-6 mb-4">
-            <div class="card border-0 p-3 shadow border-top border-5 rounded university-card">
-                <div class="image-container">
-                    <img src="@university.ImageUrl" class="university-image" alt="@university.Name" />
-                    <div class="image-overlay"></div>
-                </div>
-                <div class="card-body pb-0 university-body">
-                    <h5 class="card-title text-dark opacity-75 text-uppercase text-center university-title">@university.Name</h5>
-                    <p class="card-text text-warning text-center university-location">@university.location</p>
-                    <div class="university-price">
-                        <p class="text-opacity-75 text-dark text-center mb-0">
-                            <span class="text-decoration">@university.type</span>
-                        </p>
-                        <p class="text-opacity-75 text-dark text-center">
-                            Rank In Kuwait:
-                            <span>@university.KuwaitRank.ToString()</span>
-                        </p>
-                    </div>
-                    <a asp-action="UniDetails" asp-route-UniversityId="@university.Id" class="btn btn-primary bg-gradient border-0 form-control mt-2 details-button">Details</a>
-                </div>
-            </div>
-        </div>
-    }
-    </div>
-</div>
 
 @section Scripts {
     <script>
