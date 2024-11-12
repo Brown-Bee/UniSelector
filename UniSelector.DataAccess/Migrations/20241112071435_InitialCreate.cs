@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace UniSelector.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,13 +32,24 @@ namespace UniSelector.DataAccess.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CivilID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CivilIDExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameInArabic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NameInEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Grade = table.Column<float>(type: "real", nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Nationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MothersNationality = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PlaceOfBirth = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     HighSchoolGraduationYear = table.Column<int>(type: "int", nullable: true),
+                    HighSchoolType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HighSchoolAverage = table.Column<float>(type: "real", nullable: true),
+                    IsPublicSchool = table.Column<bool>(type: "bit", nullable: false),
+                    MaritalStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HasFourYearExperience = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

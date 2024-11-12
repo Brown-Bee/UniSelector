@@ -90,12 +90,10 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
@@ -106,34 +104,20 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
-            [Display(Name = "Name")]
+            // Basic Info
+            [Display(Name = "Full Name")]
             public string Name { get; set; }
             [Phone]
             [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
 
-            [Display(Name = "Address")]
-            public string Address { get; set; }
+            public string Gender { get; set; }
 
-            [Display(Name = "Grade")]
-            [Range(0, 100, ErrorMessage = "Grade must be between 0 and 100")]
-            public float? Grade { get; set; }
-
-            [Required]
             [DataType(DataType.Date)]
-            [Display(Name = "Birth Date")]
+            [Display(Name = "Date of Birth")]
             public DateTime BirthDate { get; set; }
-
-            [Display(Name = "Nationality")]
             public string Nationality { get; set; }
 
-            [Display(Name = "Place of Birth")]
-            public string PlaceOfBirth { get; set; }
-
-            [Display(Name = "High School Graduation Year")]
-            [ValidGraduationYear]
-            public int? HighSchoolGraduationYear { get; set; }
 
             [Display(Name = "Role")]
             public string Role { get; set; }
@@ -239,14 +223,14 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
             try
             {
                 var user = Activator.CreateInstance<ApplicationUser>();
+
+                // Essential fields for registration
                 user.Name = Input.Name;
-                user.Address = Input.Address; // Note: You might want to correct the spelling to "Address" in your ApplicationUser model
-                user.Grade = Input.Grade;
                 user.PhoneNumber = Input.PhoneNumber;
+                user.Gender = Input.Gender;
                 user.BirthDate = Input.BirthDate;
                 user.Nationality = Input.Nationality;
-                user.PlaceOfBirth = Input.PlaceOfBirth;
-                user.HighSchoolGraduationYear = Input.HighSchoolGraduationYear;
+
                 return user;
             }
             catch

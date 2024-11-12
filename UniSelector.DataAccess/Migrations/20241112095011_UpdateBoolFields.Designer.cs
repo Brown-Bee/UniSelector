@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241107194023_Init")]
-    partial class Init
+    [Migration("20241112095011_UpdateBoolFields")]
+    partial class UpdateBoolFields
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,6 +172,12 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CivilID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CivilIDExpiryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -183,17 +189,42 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Gender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float?>("Grade")
                         .HasColumnType("real");
 
+                    b.Property<bool>("HasAptitudeTest")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasFourYearExperience")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("HighSchoolGraduationYear")
                         .HasColumnType("int");
+
+                    b.Property<string>("HighSchoolType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("IELTS")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("IsPublicSchool")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MaritalStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MothersNationality")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -224,6 +255,9 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("TOEFL")
+                        .HasColumnType("real");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");

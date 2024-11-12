@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112080837_EditApplicationUserFields")]
+    partial class EditApplicationUserFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,6 +173,7 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CivilID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("CivilIDExpiryDate")
@@ -193,10 +197,10 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<float?>("Grade")
                         .HasColumnType("real");
 
-                    b.Property<bool>("HasAptitudeTest")
+                    b.Property<bool?>("HasAptitudeTest")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("HasFourYearExperience")
+                    b.Property<bool?>("HasFourYearExperience")
                         .HasColumnType("bit");
 
                     b.Property<int?>("HighSchoolGraduationYear")
@@ -208,7 +212,7 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<float?>("IELTS")
                         .HasColumnType("real");
 
-                    b.Property<bool>("IsPublicSchool")
+                    b.Property<bool?>("IsPublicSchool")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")

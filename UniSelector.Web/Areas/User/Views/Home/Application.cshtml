@@ -30,7 +30,7 @@
                                 <label asp-for="Input.Email" class="text-muted">Email</label>
                                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                             </div>
-                            <div class="form-floating mb-3 col-md-12">
+                            @* <div class="form-floating mb-3 col-md-12">
                                 <input asp-for="Input.Address" class="form-control" placeholder="Address" />
                                 <label asp-for="Input.Address" class="text-muted">Address</label>
                                 <span asp-validation-for="Input.Address" class="text-danger"></span>
@@ -39,7 +39,7 @@
                                 <input asp-for="Input.Grade" class="form-control" placeholder="Grade" />
                                 <label asp-for="Input.Grade" class="text-muted">Grade</label>
                                 <span asp-validation-for="Input.Grade" class="text-danger"></span>
-                            </div>
+                            </div> *@
                             <div class="form-floating mb-3 col-md-6">
                                 <input asp-for="Input.BirthDate" class="form-control" placeholder="Birth Date" />
                                 <label asp-for="Input.BirthDate" class="text-muted">Birth Date</label>
@@ -50,7 +50,7 @@
                                 <label asp-for="Input.Nationality" class="text-muted">Nationality</label>
                                 <span asp-validation-for="Input.Nationality" class="text-danger"></span>
                             </div>
-                            <div class="form-floating mb-3 col-md-6">
+                            @* <div class="form-floating mb-3 col-md-6">
                                 <input asp-for="Input.PlaceOfBirth" class="form-control" placeholder="Place of Birth" />
                                 <label asp-for="Input.PlaceOfBirth" class="text-muted">Place of Birth</label>
                                 <span asp-validation-for="Input.PlaceOfBirth" class="text-danger"></span>
@@ -59,7 +59,7 @@
                                 <input asp-for="Input.HighSchoolGraduationYear" class="form-control graduation-year" type="number" min="1900" max="@DateTime.Now.Year" step="1" placeholder="High School Graduation Year" list="graduationYears" />
                                 <label asp-for="Input.HighSchoolGraduationYear" class="text-muted">High School Graduation Year</label>
                                 <span asp-validation-for="Input.HighSchoolGraduationYear" class="text-danger"></span>
-                            </div>
+                            </div> *@
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary btn-lg">Send Request</button>
