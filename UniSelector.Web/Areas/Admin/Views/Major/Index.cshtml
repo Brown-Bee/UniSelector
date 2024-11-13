@@ -32,8 +32,8 @@
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@(obj.Name)</td>
-                        <td>@(obj.StandardFaculty?.CombinedName)</td>
+                        <td>@(obj.StandardMajor?.CombinedName)</td>
+                        <td>@(obj.Faculty?.StandardFaculty?.CombinedName)</td>
                         <td>@obj.Credits</td>
                         <td>@obj.AveragePrice.ToString("c")</td>
                         <td></td>
