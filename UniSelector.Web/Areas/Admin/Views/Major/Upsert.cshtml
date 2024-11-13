@@ -13,19 +13,20 @@
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label asp-for="Major.Name" class="form-label">Name</label>
-                    <input asp-for="Major.Name" type="text" class="form-control"/>
-                    <span asp-validation-for="Major.Name" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Major.StandardFacultyId" class="form-label">Faculty</label>
-                    <select class="form-control" asp-for="Major.StandardFacultyId" asp-items="Model.StandardFaculties">
+                    <label asp-for="Major.FacultyId" class="form-label">Faculty</label>
+                    <select class="form-control" asp-for="Major.FacultyId" asp-items="Model.StandardFaculties">
                         <option value="" selected>--Select Faculty--</option>
                     </select>
-                    <span asp-validation-for="Major.StandardFacultyId" class="text-danger"></span>
+                    <span asp-validation-for="Major.FacultyId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major.StandardMajorId" class="form-label">Standard Major</label>
+                    <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
+                        <option value="" selected>--Select Standard Major--</option>
+                    </select>
+                    <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
                 </div>
             </div>
         </div>
@@ -62,9 +63,31 @@
                 <a asp-controller="Major" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
             </div>
         </div>
-        
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            $('#facultySelect').change(function() {
+                var facultyId = $(this).val();
+                if (facultyId) {
+                    $.getJSON(`/Admin/Major/GetStandardMajors?facultyId=${facultyId}`, function(data) {
+                        var standardMajorSelect = $('#standardMajorSelect');
+                        standardMajorSelect.empty();
+                        standardMajorSelect.append('<option value="">--Select Standard Major--</option>');
+                        $.each(data, function(index, item) {
+                            standardMajorSelect.append($('<option></option>')
+                                .val(item.id)
+                                .text(item.combinedName));
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}
 
 
 

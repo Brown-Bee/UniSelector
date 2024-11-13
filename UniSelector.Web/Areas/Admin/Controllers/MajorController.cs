@@ -22,14 +22,14 @@ public class MajorController : Controller
     {
         if (!facultyId.HasValue) 
             return View(_unitOfWork.Major.GetAll().ToList());
-        var majors = _unitOfWork.Major.GetAll(m => m.StandardFacultyId == facultyId).ToList();
+        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
         return View(majors);
     }
 
     [Authorize(Roles = "User,Admin")]
     public IActionResult GetMajorId(int facultyId)
     {
-        var majors = _unitOfWork.Major.GetAll(m => m.StandardFacultyId == facultyId).ToList();
+        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
         return View(majors);
     }
 
@@ -83,13 +83,40 @@ public class MajorController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    // Helper method for filling dropdown lists
     private void FillSelectionData(MajorVM majorVm)
     {
+        // Get all standard faculties for the first dropdown
         var standardFaculties = _unitOfWork.StandardFaculty.GetAll();
         majorVm.StandardFaculties = standardFaculties.Select(sf => new SelectListItem
         {
             Value = sf.Id.ToString(),
             Text = sf.CombinedName
         }).ToList();
+
+        // If a faculty is selected (during edit or after validation error)
+        if (majorVm.Major.FacultyId > 0)
+        {
+            // Get majors only for the selected faculty
+            var standardMajors = _unitOfWork.StandardMajor
+                .GetAll(sm => sm.StandardFacultyId == majorVm.Major.FacultyId);
+
+            // Fill the majors dropdown
+            majorVm.StandardMajors = standardMajors.Select(sm => new SelectListItem
+            {
+                Value = sm.Id.ToString(),
+                Text = sm.CombinedName
+            }).ToList();
+        }
+    }
+
+    // New API endpoint for AJAX calls
+    [HttpGet]
+    public JsonResult GetStandardMajors(int facultyId)
+    {
+        // When faculty dropdown changes, get majors for that faculty
+        var standardMajors = _unitOfWork.StandardMajor
+            .GetAll(sm => sm.StandardFacultyId == facultyId);
+        return Json(standardMajors);
     }
 }

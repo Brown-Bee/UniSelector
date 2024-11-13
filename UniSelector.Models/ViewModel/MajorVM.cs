@@ -6,4 +6,5 @@ public class MajorVM
 {
     public Major Major { get; set; }
     public List<SelectListItem>? StandardFaculties { get; set; }
+    public List<SelectListItem>? StandardMajors { get; set; }
 }

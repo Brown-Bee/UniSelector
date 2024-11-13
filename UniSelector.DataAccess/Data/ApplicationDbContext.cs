@@ -20,11 +20,24 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<StandardFaculty> StandardFaculties { get; set; }
     public DbSet<StudentRequest> StudetsRequests { get; set; }
     public DbSet<Major> Majors { get; set; }
+    public DbSet<StandardMajor> StandardMajors { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
+        // Configure one-to-one relationship
+        modelBuilder.Entity<Faculty>()
+            .HasOne(f => f.StandardFaculty)
+            .WithOne(sf => sf.Faculty)
+            .HasForeignKey<Faculty>(f => f.StandardFacultyId);
+
+        // Ensure StandardFacultyId in Major matches the Faculty's StandardFacultyId
+        modelBuilder.Entity<Major>()
+            .HasOne(m => m.Faculty)
+            .WithMany(f => f.Majors)
+            .HasForeignKey(m => m.FacultyId);
+
         modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
             new Category { Id = 2, Name = "Scifi", DisplayOrder = 2 },

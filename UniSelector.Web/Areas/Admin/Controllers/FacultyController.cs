@@ -102,7 +102,7 @@ public class FacultyController : Controller
     [HttpGet]
     public JsonResult GetMajors(int facultyId)
     {
-        var  majors = _unitOfWork.Major.GetAll(m => m.StandardFacultyId == facultyId);
+        var  majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId);
         return Json(majors.ToList());
     }
 

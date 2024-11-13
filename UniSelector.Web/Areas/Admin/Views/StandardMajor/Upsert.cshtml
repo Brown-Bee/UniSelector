@@ -1,0 +1,61 @@
+﻿@model UniSelector.Models.ViewModel.StandardMajorVM
+
+<div class="container" style="margin-top: 6rem;">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">@(Model.StandardMajor.Id != 0 ? "Update" : "Create") Standard Major</h2>
+            </div>
+        </div>
+    </div>
+    <form method="post" class="bg-light p-3">
+        <input asp-for="StandardMajor.Id" hidden />
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="StandardMajor.NameArabic" class="form-label">Arabic Name</label>
+                    <input asp-for="StandardMajor.NameArabic" class="form-control" />
+                    <span asp-validation-for="StandardMajor.NameArabic" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="StandardMajor.NameEnglish" class="form-label">English Name</label>
+                    <input asp-for="StandardMajor.NameEnglish" class="form-control" />
+                    <span asp-validation-for="StandardMajor.NameEnglish" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="StandardMajor.StandardFacultyId" class="form-label">Faculty</label>
+                    <select asp-for="StandardMajor.StandardFacultyId" asp-items="Model.StandardFacultyList" class="form-control">
+                        <option disabled selected>--Select Faculty--</option>
+                    </select>
+                    <span asp-validation-for="StandardMajor.StandardFacultyId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3">
+                @if (Model.StandardMajor.Id == 0)
+                {
+                    <button type="submit" class="btn btn-primary form-control">Create</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary form-control">Update</button>
+                }
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="StandardMajor" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

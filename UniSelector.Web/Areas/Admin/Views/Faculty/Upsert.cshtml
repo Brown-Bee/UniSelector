@@ -21,14 +21,14 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            @* <div class="col-md-6">
                 <div class="form-group">
                     <label class="form-label">Major</label>
                     <select id="majorSelect" class="form-control" asp-for="faculty.MajorId">
                         <option disabled selected>--Select Major--</option>
                     </select>
                 </div>
-            </div>
+            </div> *@
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
@@ -70,7 +70,7 @@
             });
 
             let standardFacultyId = @Model.faculty.StandardFacultyId;
-            let selectedMajorId = @Model.faculty.MajorId;
+            @*let selectedMajorId = @Model.faculty.MajorId;*@
             if (standardFacultyId > 0) {
                 $('#standardFacultySelect').val(standardFacultyId);
                 fillMajor(standardFacultyId, selectedMajorId);
