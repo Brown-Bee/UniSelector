@@ -21,7 +21,8 @@ namespace UniSelector.Models
 
         [DataType(DataType.Date)]
         [DisplayName("Date of Birth")]
-        public DateTime BirthDate { get; set; }
+        [Required]
+        public DateTime? BirthDate { get; set; }
 
         [DisplayName("Place of Birth")]
         public string? PlaceOfBirth { get; set; }

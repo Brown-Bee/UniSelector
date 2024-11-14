@@ -15,9 +15,6 @@ namespace UniSelector.Models
         public string NameEnglish { get; set; }
         public string CombinedName => $"{NameArabic} / {NameEnglish}";
 
-        // One-to-one with Faculty
-        public Faculty Faculty { get; set; }
-
         // One-to-many with StandardMajors
         public ICollection<StandardMajor> StandardMajors { get; set; } = new List<StandardMajor>();
     }
