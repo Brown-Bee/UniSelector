@@ -113,9 +113,8 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
 
             public string Gender { get; set; }
 
-            [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
-            public DateTime BirthDate { get; set; }
+            public DateTime? BirthDate { get; set; }
             public string Nationality { get; set; }
 
 

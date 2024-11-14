@@ -44,7 +44,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account.Manage
 
             [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
-            public DateTime BirthDate { get; set; }
+            public DateTime? BirthDate { get; set; }
 
             [Display(Name = "Place of Birth")]
             public string? PlaceOfBirth { get; set; }
