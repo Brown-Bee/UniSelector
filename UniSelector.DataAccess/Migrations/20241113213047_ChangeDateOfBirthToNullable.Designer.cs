@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241113213047_ChangeDateOfBirthToNullable")]
+    partial class ChangeDateOfBirthToNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -166,6 +169,8 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("BirthDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CivilID")
@@ -293,6 +298,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -331,9 +337,12 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StandardFacultyId")
+                        .IsUnique();
 
                     b.HasIndex("UniversityId");
 
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Major", b =>
@@ -353,6 +362,7 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StandardMajorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -361,6 +371,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("StandardMajorId");
 
+                    b.ToTable("Majors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Product", b =>
@@ -409,6 +420,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -515,6 +527,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("StandardFaculties");
 
                     b.HasData(
                         new
@@ -662,6 +675,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("StandardFacultyId");
 
+                    b.ToTable("StandardMajors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
@@ -694,6 +708,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UnibersityId");
 
+                    b.ToTable("StudetsRequests");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
@@ -739,6 +754,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Universities");
 
                     b.HasData(
                         new
@@ -849,6 +865,8 @@ namespace UniSelector.DataAccess.Migrations
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
+                        .WithOne("Faculty")
+                        .HasForeignKey("UniSelector.Models.Faculty", "StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -873,6 +891,9 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasOne("UniSelector.Models.StandardMajor", "StandardMajor")
                         .WithMany()
+                        .HasForeignKey("StandardMajorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Faculty");
 
@@ -925,7 +946,8 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
                 {
-                    b.Navigation("Faculty");
+                    b.Navigation("Faculty")
+                        .IsRequired();
 
                     b.Navigation("StandardMajors");
                 });

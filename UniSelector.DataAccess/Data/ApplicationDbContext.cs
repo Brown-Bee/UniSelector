@@ -26,17 +26,19 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(modelBuilder);
 
-        // Configure one-to-one relationship
+        /*// Configure one-to-one relationship
         modelBuilder.Entity<Faculty>()
             .HasOne(f => f.StandardFaculty)
             .WithOne(sf => sf.Faculty)
-            .HasForeignKey<Faculty>(f => f.StandardFacultyId);
+            .HasForeignKey<Faculty>(f => f.StandardFacultyId);*/
 
+        /*
         // Ensure StandardFacultyId in Major matches the Faculty's StandardFacultyId
         modelBuilder.Entity<Major>()
             .HasOne(m => m.Faculty)
             .WithMany(f => f.Majors)
             .HasForeignKey(m => m.FacultyId);
+            */
 
         modelBuilder.Entity<Category>().HasData(
             new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
