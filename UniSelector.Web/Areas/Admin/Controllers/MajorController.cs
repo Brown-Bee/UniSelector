@@ -54,6 +54,11 @@ public class MajorController : Controller
     [HttpPost]
     public IActionResult Upsert(MajorVM majorVm)
     {
+        // Add server-side validation for required fields
+        if (majorVm.Major.MinimumGrade <= 0)
+        {
+            ModelState.AddModelError("Major.MinimumGrade", "Minimum grade is required");
+        }
         if (!ModelState.IsValid)
         {
             FillSelectionData(majorVm);
@@ -86,6 +91,15 @@ public class MajorController : Controller
     // Helper method for filling dropdown lists
     private void FillSelectionData(MajorVM majorVm)
     {
+        // Add validation checks for required fields
+        if (majorVm.Major.MinimumGrade < 0 || majorVm.Major.MinimumGrade > 100)
+        {
+            ModelState.AddModelError("Major.MinimumGrade", "Grade must be between 0 and 100");
+        }
+        if (majorVm.Major.MarketDemand < 1 || majorVm.Major.MarketDemand > 5)
+        {
+            ModelState.AddModelError("Major.MarketDemand", "Market demand must be between 1 and 5");
+        }
         // Get all standard faculties for the first dropdown
         var standardFaculties = _unitOfWork.StandardFaculty.GetAll();
         majorVm.StandardFaculties = standardFaculties.Select(sf => new SelectListItem

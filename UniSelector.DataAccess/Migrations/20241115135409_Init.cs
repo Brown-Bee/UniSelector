@@ -458,8 +458,7 @@ namespace UniSelector.DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Faculties_StandardFacultyId",
                 table: "Faculties",
-                column: "StandardFacultyId",
-                unique: true);
+                column: "StandardFacultyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Faculties_UniversityId",

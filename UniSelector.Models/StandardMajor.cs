@@ -16,6 +16,12 @@ namespace UniSelector.Models
         public string NameEnglish { get; set; }
         public string CombinedName => $"{NameArabic} / {NameEnglish}";
 
+        public string? Description { get; set; }  // Career prospects, program details
+        public string? CareerOptions { get; set; }  // Common job titles/paths
+        [Display(Name = "Study Duration (Years)")]
+        public int StudyDuration { get; set; }
+        public string HighSchoolPath { get; set; }  // Scientific/Literary track
+
         public int StandardFacultyId { get; set; }
         [ForeignKey("StandardFacultyId")]
         public StandardFaculty? StandardFaculty { get; set; }

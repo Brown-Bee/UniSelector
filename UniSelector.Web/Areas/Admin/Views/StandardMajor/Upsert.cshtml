@@ -38,6 +38,37 @@
                 </div>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label asp-for="StandardMajor.Description"></label>
+                <textarea asp-for="StandardMajor.Description" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="StandardMajor.Description" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12">
+                <label asp-for="StandardMajor.CareerOptions"></label>
+                <textarea asp-for="StandardMajor.CareerOptions" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="StandardMajor.CareerOptions" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label asp-for="StandardMajor.StudyDuration"></label>
+                <input asp-for="StandardMajor.StudyDuration" class="form-control" type="number" min="1" max="7" />
+                <span asp-validation-for="StandardMajor.StudyDuration" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label asp-for="StandardMajor.HighSchoolPath"></label>
+                <select asp-for="StandardMajor.HighSchoolPath" class="form-control">
+                    <option value="">--Select Path--</option>
+                    <option value="Scientific">Scientific</option>
+                    <option value="Literary">Literary</option>
+                </select>
+                <span asp-validation-for="StandardMajor.HighSchoolPath" class="text-danger"></span>
+            </div>
+        </div>
         <div class="row">
             <div class="col-6 col-md-3">
                 @if (Model.StandardMajor.Id == 0)

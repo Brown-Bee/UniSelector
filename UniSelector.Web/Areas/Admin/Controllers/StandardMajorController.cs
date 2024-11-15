@@ -51,18 +51,30 @@ namespace UniSelector.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Upsert(StandardMajorVM standardMajorVM)
         {
+            if (standardMajorVM.StandardMajor.StudyDuration <= 0 || standardMajorVM.StandardMajor.StudyDuration > 7)
+            {
+                ModelState.AddModelError("StandardMajor.StudyDuration", "Study duration must be between 1 and 7 years");
+            }
+
+            if (string.IsNullOrEmpty(standardMajorVM.StandardMajor.HighSchoolPath))
+            {
+                ModelState.AddModelError("StandardMajor.HighSchoolPath", "High school path is required");
+            }
+
+
             if (ModelState.IsValid)
             {
                 if (standardMajorVM.StandardMajor.Id == 0)
                 {
                     _unitOfWork.StandardMajor.Add(standardMajorVM.StandardMajor);
+                    TempData["success"] = "Standard major created successfully";
                 }
                 else
                 {
                     _unitOfWork.StandardMajor.Update(standardMajorVM.StandardMajor);
+                    TempData["success"] = "Standard major updated successfully";
                 }
                 _unitOfWork.Save();
-                TempData["success"] = "Standard major created successfully";
                 return RedirectToAction("Index");
             }
 
@@ -72,7 +84,6 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                     Text = f.CombinedName,
                     Value = f.Id.ToString()
                 });
-
             return View(standardMajorVM);
         }
 

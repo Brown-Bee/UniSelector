@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241113220517_RemoveFacultyFromStandardFaculty")]
-    partial class RemoveFacultyFromStandardFaculty
+    [Migration("20241115184429_AddNewFieldsToStandardMajorTable")]
+    partial class AddNewFieldsToStandardMajorTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -355,11 +355,32 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<decimal>("AveragePrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("AverageStartingSalary")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("Credits")
                         .HasColumnType("int");
 
+                    b.Property<float>("EmploymentRate")
+                        .HasColumnType("real");
+
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
+
+                    b.Property<int>("MarketDemand")
+                        .HasColumnType("int");
+
+                    b.Property<float>("MinimumGrade")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("MinimumIELTS")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("MinimumTOEFL")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("RequiresAptitudeTest")
+                        .HasColumnType("bit");
 
                     b.Property<int>("StandardMajorId")
                         .HasColumnType("int");
@@ -659,6 +680,16 @@ namespace UniSelector.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CareerOptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighSchoolPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NameArabic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -668,6 +699,9 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("StandardFacultyId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudyDuration")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

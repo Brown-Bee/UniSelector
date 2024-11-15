@@ -166,6 +166,8 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("BirthDate")
+                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CivilID")
@@ -293,6 +295,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Categories");
 
                     b.HasData(
                         new
@@ -331,9 +334,11 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("StandardFacultyId");
 
                     b.HasIndex("UniversityId");
 
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Major", b =>
@@ -347,12 +352,34 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<decimal>("AveragePrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal>("AverageStartingSalary")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<int>("Credits")
                         .HasColumnType("int");
+
+                    b.Property<float>("EmploymentRate")
+                        .HasColumnType("real");
 
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
+                    b.Property<int>("MarketDemand")
+                        .HasColumnType("int");
+
+                    b.Property<float>("MinimumGrade")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("MinimumIELTS")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("MinimumTOEFL")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("RequiresAptitudeTest")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("StandardMajorId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -361,6 +388,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("StandardMajorId");
 
+                    b.ToTable("Majors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Product", b =>
@@ -409,6 +437,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("CategoryId");
 
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
@@ -515,6 +544,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("StandardFaculties");
 
                     b.HasData(
                         new
@@ -647,6 +677,16 @@ namespace UniSelector.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("CareerOptions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HighSchoolPath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NameArabic")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -658,10 +698,14 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("StandardFacultyId")
                         .HasColumnType("int");
 
+                    b.Property<int>("StudyDuration")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("StandardFacultyId");
 
+                    b.ToTable("StandardMajors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
@@ -694,6 +738,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UnibersityId");
 
+                    b.ToTable("StudetsRequests");
                 });
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
@@ -739,6 +784,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
+                    b.ToTable("Universities");
 
                     b.HasData(
                         new
@@ -849,6 +895,8 @@ namespace UniSelector.DataAccess.Migrations
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.HasOne("UniSelector.Models.StandardFaculty", "StandardFaculty")
+                        .WithMany()
+                        .HasForeignKey("StandardFacultyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -873,6 +921,9 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasOne("UniSelector.Models.StandardMajor", "StandardMajor")
                         .WithMany()
+                        .HasForeignKey("StandardMajorId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("Faculty");
 
@@ -925,8 +976,6 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
                 {
-                    b.Navigation("Faculty");
-
                     b.Navigation("StandardMajors");
                 });
 
