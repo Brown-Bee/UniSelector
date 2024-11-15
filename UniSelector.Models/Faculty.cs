@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UniSelector.Models
 {
@@ -7,6 +8,12 @@ namespace UniSelector.Models
         // we need to make sure that the User don't duplicate the faculty
 
         public int Id { get; set; }
+
+        // New property
+        [Display(Name = "Admission Requirements")]
+        public string? AdmissionRequirements { get; set; }  // General faculty requirements
+        [Display(Name = "Faculty Overview")]
+        public string? Description { get; set; }  // Faculty overview
 
         // One-to-one with StandardFaculty
         public int StandardFacultyId { get; set; }

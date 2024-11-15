@@ -41,6 +41,25 @@
                 </div>
             </div>
         </div>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="faculty.Description" class="form-label">Faculty Overview</label>
+                    <textarea asp-for="faculty.Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="faculty.Description" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label asp-for="faculty.AdmissionRequirements" class="form-label">Admission Requirements</label>
+                    <textarea asp-for="faculty.AdmissionRequirements" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="faculty.AdmissionRequirements" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-6 col-md-3">
                 @if (Model.faculty.Id == 0)
