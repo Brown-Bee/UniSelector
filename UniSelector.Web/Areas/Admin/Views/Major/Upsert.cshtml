@@ -14,8 +14,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Major.FacultyId" class="form-label">Faculty</label>
-                    <select class="form-control" asp-for="Major.FacultyId" asp-items="Model.StandardFaculties">
-                        <option value="" selected>--Select Faculty--</option>
+                    <select class="form-control" id="facultySelect" asp-for="Major.FacultyId" asp-items="Model.StandardFaculties">
+                        <option value="" selected disabled>--Select Faculty--</option>
                     </select>
                     <span asp-validation-for="Major.FacultyId" class="text-danger"></span>
                 </div>
@@ -91,26 +91,8 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
-        $(document).ready(function () {
-            $('#facultySelect').change(function () {
-                var facultyId = $(this).val();
-                if (facultyId) {
-                    $.getJSON(`/Admin/Major/GetStandardMajors?facultyId=${facultyId}`, function (data) {
-                        var standardMajorSelect = $('#standardMajorSelect');
-                        standardMajorSelect.empty();
-                        standardMajorSelect.append('<option value="">--Select Standard Major--</option>');
-                        $.each(data, function (index, item) {
-                            standardMajorSelect.append($('<option></option>')
-                                .val(item.id)
-                                .text(item.combinedName));
-                        });
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="~/js/GetMajors.js"></script>
+    <partial name="_ValidationScriptsPartial"/>
 }
 
 

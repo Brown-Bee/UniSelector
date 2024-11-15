@@ -124,13 +124,17 @@ public class MajorController : Controller
         }
     }
 
-    // New API endpoint for AJAX calls
+    #region API CALLS
+
     [HttpGet]
     public JsonResult GetStandardMajors(int facultyId)
     {
-        // When faculty dropdown changes, get majors for that faculty
+        if (facultyId is 0) return Json("");
+
         var standardMajors = _unitOfWork.StandardMajor
             .GetAll(sm => sm.StandardFacultyId == facultyId);
-        return Json(standardMajors);
+       return Json(standardMajors);
     }
+
+    #endregion
 }
