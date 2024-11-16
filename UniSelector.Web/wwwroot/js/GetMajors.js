@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $('#facultySelect').change(function () {
         let facultyId = $(this).val();
-        alert(facultyId);
         if (facultyId) {
             get(facultyId);
         }
@@ -12,7 +11,6 @@ $(document).ready(function () {
         get(init);
     } else 
     function get(facultyId) {
-        alert(facultyId);
         $.ajax({
             url: `/Admin/Major/GetStandardMajors/facultyId?facultyId=${facultyId}`,
             type: 'GET',

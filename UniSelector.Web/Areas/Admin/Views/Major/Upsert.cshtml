@@ -11,7 +11,7 @@
     <form method="post" class="bg-light p-3">
         <input asp-for="Major.Id" hidden />
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Major.FacultyId" class="form-label">Faculty</label>
                     <select class="form-control" id="facultySelect" asp-for="Major.FacultyId" asp-items="Model.StandardFaculties">
@@ -20,7 +20,7 @@
                     <span asp-validation-for="Major.FacultyId" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Major.StandardMajorId" class="form-label">Standard Major</label>
                     <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
@@ -29,9 +29,23 @@
                     <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Major.MarketDemand">Market Demand</label>
+                    <select asp-for="Major.MarketDemand" class="form-control">
+                        <option value="">--Select Market Demand--</option>
+                        <option value="1">Very Low</option>
+                        <option value="2">Low</option>
+                        <option value="3">Medium</option>
+                        <option value="4">High</option>
+                        <option value="5">Very High</option>
+                    </select>
+                    <span asp-validation-for="Major.MarketDemand" class="text-danger"></span>
+                </div>
+            </div>
         </div>
         <div class="row mb-3">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Major.AveragePrice">Avarage</label>
                     <input asp-for="Major.AveragePrice" class="form-control" />
@@ -39,37 +53,20 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Major.Credits"></label>
                     <input asp-for="Major.Credits" class="form-control" />
                     <span asp-validation-for="Major.Credits" class="text-danger"></span>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Major.MinimumGrade">Minimum Grade (%)</label>
-                        <input asp-for="Major.MinimumGrade" class="form-control" />
-                        <span asp-validation-for="Major.MinimumGrade" class="text-danger"></span>
-                    </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Major.MinimumGrade">Minimum Grade (%)</label>
+                    <input asp-for="Major.MinimumGrade" class="form-control" />
+                    <span asp-validation-for="Major.MinimumGrade" class="text-danger"></span>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label asp-for="Major.MarketDemand">Market Demand</label>
-                        <select asp-for="Major.MarketDemand" class="form-control">
-                            <option value="">--Select Market Demand--</option>
-                            <option value="1">Very Low</option>
-                            <option value="2">Low</option>
-                            <option value="3">Medium</option>
-                            <option value="4">High</option>
-                            <option value="5">Very High</option>
-                        </select>
-                        <span asp-validation-for="Major.MarketDemand" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            
+            </div> 
         </div>
         <div class="row ">
             <div class="col-6 col-md-3">

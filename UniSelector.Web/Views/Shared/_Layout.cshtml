@@ -1,4 +1,10 @@
-﻿@using System.Security.Claims
+﻿@* to know the current controller and action in the view.*@
+@{
+    var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+    var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+    bool isHomePage = currentController == "Home" && currentAction == "Index";
+}
+@using System.Security.Claims
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using UniSelector.Models
 @inject SignInManager<ApplicationUser> SignInManager
@@ -56,58 +62,54 @@
                     {
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Content Manegement
+                                Manegement
                             </a>
                             <ul>
                                 <li>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="UserManagement" asp-action="Index">Users Managment</a>
                                 </li>
-                                <li class="dropdown">
-                                    <a href="#">
-                                        <span>Faculty Managment</span> <i class="bi bi-chevron-down toggle-dropdown"></i>
-                                    </a>
-                                    <ul>
-                                        <li>
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="StandardFaculty" asp-action="Index">Standard Faculties Managment</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Faculty" asp-action="Index">Faculties Managment</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="StandardMajor" asp-action="Index">Standard Majors Managment</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="Major" asp-action="Index">Majors Managment</a>
-                                        </li>
-                                    </ul>
-                                </li>
                                 <li>
                                     <a class="dropdown-item" asp-area="Admin" asp-controller="University" asp-action="Index">Universities Managment</a>
                                 </li>
                                 <li>
-                                    <a href="#">Dropdown 2</a>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="StandardMajor" asp-action="Index">Standard Majors Managment</a>
                                 </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="StandardFaculty" asp-action="Index">Standard Faculties Managment</a>
+                                </li>
+
+                                @* <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Faculty" asp-action="Index">Faculties Managment</a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Major" asp-action="Index">Majors Managment</a>
+                                </li> *@
                             </ul>
                         </li>
                     }
                     <li>
                         <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
                     </li>
-                    <li>
-                        <a asp-area="User" asp-controller="Home" asp-action="Index" class="active">Home</a>
-                    </li>
-                    <li>
-                        <a href="#about">About</a>
-                    </li>
-                    <li>
-                    <a href="#features">Features</a>
-                    </li>
-                    <li>
-                        <a href="#services">Services</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
+                    @if (isHomePage)
+                    {
+                        <li>
+                            <a asp-area="User" asp-controller="Home" asp-action="Index" class="active">Home</a>
+                        </li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                        <li>
+                            <a href="#features">Features</a>
+                        </li>
+                        <li>
+                            <a href="#services">Services</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contact</a>
+                        </li>
+                    }
+
 
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
