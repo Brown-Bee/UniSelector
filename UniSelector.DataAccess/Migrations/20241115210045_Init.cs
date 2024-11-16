@@ -260,6 +260,10 @@ namespace UniSelector.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameArabic = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NameEnglish = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CareerOptions = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudyDuration = table.Column<int>(type: "int", nullable: false),
+                    HighSchoolPath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -279,6 +283,8 @@ namespace UniSelector.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    AdmissionRequirements = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StandardFacultyId = table.Column<int>(type: "int", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -336,6 +342,13 @@ namespace UniSelector.DataAccess.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Credits = table.Column<int>(type: "int", nullable: false),
                     AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MinimumGrade = table.Column<float>(type: "real", nullable: false),
+                    MinimumIELTS = table.Column<float>(type: "real", nullable: true),
+                    MinimumTOEFL = table.Column<float>(type: "real", nullable: true),
+                    RequiresAptitudeTest = table.Column<bool>(type: "bit", nullable: false),
+                    EmploymentRate = table.Column<float>(type: "real", nullable: false),
+                    AverageStartingSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MarketDemand = table.Column<int>(type: "int", nullable: false),
                     StandardMajorId = table.Column<int>(type: "int", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false)
                 },
