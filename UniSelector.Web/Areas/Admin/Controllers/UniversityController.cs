@@ -218,5 +218,20 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             }
             return View(universities);
         }*/
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var universities = _unitOfWork.University.GetAll().Select(u => new {
+                u.Id,
+                u.Name,
+                u.type,
+                u.location,
+                u.KuwaitRank,
+                u.Budget,
+            });
+            return Json(new { data = universities });
+        }
+
     }
 }
