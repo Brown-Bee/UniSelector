@@ -19,11 +19,22 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index()
+        /*public IActionResult Index()
         {
             List<StandardMajor> objStandardMajorList = _unitOfWork.StandardMajor
                 .GetAll(includeProperties: "StandardFaculty").ToList();
             return View(objStandardMajorList);
+        }*/
+        public IActionResult Index()
+        {
+            ViewBag.Faculties = _unitOfWork.StandardFaculty.GetAll()
+                .Select(f => new SelectListItem
+                {
+                    Text = f.CombinedName,
+                    Value = f.Id.ToString()
+                });
+
+            return View();
         }
 
         public IActionResult Upsert(int? id)
@@ -98,6 +109,22 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             _unitOfWork.Save();
             TempData["success"] = "Standard major deleted successfully";
             return RedirectToAction("Index");
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var majors = _unitOfWork.StandardMajor
+                .GetAll(includeProperties: "StandardFaculty")
+                .Select(m => new {
+                    id = m.Id,
+                    name = m.CombinedName,
+                    facultyName = m.StandardFaculty?.CombinedName,
+                    studyDuration = m.StudyDuration,
+                    highSchoolPath = m.HighSchoolPath
+                });
+            return Json(new { data = majors });
         }
     }
 }

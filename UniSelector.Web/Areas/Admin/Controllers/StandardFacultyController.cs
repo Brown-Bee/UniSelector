@@ -70,5 +70,17 @@ namespace UniSelector.Web.Areas.Admin.Controllers
             TempData["success"] = "Standard faculty deleted successfully";
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var faculties = _unitOfWork.StandardFaculty.GetAll().Select(f => new {
+                id = f.Id,
+                arabicName = f.NameArabic,
+                englishName = f.NameEnglish,
+            });
+            return Json(new { data = faculties });
+        }
     }
 }
