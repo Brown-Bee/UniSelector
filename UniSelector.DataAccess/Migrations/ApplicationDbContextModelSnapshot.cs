@@ -550,7 +550,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StandardFaculties");
+                    b.ToTable("Faculties");
 
                     b.HasData(
                         new

@@ -85,7 +85,7 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StandardFaculties",
+                name: "Faculties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -272,7 +272,7 @@ namespace UniSelector.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_StandardMajors_StandardFaculties_StandardFacultyId",
                         column: x => x.StandardFacultyId,
-                        principalTable: "StandardFaculties",
+                        principalTable: "Faculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -294,7 +294,7 @@ namespace UniSelector.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_Faculties_StandardFaculties_StandardFacultyId",
                         column: x => x.StandardFacultyId,
-                        principalTable: "StandardFaculties",
+                        principalTable: "Faculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -379,7 +379,7 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "StandardFaculties",
+                table: "Faculties",
                 columns: new[] { "Id", "NameArabic", "NameEnglish" },
                 values: new object[,]
                 {
@@ -555,7 +555,7 @@ namespace UniSelector.DataAccess.Migrations
                 name: "Universities");
 
             migrationBuilder.DropTable(
-                name: "StandardFaculties");
+                name: "Faculties");
         }
     }
 }

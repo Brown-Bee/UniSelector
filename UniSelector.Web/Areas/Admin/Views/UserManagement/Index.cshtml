@@ -4,6 +4,7 @@
 
 <div class="p-5 m-4">
     <div class="card shadow border-0 mt-4">
+        <!-- Header Section -->
         <div class="card-header bg-secondary bg-gradient ml-0 py-3">
             <div class="row">
                 <div class="col-12 text-center">
@@ -11,7 +12,65 @@
                 </div>
             </div>
         </div>
-        <div class="card-body" style="padding:20px">
+
+        <!-- Filters Panel -->
+        <div class="card-body filters-section">
+            <div class="filters-toggle mb-3">
+                <button class="btn btn-outline-secondary w-100 text-start"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#filtersPanel">
+                    <i class="bi bi-funnel me-2"></i>Show Filters
+                    <i class="bi bi-chevron-down float-end mt-1"></i>
+                </button>
+            </div>
+
+            <!-- Collapsible Filters -->
+            <div class="collapse" id="filtersPanel">
+                <div class="card card-body bg-light">
+                    <div class="row g-3">
+                        <!-- Text Filters -->
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="text" class="form-control filter-input" data-column="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control filter-input" data-column="name">
+                        </div>
+
+                        <!-- Grade Range Filter -->
+                        <div class="col-md-6">
+                            <label class="form-label">Grade Range</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="gradeMin" placeholder="Min" min="0" max="100">
+                                <span class="input-group-text">to</span>
+                                <input type="number" class="form-control" id="gradeMax" placeholder="Max" min="0" max="100">
+                            </div>
+                        </div>
+
+                        <!-- Nationality Filter -->
+                        <div class="col-md-6">
+                            <label class="form-label">Nationality</label>
+                            <input type="text" class="form-control filter-input" data-column="nationality">
+                        </div>
+
+                        <!-- Filter Actions -->
+                        <div class="col-12">
+                            <button class="btn btn-primary me-2" id="applyFilters">
+                                <i class="bi bi-check2-circle me-2"></i>Apply Filters
+                            </button>
+                            <button class="btn btn-outline-secondary" id="clearFilters">
+                                <i class="bi bi-x-circle me-2"></i>Clear Filters
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="card-body">
             <table id="tblDataUser" class="table table-hover table-striped table-bordered display" style="width:100%">
                 <thead class="thead-dark text-light">
                     <tr>
@@ -20,7 +79,7 @@
                         <th>Address</th>
                         <th>Grade</th>
                         <th>Nationality</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
             </table>
@@ -30,4 +89,24 @@
 
 @section Scripts {
     <script src="~/js/userManagement.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Test if dependencies are loaded
+            toastr.success('Dependencies test');
+
+            // More detailed test
+            if (typeof $.fn.DataTable !== 'undefined') {
+                console.log('DataTables is loaded');
+            }
+            if (typeof Swal !== 'undefined') {
+                console.log('SweetAlert2 is loaded');
+            }
+            if (typeof toastr !== 'undefined') {
+                console.log('Toastr is loaded');
+            }
+        });
+    </script>
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/userManagement.css" />
 }
