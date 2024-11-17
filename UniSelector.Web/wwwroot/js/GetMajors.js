@@ -6,7 +6,6 @@ $(document).ready(function () {
         }
     });
     let init = $('#facultySelect').val();
-    alert(init);
     if (init) { 
         get(init);
     } else 

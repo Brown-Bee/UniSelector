@@ -1,7 +1,8 @@
 ﻿@model List<Faculty>
+
 <div class="pt-5 m-4">
     <div class="card shadow border-0 mt-4">
-        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="card-header bg-secondary bg-gradient py-3">
             <div class="row">
                 <div class="col-12 text-center">
                     <h2 class="text-white">Faculty List</h2>
@@ -13,38 +14,57 @@
                 <div class="col-6"></div>
                 <div class="col-6 text-end">
                     <a asp-controller="Faculty" asp-action="Upsert" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Add new faculty
+                        <i class="bi bi-plus-circle"></i> Add New Faculty
                     </a>
                 </div>
             </div>
-            <table class="table table-hover table-striped table-bordered display" style="width:100%">
+            <table class="table table-hover table-striped table-bordered" style="width:100%">
                 <thead class="thead-dark text-light">
                     <tr>
                         <th>Name</th>
                         <th>University</th>
-                        <th>Overview</th>  
+                        <th>Overview</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var obj in Model)
                     {
-                        
                         <tr>
                             <td>@(obj.StandardFaculty?.CombinedName)</td>
                             <td>@obj.University?.Name</td>
                             <td>@(obj.Description?.Length > 50 ? obj.Description.Substring(0, 47) + "..." : obj.Description)</td>
                             <td>
-                                <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="Major" asp-action="Index" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                        <i class="bi bi-pencil-square"></i> Majors
-                                    </a>
-                                    <a asp-controller="Faculty" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
-                                    <a asp-controller="Faculty" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
-                                        <i class="bi bi-trash-fill"></i> Delete
-                                    </a>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton-@obj.Id"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@obj.Id">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Major" asp-action="Index" asp-route-facultyId="@obj.StandardFacultyId"
+                                               onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
+                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                                <i class="fas fa-edit"></i> Majors
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Upsert" asp-route-id="@obj.Id"
+                                               onmouseover="this.style.backgroundColor='#f6a23e'; this.style.color='white';"
+                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                                <i class="fas fa-info-circle"></i> Update
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Delete" asp-route-id="@obj.Id"
+                                               onmouseover="this.style.backgroundColor='#e74a3e'; this.style.color='white';"
+                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
                             </td>
                         </tr>

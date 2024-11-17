@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UniSelector.DataAccess.Repository.IRepository;
+using UniSelector.Models;
 using UniSelector.Models.ViewModel;
 using UniSelector.Utility;
 
@@ -18,12 +19,19 @@ public class MajorController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public IActionResult Index(int? facultyId)
+    public IActionResult Index(int facultyId)
     {
-        if (!facultyId.HasValue) 
-            return View(_unitOfWork.Major.GetAll().ToList());
-        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
-        return View(majors);
+        var majorVm = new MajorVM
+        {   
+            Major = new Major
+            {
+                FacultyId = facultyId
+            },
+        };
+        FillSelectionData(majorVm);
+        majorVm.Majors = facultyId is not 0 ? _unitOfWork.Major.GetAll().ToList() 
+            : _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
+        return View("Upsert", majorVm);
     }
 
     [Authorize(Roles = "User,Admin")]
@@ -33,23 +41,22 @@ public class MajorController : Controller
         return View(majors);
     }
 
-    public IActionResult Upsert(int id)
+    /*public IActionResult Upsert(int id)
     {
-    
         var majorVm = new MajorVM
-        {
+        {   
             Major = new(),
         };
         FillSelectionData(majorVm);
+
         if (id is 0)
         {
             return View(majorVm);
         }
-
         var major = _unitOfWork.Major.Get(m => m.Id == id);
         majorVm.Major = major;
         return View(majorVm);
-    }
+    }*/
 
     [HttpPost]
     public IActionResult Upsert(MajorVM majorVm)
@@ -62,7 +69,7 @@ public class MajorController : Controller
         if (!ModelState.IsValid)
         {
             FillSelectionData(majorVm);
-            return View(majorVm);
+            return View("Upsert", majorVm);
         }
 
         if (majorVm.Major.Id is 0)
@@ -75,7 +82,7 @@ public class MajorController : Controller
         }
         _unitOfWork.Save();
         TempData["success"] = "Major added Successfully";
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Index), new {facultyId = majorVm.Major.FacultyId});
     }
 
     public IActionResult Delete(int? id)
@@ -107,21 +114,25 @@ public class MajorController : Controller
             Value = sf.Id.ToString(),
             Text = sf.CombinedName
         }).ToList();
+        
+        var standardMajors = _unitOfWork.StandardMajor
+            .GetAll(sm => sm.StandardFacultyId == majorVm.Major.FacultyId);
+        
+        majorVm.StandardMajors = standardMajors.Select(sm => new SelectListItem
+        {
+            Value = sm.Id.ToString(),
+            Text = sm.CombinedName
+        }).ToList();
 
-        // If a faculty is selected (during edit or after validation error)
+        /*// If a faculty is selected (during edit or after validation error)
         if (majorVm.Major.FacultyId > 0)
         {
             // Get majors only for the selected faculty
-            var standardMajors = _unitOfWork.StandardMajor
-                .GetAll(sm => sm.StandardFacultyId == majorVm.Major.FacultyId);
+            
 
             // Fill the majors dropdown
-            majorVm.StandardMajors = standardMajors.Select(sm => new SelectListItem
-            {
-                Value = sm.Id.ToString(),
-                Text = sm.CombinedName
-            }).ToList();
-        }
+           
+        }*/
     }
 
     #region API CALLS
