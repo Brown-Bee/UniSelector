@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241118163529_DeleteCareerOptionsFromStandardMajorTable")]
-    partial class DeleteCareerOptionsFromStandardMajorTable
+    [Migration("20241118202251_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -170,7 +170,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("BirthDate")
-                        .IsRequired()
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CivilID")
@@ -191,7 +190,6 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Gender")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("Grade")
