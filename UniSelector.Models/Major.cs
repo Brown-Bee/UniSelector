@@ -31,9 +31,6 @@ public class Major
 
     public decimal AverageStartingSalary { get; set; }
 
-    [Range(1, 5)]
-    public int MarketDemand { get; set; } // 1=Very Low, 5=Very High
-
 
     // Relationships
     public int StandardMajorId { get; set; }

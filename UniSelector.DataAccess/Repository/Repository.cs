@@ -13,7 +13,6 @@ namespace UniSelector.DataAccess.Repository
         {
             _db = db;
             this.dbSet = _db.Set<T>();
-            _db.Products.Include(u => u.Category).Include(u => u.CategoryId);
         }
 
         public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)

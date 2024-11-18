@@ -85,7 +85,7 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Faculties",
+                name: "StandardFaculties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -272,7 +272,7 @@ namespace UniSelector.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_StandardMajors_StandardFaculties_StandardFacultyId",
                         column: x => x.StandardFacultyId,
-                        principalTable: "Faculties",
+                        principalTable: "StandardFaculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -294,7 +294,7 @@ namespace UniSelector.DataAccess.Migrations
                     table.ForeignKey(
                         name: "FK_Faculties_StandardFaculties_StandardFacultyId",
                         column: x => x.StandardFacultyId,
-                        principalTable: "Faculties",
+                        principalTable: "StandardFaculties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -348,7 +348,6 @@ namespace UniSelector.DataAccess.Migrations
                     RequiresAptitudeTest = table.Column<bool>(type: "bit", nullable: false),
                     EmploymentRate = table.Column<float>(type: "real", nullable: false),
                     AverageStartingSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MarketDemand = table.Column<int>(type: "int", nullable: false),
                     StandardMajorId = table.Column<int>(type: "int", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -379,7 +378,7 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Faculties",
+                table: "StandardFaculties",
                 columns: new[] { "Id", "NameArabic", "NameEnglish" },
                 values: new object[,]
                 {
@@ -555,7 +554,7 @@ namespace UniSelector.DataAccess.Migrations
                 name: "Universities");
 
             migrationBuilder.DropTable(
-                name: "Faculties");
+                name: "StandardFaculties");
         }
     }
 }

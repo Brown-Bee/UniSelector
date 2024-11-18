@@ -12,7 +12,7 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241115210045_Init")]
+    [Migration("20241118155749_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -373,9 +373,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MarketDemand")
-                        .HasColumnType("int");
-
                     b.Property<float>("MinimumGrade")
                         .HasColumnType("real");
 
@@ -553,7 +550,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Faculties");
+                    b.ToTable("StandardFaculties");
 
                     b.HasData(
                         new

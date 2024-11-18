@@ -9,8 +9,6 @@ namespace UniSelector.DataAccess.Repository
     {
         private ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
-        public ICategoryRepository Category { get; private set; }
-        public IProductRepository Product { get; private set; }
         public IUniversityRepository University { get; private set; }
         public IFacultyRepository Faculty { get; private set; }
 
@@ -27,8 +25,6 @@ namespace UniSelector.DataAccess.Repository
         {
             _db = db;
             _userManager = userManager;
-            Category = new CategoryRepository(_db);
-            Product = new ProductRepository(_db);
             University = new UniversityRepository(_db);
             Faculty = new FacultyRepository(_db);
             StandardFaculty = new StandardFacultyRepository(_db);

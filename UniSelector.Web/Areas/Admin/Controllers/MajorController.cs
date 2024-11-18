@@ -103,10 +103,7 @@ public class MajorController : Controller
         {
             ModelState.AddModelError("Major.MinimumGrade", "Grade must be between 0 and 100");
         }
-        if (majorVm.Major.MarketDemand < 1 || majorVm.Major.MarketDemand > 5)
-        {
-            ModelState.AddModelError("Major.MarketDemand", "Market demand must be between 1 and 5");
-        }
+        
         // Get all standard faculties for the first dropdown
         var standardFaculties = _unitOfWork.StandardFaculty.GetAll();
         majorVm.StandardFaculties = standardFaculties.Select(sf => new SelectListItem

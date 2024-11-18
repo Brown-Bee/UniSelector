@@ -20,9 +20,7 @@ namespace UniSelector.Web.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
-            return View(ProductList);
-            /*return RedirectToAction("UniversityView");*/
+            return View("Index");
         }
 
         /*----------------- University Actions -----------------*/
@@ -76,12 +74,7 @@ namespace UniSelector.Web.Areas.User.Controllers
             return View();
         }
 
-        /*----------------- Product Actions -----------------*/
-        public IActionResult Details(int ProductId)
-        {
-            Product product = _unitOfWork.Product.Get(u => u.Id == ProductId, includeProperties: "Category");
-            return View(product);
-        }
+        
 
         public IActionResult Privacy()
         {
