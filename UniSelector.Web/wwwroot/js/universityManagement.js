@@ -1,4 +1,5 @@
-﻿var dataTable;
+﻿/*
+var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
@@ -192,4 +193,4 @@ function getOrdinalSuffix(number) {
     if (j == 2 && k != 12) return "nd";
     if (j == 3 && k != 13) return "rd";
     return "th";
-}
+}*/
