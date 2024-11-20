@@ -19,18 +19,21 @@ public class MajorController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public IActionResult Index(int facultyId)
+    public IActionResult Index(int id, int facultyId)
     {
-        var majorVm = new MajorVM
-        {   
-            Major = new Major
-            {
-                FacultyId = facultyId
-            },
-        };
+        if (facultyId is 0)
+        {
+            return BadRequest();
+        }
+
+        var majorVm = new MajorVM();
+        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
+        var faculty = _unitOfWork.StandardFaculty.Get(f => f.Id == facultyId);
+        majorVm.FacultyName = faculty.CombinedName;
+        majorVm.Majors = majors;
+        majorVm.Major = id is 0 ? new Major() : _unitOfWork.Major.Get(m => m.Id == id);
+        majorVm.Major.FacultyId = facultyId;
         FillSelectionData(majorVm);
-        majorVm.Majors = facultyId is not 0 ? _unitOfWork.Major.GetAll().ToList() 
-            : _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
         return View("Upsert", majorVm);
     }
 
@@ -40,7 +43,7 @@ public class MajorController : Controller
         var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
         return View(majors);
     }
-
+    
     /*public IActionResult Upsert(int id)
     {
         var majorVm = new MajorVM
@@ -85,14 +88,14 @@ public class MajorController : Controller
         return RedirectToAction(nameof(Index), new {facultyId = majorVm.Major.FacultyId});
     }
 
-    public IActionResult Delete(int? id)
+    public IActionResult Delete(int? id, int facId)
     {
         if (id is null or 0)
             return BadRequest();
         var major = _unitOfWork.Major.Get(m => m.Id == id);
         _unitOfWork.Major.Remove(major);
         _unitOfWork.Save();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Index), new {facultyId = facId});
     }
 
     // Helper method for filling dropdown lists

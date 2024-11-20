@@ -4,7 +4,7 @@
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.Major.Id != 0 ? "Update" : "Create") Major</h2>
+                <h2 class="text-white py-2">@Model.FacultyName</h2>
             </div>
         </div>
     </div>
@@ -58,9 +58,6 @@
                 }
 
             </div>
-           @*  <div class=" col-6 col-md-3">
-                <a asp-controller="Major" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
-            </div> *@
         </div>
     </form>
 </div>
@@ -91,56 +88,44 @@
                     <th>AveragePrice</th>
                     <th>Credits</th>
                     <th>Minimum Grade</th> @*Added for admission requirements*@
+                    <th>Market Demand</th> @*Added job market info*@
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach (var obj in Model.Majors)
+                @if (Model.Majors is not null)
                 {
-                    <tr>
-                        <td>@(obj.StandardMajor?.CombinedName)</td>
-                        <td>@(obj.Faculty?.StandardFaculty?.CombinedName)</td>
-                        <td>@obj.Credits</td>
-                        <td>@obj.AveragePrice.ToString("c")</td>
-                        <td>@obj.MinimumGrade%</td>
-                        <td></td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Major" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil-square"></i> Edit
-                                </a>
-                                <a asp-controller="Major" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash-fill"></i> Delete
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    foreach (var obj in Model.Majors)
+                    {
+                        <tr>
+                            <td>@(obj.StandardMajor?.CombinedName)</td>
+                            <td>@obj.Credits</td>
+                            <td>@obj.AveragePrice.ToString("c")</td>
+                            <td>@obj.MinimumGrade%</td>
+                            <td>
+                                <div class="w-75 btn-group" role="group">
+                                    <a asp-controller="Major" asp-action="Index" asp-route-id="@obj.Id" asp-route-facultyId="@obj.FacultyId" class="btn btn-primary mx-2">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </a>
+                                    <a asp-controller="Major" asp-action="Delete" asp-route-id="@obj.Id" asp-route-facId="@obj.FacultyId" class="btn btn-danger mx-2">
+                                        <i class="bi bi-trash-fill"></i> Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
                 }
                 </tbody>
             </table>
         </div>
     </div>
+    <div class=" col-6 col-md-3">
+        <a asp-controller="Faculty" asp-action="Index" class="btn btn-outline-primary form-control mt-3">Back To List</a>
+    </div>
 </div>
-
-@functions {
-
-    private string GetMarketDemandText(int demand)
-    {
-        return demand switch
-        {
-            1 => "Very Low",
-            2 => "Low",
-            3 => "Medium",
-            4 => "High",
-            5 => "Very High",
-            _ => "N/A"
-        };
-    }
-
-}
-
 
 @section Scripts {
     <script src="~/js/GetMajors.js"></script>
+    <script src="~/js/Delete.js"></script>
     <partial name="_ValidationScriptsPartial"/>
 }
