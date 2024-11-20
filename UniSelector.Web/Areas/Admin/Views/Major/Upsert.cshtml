@@ -58,9 +58,9 @@
                 }
 
             </div>
-            <div class=" col-6 col-md-3">
+           @*  <div class=" col-6 col-md-3">
                 <a asp-controller="Major" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
-            </div>
+            </div> *@
         </div>
     </form>
 </div>
@@ -91,7 +91,6 @@
                     <th>AveragePrice</th>
                     <th>Credits</th>
                     <th>Minimum Grade</th> @*Added for admission requirements*@
-                    <th>Market Demand</th> @*Added job market info*@
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -104,7 +103,6 @@
                         <td>@obj.Credits</td>
                         <td>@obj.AveragePrice.ToString("c")</td>
                         <td>@obj.MinimumGrade%</td>
-                        <td>@obj.(GetMarketDemandText(obj.MarketDemand))</td>
                         <td></td>
                         <td>
                             <div class="w-75 btn-group" role="group">

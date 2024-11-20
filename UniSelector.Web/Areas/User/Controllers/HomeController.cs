@@ -24,7 +24,7 @@ namespace UniSelector.Web.Areas.User.Controllers
         }
 
         /*----------------- University Actions -----------------*/
-        public IActionResult UniversityView(string searchString, int? facultyId, decimal? maxFees, int? maxRank)
+        public IActionResult UniversityView(string searchString, int? facultyId, int? maxRank)
         {
             IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
 
@@ -42,11 +42,11 @@ namespace UniSelector.Web.Areas.User.Controllers
             {
                 universities = universities.Where(u => u.Faculties.Any(f => f.StandardFacultyId == facultyId));
             }
-            /*// Filter According to the AvaragePrice
-            if (maxFees.HasValue)
-            {
-                universities = universities.Where(u => u.Faculties.Any(f => f.AveragePrice <= maxFees.Value));
-            }*/
+
+            // Filter According to the Major
+
+
+
             // Filter According to the Rank in Kuwait
             if (maxRank.HasValue)
             {
@@ -59,7 +59,6 @@ namespace UniSelector.Web.Areas.User.Controllers
             });
             ViewBag.CurrentSearchString = searchString;
             ViewBag.CurrentFacultyId = facultyId;
-            ViewBag.CurrentMaxFees = maxFees;
             ViewBag.CurrentMaxRank = maxRank;
             return View(universities);
         }
@@ -68,13 +67,6 @@ namespace UniSelector.Web.Areas.User.Controllers
             University? university = _unitOfWork.University.GetUniversityWithFaculties(universityId);
             return View(university);
         }
-
-        public IActionResult Application(int UniversityId)
-        {
-            return View();
-        }
-
-        
 
         public IActionResult Privacy()
         {

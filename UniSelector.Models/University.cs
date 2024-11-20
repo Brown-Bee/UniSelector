@@ -28,9 +28,7 @@ namespace UniSelector.Models
         [Range(1,30)]
         public int KuwaitRank { get; set; }
         [ValidateNever]
-        public decimal Budget { get; set; }
         public string? ImageUrl { get; set; }
-        public List<StudentRequest> AcceptedStudents { get; set; } = new List<StudentRequest>();
         public ICollection<Faculty> Faculties { get; set; } = new Collection<Faculty>();
 
         

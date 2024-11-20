@@ -28,17 +28,6 @@
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
-                            <label class="form-label">Maximum Fees</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-currency-dollar"></i></span>
-                                <input type="number" id="maxFees" name="maxFees"
-                                       class="form-control" placeholder="Max Fees"
-                                       value="@ViewBag.CurrentMaxFees">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
                             <label class="form-label">Faculty</label>
                             <select id="facultyId" name="facultyId" class="form-select">
                                 <option value="">All Faculties</option>
@@ -177,13 +166,11 @@
             });
 
             function applyFilters() {
-                var maxFees = $('#maxFees').val();
                 var facultyId = $('#facultyId').val();
                 var maxRank = $('#maxRank').val();
                 var searchString = $('#searchString').val();
 
                 var url = '@Url.Action("UniversityView", "Home")' +
-                    '?maxFees=' + maxFees +
                     '&facultyId=' + facultyId +
                     '&maxRank=' + maxRank +
                     '&searchString=' + encodeURIComponent(searchString);

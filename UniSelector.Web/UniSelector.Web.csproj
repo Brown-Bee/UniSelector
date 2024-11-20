@@ -31,6 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Folder Include="Areas\Institution\Controllers\" />
         <Folder Include="wwwroot\Images\img\pictures\" />
         <Folder Include="wwwroot\Images\img\University\Gallery\" />
         <Folder Include="wwwroot\Images\img\University\" />

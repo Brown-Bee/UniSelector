@@ -189,35 +189,13 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                 {
                     System.IO.File.Delete(oldImagePath);
                 }
-            }
-
-            // Delete gallery folder
-            string galleryPath = Path.Combine(wwwRootPath, "Images", "University", "Gallery", id.ToString());
-            if (Directory.Exists(galleryPath))
-            {
-                Directory.Delete(galleryPath, true);
-            }
+            }            
 
             _unitOfWork.University.Remove(universityToBeDeleted);
             _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
         }
-
-        /*-----------------------------------Search Functionality-------------------------------------*/
-        /*public IActionResult UniversityView(string searchString)
-        {
-            IEnumerable<University> universities;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                universities = _unitOfWork.University.Search(searchString);
-            }
-            else
-            {
-                universities = _unitOfWork.University.GetAll();
-            }
-            return View(universities);
-        }*/
 
         [HttpGet]
         public IActionResult GetAll()
@@ -228,7 +206,6 @@ namespace UniSelector.Web.Areas.Admin.Controllers
                 u.type,
                 u.location,
                 u.KuwaitRank,
-                u.Budget,
             });
             return Json(new { data = universities });
         }

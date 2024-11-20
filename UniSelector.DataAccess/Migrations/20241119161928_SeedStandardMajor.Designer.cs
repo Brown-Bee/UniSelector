@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241119161928_SeedStandardMajor")]
+    partial class SeedStandardMajor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1332,6 +1335,39 @@ namespace UniSelector.DataAccess.Migrations
                         });
                 });
 
+            modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
+                {
+                    b.Property<int>("StudentRequestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StudentRequestId"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<float?>("IELTS")
+                        .HasColumnType("real");
+
+                    b.Property<bool?>("KUAcademicAptitudeTests")
+                        .HasColumnType("bit");
+
+                    b.Property<float?>("TOEFL")
+                        .HasColumnType("real");
+
+                    b.Property<int>("UnibersityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("StudentRequestId");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("UnibersityId");
+
+                    b.ToTable("StudetsRequests");
+                });
+
             modelBuilder.Entity("UniSelector.Models.University", b =>
                 {
                     b.Property<int>("Id")
@@ -1339,6 +1375,9 @@ namespace UniSelector.DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Budget")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("FullDescription")
                         .IsRequired()
@@ -1378,6 +1417,7 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            Budget = 4500m,
                             FullDescription = "A leading open education institution in the Arab world.",
                             ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 1,
@@ -1390,6 +1430,7 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 2,
+                            Budget = 25000m,
                             FullDescription = "Offering American-style education with a Middle Eastern perspective.",
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
@@ -1402,6 +1443,7 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 3,
+                            Budget = 15000m,
                             FullDescription = "Providing a comprehensive American liberal arts education.",
                             ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 3,
@@ -1414,6 +1456,7 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 4,
+                            Budget = 13000m,
                             FullDescription = "The premier public institution of higher education in Kuwait.",
                             ImageUrl = "/images/university/KU.png",
                             KuwaitRank = 4,
@@ -1525,6 +1568,25 @@ namespace UniSelector.DataAccess.Migrations
                     b.Navigation("StandardFaculty");
                 });
 
+            modelBuilder.Entity("UniSelector.Models.StudentRequest", b =>
+                {
+                    b.HasOne("UniSelector.Models.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UniSelector.Models.University", "University")
+                        .WithMany("AcceptedStudents")
+                        .HasForeignKey("UnibersityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("University");
+                });
+
             modelBuilder.Entity("UniSelector.Models.Faculty", b =>
                 {
                     b.Navigation("Majors");
@@ -1537,6 +1599,8 @@ namespace UniSelector.DataAccess.Migrations
 
             modelBuilder.Entity("UniSelector.Models.University", b =>
                 {
+                    b.Navigation("AcceptedStudents");
+
                     b.Navigation("Faculties");
                 });
 #pragma warning restore 612, 618

@@ -24,7 +24,6 @@ namespace UniSelector.DataAccess.Repository
                 objFromDb.SmallDescription = obj.SmallDescription;
                 objFromDb.location = obj.location;
                 objFromDb.KuwaitRank = obj.KuwaitRank;
-                objFromDb.Budget = obj.Budget;
                 if (obj.ImageUrl != null)
                 {
                     objFromDb.ImageUrl = obj.ImageUrl;
