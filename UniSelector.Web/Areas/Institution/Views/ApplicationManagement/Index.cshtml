@@ -1,0 +1,69 @@
+﻿// File: /Areas/Institution/Views/ApplicationManagement/Index.cshtml
+
+@model List<Application>
+
+<div class="pt-5 m-4">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white">Application Requests</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:20px">
+            <table id="datatable" class="table table-hover table-striped table-bordered" style="width:100%">
+                <thead class="thead-dark text-light">
+                    <tr>
+                        <th>Student Name</th>
+                        <th>Faculty</th>
+                        <th>Major</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.User?.Name</td>
+                            <td>@obj.Faculty?.StandardFaculty?.CombinedName</td>
+                            <td>@obj.Major?.StandardMajor?.CombinedName</td>
+                            <td>@obj.ApplicationDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <span class="badge bg-@(obj.Status == "Pending" ? "warning" :
+                                                      obj.Status == "Accepted" ? "success" : "danger")">
+                                    @obj.Status
+                                </span>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton-@obj.Id"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@obj.Id">
+                                        <li>
+                                            <a class="dropdown-item" asp-action="Details" asp-route-id="@obj.Id"
+                                               onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
+                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                                <i class="fas fa-info-circle"></i> Details
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/dataTable.js"></script>
+}
