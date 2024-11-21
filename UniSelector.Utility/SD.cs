@@ -17,5 +17,10 @@ namespace UniSelector.Utility
 
         // Image paths
         public const string UniversityImagePath = @"\Images\University\";
+
+        // Document paths
+        public const string ApplicationDocumentsPath = @"\Documents\Applications\";
+
+        
     }
 }

@@ -1,0 +1,185 @@
+﻿@model Application
+
+<div class="pt-5 m-4">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white">Application Details</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:20px">
+            <!-- Application Info -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>University Information</h5>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">University:</dt>
+                        <dd class="col-sm-8">@Model.University?.Name</dd>
+
+                        <dt class="col-sm-4">Faculty:</dt>
+                        <dd class="col-sm-8">@Model.Faculty?.StandardFaculty?.CombinedName</dd>
+
+                        <dt class="col-sm-4">Major:</dt>
+                        <dd class="col-sm-8">@Model.Major?.StandardMajor?.CombinedName</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h5>Application Status</h5>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Date:</dt>
+                        <dd class="col-sm-8">@Model.ApplicationDate.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4">Status:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.Status == "Pending" ? "warning" :
+                                                 Model.Status == "Accepted" ? "success" : "danger")">
+                                @Model.Status
+                            </span>
+                        </dd>
+
+                        @if (!string.IsNullOrEmpty(Model.UniversityFeedback))
+                        {
+                            <dt class="col-sm-4">Feedback:</dt>
+                            <dd class="col-sm-8">@Model.UniversityFeedback</dd>
+                        }
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Documents -->
+            <div class="row">
+                <div class="col-12">
+                    <h5>Submitted Documents</h5>
+                    <hr />
+                </div>
+
+                <!-- Civil ID -->
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Civil ID</h6>
+                            @if (!string.IsNullOrEmpty(Model.CivilIdPath))
+                            {
+                                <div class="document-preview">
+                                    <a href="@Model.CivilIdPath" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    @if (Model.Status == "Pending")
+                                    {
+                                        <button onclick="deleteDocument(@Model.Id, 'CivilId')"
+                                                class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No document uploaded</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passport -->
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Passport</h6>
+                            @if (!string.IsNullOrEmpty(Model.PassportPath))
+                            {
+                                <div class="document-preview">
+                                    <a href="@Model.PassportPath" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    @if (Model.Status == "Pending")
+                                    {
+                                        <button onclick="deleteDocument(@Model.Id, 'Passport')"
+                                                class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No document uploaded</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High School Certificate -->
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">High School Certificate</h6>
+                            @if (!string.IsNullOrEmpty(Model.HighSchoolCertificatePath))
+                            {
+                                <div class="document-preview">
+                                    <a href="@Model.HighSchoolCertificatePath" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    @if (Model.Status == "Pending")
+                                    {
+                                        <button onclick="deleteDocument(@Model.Id, 'Certificate')"
+                                                class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No document uploaded</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <a asp-action="MyApplications" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                    @if (Model.Status == "Pending")
+                    {
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-times"></i> Cancel Application
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function deleteDocument(applicationId, documentType) {
+            if (confirm('Are you sure you want to delete this document?')) {
+                $.ajax({
+                    url: '@Url.Action("DeleteDocument")',
+                    type: 'POST',
+                    data: { applicationId, documentType },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert('Failed to delete document');
+                        }
+                    },
+                    error: function() {
+                        alert('Error occurred while deleting document');
+                    }
+                });
+            }
+        }
+    </script>
+}

@@ -8,6 +8,7 @@
         IStandardMajorRepository StandardMajor { get; }
         IApplicationUserRepository ApplicationUser { get; }
         IMajorRepository Major { get; }
+        IApplicationRepository Application { get; }
         void Save();
     }
 }

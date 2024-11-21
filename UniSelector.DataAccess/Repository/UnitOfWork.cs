@@ -19,6 +19,7 @@ namespace UniSelector.DataAccess.Repository
         public IMajorRepository Major { get; }
 
         public IStandardMajorRepository StandardMajor { get; private set; }
+        public IApplicationRepository Application { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
@@ -30,6 +31,7 @@ namespace UniSelector.DataAccess.Repository
             ApplicationUser = new ApplicationUserRepository(_userManager);
             Major = new MajorRepository(_db);
             StandardMajor = new StandardMajorRepository(_db);
+            Application = new ApplicationRepository(_db);
         }
 
         public void Save()

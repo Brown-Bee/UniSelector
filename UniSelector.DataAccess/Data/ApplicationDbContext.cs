@@ -18,6 +18,8 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<StandardFaculty> StandardFaculties { get; set; }
     public DbSet<Major> Majors { get; set; }
     public DbSet<StandardMajor> StandardMajors { get; set; }
+    public DbSet<Application> Applications { get; set; }
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
