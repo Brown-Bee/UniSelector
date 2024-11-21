@@ -10,83 +10,61 @@
                 </div>
             </div>
         </div>
-
-        <!-- Filters Panel -->
-        <div class="card-body filters-section">
-            <div class="filters-toggle mb-3">
-                <button class="btn btn-outline-secondary w-100 text-start"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#filtersPanel">
-                    <i class="bi bi-funnel me-2"></i>Show Filters
-                    <i class="bi bi-chevron-down float-end mt-1"></i>
-                </button>
-            </div>
-
-            <div class="collapse" id="filtersPanel">
-                <div class="card card-body bg-light">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Arabic Name</label>
-                            <input type="text" class="form-control filter-input" data-column="arabicName">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">English Name</label>
-                            <input type="text" class="form-control filter-input" data-column="englishName">
-                        </div>
-
-                        <!-- Filter Actions -->
-                        <div class="col-12">
-                            <button class="btn btn-primary me-2" id="applyFilters">
-                                <i class="bi bi-check2-circle me-2"></i>Apply Filters
-                            </button>
-                            <button class="btn btn-outline-secondary" id="clearFilters">
-                                <i class="bi bi-x-circle me-2"></i>Clear Filters
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="card-body">
             <div class="row pb-3">
-                <div class="col-6">
-                    <div class="d-flex align-items-center">
-                        <label class="me-2">Show</label>
-                        <select class="form-select form-select-sm w-auto" id="entriesPerPage">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                        <label class="ms-2">entries</label>
-                    </div>
-                </div>
-                <div class="col-6 text-end">
+                <div class="col-12 text-end">
                     <a asp-controller="StandardFaculty" asp-action="Upsert" class="btn btn-primary">
                         <i class="bi bi-plus-circle"></i> Add New Faculty
                     </a>
                 </div>
             </div>
 
-            <table id="tblStandardFaculty" class="table table-hover table-striped table-bordered display" style="width:100%">
+            <table id="datatable" class="table table-hover table-striped table-bordered display" style="width:100%">
                 <thead class="thead-dark text-light">
                     <tr>
-                        <th>Faculty Name (Arabic)</th>
-                        <th>Faculty Name (English)</th>
+                        <th>Faculty Name</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
+                <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            <td>@obj.CombinedName</td>
+                            <td>
+                                <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton-@obj.Id"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Actions
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@obj.Id">
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Upsert" asp-route-id="@obj.Id"
+                                               onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
+                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                                <i class="fas fa-info-circle"></i> Update
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Delete" asp-route-id="@obj.Id"
+                                               onmouseover="this.style.backgroundColor='#e74a3e'; this.style.color='white';"
+                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
+                                                <i class="fas fa-trash"></i> Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
     </div>
 </div>
 
-@section Styles {
-    <link rel="stylesheet" href="~/css/standardFaculty.css" />
-}
-
 @section Scripts {
-    <script src="~/js/standardFaculty.js"></script>
+    <script src="~/js/dataTable.js"></script>
 }
