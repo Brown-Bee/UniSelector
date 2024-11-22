@@ -20,7 +20,7 @@ namespace UniSelector.Areas.Institution.Controllers
         public IActionResult Index()
         {
             var universityId = GetCurrentUniversityId();
-            var applications = _unitOfWork.Application.GetUniversityApplications(universityId);
+            var applications = _unitOfWork.Application.GetUniversityApplications(universityId).ToList();
             return View(applications);
         }
 
@@ -44,8 +44,13 @@ namespace UniSelector.Areas.Institution.Controllers
         // Helper method to get university ID
         private int GetCurrentUniversityId()
         {
-            var email = User.Identity?.Name;
-            var university = _unitOfWork.University.Get(u => u.Email == email);
+            var userName = User.Identity?.Name;
+            if (string.IsNullOrEmpty(userName))
+                return 0;
+
+            // Get all universities and filter on client side
+            var universities = _unitOfWork.University.GetAll().AsEnumerable();
+            var university = universities.FirstOrDefault(u => u.Email == userName);
             return university?.Id ?? 0;
         }
     }

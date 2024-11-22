@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 
 public interface IApplicationUserRepository
@@ -8,5 +9,6 @@ public interface IApplicationUserRepository
     Task<IdentityResult> CreateUser(ApplicationUser user, string password);
     Task<IdentityResult> UpdateUser(ApplicationUser user);
     Task<IdentityResult> DeleteUser(ApplicationUser user);
+    ApplicationUser GetByEmail(string email);
     
 }
