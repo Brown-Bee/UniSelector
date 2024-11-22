@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using UniSelector.Models;
 
-public class ApplicationUserRepository : IApplicationUserRepository
+public class ApplicationUserRepository : IApplicationUserRepository     
 {
     private readonly UserManager<ApplicationUser> _userManager;
 
@@ -36,5 +36,12 @@ public class ApplicationUserRepository : IApplicationUserRepository
     public async Task<IdentityResult> DeleteUser(ApplicationUser user)
     {
         return await _userManager.DeleteAsync(user);
-    }    
+    }
+
+    public ApplicationUser GetByEmail(string email)
+    {
+        return _userManager.FindByEmailAsync(email).Result;
+    }
+
+    
 }

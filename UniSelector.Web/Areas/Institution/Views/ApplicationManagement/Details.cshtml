@@ -1,0 +1,165 @@
+﻿// File: /Areas/Institution/Views/ApplicationManagement/Details.cshtml
+
+@model Application
+
+<div class="pt-5 m-4">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white">Application Details</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" style="padding:20px">
+            <!-- Student Info -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h5>Student Information</h5>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Name:</dt>
+                        <dd class="col-sm-8">@Model.User?.Name</dd>
+
+                        <dt class="col-sm-4">Email:</dt>
+                        <dd class="col-sm-8">@Model.User?.Email</dd>
+
+                        <dt class="col-sm-4">Phone:</dt>
+                        <dd class="col-sm-8">@Model.User?.PhoneNumber</dd>
+
+                        <dt class="col-sm-4">Grade:</dt>
+                        <dd class="col-sm-8">@Model.User?.Grade%</dd>
+                    </dl>
+                </div>
+                <div class="col-md-6">
+                    <h5>Application Status</h5>
+                    <hr />
+                    <dl class="row">
+                        <dt class="col-sm-4">Faculty:</dt>
+                        <dd class="col-sm-8">@Model.Faculty?.StandardFaculty?.CombinedName</dd>
+
+                        <dt class="col-sm-4">Major:</dt>
+                        <dd class="col-sm-8">@Model.Major?.StandardMajor?.CombinedName</dd>
+
+                        <dt class="col-sm-4">Date:</dt>
+                        <dd class="col-sm-8">@Model.ApplicationDate.ToString("dd/MM/yyyy")</dd>
+
+                        <dt class="col-sm-4">Status:</dt>
+                        <dd class="col-sm-8">
+                            <span class="badge bg-@(Model.Status == "Pending" ? "warning" :
+                                                 Model.Status == "Accepted" ? "success" : "danger")">
+                                @Model.Status
+                            </span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Documents -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h5>Submitted Documents</h5>
+                    <hr />
+                </div>
+
+                <!-- Civil ID -->
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Civil ID</h6>
+                            @if (!string.IsNullOrEmpty(Model.CivilIdPath))
+                            {
+                                <div class="document-preview">
+                                    <a href="@Model.CivilIdPath" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No document uploaded</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Passport -->
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Passport</h6>
+                            @if (!string.IsNullOrEmpty(Model.PassportPath))
+                            {
+                                <div class="document-preview">
+                                    <a href="@Model.PassportPath" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No document uploaded</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High School Certificate -->
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">High School Certificate</h6>
+                            @if (!string.IsNullOrEmpty(Model.HighSchoolCertificatePath))
+                            {
+                                <div class="document-preview">
+                                    <a href="@Model.HighSchoolCertificatePath" target="_blank" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">No document uploaded</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @if (Model.Status == "Pending")
+            {
+                <!-- Decision Form -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <h5>Make Decision</h5>
+                        <hr />
+                        <form method="post" asp-action="UpdateStatus">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <div class="form-group mb-3">
+                                <label>Feedback (Optional)</label>
+                                <textarea name="feedback" class="form-control" rows="3"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" name="status" value="Accepted" class="btn btn-success mx-2">
+                                    <i class="fas fa-check"></i> Accept
+                                </button>
+                                <button type="submit" name="status" value="Rejected" class="btn btn-danger mx-2">
+                                    <i class="fas fa-times"></i> Reject
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            }
+
+            <!-- Back Button -->
+            <div class="row">
+                <div class="col-12 text-center">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Back to List
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

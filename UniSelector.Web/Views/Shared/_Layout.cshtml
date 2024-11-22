@@ -90,6 +90,10 @@
                             </ul>
                         </li>
                     }
+                    else if (User.IsInRole("Institution"))
+                    {
+                        <a asp-area="Institution" asp-controller="ApplicationManagement" asp-action="Index">Applications</a>
+                    }
                     <li>
                         <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
                     </li>

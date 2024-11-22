@@ -82,13 +82,24 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
+                @* <tbody>
+                    @foreach (var obj in Model)
+                    {
+                        <tr>
+                            
+                        </tr>
+                    }
+                    
+                </tbody> *@
             </table>
         </div>
     </div>
 </div>
 
 @section Scripts {
+    @* <script src="~/js/dataTable.js"></script> *@
     <script src="~/js/userManagement.js"></script>
+
     <script>
         $(document).ready(function() {
             // Test if dependencies are loaded
