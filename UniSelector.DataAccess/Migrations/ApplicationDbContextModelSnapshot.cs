@@ -81,7 +81,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Applications", (string)null);
+                    b.ToTable("Applications");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -363,7 +363,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("UniversityId");
 
-                    b.ToTable("Faculties", (string)null);
+                    b.ToTable("Faculties");
                 });
 
             modelBuilder.Entity("UniSelector.Models.Major", b =>
@@ -410,7 +410,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("StandardMajorId");
 
-                    b.ToTable("Majors", (string)null);
+                    b.ToTable("Majors");
                 });
 
             modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
@@ -431,7 +431,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("StandardFaculties", (string)null);
+                    b.ToTable("StandardFaculties");
 
                     b.HasData(
                         new
@@ -589,7 +589,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasIndex("StandardFacultyId");
 
-                    b.ToTable("StandardMajors", (string)null);
+                    b.ToTable("StandardMajors");
 
                     b.HasData(
                         new
@@ -1434,7 +1434,7 @@ namespace UniSelector.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Universities", (string)null);
+                    b.ToTable("Universities");
 
                     b.HasData(
                         new

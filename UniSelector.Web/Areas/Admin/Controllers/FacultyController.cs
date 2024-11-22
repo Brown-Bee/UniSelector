@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿/*
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.Language;
@@ -108,4 +109,101 @@ public class FacultyController : Controller
 
     #endregion
     
+}
+*/
+
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using UniSelector.DataAccess.Repository.IRepository;
+using UniSelector.Models;
+using UniSelector.Models.ViewModel;
+using UniSelector.Utility;
+
+namespace UniSelector.Web.Areas.Admin.Controllers;
+
+[Area("Admin")]
+[Authorize(Roles = "Admin")]
+public class FacultyController : Controller
+{
+    private readonly IUnitOfWork _unitOfWork;
+
+    public FacultyController(IUnitOfWork unitOfWork)
+    {
+        _unitOfWork = unitOfWork;
+    }
+
+    public IActionResult Index(int id, int universityId)
+    {
+        if (universityId is 0)
+        {
+            return BadRequest();
+        }
+        
+        var facultyVm = new FacultyVM();
+        var faculties = _unitOfWork.Faculty.GetAll(f => f.UniversityId == universityId, 
+            includeProperties: "University,StandardFaculty").ToList();
+        var university = _unitOfWork.University.Get(u => u.Id == universityId);
+        facultyVm.UniversityName = university.Name;
+        facultyVm.Faculties = faculties;
+        facultyVm.faculty = id is 0 ? new Faculty() : _unitOfWork.Faculty.Get(f => f.Id == id);
+        facultyVm.faculty.UniversityId = universityId;
+        FillSelectionData(facultyVm);
+        return View("Upsert", facultyVm);
+    }
+
+    [HttpPost]
+    public IActionResult Upsert(FacultyVM facultyVm)
+    {
+        if (!ModelState.IsValid)
+        {
+            FillSelectionData(facultyVm);
+            return View("Upsert", facultyVm);
+        }
+
+        if (facultyVm.faculty.Id is 0)
+        {
+            _unitOfWork.Faculty.Add(facultyVm.faculty);
+        }
+        else
+        {
+            _unitOfWork.Faculty.Update(facultyVm.faculty);
+        }
+        _unitOfWork.Save();
+        TempData["success"] = "Faculty added Successfully";
+        return RedirectToAction(nameof(Index), new {universityId = facultyVm.faculty.UniversityId});
+    }
+
+    public IActionResult Delete(int? id, int uniId)
+    {
+        if (id is null or 0)
+            return BadRequest();
+        var faculty = _unitOfWork.Faculty.Get(f => f.Id == id);
+        _unitOfWork.Faculty.Remove(faculty);
+        _unitOfWork.Save();
+        return RedirectToAction(nameof(Index), new {universityId = uniId});
+    }
+
+    private void FillSelectionData(FacultyVM facultyVm)
+    {
+        var standardFaculties = _unitOfWork.StandardFaculty.GetAll();
+        facultyVm.facultyList = standardFaculties.Select(sf => new SelectListItem
+        {
+            Value = sf.Id.ToString(),
+            Text = sf.CombinedName
+        });
+    }
+
+    #region API CALLS
+
+    [HttpGet]
+    public JsonResult GetMajors(int facultyId)
+    {
+        if (facultyId is 0) return Json("");
+
+        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId);
+        return Json(majors);
+    }
+
+    #endregion
 }

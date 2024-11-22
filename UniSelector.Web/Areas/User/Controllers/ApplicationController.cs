@@ -35,7 +35,7 @@ namespace UniSelector.Web.Areas.User.Controllers
         public IActionResult Apply(int universityId, int facultyId, int majorId)
         {
             // Create new application with provided IDs
-            var applicationVM = new ApplicationVM
+            var applicationVm = new ApplicationVM
             {
                 Application = new()
                 {
@@ -48,7 +48,7 @@ namespace UniSelector.Web.Areas.User.Controllers
                 }
             };
 
-            return View(applicationVM);
+            return View(applicationVm);
         }
 
         // POST: Submit application with documents
@@ -90,7 +90,7 @@ namespace UniSelector.Web.Areas.User.Controllers
         {
             var userId = GetCurrentUserId();
             var applications = _unitOfWork.Application.GetUserApplications(userId);
-            return View(applications);
+            return View(applications.ToList());
         }
 
         // POST: Delete document

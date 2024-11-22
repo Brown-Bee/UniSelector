@@ -47,7 +47,8 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@obj.Id">
                                         <li>
-                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Index"
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Index" 
+                                               asp-route-universityId="@obj.Id"
                                                onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
                                                onmouseout="this.style.backgroundColor=''; this.style.color='';">
                                                 <i class="fas fa-edit"></i> Faculties

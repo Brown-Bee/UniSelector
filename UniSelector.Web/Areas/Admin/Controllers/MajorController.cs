@@ -25,7 +25,7 @@ public class MajorController : Controller
         {
             return BadRequest();
         }
-
+        
         var majorVm = new MajorVM();
         var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
         var faculty = _unitOfWork.StandardFaculty.Get(f => f.Id == facultyId);
@@ -40,7 +40,7 @@ public class MajorController : Controller
     [Authorize(Roles = "User,Admin")]
     public IActionResult GetMajorId(int facultyId)
     {
-        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
+        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty,StandardMajor").ToList();
         return View(majors);
     }
     
@@ -87,6 +87,7 @@ public class MajorController : Controller
         TempData["success"] = "Major added Successfully";
         return RedirectToAction(nameof(Index), new {facultyId = majorVm.Major.FacultyId});
     }
+    
 
     public IActionResult Delete(int? id, int facId)
     {
@@ -96,6 +97,14 @@ public class MajorController : Controller
         _unitOfWork.Major.Remove(major);
         _unitOfWork.Save();
         return RedirectToAction(nameof(Index), new {facultyId = facId});
+    }
+
+    [Authorize]
+    public IActionResult DetailsById(int majorId)
+    {
+        var majors = _unitOfWork.Major.Get(m => m.Id == majorId, 
+                includeProperties:"Faculty.StandardFaculty,StandardMajor");
+        return View(majors);
     }
 
     // Helper method for filling dropdown lists

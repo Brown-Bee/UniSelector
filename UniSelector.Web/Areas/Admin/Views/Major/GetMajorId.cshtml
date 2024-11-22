@@ -16,20 +16,31 @@
                 <thead class="thead-dark text-light">
                 <tr>
                     <th>Name</th>
-                    <th>Faculty</th>
-                    <th></th>
+                    <th>Credits</th>
+                    <th>AveragePrice</th>
+                    <th>MinimumGrade</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 @foreach (var obj in Model)
                 {
                     <tr>
-                        <td>@(obj.StandardMajor?.CombinedName)</td>
-                            <td>@(obj.Faculty?.StandardFaculty?.CombinedName)</td>
+                        <td>@obj.StandardMajor?.CombinedName</td>
+                        <td>@obj.Credits</td>
+                        <td>@obj.AveragePrice</td>
+                        <td>@obj.MinimumGrade</td>
                         <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Major" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                            <div class="w-75 btn-group" role="group"> 
+                                <a asp-controller="Application" asp-action="Apply"
+                                   asp-route-universityId="@obj.Faculty!.UniversityId"
+                                   asp-route-facultyId="@obj.Faculty.Id"
+                                   asp-route-majorId="@obj.Id"
+                                   class="btn btn-primary mx-2">
                                     <i class="bi bi-pencil-square"></i> Apply
+                                </a>
+                                <a asp-controller="Major" asp-action="DetailsById" asp-route-majorId="@obj.Id" class="btn btn-primary mx-2">
+                                    <i class="bi bi-pencil-square"></i> Details
                                 </a>
                             </div>
                         </td>
