@@ -1,6 +1,7 @@
 @model MajorVM
 
 <div class="container" style="margin-top: 6rem;">
+    <!-- Header Section -->
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -8,9 +9,12 @@
             </div>
         </div>
     </div>
+    <!-- Major Information Form -->
     <form method="post" class="bg-light p-3" asp-action="Upsert">
         <input asp-for="Major.Id" hidden/>
         <input asp-for="Major.FacultyId" hidden/>
+
+        <!-- Basic Information Section -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-group">
@@ -21,31 +25,85 @@
                     <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
                 </div>
             </div>
+            <@* div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major." class="form-label">Standard Major</label>
+                    <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
+                        <option value="" selected>--Select Standard Major--</option>
+                    </select>
+                    <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
+                </div>
+            </div *@>
         </div>
+
+        <!-- Credits and Price Information -->
         <div class="row mb-3">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label asp-for="Major.AveragePrice">Avarage</label>
-                    <input asp-for="Major.AveragePrice" class="form-control"/>
+                    <label asp-for="Major.AveragePrice">Average Price</label>
+                    <input asp-for="Major.AveragePrice" class="form-control" />
                     <span asp-validation-for="Major.AveragePrice" class="text-danger"></span>
                 </div>
             </div>
-
             <div class="col-md-4">
                 <div class="form-group">
-                    <label asp-for="Major.Credits"></label>
-                    <input asp-for="Major.Credits" class="form-control"/>
+                    <label asp-for="Major.Credits">Credits</label>
+                    <input asp-for="Major.Credits" class="form-control" />
                     <span asp-validation-for="Major.Credits" class="text-danger"></span>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Major.MinimumGrade">Minimum Grade (%)</label>
-                    <input asp-for="Major.MinimumGrade" class="form-control"/>
+                    <input asp-for="Major.MinimumGrade" class="form-control" />
                     <span asp-validation-for="Major.MinimumGrade" class="text-danger"></span>
                 </div>
             </div>
         </div>
+
+        <!-- Language Requirements Section -->
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Major.MinimumIELTS">Minimum IELTS Score</label>
+                    <input asp-for="Major.MinimumIELTS" class="form-control" />
+                    <span asp-validation-for="Major.MinimumIELTS" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Major.MinimumTOEFL">Minimum TOEFL Score</label>
+                    <input asp-for="Major.MinimumTOEFL" class="form-control" />
+                    <span asp-validation-for="Major.MinimumTOEFL" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Major.RequiresAptitudeTest">Requires Aptitude Test</label>
+                    <input asp-for="Major.RequiresAptitudeTest" type="checkbox" class="form-check-input ms-2" />
+                    <span asp-validation-for="Major.RequiresAptitudeTest" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Job Market Information Section -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major.EmploymentRate">Employment Rate (%)</label>
+                    <input asp-for="Major.EmploymentRate" class="form-control" />
+                    <span asp-validation-for="Major.EmploymentRate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Major.AverageStartingSalary">Average Starting Salary</label>
+                    <input asp-for="Major.AverageStartingSalary" class="form-control" />
+                    <span asp-validation-for="Major.AverageStartingSalary" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
         <div class="row ">
             <div class="col-6 col-md-3">
                 @if (Model.Major.Id == 0)
@@ -64,22 +122,7 @@
 
 <div class="p-4" style="margin-top: 3rem;">
     <div class="card shadow border-0 mt-4">
-        @*<div class="card-header bg-secondary bg-gradient ml-0 py-3">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h2 class="text-white">Major List</h2>
-                </div>
-            </div>
-        </div>*@
         <div class="card-body" style="padding:20px">
-            @*<div class="row pb-3">
-                <div class="col-6"></div>
-                <div class="col-6 text-end">
-                    <a asp-controller="Major" asp-action="Upsert" class="btn btn-primary">
-                        <i class="bi bi-plus-circle"></i> Add new major
-                    </a>
-                </div>
-            </div>*@
             <table id="datatable" class="table table-hover table-striped table-bordered display" style="width:100%">
                 <thead class="thead-dark text-light">
                 <tr>
@@ -118,7 +161,7 @@
         </div>
     </div>
     <div class=" col-6 col-md-3">
-        <a asp-controller="Faculty" asp-action="Index" class="btn btn-outline-primary form-control mt-3">Back To List</a>
+        <a asp-controller="Faculty" asp-action="Upsert" class="btn btn-outline-primary form-control mt-3">Back To List</a>
     </div>
 </div>
 

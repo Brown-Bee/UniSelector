@@ -12,7 +12,7 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241122202329_Init")]
+    [Migration("20241123144641_Init")]
     partial class Init
     {
         /// <inheritdoc />
