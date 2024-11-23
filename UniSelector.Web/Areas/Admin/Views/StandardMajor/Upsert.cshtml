@@ -52,11 +52,12 @@
                 <span asp-validation-for="StandardMajor.StudyDuration" class="text-danger"></span>
             </div>
             <div class="col-md-6">
-                <label asp-for="StandardMajor.HighSchoolPath"></label>
+                <label asp-for="StandardMajor.HighSchoolPath">High School Path</label>
                 <select asp-for="StandardMajor.HighSchoolPath" class="form-control">
                     <option value="">--Select Path--</option>
                     <option value="Scientific">Scientific</option>
                     <option value="Literary">Literary</option>
+                    <option value="Literary">Both</option>
                 </select>
                 <span asp-validation-for="StandardMajor.HighSchoolPath" class="text-danger"></span>
             </div>

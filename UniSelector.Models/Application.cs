@@ -9,11 +9,6 @@ public class Application
     [Key]
     public int Id { get; set; }
 
-    // User and University info
-    public string UserId { get; set; }
-    public int UniversityId { get; set; }
-    public int FacultyId { get; set; }
-    public int MajorId { get; set; }
 
     // Application Details
     public DateTime ApplicationDate { get; set; }
@@ -37,19 +32,30 @@ public class Application
     public bool IsPassportVerified { get; set; }
     public bool IsHighSchoolCertificateVerified { get; set; }
 
-    // Navigation Properties
+
+    // User and University info
+
+    public string UserId { get; set; }
     [ForeignKey("UserId")]
     [ValidateNever]
-    public ApplicationUser? User { get; set; }
+    public ApplicationUser? User { get; set; 
+    }
+    public int UniversityId { get; set; }
 
     [ForeignKey("UniversityId")]
     [ValidateNever]
     [DeleteBehavior(DeleteBehavior.NoAction)]
     public University? University { get; set; }
 
+
+    public int FacultyId { get; set; }
+
     [ForeignKey("FacultyId")]
     [ValidateNever]
     public Faculty? Faculty { get; set; }
+
+
+    public int MajorId { get; set; }
 
     [ForeignKey("MajorId")]
     [ValidateNever]
