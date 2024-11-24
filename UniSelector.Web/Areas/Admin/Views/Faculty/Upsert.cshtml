@@ -1,128 +1,4 @@
-﻿@*@model UniSelector.Models.ViewModel.FacultyVM
-
-<div class="container" style="margin-top: 6rem;">
-    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h2 class="text-white py-2">@(Model.faculty.Id != 0 ? "Update" : "Create") Faculty</h2>
-            </div>
-        </div>
-    </div>
-    <form method="post" class="bg-light p-3">
-        <input asp-for="faculty.Id" hidden />
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="faculty.StandardFacultyId" class="form-label">Standard Faculty</label>
-                    <select asp-for="faculty.StandardFacultyId" asp-items="@Model.facultyList" class="form-control" id="standardFacultySelect">
-                        <option disabled selected>--Select Standard Faculty--</option>
-                    </select>
-                    <span asp-validation-for="faculty.StandardFacultyId" class="text-danger"></span>
-                </div>
-            </div>
-
-            $1$ <div class="col-md-6">
-                <div class="form-group">
-                    <label class="form-label">Major</label>
-                    <select id="majorSelect" class="form-control" asp-for="faculty.MajorId">
-                        <option disabled selected>--Select Major--</option>
-                    </select>
-                </div>
-            </div> #1#
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="faculty.UniversityId" class="form-label">University</label>
-                    <select asp-for="faculty.UniversityId" asp-items="@Model.UniversityList" class="form-control">
-                        <option disabled selected>--Select University--</option>
-                    </select>
-                    <span asp-validation-for="faculty.UniversityId" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="faculty.Description" class="form-label">Faculty Overview</label>
-                    <textarea asp-for="faculty.Description" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="faculty.Description" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label asp-for="faculty.AdmissionRequirements" class="form-label">Admission Requirements</label>
-                    <textarea asp-for="faculty.AdmissionRequirements" class="form-control" rows="3"></textarea>
-                    <span asp-validation-for="faculty.AdmissionRequirements" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6 col-md-3">
-                @if (Model.faculty.Id == 0)
-                {
-                    <button type="submit" class="btn btn-primary form-control">Create</button>
-                }
-                else
-                {
-                    <button type="submit" class="btn btn-primary form-control">Update</button>
-                }
-            </div>
-            <div class="col-6 col-md-3">
-                <a asp-controller="Faculty" asp-action="Index" class="btn btn-outline-primary form-control">Back To List</a>
-            </div>
-        </div>
-    </form>
-</div>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-
-    <script>
-        $(document).ready(function () {
-            $('#standardFacultySelect').change(function () {
-                let selectedFacultyId = $(this).val();
-                fillMajor(selectedFacultyId);
-            });
-
-            let standardFacultyId = @Model.faculty.StandardFacultyId;
-            $1$let selectedMajorId = @Model.faculty.MajorId;#1#
-            if (standardFacultyId > 0) {
-                $('#standardFacultySelect').val(standardFacultyId);
-                fillMajor(standardFacultyId, selectedMajorId);
-            }
-        });
-
-        function fillMajor(standardFacultyId, selectedMajorId) {
-            if (standardFacultyId) {
-                let url = '@Url.Action("GetMajors", "Faculty", new { area = "Admin" })';
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    data: { facultyId: standardFacultyId },
-                    success: function (majors) {
-                        let majorSelect = $('#majorSelect');
-                        majorSelect.empty();
-                        majorSelect.append('<option disabled selected>--Select Major--</option>');
-                        $.each(majors, function (index, major) {
-                            let option = $('<option></option>')
-                                .attr('value', major.id)
-                                .text(major.name);
-                            if (major.id === selectedMajorId) {
-                                option.prop('selected', true);
-                            }
-                            majorSelect.append(option);
-                        });
-                    }
-                });
-            }
-        }
-    </script>
-}*@
-
+﻿
 
 @* Upsert.cshtml *@
 @model FacultyVM
@@ -138,6 +14,7 @@
     <form method="post" class="bg-light p-3" asp-action="Upsert">
         <input asp-for="faculty.Id" hidden/>
         <input asp-for="faculty.UniversityId" hidden/>
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-group">
@@ -213,7 +90,9 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@obj.Id">
                                         <li>
-                                            <a class="dropdown-item" asp-controller="Major" asp-action="Index" asp-route-facultyId="@obj.StandardFacultyId"
+                                            <a class="dropdown-item" asp-controller="Major" asp-action="Index" 
+                                               asp-route-facultyId="@obj.Id" asp-route-standardFactId="@obj.StandardFacultyId"
+                                               asp-route-uniId="@obj.UniversityId"
                                                onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
                                                onmouseout="this.style.backgroundColor=''; this.style.color='';">
                                                 <i class="fas fa-edit"></i> Majors

@@ -10,4 +10,6 @@ public class MajorVM
     
     public List<Major>? Majors { get; set; }
     public string? FacultyName { get; set; }
+    public int StandardFacultyId { get; set; }
+    public int UniId { get; set; }
 }

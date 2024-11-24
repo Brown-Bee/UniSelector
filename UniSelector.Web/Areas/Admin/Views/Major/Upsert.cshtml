@@ -13,27 +13,22 @@
     <form method="post" class="bg-light p-3" asp-action="Upsert">
         <input asp-for="Major.Id" hidden/>
         <input asp-for="Major.FacultyId" hidden/>
+        <input asp-for="StandardFacultyId" hidden/>
+        <input asp-for="UniId" hidden/>
+        <div asp-validation-summary="All" class="text-danger"></div>
 
         <!-- Basic Information Section -->
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Major.StandardMajorId" class="form-label">Standard Major</label>
+                   
                     <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
                         <option value="" selected>--Select Standard Major--</option>
                     </select>
                     <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
                 </div>
             </div>
-            <@* div class="col-md-6">
-                <div class="form-group">
-                    <label asp-for="Major." class="form-label">Standard Major</label>
-                    <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
-                        <option value="" selected>--Select Standard Major--</option>
-                    </select>
-                    <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
-                </div>
-            </div *@>
         </div>
 
         <!-- Credits and Price Information -->

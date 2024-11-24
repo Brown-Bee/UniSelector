@@ -301,10 +301,6 @@ namespace UniSelector.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UniversityId = table.Column<int>(type: "int", nullable: false),
-                    FacultyId = table.Column<int>(type: "int", nullable: false),
-                    MajorId = table.Column<int>(type: "int", nullable: false),
                     ApplicationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UniversityFeedback = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -313,7 +309,14 @@ namespace UniSelector.DataAccess.Migrations
                     HighSchoolCertificatePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsCivilIdVerified = table.Column<bool>(type: "bit", nullable: false),
                     IsPassportVerified = table.Column<bool>(type: "bit", nullable: false),
-                    IsHighSchoolCertificateVerified = table.Column<bool>(type: "bit", nullable: false)
+                    IsHighSchoolCertificateVerified = table.Column<bool>(type: "bit", nullable: false),
+                    IsDraft = table.Column<bool>(type: "bit", nullable: false),
+                    IsProfileComplete = table.Column<bool>(type: "bit", nullable: false),
+                    MeetsRequirements = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UniversityId = table.Column<int>(type: "int", nullable: false),
+                    FacultyId = table.Column<int>(type: "int", nullable: false),
+                    MajorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

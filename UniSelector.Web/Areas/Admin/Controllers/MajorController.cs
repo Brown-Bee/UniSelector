@@ -19,21 +19,20 @@ public class MajorController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public IActionResult Index(int id, int facultyId)
+    public IActionResult Index(int facultyId, int standardFactId, int uniId)
     {
         if (facultyId is 0)
         {
             return BadRequest();
         }
         
-        var majorVm = new MajorVM();
-        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId).ToList();
-        var faculty = _unitOfWork.StandardFaculty.Get(f => f.Id == facultyId);
-        majorVm.FacultyName = faculty.CombinedName;
-        majorVm.Majors = majors;
-        majorVm.Major = id is 0 ? new Major() : _unitOfWork.Major.Get(m => m.Id == id);
-        majorVm.Major.FacultyId = facultyId;
-        FillSelectionData(majorVm);
+        var majorVm = new MajorVM
+        {
+            
+            Major = new()
+        };
+        InitPage(facultyId, standardFactId, uniId, majorVm);
+      
         return View("Upsert", majorVm);
     }
 
@@ -64,6 +63,11 @@ public class MajorController : Controller
     [HttpPost]
     public IActionResult Upsert(MajorVM majorVm)
     {
+        var uniId = majorVm.UniId;
+        var factId = majorVm.Major.FacultyId;
+        var standFactId = majorVm.StandardFacultyId;
+        var standMajorId = majorVm.Major.StandardMajorId;
+        
         // Add server-side validation for required fields
         if (majorVm.Major.MinimumGrade <= 0)
         {
@@ -71,10 +75,23 @@ public class MajorController : Controller
         }
         if (!ModelState.IsValid)
         {
-            FillSelectionData(majorVm);
+            InitPage(majorVm.Major.Id, factId, uniId , majorVm);
             return View("Upsert", majorVm);
         }
-
+        var facultyFromDb = _unitOfWork.Faculty.Get(f => f.StandardFacultyId == majorVm.StandardFacultyId  
+           && f.UniversityId == majorVm.UniId, includeProperties:"Majors"                            
+        );
+        foreach (var major in facultyFromDb.Majors)
+        {
+            if (major.StandardMajorId == standMajorId)
+            {
+                ModelState.AddModelError("", "The Major already exists");
+                InitPage(factId, standFactId, uniId, majorVm);
+                return View("Upsert", majorVm);
+            }
+        }
+        
+        
         if (majorVm.Major.Id is 0)
         {
             _unitOfWork.Major.Add(majorVm.Major);
@@ -85,7 +102,9 @@ public class MajorController : Controller
         }
         _unitOfWork.Save();
         TempData["success"] = (majorVm.Major.Id is 0) ? "Major added Successfully" : "Major Updated Successfully";
-        return RedirectToAction(nameof(Index), new {facultyId = majorVm.Major.FacultyId});
+        InitPage(factId, standFactId, uniId, majorVm);
+        return View("Upsert", majorVm);
+        
     }
     
 
@@ -108,14 +127,9 @@ public class MajorController : Controller
     }
 
     // Helper method for filling dropdown lists
-    private void FillSelectionData(MajorVM majorVm)
+    private void FillSelectionData(MajorVM majorVm, int standardFactId)
     {
-        // Add validation checks for required fields
-        if (majorVm.Major.MinimumGrade < 0 || majorVm.Major.MinimumGrade > 100)
-        {
-            ModelState.AddModelError("Major.MinimumGrade", "Grade must be between 0 and 100");
-        }
-        
+      
         // Get all standard faculties for the first dropdown
         var standardFaculties = _unitOfWork.StandardFaculty.GetAll();
         majorVm.StandardFaculties = standardFaculties.Select(sf => new SelectListItem
@@ -125,23 +139,27 @@ public class MajorController : Controller
         }).ToList();
         
         var standardMajors = _unitOfWork.StandardMajor
-            .GetAll(sm => sm.StandardFacultyId == majorVm.Major.FacultyId);
-        
+            .GetAll(sm => sm.StandardFacultyId == standardFactId);
+
         majorVm.StandardMajors = standardMajors.Select(sm => new SelectListItem
         {
             Value = sm.Id.ToString(),
             Text = sm.CombinedName
         }).ToList();
+    }
 
-        /*// If a faculty is selected (during edit or after validation error)
-        if (majorVm.Major.FacultyId > 0)
-        {
-            // Get majors only for the selected faculty
-            
-
-            // Fill the majors dropdown
-           
-        }*/
+    private void InitPage(int facultyId, int standardFactId,int uniId, MajorVM majorVm)
+    {
+        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty").ToList();
+        var faculty = _unitOfWork.StandardFaculty.Get(f => f.Id == standardFactId);
+        majorVm.FacultyName = faculty.CombinedName;
+        majorVm.Majors = majors;
+        majorVm.UniId = uniId;
+        majorVm.StandardFacultyId = standardFactId;
+        var majorId = majorVm.Major.Id;
+        majorVm.Major = majorId is 0 ? new Major() : _unitOfWork.Major.Get(m => m.Id == majorId);
+        majorVm.Major.FacultyId = facultyId;
+        FillSelectionData(majorVm, standardFactId);        
     }
 
     #region API CALLS

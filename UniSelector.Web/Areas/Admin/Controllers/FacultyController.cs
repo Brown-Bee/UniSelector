@@ -1,117 +1,4 @@
-﻿/*
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Razor.Language;
-using Microsoft.IdentityModel.Tokens;
-using UniSelector.DataAccess.Repository.IRepository;
-using UniSelector.Models;
-using UniSelector.Models.ViewModel;
-using UniSelector.Utility;
-
-namespace UniSelector.Web.Areas.Admin.Controllers;
-[Area("Admin")]
-[Authorize(Roles = "Admin")]
-public class FacultyController : Controller
-{
-    private readonly IUnitOfWork _unitOfWork;
-
-    public FacultyController(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
-    }
-
-    public IActionResult Index()
-    {
-        var objFacultyList =
-            _unitOfWork.Faculty.GetAll(includeProperties: "University,StandardFaculty").ToList();
-        return View(objFacultyList);
-    }
-
-    public IActionResult Upsert(int? id)
-    {
-        var facultyVM = new FacultyVM
-        {
-            faculty = new Faculty(),
-        };
-        FillSelectionData(facultyVM);
-
-        
-        if (id is null or 0)
-        {
-            return View(facultyVM);
-        }
-
-        facultyVM.faculty = _unitOfWork.Faculty.Get(u => u.Id == id, includeProperties: "StandardFaculty");
-        return View(facultyVM);
-    }
-
-    [HttpPost]
-    public IActionResult Upsert(FacultyVM facultyVM)
-    {
-        if (!ModelState.IsValid)
-        {
-            FillSelectionData(facultyVM);
-            return View(facultyVM);
-        }
-        if (facultyVM.faculty.Id == 0)
-        {
-            _unitOfWork.Faculty.Add(facultyVM.faculty);
-        }
-        else
-        {
-            _unitOfWork.Faculty.Update(facultyVM.faculty);
-        }
-
-        _unitOfWork.Save();
-        TempData["success"] = "Faculty created successfully";
-        return RedirectToAction("Index");
-
-
-    }
-
-    public IActionResult Delete(int id)
-    {
-        var facultyToBeDeleted = _unitOfWork.Faculty.Get(u => u.Id == id);
-        if (facultyToBeDeleted == null)
-        {
-            return NotFound();
-        }
-
-        _unitOfWork.Faculty.Remove(facultyToBeDeleted);
-        _unitOfWork.Save();
-        TempData["success"] = "faculty deleted successfully";
-        return RedirectToAction("Index", "faculty");
-    }
-
-    private void FillSelectionData(FacultyVM facultyVM)
-    {
-        facultyVM.facultyList = _unitOfWork.StandardFaculty.GetAll().Select(sf => new SelectListItem
-        {
-            Text = sf.CombinedName,
-            Value = sf.Id.ToString()
-        });
-        facultyVM.UniversityList = _unitOfWork.University.GetAll().Select(u => new SelectListItem
-        {
-            Text = u.Name,
-            Value = u.Id.ToString()
-        });
-    }
-
-    #region API CALL
-
-    [HttpGet]
-    public JsonResult GetMajors(int facultyId)
-    {
-        var  majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId);
-        return Json(majors.ToList());
-    }
-
-    #endregion
-    
-}
-*/
-
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -139,29 +26,32 @@ public class FacultyController : Controller
         {
             return BadRequest();
         }
-        
         var facultyVm = new FacultyVM();
-        var faculties = _unitOfWork.Faculty.GetAll(f => f.UniversityId == universityId, 
-            includeProperties: "University,StandardFaculty").ToList();
-        var university = _unitOfWork.University.Get(u => u.Id == universityId);
-        facultyVm.UniversityName = university.Name;
-        facultyVm.Faculties = faculties;
-        facultyVm.faculty = id is 0 ? new Faculty() : _unitOfWork.Faculty.Get(f => f.Id == id);
-        facultyVm.faculty.UniversityId = universityId;
-        FillSelectionData(facultyVm);
+
+        InitPage(id, universityId , facultyVm);
+       
         return View("Upsert", facultyVm);
     }
 
     [HttpPost]
     public IActionResult Upsert(FacultyVM facultyVm)
     {
+        var factId = facultyVm.faculty.Id;
+        var uniId = facultyVm.faculty.UniversityId;
         if (!ModelState.IsValid)
         {
-            FillSelectionData(facultyVm);
+            InitPage(factId, uniId , facultyVm);
+            return View("Upsert", facultyVm);
+        }
+        var uniFromDb = _unitOfWork.University.Get(u => u.Id== facultyVm.faculty.UniversityId, includeProperties:"Faculties");
+        if (uniFromDb.Faculties.Any(faculty => faculty.StandardFacultyId == facultyVm.faculty.StandardFacultyId))
+        {
+            ModelState.AddModelError("", "The faculty already exists");
+            InitPage(factId, uniId , facultyVm);
             return View("Upsert", facultyVm);
         }
 
-        if (facultyVm.faculty.Id is 0)
+        if (factId is 0)
         {
             _unitOfWork.Faculty.Add(facultyVm.faculty);
         }
@@ -171,7 +61,7 @@ public class FacultyController : Controller
         }
         _unitOfWork.Save();
         TempData["success"] = "Faculty added Successfully";
-        return RedirectToAction(nameof(Index), new {universityId = facultyVm.faculty.UniversityId});
+        return RedirectToAction(nameof(Index), new {universityId = uniId});
     }
 
     public IActionResult Delete(int? id, int uniId)
@@ -192,6 +82,18 @@ public class FacultyController : Controller
             Value = sf.Id.ToString(),
             Text = sf.CombinedName
         });
+    }
+
+    private void InitPage(int id, int universityId, FacultyVM facultyVm)
+    {
+        var faculties = _unitOfWork.Faculty.GetAll(f => f.UniversityId == universityId, 
+            includeProperties: "University,StandardFaculty").ToList();
+        var university = _unitOfWork.University.Get(u => u.Id == universityId);
+        facultyVm.UniversityName = university.Name;
+        facultyVm.Faculties = faculties;
+        facultyVm.faculty = id is 0 ? new Faculty() : _unitOfWork.Faculty.Get(f => f.Id == id);
+        facultyVm.faculty.UniversityId = universityId;
+        FillSelectionData(facultyVm);
     }
 
     #region API CALLS
