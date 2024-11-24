@@ -84,7 +84,7 @@ public class MajorController : Controller
             _unitOfWork.Major.Update(majorVm.Major);
         }
         _unitOfWork.Save();
-        TempData["success"] = "Major added Successfully";
+        TempData["success"] = (majorVm.Major.Id is 0) ? "Major added Successfully" : "Major Updated Successfully";
         return RedirectToAction(nameof(Index), new {facultyId = majorVm.Major.FacultyId});
     }
     
