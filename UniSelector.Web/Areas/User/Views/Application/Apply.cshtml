@@ -1,4 +1,4 @@
-﻿@model ApplicationVM
+﻿@* @model ApplicationVM
 
 <div class="container" style="margin-top: 6rem;">
     <div class="card shadow border-0">
@@ -139,4 +139,285 @@
             }
         }
     </script>
+} *@
+
+
+@model ApplicationVM
+
+<div class="container" style="margin-top: 6rem;">
+    <div class="card shadow border-0">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="text-white">Submit Application</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body p-4">
+            @if (Model.ValidationWarnings != null && Model.ValidationWarnings.Any())
+            {
+                <div class="alert alert-warning">
+                    <h5><i class="bi bi-exclamation-triangle"></i> Requirements Check:</h5>
+                    <ul class="mb-0">
+                        @foreach (var warning in Model.ValidationWarnings)
+                        {
+                            <li>@warning</li>
+                        }
+                    </ul>
+                </div>
+            }
+
+            <form method="post" enctype="multipart/form-data">
+                <!-- Hidden Fields -->
+                <input asp-for="Application.UniversityId" hidden />
+                <input asp-for="Application.FacultyId" hidden />
+                <input asp-for="Application.MajorId" hidden />
+                <input asp-for="Application.UserId" hidden />
+                <input asp-for="Application.ApplicationDate" hidden />
+                <input asp-for="Application.Status" hidden />
+
+                <!-- Application Information Display -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">University Details</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <p><strong>University:</strong> @Model.Application.University?.Name</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Faculty:</strong> @Model.Application.Faculty?.StandardFaculty?.CombinedName</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p><strong>Major:</strong> @Model.Application.Major?.StandardMajor?.CombinedName</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Personal Information</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Name" class="form-label">Full Name</label>
+                            <input asp-for="Name" class="form-control" required />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="CivilID" class="form-label">Civil ID</label>
+                            <input asp-for="CivilID" class="form-control" required />
+                            <span asp-validation-for="CivilID" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Gender" class="form-label">Gender</label>
+                            <select asp-for="Gender" class="form-select" required>
+                                <option value="">Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Nationality" class="form-label">Nationality</label>
+                            <input asp-for="Nationality" class="form-control" required />
+                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="MothersNationality" class="form-label">Mother's Nationality</label>
+                            <input asp-for="MothersNationality" class="form-control" required />
+                            <span asp-validation-for="MothersNationality" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="BirthDate" class="form-label">Date of Birth</label>
+                            <input asp-for="BirthDate" class="form-control" type="date" required />
+                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Academic Information -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Academic Information</h5>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="HighSchoolType" class="form-label">High School Type</label>
+                            <select asp-for="HighSchoolType" class="form-select" required>
+                                <option value="">Select Type</option>
+                                <option value="Scientific">Scientific</option>
+                                <option value="Literary">Literary</option>
+                            </select>
+                            <span asp-validation-for="HighSchoolType" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="Grade" class="form-label">High School Grade (%)</label>
+                            <input asp-for="Grade" class="form-control" type="number" step="0.01" required />
+                            <span asp-validation-for="Grade" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="IELTS" class="form-label">IELTS Score</label>
+                            <input asp-for="IELTS" class="form-control" type="number" step="0.5" />
+                            <span asp-validation-for="IELTS" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label asp-for="TOEFL" class="form-label">TOEFL Score</label>
+                            <input asp-for="TOEFL" class="form-control" type="number" />
+                            <span asp-validation-for="TOEFL" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="form-check mt-4">
+                                <input asp-for="HasAptitudeTest" class="form-check-input" type="checkbox" />
+                                <label asp-for="HasAptitudeTest" class="form-check-label">Has Aptitude Test</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Upload Section -->
+                <div class="section-container mb-4">
+                    <h5 class="section-title">Required Documents</h5>
+                    <div class="row">
+                        <!-- Civil ID Upload -->
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Civil ID</h6>
+                                    <div class="mb-3">
+                                        <input type="file" id="civilIdFile" name="CivilIdFile"
+                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" required="@(string.IsNullOrEmpty(Model.Application.CivilIdPath))" />
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.Application.CivilIdPath))
+                                    {
+                                        <div class="document-preview">
+                                            <span class="text-success"><i class="bi bi-check-circle"></i> Uploaded</span>
+                                            <button type="button" onclick="deleteDocument(@Model.Application.Id, 'CivilId')"
+                                                    class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Passport Upload -->
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">Passport</h6>
+                                    <div class="mb-3">
+                                        <input type="file" id="passportFile" name="PassportFile"
+                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" required="@(string.IsNullOrEmpty(Model.Application.PassportPath))" />
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.Application.PassportPath))
+                                    {
+                                        <div class="document-preview">
+                                            <span class="text-success"><i class="bi bi-check-circle"></i> Uploaded</span>
+                                            <button type="button" onclick="deleteDocument(@Model.Application.Id, 'Passport')"
+                                                    class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- High School Certificate Upload -->
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h6 class="card-title">High School Certificate</h6>
+                                    <div class="mb-3">
+                                        <input type="file" id="certificateFile" name="HighSchoolCertificateFile"
+                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" required="@(string.IsNullOrEmpty(Model.Application.PassportPath))" />
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.Application.HighSchoolCertificatePath))
+                                    {
+                                        <div class="document-preview">
+                                            <span class="text-success"><i class="bi bi-check-circle"></i> Uploaded</span>
+                                            <button type="button" onclick="deleteDocument(@Model.Application.Id, 'Certificate')"
+                                                    class="btn btn-danger btn-sm">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <button type="submit" name="saveDraft" value="true" class="btn btn-secondary me-2">
+                            <i class="bi bi-save"></i> Save as Draft
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-send"></i> Submit Application
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function deleteDocument(applicationId, documentType) {
+            if (confirm('Are you sure you want to delete this document?')) {
+                $.ajax({
+                    url: '@Url.Action("DeleteDocument")',
+                    type: 'POST',
+                    data: { applicationId, documentType },
+                    success: function (response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            alert('Failed to delete document');
+                        }
+                    },
+                    error: function () {
+                        alert('Error occurred while deleting document');
+                    }
+                });
+            }
+        }
+    </script>
+}
+@section Styles{
+    <style>
+        .section-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            color: #495057;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .document-preview {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
 }

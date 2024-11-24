@@ -32,6 +32,12 @@ public class Application
     public bool IsPassportVerified { get; set; }
     public bool IsHighSchoolCertificateVerified { get; set; }
 
+    public bool IsDraft { get; set; } = false;  
+
+    // properties to track profile completion
+    public bool IsProfileComplete { get; set; }
+    public bool MeetsRequirements { get; set; }
+
 
     // User and University info
 
