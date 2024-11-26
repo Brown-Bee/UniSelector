@@ -9,26 +9,20 @@ namespace UniSelector.Models
         // Basic Info
         [DisplayName("Full Name")]
         public string Name { get; set; }
-
         [DisplayName("Civil ID")]
         public string? CivilID { get; set; }
-
         // Personal Details
         public string? Gender { get; set; }
-
         [DisplayName("Marital Status")]
         public string? MaritalStatus { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayName("Date of Birth")]
         public DateTime? BirthDate { get; set; }
-
-        [DisplayName("Place of Birth")]
+        [DisplayName("Place of Birth")
         public string? PlaceOfBirth { get; set; }
 
         // Nationality Info
         public string? Nationality { get; set; }
-
         [DisplayName("Mother's Nationality")]
         public string? MothersNationality { get; set; }
 

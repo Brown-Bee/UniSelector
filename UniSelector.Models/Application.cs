@@ -38,31 +38,24 @@ public class Application
     public bool IsProfileComplete { get; set; }
     public bool MeetsRequirements { get; set; }
 
-
     // User and University info
-
     public string UserId { get; set; }
     [ForeignKey("UserId")]
     [ValidateNever]
     public ApplicationUser? User { get; set; 
     }
     public int UniversityId { get; set; }
-
     [ForeignKey("UniversityId")]
     [ValidateNever]
     [DeleteBehavior(DeleteBehavior.NoAction)]
     public University? University { get; set; }
 
-
     public int FacultyId { get; set; }
-
     [ForeignKey("FacultyId")]
     [ValidateNever]
     public Faculty? Faculty { get; set; }
 
-
     public int MajorId { get; set; }
-
     [ForeignKey("MajorId")]
     [ValidateNever]
     [DeleteBehavior(DeleteBehavior.NoAction)]
