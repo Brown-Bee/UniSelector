@@ -20,7 +20,7 @@ public class FacultyController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public IActionResult Index(int id, int universityId)
+    public IActionResult Index(int id, int universityId)    
     {
         if (universityId is 0)
         {
@@ -32,6 +32,8 @@ public class FacultyController : Controller
        
         return View("Upsert", facultyVm);
     }
+    
+    
 
     [HttpPost]
     public IActionResult Upsert(FacultyVM facultyVm)
@@ -43,8 +45,21 @@ public class FacultyController : Controller
             InitPage(factId, uniId , facultyVm);
             return View("Upsert", facultyVm);
         }
-        var uniFromDb = _unitOfWork.University.Get(u => u.Id== facultyVm.faculty.UniversityId, includeProperties:"Faculties");
-        if (uniFromDb.Faculties.Any(faculty => faculty.StandardFacultyId == facultyVm.faculty.StandardFacultyId))
+        var uniFromDb = _unitOfWork.University.Get(u => u.Id== facultyVm.faculty.UniversityId, 
+                includeProperties:"Faculties", isTracked: false);
+        
+        if (factId is not 0)
+        {
+            var excludeCurFact = uniFromDb.Faculties.Where(f => f.Id != factId);
+            if (excludeCurFact.Any(faculty => faculty.StandardFacultyId == facultyVm.faculty.StandardFacultyId))
+            {
+                ModelState.AddModelError("", "The faculty already exists");
+                InitPage(factId, uniId , facultyVm);
+                return View("Upsert", facultyVm);
+            }
+        }
+
+        if (factId is 0 && uniFromDb.Faculties.Any(faculty => faculty.StandardFacultyId == facultyVm.faculty.StandardFacultyId))
         {
             ModelState.AddModelError("", "The faculty already exists");
             InitPage(factId, uniId , facultyVm);

@@ -1,4 +1,5 @@
-﻿@model List<Faculty>
+﻿@*
+@model List<Faculty>
 
 <div class="pt-5 m-4">
     <div class="card shadow border-0 mt-4">
@@ -51,7 +52,8 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" asp-controlle  r="Faculty" asp-action="Upsert" asp-route-id="@obj.Id"
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Index" 
+                                               asp-route-id="@obj.Id" asp-route-universityId="@obj.UniversityId"
                                                onmouseover="this.style.backgroundColor='#f6a23e'; this.style.color='white';"
                                                onmouseout="this.style.backgroundColor=''; this.style.color='';">
                                                 <i class="fas fa-info-circle"></i> Update
@@ -78,3 +80,4 @@
 @section Scripts {
     <script src="~/js/dataTable.js"></script>
 }
+*@

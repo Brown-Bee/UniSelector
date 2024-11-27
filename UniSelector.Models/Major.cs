@@ -11,7 +11,7 @@ public class Major
     // Basic Info
     public int Credits { get; set; }
     public decimal AveragePrice { get; set; }
-
+    
     [Range(0, 100)]
     public float MinimumGrade { get; set; }
 

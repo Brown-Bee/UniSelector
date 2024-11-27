@@ -92,15 +92,15 @@
                                         <li>
                                             <a class="dropdown-item" asp-controller="Major" asp-action="Index" 
                                                asp-route-facultyId="@obj.Id" asp-route-standardFactId="@obj.StandardFacultyId"
-                                               asp-route-uniId="@obj.UniversityId"
+                                               asp-route-universityId="@obj.UniversityId"
                                                onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
                                                onmouseout="this.style.backgroundColor=''; this.style.color='';">
                                                 <i class="fas fa-edit"></i> Majors
                                             </a>
                                         </li>
                                         <li>
-                                                <a class="dropdown-item" asp-controller="Faculty" asp-action="Upsert" asp-route-id="@obj.Id"
-                                               onmouseover="this.style.backgroundColor='#f6a23e'; this.style.color='white';"
+                                            <a class="dropdown-item" asp-controller="Faculty" asp-action="Index"
+                                               asp-route-id="@obj.Id" asp-route-universityId="@obj.UniversityId"                                               onmouseover="this.style.backgroundColor='#f6a23e'; this.style.color='white';"
                                                onmouseout="this.style.backgroundColor=''; this.style.color='';">
                                                 <i class="fas fa-info-circle"></i> Update
                                             </a>
@@ -115,20 +115,6 @@
                                     </ul>
                                 </div>
                             </td>
-                           
-                            
-                            @*
-                            <td>
-                                <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="Faculty" asp-action="Index" asp-route-id="@obj.Id" asp-route-universityId="@obj.UniversityId" class="btn btn-primary mx-2">
-                                        <i class="bi bi-pencil-square"></i> Edit
-                                    </a>
-                                    <a asp-controller="Faculty" asp-action="Delete" asp-route-id="@obj.Id" asp-route-uniId="@obj.UniversityId" class="btn btn-danger mx-2">
-                                        <i class="bi bi-trash-fill"></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        *@
                         </tr>
                     }
                 }

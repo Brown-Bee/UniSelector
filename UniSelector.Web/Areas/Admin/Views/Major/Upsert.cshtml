@@ -140,8 +140,15 @@
                             <td>@obj.MinimumGrade%</td>
                             <td>
                                 <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="Major" asp-action="Index" asp-route-id="@obj.Id" asp-route-facultyId="@obj.FacultyId" class="btn btn-primary mx-2">
-                                        <i class="bi bi-pencil-square"></i> Edit
+                                    <a asp-controller="Major" asp-action="Index"
+                                       asp-route-majorId="@obj.Id"
+                                       asp-route-facultyId="@obj.FacultyId"
+                                       asp-route-standardFactId="@Model.StandardFacultyId"
+                                       asp-route-universityId="@Model.UniId"
+                                       
+                                       class="btn btn-primary mx-2">
+                                        
+                                        <i class="bi bi-pencil-square"></i> Update
                                     </a>
                                     <a asp-controller="Major" asp-action="Delete" asp-route-id="@obj.Id" asp-route-facId="@obj.FacultyId" class="btn btn-danger mx-2">
                                         <i class="bi bi-trash-fill"></i> Delete

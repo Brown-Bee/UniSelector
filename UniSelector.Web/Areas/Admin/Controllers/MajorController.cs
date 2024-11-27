@@ -19,7 +19,7 @@ public class MajorController : Controller
         _unitOfWork = unitOfWork;
     }
 
-    public IActionResult Index(int facultyId, int standardFactId, int uniId)
+    public IActionResult Index(int majorId, int facultyId, int standardFactId, int universityId)
     {
         if (facultyId is 0)
         {
@@ -29,9 +29,13 @@ public class MajorController : Controller
         var majorVm = new MajorVM
         {
             
-            Major = new()
+            Major = new Major
+            {
+                Id = majorId
+            }
         };
-        InitPage(facultyId, standardFactId, uniId, majorVm);
+        InitPage(facultyId, standardFactId, universityId, majorVm);
+        
       
         return View("Upsert", majorVm);
     }
@@ -42,23 +46,6 @@ public class MajorController : Controller
         var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty,StandardMajor").ToList();
         return View(majors);
     }
-    
-    /*public IActionResult Upsert(int id)
-    {
-        var majorVm = new MajorVM
-        {   
-            Major = new(),
-        };
-        FillSelectionData(majorVm);
-
-        if (id is 0)
-        {
-            return View(majorVm);
-        }
-        var major = _unitOfWork.Major.Get(m => m.Id == id);
-        majorVm.Major = major;
-        return View(majorVm);
-    }*/
 
     [HttpPost]
     public IActionResult Upsert(MajorVM majorVm)
@@ -67,15 +54,9 @@ public class MajorController : Controller
         var factId = majorVm.Major.FacultyId;
         var standFactId = majorVm.StandardFacultyId;
         var standMajorId = majorVm.Major.StandardMajorId;
-        
-        // Add server-side validation for required fields
-        if (majorVm.Major.MinimumGrade <= 0)
-        {
-            ModelState.AddModelError("Major.MinimumGrade", "Minimum grade is required");
-        }
         if (!ModelState.IsValid)
         {
-            InitPage(majorVm.Major.Id, factId, uniId , majorVm);
+            InitPage(factId, standFactId, uniId, majorVm);
             return View("Upsert", majorVm);
         }
         var facultyFromDb = _unitOfWork.Faculty.Get(f => f.StandardFacultyId == majorVm.StandardFacultyId  
@@ -103,7 +84,7 @@ public class MajorController : Controller
         _unitOfWork.Save();
         TempData["success"] = (majorVm.Major.Id is 0) ? "Major added Successfully" : "Major Updated Successfully";
         InitPage(factId, standFactId, uniId, majorVm);
-        return View("Upsert", majorVm);
+        return RedirectToAction("Index", new {facultyId = factId, standardFactId = standFactId, universityId = uniId});
         
     }
     
@@ -148,7 +129,7 @@ public class MajorController : Controller
         }).ToList();
     }
 
-    private void InitPage(int facultyId, int standardFactId,int uniId, MajorVM majorVm)
+    private void InitPage(int facultyId, int standardFactId, int uniId, MajorVM majorVm)
     {
         var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty").ToList();
         var faculty = _unitOfWork.StandardFaculty.Get(f => f.Id == standardFactId);

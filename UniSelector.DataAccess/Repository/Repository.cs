@@ -15,9 +15,11 @@ namespace UniSelector.DataAccess.Repository
             this.dbSet = _db.Set<T>();
         }
 
-        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null)
+        public T Get(Expression<Func<T, bool>> filter, string? includeProperties = null, bool isTracked = true)
         {
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query;
+            if (isTracked) query = dbSet;
+            else query = dbSet.AsNoTracking();
             query = query.Where(filter);
             if (!string.IsNullOrEmpty(includeProperties))
             {
