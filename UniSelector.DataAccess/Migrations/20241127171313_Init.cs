@@ -384,6 +384,21 @@ namespace UniSelector.DataAccess.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "AdmissionRequirements", "Description", "StandardFacultyId", "UniversityId" },
+                values: new object[,]
+                {
+                    { 1, "Minimum 65% high school grade, English proficiency required", "Leading business education in Kuwait with focus on modern business practices", 4, 1 },
+                    { 2, "Minimum 70% high school grade, Strong mathematics background", "Cutting-edge computing education with focus on practical skills", 14, 1 },
+                    { 3, "Minimum 60% high school grade, Interview required", "Comprehensive arts education with focus on cultural studies", 5, 1 },
+                    { 4, "Minimum 65% high school grade, Good communication skills", "Modern educational practices with focus on teaching methods", 6, 1 },
+                    { 5, "Minimum 75% high school grade, Strong science background", "Premier engineering programs with international standards", 1, 3 },
+                    { 6, "Minimum 70% high school grade, English proficiency required", "American-standard business education with global perspective", 4, 3 },
+                    { 7, "Minimum 70% high school grade, Strong scientific aptitude", "Advanced scientific research and education programs", 3, 3 },
+                    { 8, "Minimum 65% high school grade, Portfolio submission", "Creative arts and modern media studies", 20, 3 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "StandardMajors",
                 columns: new[] { "Id", "Description", "HighSchoolPath", "NameArabic", "NameEnglish", "StandardFacultyId", "StudyDuration" },
                 values: new object[,]
@@ -468,6 +483,37 @@ namespace UniSelector.DataAccess.Migrations
                     { 78, "Visual artistic expression", "Both", "الفنون البصرية", "Visual Arts", 20, 4 },
                     { 79, "Visual communication design", "Both", "التصميم الجرافيكي", "Graphic Design", 20, 4 },
                     { 80, "Media content creation", "Both", "الإنتاج الإعلامي", "Media Production", 20, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Majors",
+                columns: new[] { "Id", "AveragePrice", "AverageStartingSalary", "Credits", "EmploymentRate", "FacultyId", "MinimumGrade", "MinimumIELTS", "MinimumTOEFL", "RequiresAptitudeTest", "StandardMajorId" },
+                values: new object[,]
+                {
+                    { 1, 15000m, 800m, 130, 85f, 1, 65f, 6f, 80f, false, 13 },
+                    { 2, 14000m, 750m, 125, 80f, 1, 65f, 6f, 80f, false, 14 },
+                    { 3, 14500m, 780m, 128, 82f, 1, 65f, 6f, 80f, false, 15 },
+                    { 4, 16000m, 900m, 135, 90f, 2, 70f, 6f, 85f, true, 53 },
+                    { 5, 16500m, 950m, 140, 92f, 2, 70f, 6f, 85f, true, 54 },
+                    { 6, 15500m, 850m, 132, 88f, 2, 70f, 6f, 85f, true, 55 },
+                    { 7, 13000m, 650m, 120, 75f, 3, 65f, 6.5f, 90f, false, 17 },
+                    { 8, 12000m, 600m, 120, 70f, 3, 60f, null, null, false, 18 },
+                    { 9, 12500m, 550m, 125, 65f, 3, 60f, 5.5f, 75f, false, 19 },
+                    { 10, 14000m, 750m, 130, 85f, 4, 65f, 6f, 80f, true, 21 },
+                    { 11, 14500m, 800m, 132, 80f, 4, 65f, 6f, 80f, true, 22 },
+                    { 12, 14200m, 780m, 128, 82f, 4, 65f, 6.5f, 85f, true, 23 },
+                    { 13, 25000m, 1200m, 150, 92f, 5, 75f, 6.5f, 88f, true, 1 },
+                    { 14, 25000m, 1150m, 150, 90f, 5, 75f, 6.5f, 88f, true, 2 },
+                    { 15, 25000m, 1180m, 150, 91f, 5, 75f, 6.5f, 88f, true, 3 },
+                    { 16, 22000m, 950m, 135, 88f, 6, 70f, 6.5f, 85f, false, 13 },
+                    { 17, 22000m, 900m, 132, 85f, 6, 70f, 6.5f, 85f, false, 15 },
+                    { 18, 22000m, 1000m, 135, 87f, 6, 70f, 6.5f, 85f, false, 16 },
+                    { 19, 20000m, 850m, 140, 75f, 7, 70f, 6f, 82f, true, 9 },
+                    { 20, 20000m, 870m, 140, 78f, 7, 70f, 6f, 82f, true, 10 },
+                    { 21, 20000m, 860m, 138, 76f, 7, 70f, 6f, 82f, true, 11 },
+                    { 22, 18000m, 700m, 125, 75f, 8, 65f, 6f, 80f, false, 77 },
+                    { 23, 19000m, 750m, 130, 80f, 8, 65f, 6f, 80f, true, 79 },
+                    { 24, 18500m, 730m, 128, 78f, 8, 65f, 6f, 80f, true, 80 }
                 });
 
             migrationBuilder.CreateIndex(

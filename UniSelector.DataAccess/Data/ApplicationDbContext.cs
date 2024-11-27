@@ -223,6 +223,433 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 );
 
 
+        // Faculty Seeding
+        modelBuilder.Entity<Faculty>().HasData(
+            // AOU Faculties (University ID: 1)
+            new Faculty
+            {
+                Id = 1,
+                StandardFacultyId = 4, // Business Administration
+                UniversityId = 1,
+                Description = "Leading business education in Kuwait with focus on modern business practices",
+                AdmissionRequirements = "Minimum 65% high school grade, English proficiency required"
+            },
+            new Faculty
+            {
+                Id = 2,
+                StandardFacultyId = 14, // Computing Sciences
+                UniversityId = 1,
+                Description = "Cutting-edge computing education with focus on practical skills",
+                AdmissionRequirements = "Minimum 70% high school grade, Strong mathematics background"
+            },
+            new Faculty
+            {
+                Id = 3,
+                StandardFacultyId = 5, // Arts
+                UniversityId = 1,
+                Description = "Comprehensive arts education with focus on cultural studies",
+                AdmissionRequirements = "Minimum 60% high school grade, Interview required"
+            },
+            new Faculty
+            {
+                Id = 4,
+                StandardFacultyId = 6, // Education
+                UniversityId = 1,
+                Description = "Modern educational practices with focus on teaching methods",
+                AdmissionRequirements = "Minimum 65% high school grade, Good communication skills"
+            },
+
+            // AUK Faculties (University ID: 3)
+            new Faculty
+            {
+                Id = 5,
+                StandardFacultyId = 1, // Engineering
+                UniversityId = 3,
+                Description = "Premier engineering programs with international standards",
+                AdmissionRequirements = "Minimum 75% high school grade, Strong science background"
+            },
+            new Faculty
+            {
+                Id = 6,
+                StandardFacultyId = 4, // Business Administration
+                UniversityId = 3,
+                Description = "American-standard business education with global perspective",
+                AdmissionRequirements = "Minimum 70% high school grade, English proficiency required"
+            },
+            new Faculty
+            {
+                Id = 7,
+                StandardFacultyId = 3, // Science
+                UniversityId = 3,
+                Description = "Advanced scientific research and education programs",
+                AdmissionRequirements = "Minimum 70% high school grade, Strong scientific aptitude"
+            },
+            new Faculty
+            {
+                Id = 8,
+                StandardFacultyId = 20, // Arts and Media
+                UniversityId = 3,
+                Description = "Creative arts and modern media studies",
+                AdmissionRequirements = "Minimum 65% high school grade, Portfolio submission"
+            }
+        );
+
+
+        // Major Seeding
+        modelBuilder.Entity<Major>().HasData(
+
+            // AOU Business Faculty Majors (Faculty ID: 1)
+            new Major
+            {
+                Id = 1,
+                StandardMajorId = 13, // Accounting
+                FacultyId = 1,
+                Credits = 130,
+                AveragePrice = 15000,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 85,
+                AverageStartingSalary = 800
+            },
+            new Major
+            {
+                Id = 2,
+                StandardMajorId = 14, // Marketing
+                FacultyId = 1,
+                Credits = 125,
+                AveragePrice = 14000,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 80,
+                AverageStartingSalary = 750
+            },
+            new Major
+            {
+                Id = 3,
+                StandardMajorId = 15, // Business Management
+                FacultyId = 1,
+                Credits = 128,
+                AveragePrice = 14500,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 82,
+                AverageStartingSalary = 780
+            },
+
+            // AOU Computing Sciences Majors (Faculty ID: 2)
+            new Major
+            {
+                Id = 4,
+                StandardMajorId = 53, // Computer Science
+                FacultyId = 2,
+                Credits = 135,
+                AveragePrice = 16000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 90,
+                AverageStartingSalary = 900
+            },
+            new Major
+            {
+                Id = 5,
+                StandardMajorId = 54, // Software Engineering
+                FacultyId = 2,
+                Credits = 140,
+                AveragePrice = 16500,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 92,
+                AverageStartingSalary = 950
+            },
+            new Major
+            {
+                Id = 6,
+                StandardMajorId = 55, // Information Systems
+                FacultyId = 2,
+                Credits = 132,
+                AveragePrice = 15500,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 88,
+                AverageStartingSalary = 850
+            },
+
+            // AOU Arts Majors (Faculty ID: 3)
+            new Major
+            {
+                Id = 7,
+                StandardMajorId = 17, // English Language
+                FacultyId = 3,
+                Credits = 120,
+                AveragePrice = 13000,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 90,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 75,
+                AverageStartingSalary = 650
+            },
+            new Major
+            {
+                Id = 8,
+                StandardMajorId = 18, // Arabic Language
+                FacultyId = 3,
+                Credits = 120,
+                AveragePrice = 12000,
+                MinimumGrade = 60,
+                MinimumIELTS = null,
+                MinimumTOEFL = null,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 70,
+                AverageStartingSalary = 600
+            },
+            new Major
+            {
+                Id = 9,
+                StandardMajorId = 19, // History
+                FacultyId = 3,
+                Credits = 125,
+                AveragePrice = 12500,
+                MinimumGrade = 60,
+                MinimumIELTS = 5.5f,
+                MinimumTOEFL = 75,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 65,
+                AverageStartingSalary = 550
+            },
+
+            // AOU Education Majors (Faculty ID: 4)
+            new Major
+            {
+                Id = 10,
+                StandardMajorId = 21, // Elementary Education
+                FacultyId = 4,
+                Credits = 130,
+                AveragePrice = 14000,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 85,
+                AverageStartingSalary = 750
+            },
+            new Major
+            {
+                Id = 11,
+                StandardMajorId = 22, // Special Education
+                FacultyId = 4,
+                Credits = 132,
+                AveragePrice = 14500,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 80,
+                AverageStartingSalary = 800
+            },
+            new Major
+            {
+                Id = 12,
+                StandardMajorId = 23, // English Education
+                FacultyId = 4,
+                Credits = 128,
+                AveragePrice = 14200,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 82,
+                AverageStartingSalary = 780
+            },
+
+            // AUK Engineering Majors (Faculty ID: 5)
+            new Major
+            {
+                Id = 13,
+                StandardMajorId = 1, // Electrical Engineering
+                FacultyId = 5,
+                Credits = 150,
+                AveragePrice = 25000,
+                MinimumGrade = 75,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 88,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 92,
+                AverageStartingSalary = 1200
+            },
+            new Major
+            {
+                Id = 14,
+                StandardMajorId = 2, // Civil Engineering
+                FacultyId = 5,
+                Credits = 150,
+                AveragePrice = 25000,
+                MinimumGrade = 75,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 88,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 90,
+                AverageStartingSalary = 1150
+            },
+            new Major
+            {
+                Id = 15,
+                StandardMajorId = 3, // Mechanical Engineering
+                FacultyId = 5,
+                Credits = 150,
+                AveragePrice = 25000,
+                MinimumGrade = 75,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 88,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 91,
+                AverageStartingSalary = 1180
+            },
+
+            // AUK Business Administration Majors (Faculty ID: 6)
+            new Major
+            {
+                Id = 16,
+                StandardMajorId = 13, // Accounting
+                FacultyId = 6,
+                Credits = 135,
+                AveragePrice = 22000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 88,
+                AverageStartingSalary = 950
+            },
+            new Major
+            {
+                Id = 17,
+                StandardMajorId = 15, // Business Management
+                FacultyId = 6,
+                Credits = 132,
+                AveragePrice = 22000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 85,
+                AverageStartingSalary = 900
+            },
+            new Major
+            {
+                Id = 18,
+                StandardMajorId = 16, // Finance
+                FacultyId = 6,
+                Credits = 135,
+                AveragePrice = 22000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.5f,
+                MinimumTOEFL = 85,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 87,
+                AverageStartingSalary = 1000
+            },
+
+            // AUK Science Majors (Faculty ID: 7)
+            new Major
+            {
+                Id = 19,
+                StandardMajorId = 9, // Physics
+                FacultyId = 7,
+                Credits = 140,
+                AveragePrice = 20000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 82,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 75,
+                AverageStartingSalary = 850
+            },
+            new Major
+            {
+                Id = 20,
+                StandardMajorId = 10, // Chemistry
+                FacultyId = 7,
+                Credits = 140,
+                AveragePrice = 20000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 82,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 78,
+                AverageStartingSalary = 870
+            },
+            new Major
+            {
+                Id = 21,
+                StandardMajorId = 11, // Biology
+                FacultyId = 7,
+                Credits = 138,
+                AveragePrice = 20000,
+                MinimumGrade = 70,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 82,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 76,
+                AverageStartingSalary = 860
+            },
+
+            // AUK Arts and Media Majors (Faculty ID: 8)
+            new Major
+            {
+                Id = 22,
+                StandardMajorId = 77, // Media Studies
+                FacultyId = 8,
+                Credits = 125,
+                AveragePrice = 18000,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = false,
+                EmploymentRate = 75,
+                AverageStartingSalary = 700
+            },
+            new Major
+            {
+                Id = 23,
+                StandardMajorId = 79, // Graphic Design
+                FacultyId = 8,
+                Credits = 130,
+                AveragePrice = 19000,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 80,
+                AverageStartingSalary = 750
+            },
+            new Major
+            {
+                Id = 24,
+                StandardMajorId = 80, // Media Production
+                FacultyId = 8,
+                Credits = 128,
+                AveragePrice = 18500,
+                MinimumGrade = 65,
+                MinimumIELTS = 6.0f,
+                MinimumTOEFL = 80,
+                RequiresAptitudeTest = true,
+                EmploymentRate = 78,
+                AverageStartingSalary = 730
+            }
+        );
 
     }
 

@@ -373,6 +373,72 @@ namespace UniSelector.DataAccess.Migrations
                     b.HasIndex("UniversityId");
 
                     b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AdmissionRequirements = "Minimum 65% high school grade, English proficiency required",
+                            Description = "Leading business education in Kuwait with focus on modern business practices",
+                            StandardFacultyId = 4,
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AdmissionRequirements = "Minimum 70% high school grade, Strong mathematics background",
+                            Description = "Cutting-edge computing education with focus on practical skills",
+                            StandardFacultyId = 14,
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AdmissionRequirements = "Minimum 60% high school grade, Interview required",
+                            Description = "Comprehensive arts education with focus on cultural studies",
+                            StandardFacultyId = 5,
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AdmissionRequirements = "Minimum 65% high school grade, Good communication skills",
+                            Description = "Modern educational practices with focus on teaching methods",
+                            StandardFacultyId = 6,
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AdmissionRequirements = "Minimum 75% high school grade, Strong science background",
+                            Description = "Premier engineering programs with international standards",
+                            StandardFacultyId = 1,
+                            UniversityId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AdmissionRequirements = "Minimum 70% high school grade, English proficiency required",
+                            Description = "American-standard business education with global perspective",
+                            StandardFacultyId = 4,
+                            UniversityId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AdmissionRequirements = "Minimum 70% high school grade, Strong scientific aptitude",
+                            Description = "Advanced scientific research and education programs",
+                            StandardFacultyId = 3,
+                            UniversityId = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AdmissionRequirements = "Minimum 65% high school grade, Portfolio submission",
+                            Description = "Creative arts and modern media studies",
+                            StandardFacultyId = 20,
+                            UniversityId = 3
+                        });
                 });
 
             modelBuilder.Entity("UniSelector.Models.Major", b =>
@@ -420,6 +486,342 @@ namespace UniSelector.DataAccess.Migrations
                     b.HasIndex("StandardMajorId");
 
                     b.ToTable("Majors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AveragePrice = 15000m,
+                            AverageStartingSalary = 800m,
+                            Credits = 130,
+                            EmploymentRate = 85f,
+                            FacultyId = 1,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 13
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AveragePrice = 14000m,
+                            AverageStartingSalary = 750m,
+                            Credits = 125,
+                            EmploymentRate = 80f,
+                            FacultyId = 1,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 14
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AveragePrice = 14500m,
+                            AverageStartingSalary = 780m,
+                            Credits = 128,
+                            EmploymentRate = 82f,
+                            FacultyId = 1,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AveragePrice = 16000m,
+                            AverageStartingSalary = 900m,
+                            Credits = 135,
+                            EmploymentRate = 90f,
+                            FacultyId = 2,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 53
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AveragePrice = 16500m,
+                            AverageStartingSalary = 950m,
+                            Credits = 140,
+                            EmploymentRate = 92f,
+                            FacultyId = 2,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 54
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AveragePrice = 15500m,
+                            AverageStartingSalary = 850m,
+                            Credits = 132,
+                            EmploymentRate = 88f,
+                            FacultyId = 2,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AveragePrice = 13000m,
+                            AverageStartingSalary = 650m,
+                            Credits = 120,
+                            EmploymentRate = 75f,
+                            FacultyId = 3,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 90f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 17
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AveragePrice = 12000m,
+                            AverageStartingSalary = 600m,
+                            Credits = 120,
+                            EmploymentRate = 70f,
+                            FacultyId = 3,
+                            MinimumGrade = 60f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 18
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AveragePrice = 12500m,
+                            AverageStartingSalary = 550m,
+                            Credits = 125,
+                            EmploymentRate = 65f,
+                            FacultyId = 3,
+                            MinimumGrade = 60f,
+                            MinimumIELTS = 5.5f,
+                            MinimumTOEFL = 75f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 19
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AveragePrice = 14000m,
+                            AverageStartingSalary = 750m,
+                            Credits = 130,
+                            EmploymentRate = 85f,
+                            FacultyId = 4,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 21
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AveragePrice = 14500m,
+                            AverageStartingSalary = 800m,
+                            Credits = 132,
+                            EmploymentRate = 80f,
+                            FacultyId = 4,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 22
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AveragePrice = 14200m,
+                            AverageStartingSalary = 780m,
+                            Credits = 128,
+                            EmploymentRate = 82f,
+                            FacultyId = 4,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 23
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AveragePrice = 25000m,
+                            AverageStartingSalary = 1200m,
+                            Credits = 150,
+                            EmploymentRate = 92f,
+                            FacultyId = 5,
+                            MinimumGrade = 75f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 88f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AveragePrice = 25000m,
+                            AverageStartingSalary = 1150m,
+                            Credits = 150,
+                            EmploymentRate = 90f,
+                            FacultyId = 5,
+                            MinimumGrade = 75f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 88f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AveragePrice = 25000m,
+                            AverageStartingSalary = 1180m,
+                            Credits = 150,
+                            EmploymentRate = 91f,
+                            FacultyId = 5,
+                            MinimumGrade = 75f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 88f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AveragePrice = 22000m,
+                            AverageStartingSalary = 950m,
+                            Credits = 135,
+                            EmploymentRate = 88f,
+                            FacultyId = 6,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 13
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AveragePrice = 22000m,
+                            AverageStartingSalary = 900m,
+                            Credits = 132,
+                            EmploymentRate = 85f,
+                            FacultyId = 6,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AveragePrice = 22000m,
+                            AverageStartingSalary = 1000m,
+                            Credits = 135,
+                            EmploymentRate = 87f,
+                            FacultyId = 6,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6.5f,
+                            MinimumTOEFL = 85f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 16
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AveragePrice = 20000m,
+                            AverageStartingSalary = 850m,
+                            Credits = 140,
+                            EmploymentRate = 75f,
+                            FacultyId = 7,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 82f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 9
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AveragePrice = 20000m,
+                            AverageStartingSalary = 870m,
+                            Credits = 140,
+                            EmploymentRate = 78f,
+                            FacultyId = 7,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 82f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 10
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AveragePrice = 20000m,
+                            AverageStartingSalary = 860m,
+                            Credits = 138,
+                            EmploymentRate = 76f,
+                            FacultyId = 7,
+                            MinimumGrade = 70f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 82f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 11
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AveragePrice = 18000m,
+                            AverageStartingSalary = 700m,
+                            Credits = 125,
+                            EmploymentRate = 75f,
+                            FacultyId = 8,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 77
+                        },
+                        new
+                        {
+                            Id = 23,
+                            AveragePrice = 19000m,
+                            AverageStartingSalary = 750m,
+                            Credits = 130,
+                            EmploymentRate = 80f,
+                            FacultyId = 8,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 79
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AveragePrice = 18500m,
+                            AverageStartingSalary = 730m,
+                            Credits = 128,
+                            EmploymentRate = 78f,
+                            FacultyId = 8,
+                            MinimumGrade = 65f,
+                            MinimumIELTS = 6f,
+                            MinimumTOEFL = 80f,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 80
+                        });
                 });
 
             modelBuilder.Entity("UniSelector.Models.StandardFaculty", b =>
