@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniSelector.Models", "UniSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniSelector.Web", "UniSelector.Web\UniSelector.Web.csproj", "{851A750A-541B-4D73-9564-26C3D827EA6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniSelector.Tests", "UniSelector.Tests\UniSelector.Tests.csproj", "{D535FFA5-716A-41F1-A37A-8E92CA187E71}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{851A750A-541B-4D73-9564-26C3D827EA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{851A750A-541B-4D73-9564-26C3D827EA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{851A750A-541B-4D73-9564-26C3D827EA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D535FFA5-716A-41F1-A37A-8E92CA187E71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D535FFA5-716A-41F1-A37A-8E92CA187E71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D535FFA5-716A-41F1-A37A-8E92CA187E71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D535FFA5-716A-41F1-A37A-8E92CA187E71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
