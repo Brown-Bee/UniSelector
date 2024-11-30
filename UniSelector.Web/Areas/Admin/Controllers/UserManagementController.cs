@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 
 namespace UniSelector.Areas.Admin.Controllers
 {
@@ -11,10 +14,12 @@ namespace UniSelector.Areas.Admin.Controllers
     public class UserManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public UserManagementController(IUnitOfWork unitOfWork)
+        public UserManagementController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -90,21 +95,51 @@ namespace UniSelector.Areas.Admin.Controllers
             return View(applicationUser);
         }
 
-        [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
-            /*var user = await _unitOfWork.ApplicationUser.Get(a => a.Id == id);
+            //Validate input
+            var userToBeDeleted = _unitOfWork.ApplicationUser.Get(u => u.Id == id);
+            if (string.IsNullOrEmpty(userToBeDeleted.Id))
+            {
+                TempData["error"] = "Invalid user ID";
+                return RedirectToAction(nameof(Index));
+            }
+            //Get The User
+            var user = await _userManager.FindByIdAsync(userToBeDeleted.Id);
             if (user == null)
-            {*/
-                return Json(new { success = false, message = "Error while deleting" });
-            /*}*/
+            {
+                TempData["error"] = "User not found";
+                return RedirectToAction(nameof(Index));
+            }
+            //Delete The User
+            var result = await _userManager.DeleteAsync(user);
 
-            /*var result = await _unitOfWork.ApplicationUser.DeleteUser(user);
             if (result.Succeeded)
             {
-                return Json(new { success = true, message = "User deleted successfully" });
-            }*/
-           // return Json(new { success = false, message = "Error while deleting" });
+                _unitOfWork.Save();
+                TempData["success"] = "User deleted successfully";
+                return RedirectToAction(nameof(Index));
+            }
+            // If deletion failed
+            TempData["error"] = "Failed to delete user: " +
+                string.Join(", ", result.Errors.Select(e => e.Description));
+            return RedirectToAction(nameof(Index));
+
         }
+        /*public async Task<IActionResult> Delete(string id)
+        {
+            *//*var user = await _unitOfWork.ApplicationUser.Get(a => a.Id == id);
+            if (user == null)
+            {*//*
+                return Json(new { success = false, message = "Error while deleting" });
+            *//*}*/
+
+        /*var result = await _unitOfWork.ApplicationUser.DeleteUser(user);
+        if (result.Succeeded)
+        {
+            return Json(new { success = true, message = "User deleted successfully" });
+        }*//*
+       // return Json(new { success = false, message = "Error while deleting" });
+    }*/
     }
 }
