@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using UniSelector.DataAccess.Repository.IRepository;
+using UniSelector.Models;
 using UniSelector.Utility;
 
 namespace UniSelector.Areas.Institution.Controllers
@@ -10,17 +13,21 @@ namespace UniSelector.Areas.Institution.Controllers
     public class ApplicationManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ApplicationManagementController(IUnitOfWork unitOfWork)
+        public ApplicationManagementController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         // GET: List all applications for the university
         public IActionResult Index()
         {
-            var universityId = GetCurrentUniversityId();
-            var applications = _unitOfWork.Application.GetUniversityApplications(universityId).ToList();
+            var universityId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+
+            var applications = _unitOfWork.Application.GetUniversityApplications(universityId);
             return View(applications);
         }
 
@@ -41,6 +48,8 @@ namespace UniSelector.Areas.Institution.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
         // Helper method to get university ID
         private int GetCurrentUniversityId()
         {
@@ -53,5 +62,7 @@ namespace UniSelector.Areas.Institution.Controllers
             var university = universities.FirstOrDefault(u => u.Email == userName);
             return university?.Id ?? 0;
         }
+
+
     }
 }
