@@ -12,12 +12,12 @@
         </div>
 
         <div class="card-body bg-light p-4">
-            <!-- Major Overview Section -->
+            <!-- Major Information Section -->
             <div class="section-container">
                 <h5 class="section-title">Major Information</h5>
-                <div class="row">
+                <div class="row g-3">
                     <!-- Major Name Card -->
-                    <div class="col-md-12 mb-4">
+                    <div class="col-md-6">
                         <div class="info-card bg-light p-3 rounded shadow-sm">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-book-fill text-primary fs-4 me-2"></i>
@@ -28,15 +28,35 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
-            <!-- Basic Requirements Section -->
-            <div class="section-container mt-4">
-                <h5 class="section-title">Academic Requirements</h5>
-                <div class="row g-3">
+                    <!-- High School Path Card -->
+                    <div class="col-md-6">
+                        <div class="info-card bg-light p-3 rounded shadow-sm">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-mortarboard-fill text-primary fs-4 me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">High School Path</small>
+                                    <span class="fw-medium">@Model.StandardMajor!.HighSchoolPath</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Duration Card -->
+                    <div class="col-md-6">
+                        <div class="info-card bg-light p-3 rounded shadow-sm">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-calendar-fill text-primary fs-4 me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Study Duration</small>
+                                    <span class="fw-medium">@Model.StandardMajor!.StudyDuration Years</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Credit Hours Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <div class="info-card bg-light p-3 rounded shadow-sm">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-clock-fill text-primary fs-4 me-2"></i>
@@ -47,9 +67,15 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <!-- Academic Requirements Section -->
+            <div class="section-container mt-4">
+                <h5 class="section-title">Academic Requirements</h5>
+                <div class="row g-3">
                     <!-- Minimum Grade Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="info-card bg-light p-3 rounded shadow-sm">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-percent text-primary fs-4 me-2"></i>
@@ -62,7 +88,7 @@
                     </div>
 
                     <!-- Average Price Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="info-card bg-light p-3 rounded shadow-sm">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-currency-dollar text-primary fs-4 me-2"></i>
@@ -73,8 +99,9 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Aptitude Test Card -->
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="info-card bg-light p-3 rounded shadow-sm">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-clipboard-check text-info fs-4 me-2"></i>
@@ -87,7 +114,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Language Requirements Section -->
             <div class="section-container mt-4">
                 <h5 class="section-title">Language Requirements</h5>
@@ -156,7 +182,7 @@
                 <div class="d-flex justify-content-center">
                     <a asp-controller="Major" asp-action="GetMajorId"
                        asp-route-facultyId="@Model.FacultyId"
-                       class="btn btn-primary">
+                       class="btn btn-outline-primary">
                         <i class="bi bi-arrow-left me-2"></i>Back to Major List
                     </a>
                 </div>

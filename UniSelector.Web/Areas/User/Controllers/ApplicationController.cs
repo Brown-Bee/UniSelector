@@ -101,25 +101,25 @@ namespace UniSelector.Web.Areas.User.Controllers
 
             if (!highSchoolType)
             {
-                ModelState.AddModelError("", "highSchoolType");
+                ModelState.AddModelError("", $"Your high school path ({user.HighSchoolType}) does not match the required path ({standardMajor.HighSchoolPath}) for this major");
                 return false;
             }
 
             if (!grade)
             {
-                ModelState.AddModelError("", "grade");
+                ModelState.AddModelError("", $"Your grade ({user.Grade}%) is below the minimum required grade ({major.MinimumGrade}%) for this major");
                 return false;
             }
 
             if (!minimumIelts)
             {
-                ModelState.AddModelError("", "minimumIelts");
+                ModelState.AddModelError("", $"Your IELTS score ({user.IELTS}) is below the minimum required score ({major.MinimumIELTS}) for this major");
                 return false;
             }
 
             if (!minimumToefl)
             {
-                ModelState.AddModelError("", "minimumToefl");
+                ModelState.AddModelError("", $"Your TOEFL score ({user.TOEFL}) is below the minimum required score ({major.MinimumTOEFL}) for this major");
                 return false;
             }
             return true;

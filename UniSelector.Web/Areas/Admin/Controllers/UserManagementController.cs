@@ -126,20 +126,5 @@ namespace UniSelector.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-        /*public async Task<IActionResult> Delete(string id)
-        {
-            *//*var user = await _unitOfWork.ApplicationUser.Get(a => a.Id == id);
-            if (user == null)
-            {*//*
-                return Json(new { success = false, message = "Error while deleting" });
-            *//*}*/
-
-        /*var result = await _unitOfWork.ApplicationUser.DeleteUser(user);
-        if (result.Succeeded)
-        {
-            return Json(new { success = true, message = "User deleted successfully" });
-        }*//*
-       // return Json(new { success = false, message = "Error while deleting" });
-    }*/
     }
 }

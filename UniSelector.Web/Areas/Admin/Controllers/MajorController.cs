@@ -98,8 +98,7 @@ public class MajorController : Controller
         return RedirectToAction(nameof(Index), new {facultyId = facId});
     }
 
-    [Authorize]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,User")]
     public IActionResult DetailsById(int majorId)
     {
         var majors = _unitOfWork.Major.Get(m => m.Id == majorId, 
