@@ -19,10 +19,11 @@ namespace UniSelector.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<ApplicationUser> objApplicationUser = _unitOfWork.ApplicationUser.GetAll().ToList();
+            return View(objApplicationUser);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public IActionResult GetAll()
         {
             var users = _unitOfWork.ApplicationUser.GetAll();
@@ -38,7 +39,7 @@ namespace UniSelector.Areas.Admin.Controllers
                 u.HighSchoolGraduationYear
             });
             return Json(new { data = userList });
-        }
+        }*/
 
         public IActionResult Upsert(string id)
         {
@@ -47,29 +48,46 @@ namespace UniSelector.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Upsert(ApplicationUser model)
+        public async Task<IActionResult> Upsert(ApplicationUser applicationUser)
         {
-            if (!ModelState.IsValid) return View(model);
-            var existingUser =  _unitOfWork.ApplicationUser.Get(a => a.Id == model.Id);
+            if (!ModelState.IsValid) return View(applicationUser);
+            var existingUser =  _unitOfWork.ApplicationUser.Get(a => a.Id == applicationUser.Id);
 
-            existingUser.Email = model.Email;
-            existingUser.UserName = model.Email; // Update UserName if it's based on Email
-            existingUser.Name = model.Name;
-            existingUser.Address = model.Address;
-            existingUser.Grade = model.Grade;
-            existingUser.BirthDate = model.BirthDate;
-            existingUser.Nationality = model.Nationality;
-            existingUser.PlaceOfBirth = model.PlaceOfBirth;
-            existingUser.HighSchoolGraduationYear = model.HighSchoolGraduationYear;
+            // Civil ID Information
+            existingUser.CivilID = applicationUser.CivilID;
+            existingUser.CivilIDExpiryDate = applicationUser.CivilIDExpiryDate;
+            //Personal Information
+            existingUser.Name = applicationUser.Name;
+            existingUser.Email = applicationUser.Email;
+            existingUser.UserName = applicationUser.Email; // Update UserName if it's based on Email
+            existingUser.Gender = applicationUser.Gender;
+            existingUser.MaritalStatus = applicationUser.MaritalStatus;
+            //Additional Information
+            existingUser.Nationality = applicationUser.Nationality;
+            existingUser.MothersNationality = applicationUser.MothersNationality;
+            existingUser.BirthDate = applicationUser.BirthDate;
+            existingUser.PlaceOfBirth = applicationUser.PlaceOfBirth;
+            //Address Information
+            existingUser.Address = applicationUser.Address;
+            //Academic Information
+            existingUser.HighSchoolType = applicationUser.HighSchoolType;
+            existingUser.IsPublicSchool = applicationUser.IsPublicSchool;
+            existingUser.Grade = applicationUser.Grade;
+            existingUser.HighSchoolGraduationYear = applicationUser.HighSchoolGraduationYear;
+            //Test Scores
+            existingUser.IELTS = applicationUser.IELTS;
+            existingUser.TOEFL = applicationUser.TOEFL;
+            existingUser.HasAptitudeTest = applicationUser.HasAptitudeTest;
 
             var result =  _unitOfWork.ApplicationUser.Update(existingUser);
             if (result)
             {
+                _unitOfWork.Save();
                 TempData["success"] = "User updated successfully";
                 return RedirectToAction(nameof(Index));
             }
-            _unitOfWork.Save();;
-            return View(model);
+            _unitOfWork.Save();
+            return View(applicationUser);
         }
 
         [HttpDelete]

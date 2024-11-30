@@ -12,7 +12,7 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127171313_Init")]
+    [Migration("20241130004248_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -48,9 +48,6 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<bool>("IsCivilIdVerified")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsDraft")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsHighSchoolCertificateVerified")
                         .HasColumnType("bit");
 
@@ -63,10 +60,11 @@ namespace UniSelector.DataAccess.Migrations
                     b.Property<int>("MajorId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("MeetsRequirements")
-                        .HasColumnType("bit");
-
                     b.Property<string>("PassportPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Response")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
