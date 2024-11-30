@@ -16,7 +16,7 @@ public class UserNameViewComponent : ViewComponent
 
     public async Task<IViewComponentResult> InvokeAsync(string id)
     {
-        var user = await _unitOfWork.ApplicationUser.GetUserById(id);
+        var user = _unitOfWork.ApplicationUser.Get(a => a.Id == id);
         return View("Default", user.Name);
     }
 }

@@ -30,9 +30,9 @@
                             <td>@obj.Major?.StandardMajor?.CombinedName</td>
                             <td>@obj.ApplicationDate.ToString("dd/MM/yyyy")</td>
                             <td>
-                                <span class="badge bg-@(obj.Status == "Pending" ? "warning" :
-                                                      obj.Status == "Accepted" ? "success" : "danger")">
-                                    @obj.Status
+                                <span class="badge bg-@(obj.Response == "Pending" ? "warning" :
+                                                      obj.Response == "Accepted" ? "success" : "danger")">
+                                    @obj.Response
                                 </span>
                             </td>
                             <td>
@@ -51,7 +51,7 @@
                                                 <i class="fas fa-info-circle"></i> Details
                                             </a>
                                         </li>
-                                        @if (obj.Status == "Pending")
+                                        @if (obj.Response == "Pending")
                                         {
                                             <li>
                                                 <a class="dropdown-item" asp-action="Delete" asp-route-id="@obj.Id"

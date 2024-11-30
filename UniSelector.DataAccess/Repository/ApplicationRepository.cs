@@ -21,7 +21,7 @@ public class ApplicationRepository : Repository<Application>, IApplicationReposi
         var application = _db.Applications.Find(id);
         if (application != null)
         {
-            application.Status = status;
+            application.Response = status;
             application.UniversityFeedback = feedback;
         }
     }

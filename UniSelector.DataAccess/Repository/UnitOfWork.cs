@@ -28,7 +28,7 @@ namespace UniSelector.DataAccess.Repository
             University = new UniversityRepository(_db);
             Faculty = new FacultyRepository(_db);
             StandardFaculty = new StandardFacultyRepository(_db);
-            ApplicationUser = new ApplicationUserRepository(_userManager);
+            ApplicationUser = new ApplicationUserRepository(_db);
             Major = new MajorRepository(_db);
             StandardMajor = new StandardMajorRepository(_db);
             Application = new ApplicationRepository(_db);

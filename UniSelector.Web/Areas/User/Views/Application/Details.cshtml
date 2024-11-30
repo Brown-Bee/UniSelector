@@ -35,9 +35,9 @@
 
                         <dt class="col-sm-4">Status:</dt>
                         <dd class="col-sm-8">
-                            <span class="badge bg-@(Model.Status == "Pending" ? "warning" :
-                                                 Model.Status == "Accepted" ? "success" : "danger")">
-                                @Model.Status
+                            <span class="badge bg-@(Model.Response == "Pending" ? "warning" :
+                                                 Model.Response == "Accepted" ? "success" : "danger")">
+                                @Model.Response
                             </span>
                         </dd>
 
@@ -68,7 +68,7 @@
                                     <a href="@Model.CivilIdPath" target="_blank" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-eye"></i> View
                                     </a>
-                                    @if (Model.Status == "Pending")
+                                    @if (Model.Response == "Pending")
                                     {
                                         <button onclick="deleteDocument(@Model.Id, 'CivilId')"
                                                 class="btn btn-outline-danger btn-sm">
@@ -96,7 +96,7 @@
                                     <a href="@Model.PassportPath" target="_blank" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-eye"></i> View
                                     </a>
-                                    @if (Model.Status == "Pending")
+                                    @if (Model.Response == "Pending")
                                     {
                                         <button onclick="deleteDocument(@Model.Id, 'Passport')"
                                                 class="btn btn-outline-danger btn-sm">
@@ -124,7 +124,7 @@
                                     <a href="@Model.HighSchoolCertificatePath" target="_blank" class="btn btn-outline-primary btn-sm">
                                         <i class="fas fa-eye"></i> View
                                     </a>
-                                    @if (Model.Status == "Pending")
+                                    @if (Model.Response == "Pending")
                                     {
                                         <button onclick="deleteDocument(@Model.Id, 'Certificate')"
                                                 class="btn btn-outline-danger btn-sm">
@@ -148,7 +148,7 @@
                     <a asp-action="MyApplications" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Back to List
                     </a>
-                    @if (Model.Status == "Pending")
+                    @if (Model.Response == "Pending")
                     {
                         <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
                             <i class="fas fa-times"></i> Cancel Application

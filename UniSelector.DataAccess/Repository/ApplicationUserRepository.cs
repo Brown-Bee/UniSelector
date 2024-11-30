@@ -1,47 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using UniSelector.DataAccess.Data;
+using UniSelector.DataAccess.Repository;
 using UniSelector.Models;
 
-public class ApplicationUserRepository : IApplicationUserRepository     
+public class ApplicationUserRepository : Repository<ApplicationUser>, IApplicationUserRepository     
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ApplicationDbContext _db;
 
-    public ApplicationUserRepository(UserManager<ApplicationUser> userManager)
+    public ApplicationUserRepository(ApplicationDbContext db) : base(db)
     {
-        _userManager = userManager;
+        _db = db;
     }
 
-    public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
+    public bool Update(ApplicationUser user)
     {
-        return await _userManager.Users.ToListAsync();
+        _db.Update(user);
+        return true;
     }
-
-    public async Task<ApplicationUser> GetUserById(string id)
-    {
-        return await _userManager.FindByIdAsync(id);
-    }
-
-    public async Task<IdentityResult> CreateUser(ApplicationUser user, string password)
-    {
-        // Generate a new Id for the user
-        /*user.Id = Guid.NewGuid().ToString();*/
-        return await _userManager.CreateAsync(user, password);
-    }
-
-    public async Task<IdentityResult> UpdateUser(ApplicationUser user)
-    {
-        return await _userManager.UpdateAsync(user);
-    }
-
-    public async Task<IdentityResult> DeleteUser(ApplicationUser user)
-    {
-        return await _userManager.DeleteAsync(user);
-    }
-
-    public ApplicationUser GetByEmail(string email)
-    {
-        return _userManager.FindByEmailAsync(email).Result;
-    }
-
-    
 }

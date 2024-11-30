@@ -9,12 +9,12 @@ public class Application
     [Key]
     public int Id { get; set; }
 
-
     // Application Details
-    public DateTime ApplicationDate { get; set; }
+    public DateTime ApplicationDate { get; set; } = DateTime.Now;
 
-    public string Status { get; set; } = "Pending";  // Pending/Accepted/Rejected
-
+    public string Response { get; set; } = "Pending";  // Pending/Accepted/Rejected
+    public string Status { get; set; }  // Draft/Posted/Cancelled
+    
     public string? UniversityFeedback { get; set; }
 
     // Document URLs (stored locally)
@@ -31,19 +31,13 @@ public class Application
     public bool IsCivilIdVerified { get; set; }
     public bool IsPassportVerified { get; set; }
     public bool IsHighSchoolCertificateVerified { get; set; }
-
-    public bool IsDraft { get; set; } = false;  
-
-    // properties to track profile completion
     public bool IsProfileComplete { get; set; }
-    public bool MeetsRequirements { get; set; }
 
     // User and University info
     public string UserId { get; set; }
     [ForeignKey("UserId")]
     [ValidateNever]
-    public ApplicationUser? User { get; set; 
-    }
+    public ApplicationUser? User { get; set; }
     public int UniversityId { get; set; }
     [ForeignKey("UniversityId")]
     [ValidateNever]
@@ -60,4 +54,5 @@ public class Application
     [ValidateNever]
     [DeleteBehavior(DeleteBehavior.NoAction)]
     public Major? Major { get; set; }
+
 }

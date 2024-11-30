@@ -46,9 +46,9 @@
 
                         <dt class="col-sm-4">Status:</dt>
                         <dd class="col-sm-8">
-                            <span class="badge bg-@(Model.Status == "Pending" ? "warning" :
-                                                 Model.Status == "Accepted" ? "success" : "danger")">
-                                @Model.Status
+                            <span class="badge bg-@(Model.Response == "Pending" ? "warning" :
+                                                 Model.Response == "Accepted" ? "success" : "danger")">
+                                @Model.Response
                             </span>
                         </dd>
                     </dl>
@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            @if (Model.Status == "Pending")
+            @if (Model.Response == "Pending")
             {
                 <!-- Decision Form -->
                 <div class="row mb-4">

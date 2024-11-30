@@ -11,19 +11,7 @@
         </div>
 
         <div class="card-body p-4">
-            @if (Model.ValidationWarnings != null && Model.ValidationWarnings.Any())
-            {
-                <div class="alert alert-warning">
-                    <h5><i class="bi bi-exclamation-triangle"></i> Requirements Check:</h5>
-                    <ul class="mb-0">
-                        @foreach (var warning in Model.ValidationWarnings)
-                        {
-                            <li>@warning</li>
-                        }
-                    </ul>
-                </div>
-            }
-
+           <div asp-validation-summary="All" class="text-danger"></div>
             <form method="post" enctype="multipart/form-data">
                 <!-- Hidden Fields -->
                 <input asp-for="Application.UniversityId" hidden />
@@ -31,7 +19,7 @@
                 <input asp-for="Application.MajorId" hidden />
                 <input asp-for="Application.UserId" hidden />
                 <input asp-for="Application.ApplicationDate" hidden />
-                <input asp-for="Application.Status" hidden />
+                <input asp-for="Application.Response" hidden />
 
                 <!-- Application Information Display -->
                 <div class="section-container mb-4">
@@ -54,42 +42,42 @@
                     <h5 class="section-title">Personal Information</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label asp-for="Name" class="form-label">Full Name</label>
-                            <input asp-for="Name" class="form-control" required />
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.Name" class="form-label">Full Name</label>
+                            <input asp-for="ApplicationUser.Name" class="form-control" />
+                            <span asp-validation-for="ApplicationUser.Name" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label asp-for="CivilID" class="form-label">Civil ID</label>
-                            <input asp-for="CivilID" class="form-control" required />
-                            <span asp-validation-for="CivilID" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.CivilID" class="form-label">Civil ID</label>
+                            <input asp-for="ApplicationUser.CivilID" class="form-control" />
+                            <span asp-validation-for="ApplicationUser.CivilID" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label asp-for="Gender" class="form-label">Gender</label>
-                            <select asp-for="Gender" class="form-select" required>
+                            <label asp-for="ApplicationUser.Gender" class="form-label">Gender</label>
+                            <select asp-for="ApplicationUser.Gender" class="form-select" >
                                 <option value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
-                            <span asp-validation-for="Gender" class="text-danger"></span>
+                            <span asp-validation-for="ApplicationUser.Gender" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label asp-for="Nationality" class="form-label">Nationality</label>
-                            <input asp-for="Nationality" class="form-control" required />
-                            <span asp-validation-for="Nationality" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.Nationality" class="form-label">Nationality</label>
+                            <input asp-for="ApplicationUser.Nationality" class="form-control" />
+                            <span asp-validation-for="ApplicationUser.Nationality" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label asp-for="MothersNationality" class="form-label">Mother's Nationality</label>
-                            <input asp-for="MothersNationality" class="form-control" required />
-                            <span asp-validation-for="MothersNationality" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.MothersNationality" class="form-label">Mother's Nationality</label>
+                            <input asp-for="ApplicationUser.MothersNationality" class="form-control" />
+                            <span asp-validation-for="ApplicationUser.MothersNationality" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label asp-for="BirthDate" class="form-label">Date of Birth</label>
-                            <input asp-for="BirthDate" class="form-control" type="date" required />
-                            <span asp-validation-for="BirthDate" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.BirthDate" class="form-label">Date of Birth</label>
+                            <input asp-for="ApplicationUser.BirthDate" class="form-control" type="date"  />
+                            <span asp-validation-for="ApplicationUser.BirthDate" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -99,35 +87,35 @@
                     <h5 class="section-title">Academic Information</h5>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label asp-for="HighSchoolType" class="form-label">High School Type</label>
-                            <select asp-for="HighSchoolType" class="form-select" required>
+                            <label asp-for="ApplicationUser.HighSchoolType" class="form-label">High School Type</label>
+                            <select asp-for="ApplicationUser.HighSchoolType" class="form-select">
                                 <option value="">Select Type</option>
                                 <option value="Scientific">Scientific</option>
                                 <option value="Literary">Literary</option>
                             </select>
-                            <span asp-validation-for="HighSchoolType" class="text-danger"></span>
+                            <span asp-validation-for="ApplicationUser.HighSchoolType" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label asp-for="Grade" class="form-label">High School Grade (%)</label>
-                            <input asp-for="Grade" class="form-control" type="number" step="0.01" required />
-                            <span asp-validation-for="Grade" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.Grade" class="form-label">High School Grade (%)</label>
+                            <input asp-for="ApplicationUser.Grade" class="form-control" type="number" step="0.01" />
+                            <span asp-validation-for="ApplicationUser.Grade" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label asp-for="IELTS" class="form-label">IELTS Score</label>
-                            <input asp-for="IELTS" class="form-control" type="number" step="0.5" />
-                            <span asp-validation-for="IELTS" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.IELTS" class="form-label">IELTS Score</label>
+                            <input asp-for="ApplicationUser.IELTS" class="form-control" type="number" step="0.5" />
+                            <span asp-validation-for="ApplicationUser.IELTS" class="text-danger"></span>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label asp-for="TOEFL" class="form-label">TOEFL Score</label>
-                            <input asp-for="TOEFL" class="form-control" type="number" />
-                            <span asp-validation-for="TOEFL" class="text-danger"></span>
+                            <label asp-for="ApplicationUser.TOEFL" class="form-label">TOEFL Score</label>
+                            <input asp-for="ApplicationUser.TOEFL" class="form-control" type="number" />
+                            <span asp-validation-for="ApplicationUser.TOEFL" class="text-danger"></span>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-check mt-4">
-                                <input asp-for="HasAptitudeTest" class="form-check-input" type="checkbox" />
-                                <label asp-for="HasAptitudeTest" class="form-check-label">Has Aptitude Test</label>
+                                <input asp-for="ApplicationUser.HasAptitudeTest" class="form-check-input" type="checkbox" />
+                                <label asp-for="ApplicationUser.HasAptitudeTest" class="form-check-label">Has Aptitude Test</label>
                             </div>
                         </div>
                     </div>
@@ -143,9 +131,12 @@
                                 <div class="card-body">
                                     <h6 class="card-title">Civil ID</h6>
                                     <div class="mb-3">
-                                        <input type="file" id="civilIdFile" name="CivilIdFile"
-                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" required="@(string.IsNullOrEmpty(Model.Application.CivilIdPath))" />
+                                        <input type="file" id="civilIdFile" name="CivilIdFile" asp-for="CivilIdFile"
+                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" />
+                                        
                                     </div>
+                                    <span asp-validation-for="CivilIdFile" class="text-danger"></span>
+                                    
                                     @if (!string.IsNullOrEmpty(Model.Application.CivilIdPath))
                                     {
                                         <div class="document-preview">
@@ -166,9 +157,11 @@
                                 <div class="card-body">
                                     <h6 class="card-title">Passport</h6>
                                     <div class="mb-3">
-                                        <input type="file" id="passportFile" name="PassportFile"
-                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" required="@(string.IsNullOrEmpty(Model.Application.PassportPath))" />
+                                        <input type="file" id="passportFile" name="PassportFile" asp-for="PassportFile"
+                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" />
                                     </div>
+                                    <span asp-validation-for="PassportFile" class="text-danger"></span>
+                                    
                                     @if (!string.IsNullOrEmpty(Model.Application.PassportPath))
                                     {
                                         <div class="document-preview">
@@ -189,9 +182,11 @@
                                 <div class="card-body">
                                     <h6 class="card-title">High School Certificate</h6>
                                     <div class="mb-3">
-                                        <input type="file" id="certificateFile" name="HighSchoolCertificateFile"
-                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" required="@(string.IsNullOrEmpty(Model.Application.PassportPath))" />
+                                        <input type="file" id="certificateFile" name="HighSchoolCertificateFile" asp-for="HighSchoolCertificateFile"
+                                               class="form-control" accept=".pdf,.jpg,.jpeg,.png" />
                                     </div>
+                                    <span asp-validation-for="HighSchoolCertificateFile" class="text-danger"></span>
+                                    
                                     @if (!string.IsNullOrEmpty(Model.Application.HighSchoolCertificatePath))
                                     {
                                         <div class="document-preview">

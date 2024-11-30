@@ -23,9 +23,9 @@ namespace UniSelector.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var users = await _unitOfWork.ApplicationUser.GetAllUsers();
+            var users = _unitOfWork.ApplicationUser.GetAll();
             var userList = users.Select(u => new {
                 u.Id,
                 u.Email,
@@ -40,68 +40,53 @@ namespace UniSelector.Areas.Admin.Controllers
             return Json(new { data = userList });
         }
 
-        public async Task<IActionResult> Upsert(string id)
+        public IActionResult Upsert(string id)
         {
-            var user = await _unitOfWork.ApplicationUser.GetUserById(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
+            var user =  _unitOfWork.ApplicationUser.Get(a => a.Id == id);
             return View(user);
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Upsert(ApplicationUser model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            var existingUser =  _unitOfWork.ApplicationUser.Get(a => a.Id == model.Id);
+
+            existingUser.Email = model.Email;
+            existingUser.UserName = model.Email; // Update UserName if it's based on Email
+            existingUser.Name = model.Name;
+            existingUser.Address = model.Address;
+            existingUser.Grade = model.Grade;
+            existingUser.BirthDate = model.BirthDate;
+            existingUser.Nationality = model.Nationality;
+            existingUser.PlaceOfBirth = model.PlaceOfBirth;
+            existingUser.HighSchoolGraduationYear = model.HighSchoolGraduationYear;
+
+            var result =  _unitOfWork.ApplicationUser.Update(existingUser);
+            if (result)
             {
-                var existingUser = await _unitOfWork.ApplicationUser.GetUserById(model.Id);
-                if (existingUser == null)
-                {
-                    return NotFound();
-                }
-
-                existingUser.Email = model.Email;
-                existingUser.UserName = model.Email; // Update UserName if it's based on Email
-                existingUser.Name = model.Name;
-                existingUser.Address = model.Address;
-                existingUser.Grade = model.Grade;
-                existingUser.BirthDate = model.BirthDate;
-                existingUser.Nationality = model.Nationality;
-                existingUser.PlaceOfBirth = model.PlaceOfBirth;
-                existingUser.HighSchoolGraduationYear = model.HighSchoolGraduationYear;
-
-                var result = await _unitOfWork.ApplicationUser.UpdateUser(existingUser);
-                if (result.Succeeded)
-                {
-                    TempData["success"] = "User updated successfully";
-                    return RedirectToAction(nameof(Index));
-                }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                TempData["success"] = "User updated successfully";
+                return RedirectToAction(nameof(Index));
             }
-
+            _unitOfWork.Save();;
             return View(model);
         }
 
         [HttpDelete]
         public async Task<IActionResult> Delete(string id)
         {
-            var user = await _unitOfWork.ApplicationUser.GetUserById(id);
+            /*var user = await _unitOfWork.ApplicationUser.Get(a => a.Id == id);
             if (user == null)
-            {
+            {*/
                 return Json(new { success = false, message = "Error while deleting" });
-            }
+            /*}*/
 
-            var result = await _unitOfWork.ApplicationUser.DeleteUser(user);
+            /*var result = await _unitOfWork.ApplicationUser.DeleteUser(user);
             if (result.Succeeded)
             {
                 return Json(new { success = true, message = "User deleted successfully" });
-            }
-            return Json(new { success = false, message = "Error while deleting" });
+            }*/
+           // return Json(new { success = false, message = "Error while deleting" });
         }
     }
 }

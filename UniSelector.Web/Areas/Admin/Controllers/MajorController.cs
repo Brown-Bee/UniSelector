@@ -4,12 +4,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Models.ViewModel;
-using UniSelector.Utility;
 
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,User")]
 public class MajorController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -18,7 +17,8 @@ public class MajorController : Controller
     {
         _unitOfWork = unitOfWork;
     }
-
+    
+    [Authorize(Roles = "Admin")]
     public IActionResult Index(int majorId, int facultyId, int standardFactId, int universityId)
     {
         if (facultyId is 0)
@@ -35,19 +35,18 @@ public class MajorController : Controller
             }
         };
         InitPage(facultyId, standardFactId, universityId, majorVm);
-        
-      
         return View("Upsert", majorVm);
     }
 
-    [Authorize(Roles = "User,Admin")]
     public IActionResult GetMajorId(int facultyId)
     {
-        var majors = _unitOfWork.Major.GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty,StandardMajor").ToList();
+        var majors = _unitOfWork.Major
+            .GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty,StandardMajor").ToList();
         return View(majors);
     }
 
     [HttpPost]
+    [Authorize(Roles = "Admin")]
     public IActionResult Upsert(MajorVM majorVm)
     {
         var uniId = majorVm.UniId;
@@ -88,7 +87,7 @@ public class MajorController : Controller
         
     }
     
-
+    [Authorize(Roles = "Admin")]
     public IActionResult Delete(int? id, int facId)
     {
         if (id is null or 0)
@@ -100,6 +99,7 @@ public class MajorController : Controller
     }
 
     [Authorize]
+    [Authorize(Roles = "Admin")]
     public IActionResult DetailsById(int majorId)
     {
         var majors = _unitOfWork.Major.Get(m => m.Id == majorId, 
@@ -146,6 +146,7 @@ public class MajorController : Controller
     #region API CALLS
 
     [HttpGet]
+    [Authorize(Roles = "Admin")]
     public JsonResult GetStandardMajors(int facultyId)
     {
         if (facultyId is 0) return Json("");
@@ -154,6 +155,6 @@ public class MajorController : Controller
             .GetAll(sm => sm.StandardFacultyId == facultyId);
        return Json(standardMajors);
     }
-
+    
     #endregion
 }

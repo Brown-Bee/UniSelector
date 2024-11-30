@@ -2,13 +2,7 @@
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 
-public interface IApplicationUserRepository
+public interface IApplicationUserRepository : IRepository<ApplicationUser>
 {
-    Task<IEnumerable<ApplicationUser>> GetAllUsers();
-    Task<ApplicationUser> GetUserById(string id);
-    Task<IdentityResult> CreateUser(ApplicationUser user, string password);
-    Task<IdentityResult> UpdateUser(ApplicationUser user);
-    Task<IdentityResult> DeleteUser(ApplicationUser user);
-    ApplicationUser GetByEmail(string email);
-    
+    bool Update(ApplicationUser user);
 }

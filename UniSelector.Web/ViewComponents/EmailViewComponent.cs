@@ -12,10 +12,10 @@ namespace UniSelector.Web.ViewComponents
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string Id)
+        public async Task<IViewComponentResult> InvokeAsync(string id)
         {
-            var user = await _unitOfWork.ApplicationUser.GetUserById(Id);
-            return View("Default", user.Email);
+            var user = _unitOfWork.ApplicationUser.Get(a => a.Id == id);
+            return View(user.Email);
         }
     }
 }
