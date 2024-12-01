@@ -40,8 +40,9 @@ public class MajorController : Controller
 
     public IActionResult GetMajorId(int facultyId)
     {
+        
         var majors = _unitOfWork.Major
-            .GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty,StandardMajor").ToList();
+            .GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty.University,StandardMajor").ToList();
         return View(majors);
     }
 

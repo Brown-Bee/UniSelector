@@ -24,7 +24,7 @@ namespace UniSelector.Web.Areas.User.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Apply(int universityId, int facultyId, int majorId)
+        public IActionResult Apply(int universityId, int facultyId, int majorId, string uniEmail)
         {
             var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId is null) return NotFound("User not found");
@@ -41,6 +41,7 @@ namespace UniSelector.Web.Areas.User.Controllers
                     FacultyId = facultyId,
                     MajorId = majorId,
                     UserId = user.Id,
+                    UniEmail = uniEmail
                 }
             };
             return View(applicationVm);

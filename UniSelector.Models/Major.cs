@@ -10,26 +10,26 @@ public class Major
 
     // Basic Info
     public int Credits { get; set; }
-    public decimal AveragePrice { get; set; }
+    public double AveragePrice { get; set; }
     
     [Range(0, 100)]
-    public float MinimumGrade { get; set; }
+    public double MinimumGrade { get; set; }
 
 
     // Testing Requirements
     [Range(0, 9)]
-    public float? MinimumIELTS { get; set; }
+    public double? MinimumIELTS { get; set; }
 
     [Range(0, 120)]
-    public float? MinimumTOEFL { get; set; }
+    public double? MinimumTOEFL { get; set; }
 
     public bool RequiresAptitudeTest { get; set; }
 
     // Job Market Info
     [Range(0, 100)]
-    public float EmploymentRate { get; set; }
+    public double EmploymentRate { get; set; }
 
-    public decimal AverageStartingSalary { get; set; }
+    public double AverageStartingSalary { get; set; }
 
 
     // Relationships

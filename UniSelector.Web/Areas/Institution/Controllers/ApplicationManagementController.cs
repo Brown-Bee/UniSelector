@@ -25,10 +25,10 @@ namespace UniSelector.Areas.Institution.Controllers
         // GET: List all applications for the university
         public IActionResult Index()
         {
+            var uniEmail = User.FindFirstValue(ClaimTypes.Email);
 
-            var universityId = GetCurrentUniversityId();
-            List<Application> applications = _unitOfWork.Application.GetUniversityApplications(universityId).ToList();
-            return View(applications);
+            var applications = _unitOfWork.Application.GetUniversityApplications(uniEmail);
+            return View(applications.ToList());
         }
 
         // GET: Application details

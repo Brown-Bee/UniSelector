@@ -35,7 +35,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">University Type</label>
-                            <select id="universityType" class="form-select">
+                            <select id="universityType" class="form-select filter-input">
                                 <option value="">All Types</option>
                                 <option value="Public">Public</option>
                                 <option value="Private">Private</option>
@@ -50,7 +50,7 @@
                             <div class="input-group">
                                 <span class="input-group-text"><i class="bi bi-trophy"></i></span>
                                 <input type="number" id="maxRank" name="maxRank"
-                                       class="form-control" placeholder="Max Rank"
+                                       class="form-control filter-input" placeholder="Max Rank"
                                        min="1" max="30">
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">Faculty</label>
-                            <select id="facultyId" class="form-select">
+                            <select id="faculty" class="form-select filter-input">
                                 <option value="">All Faculties</option>
                                 @foreach (var faculty in ViewBag.Faculties)
                                 {
@@ -74,12 +74,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">Major</label>
-                            <select id="majorId" class="form-select">
-                                <option value="">All Majors</option>
-                                @* @foreach (var major in ViewBag.Majors)
-                                {
-                                    <option value="@major.Value">@major.Text</option>
-                                } *@
+                            <select id="major" class="form-select filter-input">
                             </select>
                         </div>
                     </div>
@@ -91,7 +86,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">High School Path</label>
-                            <select id="highSchoolPath" class="form-select">
+                            <select id="highSchoolPath" class="form-select filter-input">
                                 <option value="">Any Path</option>
                                 <option value="Scientific">Scientific</option>
                                 <option value="Literary">Literary</option>
@@ -104,7 +99,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">Minimum Grade</label>
-                            <input type="number" id="minGrade" class="form-control"
+                            <input type="number" id="minGrade" class="form-control filter-input"
                                    placeholder="Minimum grade %" min="0" max="100">
                         </div>
                     </div>
@@ -113,7 +108,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">Minimum IELTS</label>
-                            <input type="number" id="minIELTS" class="form-control"
+                            <input type="number" id="minIELTS" class="form-control filter-input"
                                    placeholder="Min IELTS score" min="0" max="9" step="0.5">
                         </div>
                     </div>
@@ -122,7 +117,7 @@
                     <div class="col-md-3 mb-3">
                         <div class="form-group">
                             <label class="form-label">Minimum TOEFL</label>
-                            <input type="number" id="minTOEFL" class="form-control"
+                            <input type="number" id="minTOEFL" class="form-control filter-input"
                                    placeholder="Min TOEFL score" min="0" max="120">
                         </div>
                     </div>
@@ -134,9 +129,9 @@
                         <label class="form-label">Price Range</label>
                         <div class="input-group">
                             <span class="input-group-text">KWD</span>
-                            <input type="number" id="minPrice" class="form-control" placeholder="Min">
+                            <input type="number" id="minPrice" class="form-control filter-input" placeholder="Min">
                             <span class="input-group-text">to</span>
-                            <input type="number" id="maxPrice" class="form-control" placeholder="Max">
+                            <input type="number" id="maxPrice" class="form-control filter-input" placeholder="Max">
                         </div>
                     </div>
 
@@ -156,12 +151,11 @@
                     </div>
                 </div>
             </div>
-
             <!-- Universities Grid -->
-            <div class="section-container">
+            <div  class="section-container">
                 <h5 class="section-title">Results</h5>
-                <div class="row pb-3">
-                    @foreach (var university in Model)
+                <div id="uni-grid" class="row pb-3">
+                    @*@foreach (var university in Model)
                     {
                         <div class="col-lg-3 col-sm-6 mb-4">
                             <div class="card h-100 border-0 shadow rounded-3 overflow-hidden university-card">
@@ -193,7 +187,7 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                    }*@
                 </div>
             </div>
         </div>
@@ -240,3 +234,45 @@
         color: #495057;
     }
 </style>
+
+@section Scripts {
+    <script src="~/js/universityFilter.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Faculty dropdown change event
+            $('#faculty').on('change', function () {
+                var selectedFacultyId = $(this).val();
+                var majorDropdown = $('#major');
+
+                // Clear existing options
+                majorDropdown.empty();
+                majorDropdown.append($('<option>', {
+                    value: '',
+                    text: 'All Majors'
+                }));
+
+                // If a faculty is selected, fetch its majors
+                if (selectedFacultyId) {
+                    $.ajax({
+                        url: '/User/Home/GetMajorsByFaculty',
+                        type: 'GET',
+                        data: { facultyId: selectedFacultyId },
+                        success: function (majors) {
+                            // Populate major dropdown
+                            $.each(majors, function (i, major) {
+                                majorDropdown.append($('<option>', {
+                                    value: major.value,
+                                    text: major.text
+                                }));
+                            });
+                        },
+                        error: function () {
+                            console.log('Error fetching majors');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

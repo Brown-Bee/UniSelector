@@ -22,10 +22,9 @@ namespace UniSelector.Models
         public string PhoneNumber { get; set; }
         
         [EmailAddress]
-        [NotMapped]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         
-        [Range(1,30)]
+        [Range(1,30)]   
         public int KuwaitRank { get; set; }
         [ValidateNever]
         public string? ImageUrl { get; set; }

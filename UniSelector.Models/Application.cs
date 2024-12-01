@@ -34,6 +34,7 @@ public class Application
     public bool IsProfileComplete { get; set; }
 
     // User and University info
+    public string? UniEmail { get; set; }
     public string UserId { get; set; }
     [ForeignKey("UserId")]
     [ValidateNever]

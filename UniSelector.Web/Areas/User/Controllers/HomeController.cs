@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UniSelector.DataAccess.Repository.IRepository;
@@ -57,6 +59,11 @@ namespace UniSelector.Web.Areas.User.Controllers
                 Text = sf.CombinedName,
                 Value = sf.Id.ToString()
             });
+            /*ViewBag.Majors = _unitOfWork.StandardMajor.GetAll().Select(sf => new SelectListItem
+            {
+                Text = sf.CombinedName,
+                Value = sf.Id.ToString()
+            });*/
             ViewBag.CurrentSearchString = searchString;
             ViewBag.CurrentFacultyId = facultyId;
             ViewBag.CurrentMaxRank = maxRank;
@@ -77,6 +84,34 @@ namespace UniSelector.Web.Areas.User.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        
+        [HttpGet]
+        public JsonResult GetMajorsByFaculty(int facultyId)
+        {
+            // Retrieve majors associated with the selected faculty
+            var majors = _unitOfWork.StandardMajor.GetAll()
+                .Where(m => m.StandardFacultyId == facultyId)
+                .Select(m => new SelectListItem
+                {
+                    Text = m.CombinedName,
+                    Value = m.Id.ToString()
+                })
+                .ToList();
+
+            return Json(majors);
+        }
+        
+        [HttpGet]
+        public async Task<JsonResult> FilterUniversities([FromQuery] UniversityFilter filter)
+        {
+            var results = await _unitOfWork.University.FilterUniversities(filter);
+            var jsonOptions = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                MaxDepth = 64
+            };
+            return Json(results, jsonOptions);
         }
     }
 }

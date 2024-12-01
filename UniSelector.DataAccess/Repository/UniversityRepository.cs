@@ -20,6 +20,7 @@ namespace UniSelector.DataAccess.Repository
             {
                 objFromDb.Name = obj.Name;
                 objFromDb.type = obj.type;
+                objFromDb.Email = obj.Email;
                 objFromDb.FullDescription = obj.FullDescription;
                 objFromDb.SmallDescription = obj.SmallDescription;
                 objFromDb.location = obj.location;
@@ -46,8 +47,93 @@ namespace UniSelector.DataAccess.Repository
                 .Include(u => u.Faculties)
                 .ThenInclude(u => u.StandardFaculty)
                 .FirstOrDefault(u => u.Id == id);
-            
+        }
+        
+        public async Task<List<University>> FilterUniversities(UniversityFilter filter)
+        {
+            var query = _db.Universities
+                .Include(u => u.Faculties)
+                .ThenInclude(f => f.StandardFaculty)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.UniversityType))
+            {
+                query = query.Where(u => u.type == filter.UniversityType);
+            }
+
+            if (!string.IsNullOrEmpty(filter.Faculty))
+            {
+                query = query
+                    .Where(u => u.Faculties
+                        .Any(f => f.StandardFaculty != null && f.StandardFaculty.Id.ToString() == filter.Faculty))
+                    .AsQueryable();
+            }
+            if (!string.IsNullOrEmpty(filter.Major))
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .ThenInclude(m => m.StandardMajor)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.StandardMajor != null && m.StandardMajor.Id.ToString() == filter.Major)));
+            }
+
+            if (filter.MinimumGrade.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumGrade <= filter.MinimumGrade)));
+            }
+
+            if (filter.IeltsScore.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumIELTS >= filter.IeltsScore)));
+            }
+
+            if (filter.ToeflScore.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumTOEFL >= filter.ToeflScore)));
+            }
+
+            if (!string.IsNullOrEmpty(filter.HighSchoolPath))
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .ThenInclude(m => m.StandardMajor)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.StandardMajor!.HighSchoolPath == filter.HighSchoolPath)));            }
+
+            if (filter.MinPrice.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.AveragePrice >= filter.MinPrice)));
+            }
+
+            if (filter.MaxPrice.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.AveragePrice <= filter.MaxPrice)));
+            }
+
+            if (filter.MaxRank.HasValue)
+            {
+                query = query
+                    .Where(u => u.KuwaitRank >= filter.MaxRank);
+            }
+
+            return await query.ToListAsync();
         }
         
     }
 }
+

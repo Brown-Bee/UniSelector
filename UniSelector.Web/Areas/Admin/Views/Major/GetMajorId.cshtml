@@ -33,6 +33,8 @@
                             <td>
                                 <div class="w-75 btn-group" role="group">
                                     <a asp-area="User" asp-controller="Application" asp-action="Apply"
+                                       
+                                       asp-route-uniEmail="@obj.Faculty!.University!.Email"
                                        asp-route-universityId="@obj.Faculty!.UniversityId"
                                        asp-route-facultyId="@obj.Faculty.Id"
                                        asp-route-majorId="@obj.Id"

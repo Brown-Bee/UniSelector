@@ -7,5 +7,6 @@ namespace UniSelector.DataAccess.Repository.IRepository
         void Update(University obj);
         IEnumerable<University> Search(string searchString);
         University? GetUniversityWithFaculties(int id);
+        Task<List<University>> FilterUniversities(UniversityFilter filter);
     }
 }

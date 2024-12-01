@@ -35,12 +35,11 @@ public class ApplicationRepository : Repository<Application>, IApplicationReposi
             .Where(a => a.UserId == userId);
     }
 
-    public IEnumerable<Application> GetUniversityApplications(int universityId)
+    public List<Application> GetUniversityApplications(string? uniEmail)
     {
+        
         return _db.Applications
-            .Include(a => a.User)
-            .Include(a => a.Faculty)
-            .Include(a => a.Major)
-            .Where(a => a.UniversityId == universityId);
+            .Include(a => a.University)
+            .Where(a => a.University != null && a.University.Email == uniEmail).ToList();
     }
 }
