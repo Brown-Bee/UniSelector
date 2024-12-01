@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Security.Claims;
+using UniSelector.DataAccess.Data;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Utility;
@@ -13,21 +16,18 @@ namespace UniSelector.Areas.Institution.Controllers
     public class ApplicationManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ApplicationManagementController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+        public ApplicationManagementController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
-            _userManager = userManager;
         }
 
         // GET: List all applications for the university
         public IActionResult Index()
         {
-            var universityId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-
-            var applications = _unitOfWork.Application.GetUniversityApplications(universityId);
+            var universityId = GetCurrentUniversityId();
+            List<Application> applications = _unitOfWork.Application.GetUniversityApplications(universityId).ToList();
             return View(applications);
         }
 

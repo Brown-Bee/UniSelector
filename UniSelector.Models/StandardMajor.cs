@@ -19,7 +19,8 @@ namespace UniSelector.Models
         public string? Description { get; set; }  // Career prospects, program details
         [Display(Name = "Study Duration (Years)")]
         public int StudyDuration { get; set; }
-        public string HighSchoolPath { get; set; }  // Scientific/Literary track
+        [Display(Name = "High School Path")]
+        public string HighSchoolPath { get; set; }  // Scientific/Literary/Both track
 
         public int StandardFacultyId { get; set; }
         [ForeignKey("StandardFacultyId")]
