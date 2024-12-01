@@ -28,24 +28,6 @@ namespace UniSelector.Areas.Admin.Controllers
             return View(objApplicationUser);
         }
 
-        /*[HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _unitOfWork.ApplicationUser.GetAll();
-            var userList = users.Select(u => new {
-                u.Id,
-                u.Email,
-                u.Name,
-                u.Address,
-                u.Grade,
-                u.BirthDate,
-                u.Nationality,
-                u.PlaceOfBirth,
-                u.HighSchoolGraduationYear
-            });
-            return Json(new { data = userList });
-        }*/
-
         public IActionResult Upsert(string id)
         {
             var user =  _unitOfWork.ApplicationUser.Get(a => a.Id == id);
