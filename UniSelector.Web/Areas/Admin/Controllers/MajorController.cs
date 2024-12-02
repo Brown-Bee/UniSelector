@@ -62,17 +62,20 @@ public class MajorController : Controller
         var facultyFromDb = _unitOfWork.Faculty.Get(f => f.StandardFacultyId == majorVm.StandardFacultyId  
            && f.UniversityId == majorVm.UniId, includeProperties:"Majors"                            
         );
-        foreach (var major in facultyFromDb.Majors)
+        // Only perform this check when adding a new major
+        if (majorVm.Major.Id == 0)
         {
-            if (major.StandardMajorId == standMajorId)
+            foreach (var major in facultyFromDb.Majors)
             {
-                ModelState.AddModelError("", "The Major already exists");
-                InitPage(factId, standFactId, uniId, majorVm);
-                return View("Upsert", majorVm);
+                if (major.StandardMajorId == standMajorId)
+                {
+                    ModelState.AddModelError("", "The Major already exists");
+                    InitPage(factId, standFactId, uniId, majorVm);
+                    return View("Upsert", majorVm);
+                }
             }
         }
-        
-        
+
         if (majorVm.Major.Id is 0)
         {
             _unitOfWork.Major.Add(majorVm.Major);
