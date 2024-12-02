@@ -75,7 +75,7 @@ public class FacultyController : Controller
             _unitOfWork.Faculty.Update(facultyVm.faculty);
         }
         _unitOfWork.Save();
-        TempData["success"] = "Faculty added Successfully";
+        TempData["success"] = (facultyVm.faculty.Id is 0) ? "Faculty added Successfully" : "Faculty Updated Successfully";
         return RedirectToAction(nameof(Index), new {universityId = uniId});
     }
 

@@ -39,6 +39,11 @@ public class ApplicationRepository : Repository<Application>, IApplicationReposi
     {
         
         return _db.Applications
+            .Include(a => a.User)
+            .Include(a => a.Major)
+            .Include(a => a.Major!.StandardMajor)
+            .Include(a => a.Faculty)
+            .Include(a => a.Faculty!.StandardFaculty)
             .Include(a => a.University)
             .Where(a => a.University != null && a.University.Email == uniEmail).ToList();
     }
