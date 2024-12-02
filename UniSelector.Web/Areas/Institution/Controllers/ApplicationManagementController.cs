@@ -12,7 +12,7 @@ using UniSelector.Utility;
 namespace UniSelector.Areas.Institution.Controllers
 {
     [Area("Institution")]
-    [Authorize(Roles = SD.RoleUniversity)]
+    [Authorize(Roles = "Institution,User")]
     public class ApplicationManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -23,6 +23,7 @@ namespace UniSelector.Areas.Institution.Controllers
         }
 
         // GET: List all applications for the university
+        [Authorize(Roles = "Institution")]
         public IActionResult Index()
         {
             var uniEmail = User.FindFirstValue(ClaimTypes.Email);
@@ -31,12 +32,46 @@ namespace UniSelector.Areas.Institution.Controllers
             return View(applications.ToList());
         }
 
-        // GET: Application details
+        // Unified Details action
         public IActionResult Details(int id)
         {
             var application = _unitOfWork.Application.Get(a => a.Id == id,
-                includeProperties: "User,Major,Faculty");
+                includeProperties: "User,Major.StandardMajor,Faculty.StandardFaculty,University");
+
+            if (application == null) return NotFound();
+
+            // Verify user has permission to view this application
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+
+            if (User.IsInRole("User") && application.UserId != userId)
+                return Forbid();
+
+            if (User.IsInRole("Institution") && application.UniEmail != userEmail)
+                return Forbid();
+
             return View(application);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "User")]
+        public IActionResult Delete(int id)
+        {
+            var application = _unitOfWork.Application.Get(a => a.Id == id);
+            if (application == null) return NotFound();
+
+            // Verify user owns this application
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (application.UserId != userId) return Forbid();
+
+            if (application.Response != "Pending")
+                return BadRequest("Cannot cancel a processed application");
+
+            _unitOfWork.Application.Remove(application);
+            _unitOfWork.Save();
+
+            TempData["success"] = "Application cancelled successfully";
+            return RedirectToAction("MyApplications", "Application", new { area = "User" });
         }
 
         // POST: Update application status

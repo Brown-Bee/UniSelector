@@ -36,23 +36,11 @@
                                 </span>
                             </td>
                             <td>
-                                <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button"
-                                            id="dropdownMenuButton-@obj.Id"
-                                            data-bs-toggle="dropdown"
-                                            aria-expanded="false">
-                                        Actions
-                                    </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton-@obj.Id">
-                                        <li>
-                                            <a class="dropdown-item" asp-action="Details" asp-route-id="@obj.Id"
-                                               onmouseover="this.style.backgroundColor='#5cb85e'; this.style.color='white';"
-                                               onmouseout="this.style.backgroundColor=''; this.style.color='';">
-                                                <i class="fas fa-info-circle"></i> Details
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <a class="btn btn-primary btn-sm"
+                                   asp-action="Details"
+                                   asp-route-id="@obj.Id">
+                                    <i class="fas fa-info-circle"></i> Details
+                                </a>
                             </td>
                         </tr>
                     }

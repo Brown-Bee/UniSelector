@@ -1,157 +1,271 @@
-﻿@*This is the Details View in ApplicationManagementController in Institution Area*@
-@model Application
+﻿@model Application
 
 <div class="container" style="margin-top: 6rem;">
-    <div class="card shadow-sm">
-        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <h3 class="text-white py-1">Application Details</h3>
-                </div>
+    <div class="card shadow">
+        <div class="card-header bg-secondary bg-gradient py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="text-white mb-0">Application Details</h3>
+                <span class="badge bg-@(Model.Response == "Pending" ? "warning" :
+                               Model.Response == "Accepted" ? "success" : "danger") fs-5">
+                    @Model.Response
+                </span>
             </div>
         </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5>Student Information</h5>
-                    <hr />
-                    <dl class="row">
-                        <dt class="col-sm-4">Name:</dt>
-                        <dd class="col-sm-8">@Model.User?.Name</dd>
-                        <dt class="col-sm-4">Email:</dt>
-                        <dd class="col-sm-8">@Model.User?.Email</dd>
-                        <dt class="col-sm-4">Phone:</dt>
-                        <dd class="col-sm-8">@Model.User?.PhoneNumber</dd>
-                        <dt class="col-sm-4">Grade:</dt>
-                        <dd class="col-sm-8">@Model.User?.Grade%</dd>
-                    </dl>
-                </div>
-                <div class="col-md-6">
-                    <h5>Application Status</h5>
-                    <hr />
-                    <dl class="row">
-                        <dt class="col-sm-4">Faculty:</dt>
-                        <dd class="col-sm-8">@(Model.Faculty?.StandardFaculty?.CombinedName ?? "N/A")</dd>
-                        <dt class="col-sm-4">Major:</dt>
-                        <dd class="col-sm-8">@(Model.Major?.StandardMajor?.CombinedName ?? "N/A")</dd>
-                        <dt class="col-sm-4">Date:</dt>
-                        <dd class="col-sm-8">@Model.ApplicationDate.ToString("dd/MM/yyyy")</dd>
-                        <dt class="col-sm-4">Status:</dt>
-                        <dd class="col-sm-8">
-                            <span class="badge bg-@(Model.Response == "Pending" ? "warning" : Model.Response == "Accepted" ? "success" : "danger")">
-                                @Model.Response
-                            </span>
-                        </dd>
-                    </dl>
-                </div>
-            </div>
 
-            <!-- Documents -->
+        <div class="card-body p-4">
+            <!-- University and Program Info -->
             <div class="row mb-4">
-                <div class="col-12">
-                    <h5>Submitted Documents</h5>
-                    <hr />
-                </div>
-
-                <!-- Civil ID -->
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title">Civil ID</h6>
-                            @if (!string.IsNullOrEmpty(Model.CivilIdPath))
-                            {
-                                <div class="document-preview">
-                                    <a href="@Model.CivilIdPath" target="_blank" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-eye"></i> View
-                                    </a>
-                                </div>
-                            }
-                            else
-                            {
-                                <p class="text-muted">No document uploaded</p>
-                            }
+                <div class="col-md-6">
+                    <div class="info-card">
+                        <h5 class="border-bottom pb-2 mb-3">University Information</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">University:</span>
+                                <span class="fw-medium">@Model.University?.Name</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Faculty:</span>
+                                <span class="fw-medium">@Model.Faculty?.StandardFaculty?.CombinedName</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Major:</span>
+                                <span class="fw-medium">@Model.Major?.StandardMajor?.CombinedName</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Passport -->
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title">Passport</h6>
-                            @if (!string.IsNullOrEmpty(Model.PassportPath))
+                <div class="col-md-6">
+                    <div class="info-card">
+                        <h5 class="border-bottom pb-2 mb-3">Application Status</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Submission Date:</span>
+                                <span class="fw-medium">@Model.ApplicationDate.ToString("dd/MM/yyyy")</span>
+                            </div>
+                            @if (!string.IsNullOrEmpty(Model.UniversityFeedback))
                             {
-                                <div class="document-preview">
-                                    <a href="@Model.PassportPath" target="_blank" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-eye"></i> View
-                                    </a>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted">Feedback:</span>
+                                    <span class="fw-medium">@Model.UniversityFeedback</span>
                                 </div>
                             }
-                            else
+                            @if (User.IsInRole("Institution"))
                             {
-                                <p class="text-muted">No document uploaded</p>
-                            }
-                        </div>
-                    </div>
-                </div>
-
-                <!-- High School Certificate -->
-                <div class="col-md-4 mb-3">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 class="card-title">High School Certificate</h6>
-                            @if (!string.IsNullOrEmpty(Model.HighSchoolCertificatePath))
-                            {
-                                <div class="document-preview">
-                                    <a href="@Model.HighSchoolCertificatePath" target="_blank" class="btn btn-outline-primary btn-sm">
-                                        <i class="fas fa-eye"></i> View
-                                    </a>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted">Student:</span>
+                                    <span class="fw-medium">@Model.User?.Name</span>
                                 </div>
-                            }
-                            else
-                            {
-                                <p class="text-muted">No document uploaded</p>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted">Grade:</span>
+                                    <span class="fw-medium">@Model.User?.Grade%</span>
+                                </div>
                             }
                         </div>
                     </div>
                 </div>
             </div>
 
-            @if (Model.Response == "Pending")
-            {
-                <!-- Decision Form -->
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <h5>Make Decision</h5>
-                        <hr />
-                        <form method="post" asp-action="UpdateStatus">
-                            <input type="hidden" name="id" value="@Model.Id" />
-                            <div class="form-group mb-3">
-                                <label>Feedback (Optional)</label>
-                                <textarea name="feedback" class="form-control" rows="3"></textarea>
+            <!-- Documents Section -->
+            <div class="documents-section mb-4">
+                <h5 class="border-bottom pb-2 mb-3">Documents</h5>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="bi bi-person-vcard"></i>
                             </div>
-                            <div class="text-center">
-                                <button type="submit" name="status" value="Accepted" class="btn btn-success mx-2">
-                                    <i class="fas fa-check"></i> Accept
-                                </button>
-                                <button type="submit" name="status" value="Rejected" class="btn btn-danger mx-2">
-                                    <i class="fas fa-times"></i> Reject
-                                </button>
+                            <div class="document-info">
+                                <h6>Civil ID</h6>
+                                @if (!string.IsNullOrEmpty(Model.CivilIdPath))
+                                {
+                                    <div class="document-actions">
+                                        <a href="@Model.CivilIdPath" target="_blank" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Not uploaded</span>
+                                }
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            }
 
-            <!-- Back Button -->
-            <div class="row">
-                <div class="row mt-4">
-                    <div class="col-12 text-center">
-                        <a asp-action="Index" class="btn btn-secondary">
-                            <i class="fas fa-arrow-left"></i> Back to List
-                        </a>
+                    <div class="col-md-4">
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="bi bi-passport"></i>
+                            </div>
+                            <div class="document-info">
+                                <h6>Passport</h6>
+                                @if (!string.IsNullOrEmpty(Model.PassportPath))
+                                {
+                                    <div class="document-actions">
+                                        <a href="@Model.PassportPath" target="_blank" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Not uploaded</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="document-card">
+                            <div class="document-icon">
+                                <i class="bi bi-file-earmark-text"></i>
+                            </div>
+                            <div class="document-info">
+                                <h6>High School Certificate</h6>
+                                @if (!string.IsNullOrEmpty(Model.HighSchoolCertificatePath))
+                                {
+                                    <div class="document-actions">
+                                        <a href="@Model.HighSchoolCertificatePath" target="_blank" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Not uploaded</span>
+                                }
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-center gap-3">
+                @if (User.IsInRole("Institution"))
+                {
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Applications
+                    </a>
+                    @if (Model.Response == "Pending")
+                    {
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#responseModal">
+                            <i class="bi bi-check-circle"></i> Respond
+                        </button>
+                    }
+                }
+                else
+                {
+                    <a asp-area="User" asp-controller="Application" asp-action="MyApplications" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to My Applications
+                    </a>
+                    @if (Model.Response == "Pending")
+                    {
+                        <button type="button" class="btn btn-danger" onclick="confirmCancel(@Model.Id)">
+                            <i class="bi bi-x-circle"></i> Cancel Application
+                        </button>
+                    }
+                }
             </div>
         </div>
     </div>
+</div>
+
+<!-- Response Modal for Institution -->
+@if (User.IsInRole("Institution") && Model.Response == "Pending")
+{
+    <div class="modal fade" id="responseModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form method="post" asp-action="UpdateStatus">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    <div class="modal-header">
+                        <h5 class="modal-title">Application Response</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Feedback (Optional)</label>
+                            <textarea name="feedback" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" name="status" value="Accepted" class="btn btn-success">Accept</button>
+                        <button type="submit" name="status" value="Rejected" class="btn btn-danger">Reject</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+<form id="deleteForm" method="post" asp-area="Institution" 
+      asp-controller="ApplicationManagement" asp-action="Delete">
+    <input type="hidden" name="id" id="applicationId" />
+</form>
+
+@section Styles {
+    <style>
+        .info-card {
+            padding: 1.25rem;
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            height: 100%;
+        }
+
+        .document-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 0.5rem;
+            height: 100%;
+        }
+
+        .document-icon {
+            font-size: 2rem;
+            color: #0d6efd;
+        }
+
+        .document-info {
+            flex: 1;
+        }
+
+            .document-info h6 {
+                margin-bottom: 0.5rem;
+            }
+
+        .document-actions {
+            margin-top: 0.5rem;
+        }
+
+        .badge {
+            padding: 0.5em 1em;
+        }
+    </style>
+}
+
+
+@section Scripts {
+    <script>
+        function confirmCancel(id) 
+        {
+            Swal.fire({
+                title: 'Cancel Application',
+                text: 'Are you sure you want to cancel this application?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, cancel it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('#applicationId').val(id);
+                    $('#deleteForm').submit();
+                }
+            });
+        }
+    </script>
+}

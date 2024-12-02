@@ -150,9 +150,13 @@
                     <a asp-action="MyApplications" class="btn btn-secondary">
                         <i class="fas fa-arrow-left"></i> Back to List
                     </a>
-                    @if (Model.Response == "Pending")
+                    @if (Model.Response == "Pending" && User.IsInRole("User"))
                     {
-                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                        <a class="btn btn-danger"
+                           asp-area="Institution"
+                           asp-controller="ApplicationManagement"
+                           asp-action="Delete"
+                           asp-route-id="@Model.Id">
                             <i class="fas fa-times"></i> Cancel Application
                         </a>
                     }
