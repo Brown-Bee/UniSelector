@@ -30,7 +30,9 @@ public class ApplicationRepository : Repository<Application>, IApplicationReposi
     {
         return _db.Applications
             .Include(a => a.University)
+            .Include(a => a.Faculty!.StandardFaculty)
             .Include(a => a.Faculty)
+            .Include(a => a.Major!.StandardMajor)
             .Include(a => a.Major)
             .Where(a => a.UserId == userId);
     }
