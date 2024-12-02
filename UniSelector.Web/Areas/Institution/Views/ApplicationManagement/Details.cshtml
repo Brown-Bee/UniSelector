@@ -146,7 +146,7 @@
                 @if (User.IsInRole("Institution"))
                 {
                     <a asp-action="Index" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Back to Applications
+                        <i class="bi bi-arrow-left"></i> Back
                     </a>
                     @if (Model.Response == "Pending")
                     {
@@ -158,7 +158,7 @@
                 else
                 {
                     <a asp-area="User" asp-controller="Application" asp-action="MyApplications" class="btn btn-secondary">
-                        <i class="bi bi-arrow-left"></i> Back to My Applications
+                        <i class="bi bi-arrow-left"></i> Back
                     </a>
                     @if (Model.Response == "Pending")
                     {
