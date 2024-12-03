@@ -96,6 +96,7 @@ namespace UniSelector.DataAccess.Migrations
                     SmallDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     KuwaitRank = table.Column<int>(type: "int", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -269,13 +270,13 @@ namespace UniSelector.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Credits = table.Column<int>(type: "int", nullable: false),
-                    AveragePrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MinimumGrade = table.Column<float>(type: "real", nullable: false),
-                    MinimumIELTS = table.Column<float>(type: "real", nullable: true),
-                    MinimumTOEFL = table.Column<float>(type: "real", nullable: true),
+                    AveragePrice = table.Column<double>(type: "float", nullable: false),
+                    MinimumGrade = table.Column<double>(type: "float", nullable: false),
+                    MinimumIELTS = table.Column<double>(type: "float", nullable: true),
+                    MinimumTOEFL = table.Column<double>(type: "float", nullable: true),
                     RequiresAptitudeTest = table.Column<bool>(type: "bit", nullable: false),
-                    EmploymentRate = table.Column<float>(type: "real", nullable: false),
-                    AverageStartingSalary = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    EmploymentRate = table.Column<double>(type: "float", nullable: false),
+                    AverageStartingSalary = table.Column<double>(type: "float", nullable: false),
                     StandardMajorId = table.Column<int>(type: "int", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -312,6 +313,7 @@ namespace UniSelector.DataAccess.Migrations
                     IsPassportVerified = table.Column<bool>(type: "bit", nullable: false),
                     IsHighSchoolCertificateVerified = table.Column<bool>(type: "bit", nullable: false),
                     IsProfileComplete = table.Column<bool>(type: "bit", nullable: false),
+                    UniEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UniversityId = table.Column<int>(type: "int", nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false),
@@ -373,13 +375,19 @@ namespace UniSelector.DataAccess.Migrations
 
             migrationBuilder.InsertData(
                 table: "Universities",
-                columns: new[] { "Id", "FullDescription", "ImageUrl", "KuwaitRank", "Name", "PhoneNumber", "SmallDescription", "location", "type" },
+                columns: new[] { "Id", "Email", "FullDescription", "ImageUrl", "KuwaitRank", "Name", "PhoneNumber", "SmallDescription", "location", "type" },
                 values: new object[,]
                 {
-                    { 1, "A leading open education institution in the Arab world.", "/images/University/AOU.png", 1, "Arab Open University (AOU)", "99999999", "", "العارضية-Ardya", "Private" },
-                    { 2, "Offering American-style education with a Middle Eastern perspective.", "/images/University/AUM.png", 2, "American University In Middle East (AUM)", "99999999", "", "العقيلة-Egila", "Private" },
-                    { 3, "Providing a comprehensive American liberal arts education.", "/images/University/AUK.png", 3, "American University Of Kuwait (AUK)", "99999999", "", "السالمية-Salmya", "Private" },
-                    { 4, "The premier public institution of higher education in Kuwait.", "/images/university/KU.png", 4, "Kuwait University (KU)", "99999999", "", "الشويخ-Shwaikh", "Public" }
+                    { 1, "", "Accredited liberal arts institution offering American-style education since 2004. Located in Salmiya, Kuwait's premier university district.", "/images/University/AUK.png", 1, "American University of Kuwait (AUK)", "+965 1802040", "Kuwait's leading American-style liberal arts university", "Salmiya, Block 13, Salem Al Mubarak Street", "Private" },
+                    { 2, "", "Leading engineering and business focused university established in 2008. Known for strong industry partnerships and state-of-the-art facilities.", "/images/University/AUM.png", 2, "American University of Middle East (AUM)", "+965 22251400", "Premier engineering and business education in Kuwait", "Egaila, Block 6, Salem Sabah Al-Salem Area", "Private" },
+                    { 3, "", "First private university in Kuwait, established in 2002. Offers American-style education with focus on business and technology.", "/images/University/GUST.png", 3, "Gulf University for Science and Technology (GUST)", "+965 25307000", "Kuwait's first private university for business and technology", "Mubarak Al-Abdullah Area, West Mishref", "Private" },
+                    { 4, "", "Regional university focused on accessible education since 2002. Partners with UK Open University for international accreditation.", "/images/University/AOU.png", 4, "Arab Open University (AOU)", "+965 24394400", "Accessible quality education across Kuwait", "Al-Ardiya, Block 3, Street 37", "Private" },
+                    { 5, "", "Specialized institution focusing on engineering and technology education. Strong emphasis on practical skills and industry readiness.", "/images/University/KCST.png", 5, "Kuwait College of Science and Technology (KCST)", "+965 24980450", "Advanced technical education in Kuwait", "Doha District, Block 4", "Private" },
+                    { 6, "", "Australian-standard technical and vocational education. Strong focus on engineering and maritime studies.", "/images/University/ACK.png", 6, "Australian College of Kuwait (ACK)", "+965 1828225", "Australian-standard technical education", "Mishref, Block 5", "Private" },
+                    { 7, "", "Women's college offering Australian-standard education in business, design and technology.", "/images/University/BHCK.png", 7, "Box Hill College Kuwait", "+965 23962000", "Quality education for women in Kuwait", "Abu Halifa, Block 1", "Private" },
+                    { 8, "", "Specialized institution focused on legal education and jurisprudence studies.", "/images/University/KILAW.png", 8, "Kuwait International Law School", "+965 22280111", "Premier legal education in Kuwait", "Doha, Block 2", "Private" },
+                    { 9, "", "Specialized college offering aviation engineering and management programs.", "/images/University/CAT.png", 9, "College of Aviation Technology", "+965 24315555", "Kuwait's aviation education hub", "Kuwait International Airport Area", "Private" },
+                    { 10, "", "Modern technical college focusing on IT, business and telecommunications.", "/images/University/KTECH.png", 10, "Kuwait Technical College", "+965 22280222", "Advanced technical education", "Shuwaikh Educational Area", "Private" }
                 });
 
             migrationBuilder.InsertData(
@@ -387,14 +395,26 @@ namespace UniSelector.DataAccess.Migrations
                 columns: new[] { "Id", "AdmissionRequirements", "Description", "StandardFacultyId", "UniversityId" },
                 values: new object[,]
                 {
-                    { 1, "Minimum 65% high school grade, English proficiency required", "Leading business education in Kuwait with focus on modern business practices", 4, 1 },
-                    { 2, "Minimum 70% high school grade, Strong mathematics background", "Cutting-edge computing education with focus on practical skills", 14, 1 },
-                    { 3, "Minimum 60% high school grade, Interview required", "Comprehensive arts education with focus on cultural studies", 5, 1 },
-                    { 4, "Minimum 65% high school grade, Good communication skills", "Modern educational practices with focus on teaching methods", 6, 1 },
-                    { 5, "Minimum 75% high school grade, Strong science background", "Premier engineering programs with international standards", 1, 3 },
-                    { 6, "Minimum 70% high school grade, English proficiency required", "American-standard business education with global perspective", 4, 3 },
-                    { 7, "Minimum 70% high school grade, Strong scientific aptitude", "Advanced scientific research and education programs", 3, 3 },
-                    { 8, "Minimum 65% high school grade, Portfolio submission", "Creative arts and modern media studies", 20, 3 }
+                    { 1, "Minimum 70% high school GPA, TOEFL 80+ or IELTS 6.5+", "Comprehensive liberal arts education with diverse programs in humanities and sciences", 5, 1 },
+                    { 2, "Minimum 70% high school GPA, TOEFL 80+ or IELTS 6.5+", "AACSB-accredited business programs with focus on global business practices", 4, 1 },
+                    { 3, "Minimum 75% high school GPA in Scientific track, Strong math/science background", "ABET-accredited engineering programs with state-of-the-art facilities", 1, 1 },
+                    { 4, "Minimum 70% high school GPA, Portfolio submission required", "Creative design education with focus on practical applications", 13, 1 },
+                    { 5, "Minimum 75% in Scientific track, Strong mathematics background", "Comprehensive engineering programs with modern laboratories", 14, 2 },
+                    { 6, "Minimum 70% high school GPA, English proficiency required", "Industry-focused business education with international accreditation", 4, 2 },
+                    { 7, "Minimum 70% GPA, TOEFL 79+ or IELTS 6.5+", "Comprehensive programs in humanities, media, and computer science", 5, 3 },
+                    { 8, "Minimum 70% GPA, English proficiency required", "AACSB-accredited business school with focus on practical skills", 4, 3 },
+                    { 9, "Minimum 75% in Scientific stream, Strong math background", "Advanced technical education in engineering and computing", 14, 5 },
+                    { 10, "Minimum 60% GPA, Basic English proficiency", "Flexible business education with UK partnership", 4, 4 },
+                    { 11, "Minimum 65% GPA, Basic programming knowledge preferred", "IT and computing programs with international recognition", 14, 4 },
+                    { 12, "Minimum 75% in Scientific track, Mathematics proficiency", "Australian-standard engineering education", 1, 6 },
+                    { 13, "Minimum 70% GPA, English proficiency required", "Business programs with Australian curriculum", 4, 6 },
+                    { 14, "Minimum 65% GPA, English proficiency test", "Women's business education with Australian standards", 4, 7 },
+                    { 15, "Portfolio submission, Interview required", "Creative arts and design programs for women", 20, 7 },
+                    { 16, "Minimum 75% GPA, Arabic and English proficiency", "Comprehensive legal education with focus on Kuwait and international law", 8, 8 },
+                    { 17, "Minimum 75% in Scientific track, English proficiency required", "Specialized aviation engineering and maintenance programs", 1, 9 },
+                    { 18, "Minimum 65% GPA, Basic technical aptitude", "Technical IT and networking education", 14, 10 },
+                    { 19, "Minimum 65% GPA, English proficiency test", "Applied business and management programs", 4, 10 },
+                    { 20, "Minimum 60% GPA, Higher English proficiency required", "English language and literature studies with focus on linguistics and translation", 5, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -455,7 +475,7 @@ namespace UniSelector.DataAccess.Migrations
                     { 51, "City planning and development", "Scientific", "تخطيط المدن", "Urban Planning", 13, 5 },
                     { 52, "Environmental design", "Scientific", "تصميم المناظر الطبيعية", "Landscape Architecture", 13, 4 },
                     { 53, "Programming and computer theory", "Scientific", "علوم الحاسوب", "Computer Science", 14, 4 },
-                    { 54, "Software development and systems", "Scientific", "هندسة البرمجيات", "Software Engineering", 14, 4 },
+                    { 54, "Software development and systems", "Scientific", "هندسة الحاسوب", "Computer Engineering", 14, 4 },
                     { 55, "Business information technology", "Scientific", "نظم المعلومات", "Information Systems", 14, 4 },
                     { 56, "Cybersecurity and data protection", "Scientific", "أمن المعلومات", "Information Security", 14, 4 },
                     { 57, "Community health programs", "Scientific", "الصحة العامة", "Public Health", 15, 4 },
@@ -481,7 +501,12 @@ namespace UniSelector.DataAccess.Migrations
                     { 77, "Mass communication", "Both", "الإعلام", "Media Studies", 20, 4 },
                     { 78, "Visual artistic expression", "Both", "الفنون البصرية", "Visual Arts", 20, 4 },
                     { 79, "Visual communication design", "Both", "التصميم الجرافيكي", "Graphic Design", 20, 4 },
-                    { 80, "Media content creation", "Both", "الإنتاج الإعلامي", "Media Production", 20, 4 }
+                    { 80, "Media content creation", "Both", "الإنتاج الإعلامي", "Media Production", 20, 4 },
+                    { 81, "Maritime engineering and naval architecture", "Scientific", "الهندسة البحرية", "Maritime Engineering", 1, 4 },
+                    { 82, "Aircraft engineering and maintenance", "Scientific", "هندسة الطيران", "Aviation Engineering", 1, 4 },
+                    { 83, "Aviation operations and management", "Both", "إدارة الطيران", "Aviation Management", 4, 4 },
+                    { 84, "Electronics and telecommunications systems", "Scientific", "هندسة الإلكترونيات والاتصالات", "Electronics & Communications Engineering", 1, 4 },
+                    { 85, "Human resource management and development", "Both", "إدارة الموارد البشرية", "Human Resources Management", 4, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -489,30 +514,51 @@ namespace UniSelector.DataAccess.Migrations
                 columns: new[] { "Id", "AveragePrice", "AverageStartingSalary", "Credits", "EmploymentRate", "FacultyId", "MinimumGrade", "MinimumIELTS", "MinimumTOEFL", "RequiresAptitudeTest", "StandardMajorId" },
                 values: new object[,]
                 {
-                    { 1, 15000m, 800m, 130, 85f, 1, 65f, 6f, 80f, false, 13 },
-                    { 2, 14000m, 750m, 125, 80f, 1, 65f, 6f, 80f, false, 14 },
-                    { 3, 14500m, 780m, 128, 82f, 1, 65f, 6f, 80f, false, 15 },
-                    { 4, 16000m, 900m, 135, 90f, 2, 70f, 6f, 85f, true, 53 },
-                    { 5, 16500m, 950m, 140, 92f, 2, 70f, 6f, 85f, true, 54 },
-                    { 6, 15500m, 850m, 132, 88f, 2, 70f, 6f, 85f, true, 55 },
-                    { 7, 13000m, 650m, 120, 75f, 3, 65f, 6.5f, 90f, false, 17 },
-                    { 8, 12000m, 600m, 120, 70f, 3, 60f, null, null, false, 18 },
-                    { 9, 12500m, 550m, 125, 65f, 3, 60f, 5.5f, 75f, false, 19 },
-                    { 10, 14000m, 750m, 130, 85f, 4, 65f, 6f, 80f, true, 21 },
-                    { 11, 14500m, 800m, 132, 80f, 4, 65f, 6f, 80f, true, 22 },
-                    { 12, 14200m, 780m, 128, 82f, 4, 65f, 6.5f, 85f, true, 23 },
-                    { 13, 25000m, 1200m, 150, 92f, 5, 75f, 6.5f, 88f, true, 1 },
-                    { 14, 25000m, 1150m, 150, 90f, 5, 75f, 6.5f, 88f, true, 2 },
-                    { 15, 25000m, 1180m, 150, 91f, 5, 75f, 6.5f, 88f, true, 3 },
-                    { 16, 22000m, 950m, 135, 88f, 6, 70f, 6.5f, 85f, false, 13 },
-                    { 17, 22000m, 900m, 132, 85f, 6, 70f, 6.5f, 85f, false, 15 },
-                    { 18, 22000m, 1000m, 135, 87f, 6, 70f, 6.5f, 85f, false, 16 },
-                    { 19, 20000m, 850m, 140, 75f, 7, 70f, 6f, 82f, true, 9 },
-                    { 20, 20000m, 870m, 140, 78f, 7, 70f, 6f, 82f, true, 10 },
-                    { 21, 20000m, 860m, 138, 76f, 7, 70f, 6f, 82f, true, 11 },
-                    { 22, 18000m, 700m, 125, 75f, 8, 65f, 6f, 80f, false, 77 },
-                    { 23, 19000m, 750m, 130, 80f, 8, 65f, 6f, 80f, true, 79 },
-                    { 24, 18500m, 730m, 128, 78f, 8, 65f, 6f, 80f, true, 80 }
+                    { 1, 16000.0, 800.0, 124, 75.0, 1, 70.0, 6.5, 80.0, false, 17 },
+                    { 2, 16000.0, 850.0, 124, 80.0, 1, 70.0, 6.5, 80.0, false, 77 },
+                    { 3, 17000.0, 1200.0, 130, 90.0, 1, 75.0, 6.5, 80.0, true, 53 },
+                    { 4, 16500.0, 1000.0, 128, 85.0, 2, 70.0, 6.5, 80.0, false, 13 },
+                    { 5, 16500.0, 1100.0, 128, 88.0, 2, 70.0, 6.5, 80.0, false, 16 },
+                    { 6, 16500.0, 950.0, 128, 82.0, 2, 70.0, 6.5, 80.0, false, 15 },
+                    { 7, 16500.0, 900.0, 128, 80.0, 2, 70.0, 6.5, 80.0, false, 14 },
+                    { 8, 18000.0, 1300.0, 140, 90.0, 3, 75.0, 6.5, 80.0, true, 1 },
+                    { 9, 18000.0, 1350.0, 140, 92.0, 3, 75.0, 6.5, 80.0, true, 54 },
+                    { 10, 18000.0, 1250.0, 140, 88.0, 3, 75.0, 6.5, 80.0, true, 55 },
+                    { 11, 19000.0, 1200.0, 140, 85.0, 5, 75.0, 6.0, 80.0, true, 2 },
+                    { 12, 19000.0, 1300.0, 140, 90.0, 5, 75.0, 6.0, 80.0, true, 54 },
+                    { 13, 19000.0, 1250.0, 140, 88.0, 5, 75.0, 6.0, 80.0, true, 1 },
+                    { 14, 19000.0, 1200.0, 140, 87.0, 5, 75.0, 6.0, 80.0, true, 3 },
+                    { 15, 19000.0, 1150.0, 140, 85.0, 5, 75.0, 6.0, 80.0, true, 4 },
+                    { 16, 17000.0, 900.0, 130, 85.0, 6, 70.0, 6.0, 80.0, false, 13 },
+                    { 17, 17000.0, 950.0, 130, 87.0, 6, 70.0, 6.0, 80.0, false, 16 },
+                    { 18, 17000.0, 850.0, 130, 82.0, 6, 70.0, 6.0, 80.0, false, 14 },
+                    { 19, 17000.0, 900.0, 130, 85.0, 6, 70.0, 6.0, 80.0, false, 55 },
+                    { 20, 16500.0, 800.0, 132, 75.0, 7, 70.0, 6.5, 79.0, false, 77 },
+                    { 21, 17500.0, 900.0, 132, 80.0, 4, 70.0, 6.5, 80.0, true, 50 },
+                    { 22, 17500.0, 850.0, 132, 82.0, 4, 70.0, 6.5, 80.0, true, 79 },
+                    { 23, 16500.0, 1100.0, 130, 90.0, 7, 75.0, 6.5, 79.0, true, 53 },
+                    { 24, 16500.0, 950.0, 130, 85.0, 8, 70.0, 6.5, 79.0, false, 13 },
+                    { 25, 16500.0, 1000.0, 130, 87.0, 8, 70.0, 6.5, 79.0, false, 16 },
+                    { 26, 16500.0, 900.0, 130, 83.0, 8, 70.0, 6.5, 79.0, false, 15 },
+                    { 27, 15500.0, 1100.0, 135, 88.0, 9, 75.0, 6.0, 80.0, true, 54 },
+                    { 28, 15500.0, 1000.0, 135, 85.0, 9, 75.0, 6.0, 80.0, true, 84 },
+                    { 29, 15000.0, 950.0, 130, 88.0, 9, 70.0, 6.0, 80.0, false, 55 },
+                    { 30, 12000.0, 750.0, 132, 80.0, 10, 60.0, 5.5, 75.0, false, 15 },
+                    { 31, 12000.0, 750.0, 132, 78.0, 10, 60.0, 5.5, 75.0, false, 14 },
+                    { 32, 12000.0, 800.0, 132, 85.0, 10, 60.0, 5.5, 75.0, false, 13 },
+                    { 33, 12000.0, 800.0, 132, 82.0, 10, 60.0, 5.5, 75.0, false, 55 },
+                    { 34, 12500.0, 850.0, 135, 85.0, 11, 65.0, 5.5, 75.0, false, 55 },
+                    { 35, 12000.0, 700.0, 132, 75.0, 20, 60.0, 6.0, 78.0, false, 17 },
+                    { 36, 16000.0, 1000.0, 140, 85.0, 12, 70.0, 6.0, 78.0, true, 1 },
+                    { 37, 15000.0, 850.0, 132, 80.0, 13, 65.0, 6.0, 78.0, false, 15 },
+                    { 38, 14000.0, 800.0, 130, 75.0, 14, 65.0, 5.5, 75.0, false, 15 },
+                    { 39, 14000.0, 750.0, 130, 70.0, 15, 65.0, 5.5, 75.0, true, 79 },
+                    { 40, 14500.0, 900.0, 132, 85.0, 15, 65.0, 5.5, 75.0, false, 55 },
+                    { 41, 16000.0, 1000.0, 140, 85.0, 16, 75.0, 6.0, 78.0, false, 29 },
+                    { 42, 18000.0, 1200.0, 140, 88.0, 17, 75.0, 6.0, 80.0, true, 82 },
+                    { 43, 17000.0, 1000.0, 135, 85.0, 17, 70.0, 6.0, 80.0, false, 83 },
+                    { 44, 13000.0, 850.0, 130, 80.0, 18, 65.0, 5.5, 75.0, false, 55 },
+                    { 45, 13000.0, 800.0, 130, 75.0, 19, 65.0, 5.5, 75.0, false, 15 }
                 });
 
             migrationBuilder.CreateIndex(

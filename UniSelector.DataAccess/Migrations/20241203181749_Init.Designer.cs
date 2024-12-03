@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241201221035_AddEmailToUni")]
-    partial class AddEmailToUni
+    [Migration("20241203181749_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -382,66 +382,162 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            AdmissionRequirements = "Minimum 65% high school grade, English proficiency required",
-                            Description = "Leading business education in Kuwait with focus on modern business practices",
-                            StandardFacultyId = 4,
-                            UniversityId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AdmissionRequirements = "Minimum 70% high school grade, Strong mathematics background",
-                            Description = "Cutting-edge computing education with focus on practical skills",
-                            StandardFacultyId = 14,
-                            UniversityId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AdmissionRequirements = "Minimum 60% high school grade, Interview required",
-                            Description = "Comprehensive arts education with focus on cultural studies",
+                            AdmissionRequirements = "Minimum 70% high school GPA, TOEFL 80+ or IELTS 6.5+",
+                            Description = "Comprehensive liberal arts education with diverse programs in humanities and sciences",
                             StandardFacultyId = 5,
                             UniversityId = 1
                         },
                         new
                         {
+                            Id = 2,
+                            AdmissionRequirements = "Minimum 70% high school GPA, TOEFL 80+ or IELTS 6.5+",
+                            Description = "AACSB-accredited business programs with focus on global business practices",
+                            StandardFacultyId = 4,
+                            UniversityId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AdmissionRequirements = "Minimum 75% high school GPA in Scientific track, Strong math/science background",
+                            Description = "ABET-accredited engineering programs with state-of-the-art facilities",
+                            StandardFacultyId = 1,
+                            UniversityId = 1
+                        },
+                        new
+                        {
                             Id = 4,
-                            AdmissionRequirements = "Minimum 65% high school grade, Good communication skills",
-                            Description = "Modern educational practices with focus on teaching methods",
-                            StandardFacultyId = 6,
+                            AdmissionRequirements = "Minimum 70% high school GPA, Portfolio submission required",
+                            Description = "Creative design education with focus on practical applications",
+                            StandardFacultyId = 13,
                             UniversityId = 1
                         },
                         new
                         {
                             Id = 5,
-                            AdmissionRequirements = "Minimum 75% high school grade, Strong science background",
-                            Description = "Premier engineering programs with international standards",
-                            StandardFacultyId = 1,
-                            UniversityId = 3
+                            AdmissionRequirements = "Minimum 75% in Scientific track, Strong mathematics background",
+                            Description = "Comprehensive engineering programs with modern laboratories",
+                            StandardFacultyId = 14,
+                            UniversityId = 2
                         },
                         new
                         {
                             Id = 6,
-                            AdmissionRequirements = "Minimum 70% high school grade, English proficiency required",
-                            Description = "American-standard business education with global perspective",
+                            AdmissionRequirements = "Minimum 70% high school GPA, English proficiency required",
+                            Description = "Industry-focused business education with international accreditation",
                             StandardFacultyId = 4,
-                            UniversityId = 3
+                            UniversityId = 2
                         },
                         new
                         {
                             Id = 7,
-                            AdmissionRequirements = "Minimum 70% high school grade, Strong scientific aptitude",
-                            Description = "Advanced scientific research and education programs",
-                            StandardFacultyId = 3,
+                            AdmissionRequirements = "Minimum 70% GPA, TOEFL 79+ or IELTS 6.5+",
+                            Description = "Comprehensive programs in humanities, media, and computer science",
+                            StandardFacultyId = 5,
                             UniversityId = 3
                         },
                         new
                         {
                             Id = 8,
-                            AdmissionRequirements = "Minimum 65% high school grade, Portfolio submission",
-                            Description = "Creative arts and modern media studies",
-                            StandardFacultyId = 20,
+                            AdmissionRequirements = "Minimum 70% GPA, English proficiency required",
+                            Description = "AACSB-accredited business school with focus on practical skills",
+                            StandardFacultyId = 4,
                             UniversityId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AdmissionRequirements = "Minimum 75% in Scientific stream, Strong math background",
+                            Description = "Advanced technical education in engineering and computing",
+                            StandardFacultyId = 14,
+                            UniversityId = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AdmissionRequirements = "Minimum 60% GPA, Basic English proficiency",
+                            Description = "Flexible business education with UK partnership",
+                            StandardFacultyId = 4,
+                            UniversityId = 4
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AdmissionRequirements = "Minimum 65% GPA, Basic programming knowledge preferred",
+                            Description = "IT and computing programs with international recognition",
+                            StandardFacultyId = 14,
+                            UniversityId = 4
+                        },
+                        new
+                        {
+                            Id = 20,
+                            AdmissionRequirements = "Minimum 60% GPA, Higher English proficiency required",
+                            Description = "English language and literature studies with focus on linguistics and translation",
+                            StandardFacultyId = 5,
+                            UniversityId = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AdmissionRequirements = "Minimum 75% in Scientific track, Mathematics proficiency",
+                            Description = "Australian-standard engineering education",
+                            StandardFacultyId = 1,
+                            UniversityId = 6
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AdmissionRequirements = "Minimum 70% GPA, English proficiency required",
+                            Description = "Business programs with Australian curriculum",
+                            StandardFacultyId = 4,
+                            UniversityId = 6
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AdmissionRequirements = "Minimum 65% GPA, English proficiency test",
+                            Description = "Women's business education with Australian standards",
+                            StandardFacultyId = 4,
+                            UniversityId = 7
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AdmissionRequirements = "Portfolio submission, Interview required",
+                            Description = "Creative arts and design programs for women",
+                            StandardFacultyId = 20,
+                            UniversityId = 7
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AdmissionRequirements = "Minimum 75% GPA, Arabic and English proficiency",
+                            Description = "Comprehensive legal education with focus on Kuwait and international law",
+                            StandardFacultyId = 8,
+                            UniversityId = 8
+                        },
+                        new
+                        {
+                            Id = 17,
+                            AdmissionRequirements = "Minimum 75% in Scientific track, English proficiency required",
+                            Description = "Specialized aviation engineering and maintenance programs",
+                            StandardFacultyId = 1,
+                            UniversityId = 9
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AdmissionRequirements = "Minimum 65% GPA, Basic technical aptitude",
+                            Description = "Technical IT and networking education",
+                            StandardFacultyId = 14,
+                            UniversityId = 10
+                        },
+                        new
+                        {
+                            Id = 19,
+                            AdmissionRequirements = "Minimum 65% GPA, English proficiency test",
+                            Description = "Applied business and management programs",
+                            StandardFacultyId = 4,
+                            UniversityId = 10
                         });
                 });
 
@@ -495,12 +591,250 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            AveragePrice = 15000.0,
+                            AveragePrice = 16000.0,
                             AverageStartingSalary = 800.0,
+                            Credits = 124,
+                            EmploymentRate = 75.0,
+                            FacultyId = 1,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 17
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AveragePrice = 16000.0,
+                            AverageStartingSalary = 850.0,
+                            Credits = 124,
+                            EmploymentRate = 80.0,
+                            FacultyId = 1,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 77
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AveragePrice = 17000.0,
+                            AverageStartingSalary = 1200.0,
+                            Credits = 130,
+                            EmploymentRate = 90.0,
+                            FacultyId = 1,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 53
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 1000.0,
+                            Credits = 128,
+                            EmploymentRate = 85.0,
+                            FacultyId = 2,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 13
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 1100.0,
+                            Credits = 128,
+                            EmploymentRate = 88.0,
+                            FacultyId = 2,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 16
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 950.0,
+                            Credits = 128,
+                            EmploymentRate = 82.0,
+                            FacultyId = 2,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 900.0,
+                            Credits = 128,
+                            EmploymentRate = 80.0,
+                            FacultyId = 2,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 14
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AveragePrice = 18000.0,
+                            AverageStartingSalary = 1300.0,
+                            Credits = 140,
+                            EmploymentRate = 90.0,
+                            FacultyId = 3,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AveragePrice = 18000.0,
+                            AverageStartingSalary = 1350.0,
+                            Credits = 140,
+                            EmploymentRate = 92.0,
+                            FacultyId = 3,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 54
+                        },
+                        new
+                        {
+                            Id = 10,
+                            AveragePrice = 18000.0,
+                            AverageStartingSalary = 1250.0,
+                            Credits = 140,
+                            EmploymentRate = 88.0,
+                            FacultyId = 3,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 21,
+                            AveragePrice = 17500.0,
+                            AverageStartingSalary = 900.0,
+                            Credits = 132,
+                            EmploymentRate = 80.0,
+                            FacultyId = 4,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 50
+                        },
+                        new
+                        {
+                            Id = 22,
+                            AveragePrice = 17500.0,
+                            AverageStartingSalary = 850.0,
+                            Credits = 132,
+                            EmploymentRate = 82.0,
+                            FacultyId = 4,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 79
+                        },
+                        new
+                        {
+                            Id = 11,
+                            AveragePrice = 19000.0,
+                            AverageStartingSalary = 1200.0,
+                            Credits = 140,
+                            EmploymentRate = 85.0,
+                            FacultyId = 5,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            AveragePrice = 19000.0,
+                            AverageStartingSalary = 1300.0,
+                            Credits = 140,
+                            EmploymentRate = 90.0,
+                            FacultyId = 5,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 54
+                        },
+                        new
+                        {
+                            Id = 13,
+                            AveragePrice = 19000.0,
+                            AverageStartingSalary = 1250.0,
+                            Credits = 140,
+                            EmploymentRate = 88.0,
+                            FacultyId = 5,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            AveragePrice = 19000.0,
+                            AverageStartingSalary = 1200.0,
+                            Credits = 140,
+                            EmploymentRate = 87.0,
+                            FacultyId = 5,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 3
+                        },
+                        new
+                        {
+                            Id = 15,
+                            AveragePrice = 19000.0,
+                            AverageStartingSalary = 1150.0,
+                            Credits = 140,
+                            EmploymentRate = 85.0,
+                            FacultyId = 5,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            AveragePrice = 17000.0,
+                            AverageStartingSalary = 900.0,
                             Credits = 130,
                             EmploymentRate = 85.0,
-                            FacultyId = 1,
-                            MinimumGrade = 65.0,
+                            FacultyId = 6,
+                            MinimumGrade = 70.0,
                             MinimumIELTS = 6.0,
                             MinimumTOEFL = 80.0,
                             RequiresAptitudeTest = false,
@@ -508,13 +842,27 @@ namespace UniSelector.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 2,
-                            AveragePrice = 14000.0,
-                            AverageStartingSalary = 750.0,
-                            Credits = 125,
-                            EmploymentRate = 80.0,
-                            FacultyId = 1,
-                            MinimumGrade = 65.0,
+                            Id = 17,
+                            AveragePrice = 17000.0,
+                            AverageStartingSalary = 950.0,
+                            Credits = 130,
+                            EmploymentRate = 87.0,
+                            FacultyId = 6,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 16
+                        },
+                        new
+                        {
+                            Id = 18,
+                            AveragePrice = 17000.0,
+                            AverageStartingSalary = 850.0,
+                            Credits = 130,
+                            EmploymentRate = 82.0,
+                            FacultyId = 6,
+                            MinimumGrade = 70.0,
                             MinimumIELTS = 6.0,
                             MinimumTOEFL = 80.0,
                             RequiresAptitudeTest = false,
@@ -522,309 +870,353 @@ namespace UniSelector.DataAccess.Migrations
                         },
                         new
                         {
-                            Id = 3,
-                            AveragePrice = 14500.0,
-                            AverageStartingSalary = 780.0,
-                            Credits = 128,
-                            EmploymentRate = 82.0,
-                            FacultyId = 1,
-                            MinimumGrade = 65.0,
+                            Id = 19,
+                            AveragePrice = 17000.0,
+                            AverageStartingSalary = 900.0,
+                            Credits = 130,
+                            EmploymentRate = 85.0,
+                            FacultyId = 6,
+                            MinimumGrade = 70.0,
                             MinimumIELTS = 6.0,
                             MinimumTOEFL = 80.0,
                             RequiresAptitudeTest = false,
-                            StandardMajorId = 15
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AveragePrice = 16000.0,
-                            AverageStartingSalary = 900.0,
-                            Credits = 135,
-                            EmploymentRate = 90.0,
-                            FacultyId = 2,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 53
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AveragePrice = 16500.0,
-                            AverageStartingSalary = 950.0,
-                            Credits = 140,
-                            EmploymentRate = 92.0,
-                            FacultyId = 2,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 54
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AveragePrice = 15500.0,
-                            AverageStartingSalary = 850.0,
-                            Credits = 132,
-                            EmploymentRate = 88.0,
-                            FacultyId = 2,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = true,
                             StandardMajorId = 55
                         },
                         new
                         {
-                            Id = 7,
-                            AveragePrice = 13000.0,
-                            AverageStartingSalary = 650.0,
-                            Credits = 120,
-                            EmploymentRate = 75.0,
-                            FacultyId = 3,
-                            MinimumGrade = 65.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 90.0,
-                            RequiresAptitudeTest = false,
-                            StandardMajorId = 17
-                        },
-                        new
-                        {
-                            Id = 8,
-                            AveragePrice = 12000.0,
-                            AverageStartingSalary = 600.0,
-                            Credits = 120,
-                            EmploymentRate = 70.0,
-                            FacultyId = 3,
-                            MinimumGrade = 60.0,
-                            RequiresAptitudeTest = false,
-                            StandardMajorId = 18
-                        },
-                        new
-                        {
-                            Id = 9,
-                            AveragePrice = 12500.0,
-                            AverageStartingSalary = 550.0,
-                            Credits = 125,
-                            EmploymentRate = 65.0,
-                            FacultyId = 3,
-                            MinimumGrade = 60.0,
-                            MinimumIELTS = 5.5,
-                            MinimumTOEFL = 75.0,
-                            RequiresAptitudeTest = false,
-                            StandardMajorId = 19
-                        },
-                        new
-                        {
-                            Id = 10,
-                            AveragePrice = 14000.0,
-                            AverageStartingSalary = 750.0,
-                            Credits = 130,
-                            EmploymentRate = 85.0,
-                            FacultyId = 4,
-                            MinimumGrade = 65.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 80.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 21
-                        },
-                        new
-                        {
-                            Id = 11,
-                            AveragePrice = 14500.0,
+                            Id = 20,
+                            AveragePrice = 16500.0,
                             AverageStartingSalary = 800.0,
                             Credits = 132,
-                            EmploymentRate = 80.0,
-                            FacultyId = 4,
-                            MinimumGrade = 65.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 80.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 22
-                        },
-                        new
-                        {
-                            Id = 12,
-                            AveragePrice = 14200.0,
-                            AverageStartingSalary = 780.0,
-                            Credits = 128,
-                            EmploymentRate = 82.0,
-                            FacultyId = 4,
-                            MinimumGrade = 65.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 23
-                        },
-                        new
-                        {
-                            Id = 13,
-                            AveragePrice = 25000.0,
-                            AverageStartingSalary = 1200.0,
-                            Credits = 150,
-                            EmploymentRate = 92.0,
-                            FacultyId = 5,
-                            MinimumGrade = 75.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 88.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            AveragePrice = 25000.0,
-                            AverageStartingSalary = 1150.0,
-                            Credits = 150,
-                            EmploymentRate = 90.0,
-                            FacultyId = 5,
-                            MinimumGrade = 75.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 88.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            AveragePrice = 25000.0,
-                            AverageStartingSalary = 1180.0,
-                            Credits = 150,
-                            EmploymentRate = 91.0,
-                            FacultyId = 5,
-                            MinimumGrade = 75.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 88.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 3
-                        },
-                        new
-                        {
-                            Id = 16,
-                            AveragePrice = 22000.0,
-                            AverageStartingSalary = 950.0,
-                            Credits = 135,
-                            EmploymentRate = 88.0,
-                            FacultyId = 6,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = false,
-                            StandardMajorId = 13
-                        },
-                        new
-                        {
-                            Id = 17,
-                            AveragePrice = 22000.0,
-                            AverageStartingSalary = 900.0,
-                            Credits = 132,
-                            EmploymentRate = 85.0,
-                            FacultyId = 6,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = false,
-                            StandardMajorId = 15
-                        },
-                        new
-                        {
-                            Id = 18,
-                            AveragePrice = 22000.0,
-                            AverageStartingSalary = 1000.0,
-                            Credits = 135,
-                            EmploymentRate = 87.0,
-                            FacultyId = 6,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.5,
-                            MinimumTOEFL = 85.0,
-                            RequiresAptitudeTest = false,
-                            StandardMajorId = 16
-                        },
-                        new
-                        {
-                            Id = 19,
-                            AveragePrice = 20000.0,
-                            AverageStartingSalary = 850.0,
-                            Credits = 140,
                             EmploymentRate = 75.0,
                             FacultyId = 7,
                             MinimumGrade = 70.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 82.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 9
-                        },
-                        new
-                        {
-                            Id = 20,
-                            AveragePrice = 20000.0,
-                            AverageStartingSalary = 870.0,
-                            Credits = 140,
-                            EmploymentRate = 78.0,
-                            FacultyId = 7,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 82.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 10
-                        },
-                        new
-                        {
-                            Id = 21,
-                            AveragePrice = 20000.0,
-                            AverageStartingSalary = 860.0,
-                            Credits = 138,
-                            EmploymentRate = 76.0,
-                            FacultyId = 7,
-                            MinimumGrade = 70.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 82.0,
-                            RequiresAptitudeTest = true,
-                            StandardMajorId = 11
-                        },
-                        new
-                        {
-                            Id = 22,
-                            AveragePrice = 18000.0,
-                            AverageStartingSalary = 700.0,
-                            Credits = 125,
-                            EmploymentRate = 75.0,
-                            FacultyId = 8,
-                            MinimumGrade = 65.0,
-                            MinimumIELTS = 6.0,
-                            MinimumTOEFL = 80.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 79.0,
                             RequiresAptitudeTest = false,
                             StandardMajorId = 77
                         },
                         new
                         {
                             Id = 23,
-                            AveragePrice = 19000.0,
-                            AverageStartingSalary = 750.0,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 1100.0,
                             Credits = 130,
-                            EmploymentRate = 80.0,
+                            EmploymentRate = 90.0,
+                            FacultyId = 7,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 79.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 53
+                        },
+                        new
+                        {
+                            Id = 24,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 950.0,
+                            Credits = 130,
+                            EmploymentRate = 85.0,
                             FacultyId = 8,
-                            MinimumGrade = 65.0,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 79.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 13
+                        },
+                        new
+                        {
+                            Id = 25,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 1000.0,
+                            Credits = 130,
+                            EmploymentRate = 87.0,
+                            FacultyId = 8,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 79.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 16
+                        },
+                        new
+                        {
+                            Id = 26,
+                            AveragePrice = 16500.0,
+                            AverageStartingSalary = 900.0,
+                            Credits = 130,
+                            EmploymentRate = 83.0,
+                            FacultyId = 8,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.5,
+                            MinimumTOEFL = 79.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 27,
+                            AveragePrice = 15500.0,
+                            AverageStartingSalary = 1100.0,
+                            Credits = 135,
+                            EmploymentRate = 88.0,
+                            FacultyId = 9,
+                            MinimumGrade = 75.0,
                             MinimumIELTS = 6.0,
                             MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 54
+                        },
+                        new
+                        {
+                            Id = 28,
+                            AveragePrice = 15500.0,
+                            AverageStartingSalary = 1000.0,
+                            Credits = 135,
+                            EmploymentRate = 85.0,
+                            FacultyId = 9,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 84
+                        },
+                        new
+                        {
+                            Id = 29,
+                            AveragePrice = 15000.0,
+                            AverageStartingSalary = 950.0,
+                            Credits = 130,
+                            EmploymentRate = 88.0,
+                            FacultyId = 9,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 30,
+                            AveragePrice = 12000.0,
+                            AverageStartingSalary = 750.0,
+                            Credits = 132,
+                            EmploymentRate = 80.0,
+                            FacultyId = 10,
+                            MinimumGrade = 60.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 31,
+                            AveragePrice = 12000.0,
+                            AverageStartingSalary = 750.0,
+                            Credits = 132,
+                            EmploymentRate = 78.0,
+                            FacultyId = 10,
+                            MinimumGrade = 60.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 14
+                        },
+                        new
+                        {
+                            Id = 32,
+                            AveragePrice = 12000.0,
+                            AverageStartingSalary = 800.0,
+                            Credits = 132,
+                            EmploymentRate = 85.0,
+                            FacultyId = 10,
+                            MinimumGrade = 60.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 13
+                        },
+                        new
+                        {
+                            Id = 33,
+                            AveragePrice = 12000.0,
+                            AverageStartingSalary = 800.0,
+                            Credits = 132,
+                            EmploymentRate = 82.0,
+                            FacultyId = 10,
+                            MinimumGrade = 60.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 34,
+                            AveragePrice = 12500.0,
+                            AverageStartingSalary = 850.0,
+                            Credits = 135,
+                            EmploymentRate = 85.0,
+                            FacultyId = 11,
+                            MinimumGrade = 65.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 35,
+                            AveragePrice = 12000.0,
+                            AverageStartingSalary = 700.0,
+                            Credits = 132,
+                            EmploymentRate = 75.0,
+                            FacultyId = 20,
+                            MinimumGrade = 60.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 78.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 17
+                        },
+                        new
+                        {
+                            Id = 36,
+                            AveragePrice = 16000.0,
+                            AverageStartingSalary = 1000.0,
+                            Credits = 140,
+                            EmploymentRate = 85.0,
+                            FacultyId = 12,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 78.0,
+                            RequiresAptitudeTest = true,
+                            StandardMajorId = 1
+                        },
+                        new
+                        {
+                            Id = 37,
+                            AveragePrice = 15000.0,
+                            AverageStartingSalary = 850.0,
+                            Credits = 132,
+                            EmploymentRate = 80.0,
+                            FacultyId = 13,
+                            MinimumGrade = 65.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 78.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 38,
+                            AveragePrice = 14000.0,
+                            AverageStartingSalary = 800.0,
+                            Credits = 130,
+                            EmploymentRate = 75.0,
+                            FacultyId = 14,
+                            MinimumGrade = 65.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
+                        },
+                        new
+                        {
+                            Id = 39,
+                            AveragePrice = 14000.0,
+                            AverageStartingSalary = 750.0,
+                            Credits = 130,
+                            EmploymentRate = 70.0,
+                            FacultyId = 15,
+                            MinimumGrade = 65.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
                             RequiresAptitudeTest = true,
                             StandardMajorId = 79
                         },
                         new
                         {
-                            Id = 24,
-                            AveragePrice = 18500.0,
-                            AverageStartingSalary = 730.0,
-                            Credits = 128,
-                            EmploymentRate = 78.0,
-                            FacultyId = 8,
+                            Id = 40,
+                            AveragePrice = 14500.0,
+                            AverageStartingSalary = 900.0,
+                            Credits = 132,
+                            EmploymentRate = 85.0,
+                            FacultyId = 15,
                             MinimumGrade = 65.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 41,
+                            AveragePrice = 16000.0,
+                            AverageStartingSalary = 1000.0,
+                            Credits = 140,
+                            EmploymentRate = 85.0,
+                            FacultyId = 16,
+                            MinimumGrade = 75.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 78.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 29
+                        },
+                        new
+                        {
+                            Id = 42,
+                            AveragePrice = 18000.0,
+                            AverageStartingSalary = 1200.0,
+                            Credits = 140,
+                            EmploymentRate = 88.0,
+                            FacultyId = 17,
+                            MinimumGrade = 75.0,
                             MinimumIELTS = 6.0,
                             MinimumTOEFL = 80.0,
                             RequiresAptitudeTest = true,
-                            StandardMajorId = 80
+                            StandardMajorId = 82
+                        },
+                        new
+                        {
+                            Id = 43,
+                            AveragePrice = 17000.0,
+                            AverageStartingSalary = 1000.0,
+                            Credits = 135,
+                            EmploymentRate = 85.0,
+                            FacultyId = 17,
+                            MinimumGrade = 70.0,
+                            MinimumIELTS = 6.0,
+                            MinimumTOEFL = 80.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 83
+                        },
+                        new
+                        {
+                            Id = 44,
+                            AveragePrice = 13000.0,
+                            AverageStartingSalary = 850.0,
+                            Credits = 130,
+                            EmploymentRate = 80.0,
+                            FacultyId = 18,
+                            MinimumGrade = 65.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 55
+                        },
+                        new
+                        {
+                            Id = 45,
+                            AveragePrice = 13000.0,
+                            AverageStartingSalary = 800.0,
+                            Credits = 130,
+                            EmploymentRate = 75.0,
+                            FacultyId = 19,
+                            MinimumGrade = 65.0,
+                            MinimumIELTS = 5.5,
+                            MinimumTOEFL = 75.0,
+                            RequiresAptitudeTest = false,
+                            StandardMajorId = 15
                         });
                 });
 
@@ -1049,6 +1441,36 @@ namespace UniSelector.DataAccess.Migrations
                         },
                         new
                         {
+                            Id = 81,
+                            Description = "Maritime engineering and naval architecture",
+                            HighSchoolPath = "Scientific",
+                            NameArabic = "الهندسة البحرية",
+                            NameEnglish = "Maritime Engineering",
+                            StandardFacultyId = 1,
+                            StudyDuration = 4
+                        },
+                        new
+                        {
+                            Id = 82,
+                            Description = "Aircraft engineering and maintenance",
+                            HighSchoolPath = "Scientific",
+                            NameArabic = "هندسة الطيران",
+                            NameEnglish = "Aviation Engineering",
+                            StandardFacultyId = 1,
+                            StudyDuration = 4
+                        },
+                        new
+                        {
+                            Id = 84,
+                            Description = "Electronics and telecommunications systems",
+                            HighSchoolPath = "Scientific",
+                            NameArabic = "هندسة الإلكترونيات والاتصالات",
+                            NameEnglish = "Electronics & Communications Engineering",
+                            StandardFacultyId = 1,
+                            StudyDuration = 4
+                        },
+                        new
+                        {
                             Id = 5,
                             Description = "Complete medical education program",
                             HighSchoolPath = "Scientific",
@@ -1164,6 +1586,26 @@ namespace UniSelector.DataAccess.Migrations
                             HighSchoolPath = "Both",
                             NameArabic = "التمويل",
                             NameEnglish = "Finance",
+                            StandardFacultyId = 4,
+                            StudyDuration = 4
+                        },
+                        new
+                        {
+                            Id = 83,
+                            Description = "Aviation operations and management",
+                            HighSchoolPath = "Both",
+                            NameArabic = "إدارة الطيران",
+                            NameEnglish = "Aviation Management",
+                            StandardFacultyId = 4,
+                            StudyDuration = 4
+                        },
+                        new
+                        {
+                            Id = 85,
+                            Description = "Human resource management and development",
+                            HighSchoolPath = "Both",
+                            NameArabic = "إدارة الموارد البشرية",
+                            NameEnglish = "Human Resources Management",
                             StandardFacultyId = 4,
                             StudyDuration = 4
                         },
@@ -1542,8 +1984,8 @@ namespace UniSelector.DataAccess.Migrations
                             Id = 54,
                             Description = "Software development and systems",
                             HighSchoolPath = "Scientific",
-                            NameArabic = "هندسة البرمجيات",
-                            NameEnglish = "Software Engineering",
+                            NameArabic = "هندسة الحاسوب",
+                            NameEnglish = "Computer Engineering",
                             StandardFacultyId = 14,
                             StudyDuration = 4
                         },
@@ -1858,50 +2300,132 @@ namespace UniSelector.DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            FullDescription = "A leading open education institution in the Arab world.",
-                            ImageUrl = "/images/University/AOU.png",
+                            Email = "",
+                            FullDescription = "Accredited liberal arts institution offering American-style education since 2004. Located in Salmiya, Kuwait's premier university district.",
+                            ImageUrl = "/images/University/AUK.png",
                             KuwaitRank = 1,
-                            Name = "Arab Open University (AOU)",
-                            PhoneNumber = "99999999",
-                            SmallDescription = "",
-                            location = "العارضية-Ardya",
+                            Name = "American University of Kuwait (AUK)",
+                            PhoneNumber = "+965 1802040",
+                            SmallDescription = "Kuwait's leading American-style liberal arts university",
+                            location = "Salmiya, Block 13, Salem Al Mubarak Street",
                             type = "Private"
                         },
                         new
                         {
                             Id = 2,
-                            FullDescription = "Offering American-style education with a Middle Eastern perspective.",
+                            Email = "",
+                            FullDescription = "Leading engineering and business focused university established in 2008. Known for strong industry partnerships and state-of-the-art facilities.",
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
-                            Name = "American University In Middle East (AUM)",
-                            PhoneNumber = "99999999",
-                            SmallDescription = "",
-                            location = "العقيلة-Egila",
+                            Name = "American University of Middle East (AUM)",
+                            PhoneNumber = "+965 22251400",
+                            SmallDescription = "Premier engineering and business education in Kuwait",
+                            location = "Egaila, Block 6, Salem Sabah Al-Salem Area",
                             type = "Private"
                         },
                         new
                         {
                             Id = 3,
-                            FullDescription = "Providing a comprehensive American liberal arts education.",
-                            ImageUrl = "/images/University/AUK.png",
+                            Email = "",
+                            FullDescription = "First private university in Kuwait, established in 2002. Offers American-style education with focus on business and technology.",
+                            ImageUrl = "/images/University/GUST.png",
                             KuwaitRank = 3,
-                            Name = "American University Of Kuwait (AUK)",
-                            PhoneNumber = "99999999",
-                            SmallDescription = "",
-                            location = "السالمية-Salmya",
+                            Name = "Gulf University for Science and Technology (GUST)",
+                            PhoneNumber = "+965 25307000",
+                            SmallDescription = "Kuwait's first private university for business and technology",
+                            location = "Mubarak Al-Abdullah Area, West Mishref",
                             type = "Private"
                         },
                         new
                         {
                             Id = 4,
-                            FullDescription = "The premier public institution of higher education in Kuwait.",
-                            ImageUrl = "/images/university/KU.png",
+                            Email = "",
+                            FullDescription = "Regional university focused on accessible education since 2002. Partners with UK Open University for international accreditation.",
+                            ImageUrl = "/images/University/AOU.png",
                             KuwaitRank = 4,
-                            Name = "Kuwait University (KU)",
-                            PhoneNumber = "99999999",
-                            SmallDescription = "",
-                            location = "الشويخ-Shwaikh",
-                            type = "Public"
+                            Name = "Arab Open University (AOU)",
+                            PhoneNumber = "+965 24394400",
+                            SmallDescription = "Accessible quality education across Kuwait",
+                            location = "Al-Ardiya, Block 3, Street 37",
+                            type = "Private"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Email = "",
+                            FullDescription = "Specialized institution focusing on engineering and technology education. Strong emphasis on practical skills and industry readiness.",
+                            ImageUrl = "/images/University/KCST.png",
+                            KuwaitRank = 5,
+                            Name = "Kuwait College of Science and Technology (KCST)",
+                            PhoneNumber = "+965 24980450",
+                            SmallDescription = "Advanced technical education in Kuwait",
+                            location = "Doha District, Block 4",
+                            type = "Private"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Email = "",
+                            FullDescription = "Australian-standard technical and vocational education. Strong focus on engineering and maritime studies.",
+                            ImageUrl = "/images/University/ACK.png",
+                            KuwaitRank = 6,
+                            Name = "Australian College of Kuwait (ACK)",
+                            PhoneNumber = "+965 1828225",
+                            SmallDescription = "Australian-standard technical education",
+                            location = "Mishref, Block 5",
+                            type = "Private"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Email = "",
+                            FullDescription = "Women's college offering Australian-standard education in business, design and technology.",
+                            ImageUrl = "/images/University/BHCK.png",
+                            KuwaitRank = 7,
+                            Name = "Box Hill College Kuwait",
+                            PhoneNumber = "+965 23962000",
+                            SmallDescription = "Quality education for women in Kuwait",
+                            location = "Abu Halifa, Block 1",
+                            type = "Private"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Email = "",
+                            FullDescription = "Specialized institution focused on legal education and jurisprudence studies.",
+                            ImageUrl = "/images/University/KILAW.png",
+                            KuwaitRank = 8,
+                            Name = "Kuwait International Law School",
+                            PhoneNumber = "+965 22280111",
+                            SmallDescription = "Premier legal education in Kuwait",
+                            location = "Doha, Block 2",
+                            type = "Private"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Email = "",
+                            FullDescription = "Specialized college offering aviation engineering and management programs.",
+                            ImageUrl = "/images/University/CAT.png",
+                            KuwaitRank = 9,
+                            Name = "College of Aviation Technology",
+                            PhoneNumber = "+965 24315555",
+                            SmallDescription = "Kuwait's aviation education hub",
+                            location = "Kuwait International Airport Area",
+                            type = "Private"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Email = "",
+                            FullDescription = "Modern technical college focusing on IT, business and telecommunications.",
+                            ImageUrl = "/images/University/KTECH.png",
+                            KuwaitRank = 10,
+                            Name = "Kuwait Technical College",
+                            PhoneNumber = "+965 22280222",
+                            SmallDescription = "Advanced technical education",
+                            location = "Shuwaikh Educational Area",
+                            type = "Private"
                         });
                 });
 
