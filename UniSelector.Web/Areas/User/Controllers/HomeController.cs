@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
+using UniSelector.Models.ViewModel;
 
 namespace UniSelector.Web.Areas.User.Controllers
 {
@@ -22,7 +23,14 @@ namespace UniSelector.Web.Areas.User.Controllers
 
         public IActionResult Index()
         {
-            return View("Index");
+            var homeVM = new HomeViewModel
+            {
+                UniversityCount = _unitOfWork.University.GetAll().Count(),
+                FacultyCount = _unitOfWork.Faculty.GetAll().Count(),
+                MajorCount = _unitOfWork.Major.GetAll().Count(),
+                StudentCount = _unitOfWork.ApplicationUser.GetAll().Count()
+            };
+            return View(homeVM);
         }
 
         /*----------------- University Actions -----------------*/

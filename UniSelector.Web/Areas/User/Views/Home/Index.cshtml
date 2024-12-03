@@ -363,7 +363,7 @@
 </section>
 <!-- /Clients Section -->
 
-<!-- Testimonials Section -->
+@* <!-- Testimonials Section -->
 <section id="testimonials" class="testimonials section light-background">
 
     <!-- Section Title -->
@@ -444,40 +444,35 @@
 
 </section>
 <!-- /Testimonials Section -->
-
+ *@
 <!-- Stats Section -->
 <section id="stats" class="stats section">
     <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
-
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="4" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="@Model.UniversityCount" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Universities</p>
                 </div>
-            </div><!-- End Stats Item -->
-
+            </div>
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="20" data-purecounter-duration="1" class="purecounter"></span>
+                    <span data-purecounter-start="0" data-purecounter-end="@Model.FacultyCount" data-purecounter-duration="1" class="purecounter"></span>
                     <p>Faculties</p>
                 </div>
-            </div><!-- End Stats Item -->
-
+            </div>
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Registered Students</p>
+                    <span data-purecounter-start="0" data-purecounter-end="@Model.MajorCount" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Majors</p>
                 </div>
-            </div><!-- End Stats Item -->
-
+            </div>
             <div class="col-lg-3 col-md-6">
                 <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="95" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Success Rate %</p>
+                    <span data-purecounter-start="0" data-purecounter-end="@Model.StudentCount" data-purecounter-duration="1" class="purecounter"></span>
+                    <p>Students</p>
                 </div>
-            </div><!-- End Stats Item -->
-
+            </div>
         </div>
     </div>
 </section>
@@ -624,6 +619,7 @@
     </div>
 </section>
 <!-- /Faq Section -->
+
 <!-- Call To Action 2 Section -->
 <section id="call-to-action-2" class="call-to-action-2 section dark-background">
     <div class="container">
@@ -639,7 +635,7 @@
     </div>
 </section>
 
-<!-- Contact Section -->
+@* <!-- Contact Section -->
 <section id="contact" class="contact section light-background">
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
@@ -725,4 +721,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> *@
