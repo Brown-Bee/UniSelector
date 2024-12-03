@@ -61,7 +61,7 @@
         </div>
 
         <!-- Statistics Row -->
-        <div class="row stats-row gy-4 mt-5" data-aos="fade-up" data-aos-delay="500">
+        <div class="row stats-row gy-4 mt-5" data-aos="fade-up" data-aos-delay="100">
             <!-- University Count Stat -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
@@ -69,25 +69,23 @@
                         <i class="bi bi-building"></i>
                     </div>
                     <div class="stat-content">
-                        <h4>8+ Universities</h4>
+                        <h4>@(Model.UniversityCount-1)+ Universities</h4>
                         <p class="mb-0">Available Options</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Students Helped Stat -->
+            <!-- Students Count Stat -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
                     <div class="stat-icon">
                         <i class="bi bi-people"></i>
                     </div>
                     <div class="stat-content">
-                        <h4>1000+ Students</h4>
+                        <h4>@(Model.StudentCount-1)+ Students</h4>
                         <p class="mb-0">Guided Successfully</p>
                     </div>
                 </div>
             </div>
-
             <!-- Faculty Count Stat -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
@@ -95,21 +93,20 @@
                         <i class="bi bi-book"></i>
                     </div>
                     <div class="stat-content">
-                        <h4>50+ Faculties</h4>
+                        <h4>@(Model.FacultyCount -1)+ Faculties</h4>
                         <p class="mb-0">Various Programs</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Success Rate Stat -->
+            <!-- Major Count Stat -->
             <div class="col-lg-3 col-md-6">
                 <div class="stat-item">
                     <div class="stat-icon">
-                        <i class="bi bi-graph-up"></i>
+                        <i class="bi bi-mortarboard"></i>
                     </div>
                     <div class="stat-content">
-                        <h4>95% Success</h4>
-                        <p class="mb-0">Admission Rate</p>
+                        <h4>@(Model.MajorCount-1)+ Majors</h4>
+                        <p class="mb-0">Study Programs</p>
                     </div>
                 </div>
             </div>
@@ -306,6 +303,7 @@
         </div>
     </div>
 </section>
+
 <!-- Clients Section -->
 <section id="clients" class="clients section">
 
@@ -362,121 +360,6 @@
 
 </section>
 <!-- /Clients Section -->
-
-@* <!-- Testimonials Section -->
-<section id="testimonials" class="testimonials section light-background">
-
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Student Success Stories</h2>
-        <p>Hear from students who found their perfect university match through UniSelector</p>
-    </div>
-
-    <div class="container">
-        <div class="row g-5">
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="testimonial-item">
-                    <img src="~/Images/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                    <h3>Ahmed Al-Sayed</h3>
-                    <h4>Engineering Student at KU</h4>
-                    <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>UniSelector made my university search so much easier. The detailed information about Kuwait University's engineering programs helped me make an informed decision. Now I'm studying exactly where I wanted to be!</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="testimonial-item">
-                    <img src="~/Images/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                    <h3>Maryam Al-Rashid</h3>
-                    <h4>Business Student at AUM</h4>
-                    <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>The faculty details and program costs were exactly what I needed to compare different business schools. Thanks to UniSelector, I found the perfect program at American University of the Middle East.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-                <div class="testimonial-item">
-                    <img src="~/Images/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                    <h3>Fatima Al-Hassan</h3>
-                    <h4>Medical Student at AOU</h4>
-                    <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>The application process was straightforward thanks to UniSelector's guidance. The platform provided all the information about requirements and deadlines. It made my journey to medical school much smoother.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-                <div class="testimonial-item">
-                    <img src="~/Images/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                    <h3>Abdullah Al-Salem</h3>
-                    <h4>Computer Science Student at AUK</h4>
-                    <div class="stars">
-                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-                    </div>
-                    <p>
-                        <i class="bi bi-quote quote-icon-left"></i>
-                        <span>The search filters helped me find universities offering the exact computer science specialization I wanted. UniSelector's detailed faculty information made it easy to choose between different programs.</span>
-                        <i class="bi bi-quote quote-icon-right"></i>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-</section>
-<!-- /Testimonials Section -->
- *@
-<!-- Stats Section -->
-<section id="stats" class="stats section">
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="@Model.UniversityCount" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Universities</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="@Model.FacultyCount" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Faculties</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="@Model.MajorCount" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Majors</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6">
-                <div class="stats-item text-center w-100 h-100">
-                    <span data-purecounter-start="0" data-purecounter-end="@Model.StudentCount" data-purecounter-duration="1" class="purecounter"></span>
-                    <p>Students</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- /Stats Section -->
 
 <!-- Services Section -->
 <section id="services" class="services section light-background">
@@ -634,91 +517,3 @@
         </div>
     </div>
 </section>
-
-@* <!-- Contact Section -->
-<section id="contact" class="contact section light-background">
-    <!-- Section Title -->
-    <div class="container section-title" data-aos="fade-up">
-        <h2>Contact Us</h2>
-        <p>Have questions about universities or need help with your application? We're here to assist you</p>
-    </div>
-
-    <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row g-4 g-lg-5">
-            <div class="col-lg-5">
-                <div class="info-box" data-aos="fade-up" data-aos-delay="200">
-                    <h3>Get in Touch</h3>
-                    <p>Our support team is available to help you with any questions about universities in Kuwait or the application process.</p>
-
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-box">
-                            <i class="bi bi-geo-alt"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Our Location</h4>
-                            <p>Hawally, Al Zahra</p>
-                            <p>Kuwait City, Kuwait</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-box">
-                            <i class="bi bi-telephone"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Contact Numbers</h4>
-                            <p>+965 5412 7874</p>
-                            <p>+965 2222 2222</p>
-                        </div>
-                    </div>
-
-                    <div class="info-item" data-aos="fade-up" data-aos-delay="500">
-                        <div class="icon-box">
-                            <i class="bi bi-envelope"></i>
-                        </div>
-                        <div class="content">
-                            <h4>Email Us</h4>
-                            <p>info@uniselector.com</p>
-                            <p>support@uniselector.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-7">
-                <div class="contact-form" data-aos="fade-up" data-aos-delay="300">
-                    <h3>Send Us a Message</h3>
-                    <p>Have specific questions about universities or the application process? Fill out the form below and we'll get back to you shortly.</p>
-
-                    <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-                        <div class="row gy-4">
-                            <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-                            </div>
-
-                            <div class="col-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
-                            </div>
-
-                            <div class="col-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="How can we help you?" required></textarea>
-                            </div>
-
-                            <div class="col-12 text-center">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-
-                                <button type="submit" class="btn">Send Message</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</section> *@
