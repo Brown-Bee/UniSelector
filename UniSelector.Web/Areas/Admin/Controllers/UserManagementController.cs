@@ -24,8 +24,10 @@ namespace UniSelector.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            List<ApplicationUser> objApplicationUser = _unitOfWork.ApplicationUser.GetAll().ToList();
-            return View(objApplicationUser);
+            /*List<ApplicationUser> objApplicationUser = _unitOfWork.ApplicationUser.GetAll().ToList();
+            return View(objApplicationUser);*/
+            var users = _unitOfWork.ApplicationUser.GetAll().ToList();
+            return View((users,_userManager));
         }
 
         public IActionResult Upsert(string id)
