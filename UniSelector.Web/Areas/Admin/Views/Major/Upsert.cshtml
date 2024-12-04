@@ -11,10 +11,10 @@
     </div>
     <!-- Major Information Form -->
     <form method="post" class="bg-light p-3" asp-action="Upsert">
-        <input asp-for="Major.Id" hidden/>
-        <input asp-for="Major.FacultyId" hidden/>
-        <input asp-for="StandardFacultyId" hidden/>
-        <input asp-for="UniId" hidden/>
+        <input asp-for="Major.Id" hidden />
+        <input asp-for="Major.FacultyId" hidden />
+        <input asp-for="StandardFacultyId" hidden />
+        <input asp-for="UniId" hidden />
         <div asp-validation-summary="All" class="text-danger"></div>
 
         <!-- Basic Information Section -->
@@ -22,7 +22,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="Major.StandardMajorId" class="form-label">Standard Major</label>
-                   
+
                     <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
                         <option value="" selected>--Select Standard Major--</option>
                     </select>
@@ -111,6 +111,15 @@
                 }
 
             </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Major"
+                   asp-action="Index"
+                   asp-route-facultyId="@Model.Major.FacultyId"
+                   asp-route-standardFactId="@Model.StandardFacultyId"
+                   asp-route-universityId="@Model.UniId" class="btn btn-outline-primary form-control">
+                    <i class="bi bi-x-circle me-2"></i>Clear
+                </a>
+            </div>
         </div>
     </form>
 </div>
@@ -120,55 +129,58 @@
         <div class="card-body" style="padding:20px">
             <table id="datatable" class="table table-hover table-striped table-bordered display" style="width:100%">
                 <thead class="thead-dark text-light">
-                <tr>
-                    <th>Name</th>
-                    <th>Credits</th>
-                    <th>AveragePrice</th>
-                    <th>Minimum Grade</th> @*Added for admission requirements*@
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>Name</th>
+                        <th>Credits</th>
+                        <th>AveragePrice</th>
+                        <th>Minimum Grade</th> @*Added for admission requirements*@
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
-                @if (Model.Majors is not null)
-                {
-                    foreach (var obj in Model.Majors)
+                    @if (Model.Majors is not null)
                     {
-                        <tr>
-                            <td>@(obj.StandardMajor?.CombinedName)</td>
-                            <td>@obj.Credits</td>
-                            <td>@obj.AveragePrice.ToString("c")</td>
-                            <td>@obj.MinimumGrade%</td>
-                            <td>
-                                <div class="w-75 btn-group" role="group">
-                                    <a asp-controller="Major" asp-action="Index"
-                                       asp-route-majorId="@obj.Id"
-                                       asp-route-facultyId="@obj.FacultyId"
-                                       asp-route-standardFactId="@Model.StandardFacultyId"
-                                       asp-route-universityId="@Model.UniId"
-                                       
-                                       class="btn btn-primary mx-2">
-                                        
-                                        <i class="bi bi-pencil-square"></i> Update
-                                    </a>
-                                    <a asp-controller="Major" asp-action="Delete" asp-route-id="@obj.Id"
-                                       asp-route-majorId="@obj.Id"
-                                       asp-route-factId="@obj.FacultyId"
-                                       asp-route-standFactId="@Model.StandardFacultyId"
-                                       asp-route-uniId="@Model.UniId"
-                                       class="btn btn-danger mx-2">
-                                        <i class="bi bi-trash-fill"></i> Delete
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
+                        foreach (var obj in Model.Majors)
+                        {
+                            <tr>
+                                <td>@(obj.StandardMajor?.CombinedName)</td>
+                                <td>@obj.Credits</td>
+                                <td>@obj.AveragePrice.ToString("c")</td>
+                                <td>@obj.MinimumGrade%</td>
+                                <td>
+                                    <div class="w-75 btn-group" role="group">
+                                        <a asp-controller="Major" asp-action="Index"
+                                           asp-route-majorId="@obj.Id"
+                                           asp-route-facultyId="@obj.FacultyId"
+                                           asp-route-standardFactId="@Model.StandardFacultyId"
+                                           asp-route-universityId="@Model.UniId"
+                                           class="btn btn-primary mx-2">
+
+                                            <i class="bi bi-pencil-square"></i> Update
+                                        </a>
+                                        <a asp-controller="Major" asp-action="Delete" asp-route-id="@obj.Id"
+                                           asp-route-majorId="@obj.Id"
+                                           asp-route-factId="@obj.FacultyId"
+                                           asp-route-standFactId="@Model.StandardFacultyId"
+                                           asp-route-uniId="@Model.UniId"
+                                           class="btn btn-danger mx-2">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
                 </tbody>
             </table>
         </div>
     </div>
     <div class=" col-6 col-md-3">
-        <a asp-controller="Faculty" asp-action="Upsert" class="btn btn-outline-primary form-control mt-3">Back To List</a>
+        <a asp-controller="Faculty" 
+        asp-action="Index" 
+        asp-route-universityId ="@Model.UniId" 
+        asp-route-id ="@(0)" 
+        class="btn btn-outline-primary form-control mt-3">Back To List</a>
     </div>
 </div>
 
@@ -176,5 +188,5 @@
     <script src="~/js/dataTable.js"></script>
     <script src="~/js/GetMajors.js"></script>
     <script src="~/js/Delete.js"></script>
-    <partial name="_ValidationScriptsPartial"/>
+    <partial name="_ValidationScriptsPartial" />
 }

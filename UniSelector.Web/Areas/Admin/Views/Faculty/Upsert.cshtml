@@ -1,7 +1,4 @@
-﻿
-
-@* Upsert.cshtml *@
-@model FacultyVM
+﻿@model FacultyVM
 
 <div class="container" style="margin-top: 6rem;">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
@@ -54,6 +51,15 @@
                 {
                     <button type="submit" class="btn btn-primary form-control">Update</button>
                 }
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-controller="Faculty"
+                   asp-action="Index"
+                   asp-route-id="@(0)"
+                   asp-route-universityId="@Model.faculty.UniversityId"
+                   class="btn btn-outline-primary form-control">
+                    <i class="bi bi-x-circle me-2"></i>Clear
+                </a>
             </div>
         </div>
     </form>
