@@ -128,7 +128,7 @@ namespace UniSelector.DataAccess.Repository
             if (filter.MaxRank.HasValue)
             {
                 query = query
-                    .Where(u => u.KuwaitRank >= filter.MaxRank);
+                    .Where(u => u.KuwaitRank <= filter.MaxRank);
             }
 
             return await query.ToListAsync();
