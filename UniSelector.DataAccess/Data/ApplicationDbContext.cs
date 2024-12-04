@@ -35,8 +35,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Kuwait's leading American-style liberal arts university",
        location = "Salmiya, Block 13, Salem Al Mubarak Street",
        KuwaitRank = 1,
-       PhoneNumber = "+965 1802040",
-       Email = ""/*"admissions@auk.edu.kw"*/,
+       PhoneNumber = "1802040",
        ImageUrl = "/images/University/AUK.png"
    },
    new University
@@ -49,7 +48,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        location = "Egaila, Block 6, Salem Sabah Al-Salem Area",
        KuwaitRank = 2,
        PhoneNumber = "+965 22251400",
-       Email = "" /*"info@aum.edu.kw"*/,
        ImageUrl = "/images/University/AUM.png"
    },
    new University
@@ -61,8 +59,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Kuwait's first private university for business and technology",
        location = "Mubarak Al-Abdullah Area, West Mishref",
        KuwaitRank = 3,
-       PhoneNumber = "+965 25307000",
-       Email = ""/*"admissions@gust.edu.kw"*/,
+       PhoneNumber = "25307000",
        ImageUrl = "/images/University/GUST.png"
    },
    new University
@@ -74,8 +71,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Accessible quality education across Kuwait",
        location = "Al-Ardiya, Block 3, Street 37",
        KuwaitRank = 4,
-       PhoneNumber = "+965 24394400",
-       Email = ""/*"info@aou.edu.kw"*/,
+       PhoneNumber = "24394400",
        ImageUrl = "/images/University/AOU.png"
    },
    new University
@@ -87,8 +83,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Advanced technical education in Kuwait",
        location = "Doha District, Block 4",
        KuwaitRank = 5,
-       PhoneNumber = "+965 24980450",
-       Email = ""/*"admissions@kcst.edu.kw"*/,
+       PhoneNumber = "24980450",
        ImageUrl = "/images/University/KCST.png"
    },
    new University
@@ -100,8 +95,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Australian-standard technical education",
        location = "Mishref, Block 5",
        KuwaitRank = 6,
-       PhoneNumber = "+965 1828225",
-       Email = ""/*"admission@ack.edu.kw"*/,
+       PhoneNumber = "1828225",
        ImageUrl = "/images/University/ACK.png"
    },
    new University
@@ -113,8 +107,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Quality education for women in Kuwait",
        location = "Abu Halifa, Block 1",
        KuwaitRank = 7,
-       PhoneNumber = "+965 23962000",
-       Email = ""/*"admission@bhck.edu.kw"*/,
+       PhoneNumber = "23962000",
        ImageUrl = "/images/University/BHCK.png"
    },
    new University
@@ -126,8 +119,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Premier legal education in Kuwait",
        location = "Doha, Block 2",
        KuwaitRank = 8,
-       PhoneNumber = "+965 22280111",
-       Email = ""/*"info@kilaw.edu.kw"*/,
+       PhoneNumber = "22280111",
        ImageUrl = "/images/University/KILAW.png"
    },
    new University
@@ -139,8 +131,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Kuwait's aviation education hub",
        location = "Kuwait International Airport Area",
        KuwaitRank = 9,
-       PhoneNumber = "+965 24315555",
-       Email = ""/*"info@cat.edu.kw"*/,
+       PhoneNumber = "24315555",
        ImageUrl = "/images/University/CAT.png"
    },
    new University
@@ -152,8 +143,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Advanced technical education",
        location = "Shuwaikh Educational Area",
        KuwaitRank = 10,
-       PhoneNumber = "+965 22280222",
-       Email = ""/*"info@ktech.edu.kw"*/,
+       PhoneNumber = "22280222",
        ImageUrl = "/images/University/KTECH.png"
    },
    new University
@@ -165,8 +155,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Kuwait's premier public higher education institution",
        location = "Multiple campuses - Main in Khaldiya",
        KuwaitRank = 1,
-       PhoneNumber = "+965 24987000",
-       Email = "",
+       PhoneNumber = "24987000",
        ImageUrl = "/images/University/KU.png"
    }
 );
