@@ -387,7 +387,8 @@ namespace UniSelector.DataAccess.Migrations
                     { 7, "", "Women's college offering Australian-standard education in business, design and technology.", "/images/University/BHCK.png", 7, "Box Hill College Kuwait", "+965 23962000", "Quality education for women in Kuwait", "Abu Halifa, Block 1", "Private" },
                     { 8, "", "Specialized institution focused on legal education and jurisprudence studies.", "/images/University/KILAW.png", 8, "Kuwait International Law School", "+965 22280111", "Premier legal education in Kuwait", "Doha, Block 2", "Private" },
                     { 9, "", "Specialized college offering aviation engineering and management programs.", "/images/University/CAT.png", 9, "College of Aviation Technology", "+965 24315555", "Kuwait's aviation education hub", "Kuwait International Airport Area", "Private" },
-                    { 10, "", "Modern technical college focusing on IT, business and telecommunications.", "/images/University/KTECH.png", 10, "Kuwait Technical College", "+965 22280222", "Advanced technical education", "Shuwaikh Educational Area", "Private" }
+                    { 10, "", "Modern technical college focusing on IT, business and telecommunications.", "/images/University/KTECH.png", 10, "Kuwait Technical College", "+965 22280222", "Advanced technical education", "Shuwaikh Educational Area", "Private" },
+                    { 11, "", "Established in 1966, Kuwait's first public university offering comprehensive education across multiple campuses", "/images/University/KU.png", 1, "Kuwait University", "+965 24987000", "Kuwait's premier public higher education institution", "Multiple campuses - Main in Khaldiya", "Public" }
                 });
 
             migrationBuilder.InsertData(
@@ -414,7 +415,18 @@ namespace UniSelector.DataAccess.Migrations
                     { 17, "Minimum 75% in Scientific track, English proficiency required", "Specialized aviation engineering and maintenance programs", 1, 9 },
                     { 18, "Minimum 65% GPA, Basic technical aptitude", "Technical IT and networking education", 14, 10 },
                     { 19, "Minimum 65% GPA, English proficiency test", "Applied business and management programs", 4, 10 },
-                    { 20, "Minimum 60% GPA, Higher English proficiency required", "English language and literature studies with focus on linguistics and translation", 5, 4 }
+                    { 20, "Minimum 60% GPA, Higher English proficiency required", "English language and literature studies with focus on linguistics and translation", 5, 4 },
+                    { 21, "Minimum 80% in Scientific track, Aptitude test required", "Leading engineering programs with ABET accreditation", 1, 11 },
+                    { 22, "Minimum 75% in Scientific track, Aptitude test required", "Research-focused science programs across multiple disciplines", 3, 11 },
+                    { 23, "Minimum 90% in Scientific track, Aptitude test required", "Premier medical education in Kuwait", 2, 11 },
+                    { 24, "Minimum 75% in Scientific track, Aptitude test required", "Healthcare professional programs with clinical training", 12, 11 },
+                    { 25, "Minimum 85% in Scientific track, Aptitude test required", "PharmD program with extensive clinical training", 11, 11 },
+                    { 26, "Minimum 85% in Scientific track, Aptitude test required", "Advanced dental education with modern facilities", 10, 11 },
+                    { 27, "Minimum 75% in Either track, Aptitude test required", "AACSB-accredited business programs", 4, 11 },
+                    { 28, "Minimum 70% in Either track, Aptitude test required", "Comprehensive humanities and social sciences programs", 5, 11 },
+                    { 29, "Minimum 80% in Either track, Aptitude test required", "Kuwait's premier legal education program", 8, 11 },
+                    { 30, "Minimum 70% in Either track, Aptitude test required", "Teacher preparation and educational research programs", 6, 11 },
+                    { 31, "Minimum 70% in Either track, Aptitude test required", "Islamic studies and jurisprudence programs", 7, 11 }
                 });
 
             migrationBuilder.InsertData(
@@ -558,7 +570,36 @@ namespace UniSelector.DataAccess.Migrations
                     { 42, 18000.0, 1200.0, 140, 88.0, 17, 75.0, 6.0, 80.0, true, 82 },
                     { 43, 17000.0, 1000.0, 135, 85.0, 17, 70.0, 6.0, 80.0, false, 83 },
                     { 44, 13000.0, 850.0, 130, 80.0, 18, 65.0, 5.5, 75.0, false, 55 },
-                    { 45, 13000.0, 800.0, 130, 75.0, 19, 65.0, 5.5, 75.0, false, 15 }
+                    { 45, 13000.0, 800.0, 130, 75.0, 19, 65.0, 5.5, 75.0, false, 15 },
+                    { 46, 0.0, 1200.0, 144, 90.0, 21, 80.0, null, null, true, 4 },
+                    { 47, 0.0, 1200.0, 144, 92.0, 21, 80.0, null, null, true, 2 },
+                    { 48, 0.0, 1300.0, 144, 95.0, 21, 80.0, null, null, true, 54 },
+                    { 49, 0.0, 1250.0, 144, 93.0, 21, 80.0, null, null, true, 1 },
+                    { 50, 0.0, 1200.0, 144, 92.0, 21, 80.0, null, null, true, 3 },
+                    { 51, 0.0, 900.0, 132, 80.0, 22, 75.0, null, null, true, 12 },
+                    { 52, 0.0, 850.0, 132, 78.0, 22, 75.0, null, null, true, 9 },
+                    { 53, 0.0, 900.0, 132, 82.0, 22, 75.0, null, null, true, 10 },
+                    { 54, 0.0, 850.0, 132, 80.0, 22, 75.0, null, null, true, 11 },
+                    { 55, 0.0, 2000.0, 220, 98.0, 23, 90.0, null, null, true, 5 },
+                    { 56, 0.0, 1100.0, 140, 90.0, 24, 75.0, null, null, true, 45 },
+                    { 57, 0.0, 1000.0, 135, 88.0, 24, 75.0, null, null, true, 46 },
+                    { 58, 0.0, 1500.0, 170, 95.0, 25, 85.0, null, null, true, 41 },
+                    { 59, 0.0, 1800.0, 180, 95.0, 26, 85.0, null, null, true, 37 },
+                    { 60, 0.0, 1100.0, 130, 90.0, 27, 75.0, null, null, true, 13 },
+                    { 61, 0.0, 1200.0, 130, 88.0, 27, 75.0, null, null, true, 16 },
+                    { 62, 0.0, 1000.0, 130, 85.0, 27, 75.0, null, null, true, 15 },
+                    { 63, 0.0, 1000.0, 130, 85.0, 27, 75.0, null, null, true, 14 },
+                    { 64, 0.0, 1100.0, 130, 87.0, 27, 75.0, null, null, true, 55 },
+                    { 65, 0.0, 800.0, 128, 75.0, 28, 70.0, null, null, true, 18 },
+                    { 66, 0.0, 850.0, 128, 80.0, 28, 70.0, null, null, true, 17 },
+                    { 67, 0.0, 900.0, 128, 78.0, 28, 70.0, null, null, true, 77 },
+                    { 68, 0.0, 1200.0, 138, 90.0, 29, 80.0, null, null, true, 29 },
+                    { 69, 0.0, 900.0, 132, 85.0, 30, 70.0, null, null, true, 21 },
+                    { 70, 0.0, 950.0, 132, 83.0, 30, 70.0, null, null, true, 66 },
+                    { 71, 0.0, 850.0, 132, 80.0, 31, 70.0, null, null, true, 25 },
+                    { 72, 0.0, 800.0, 132, 78.0, 31, 70.0, null, null, true, 26 },
+                    { 73, 0.0, 800.0, 132, 75.0, 31, 70.0, null, null, true, 27 },
+                    { 74, 0.0, 800.0, 132, 75.0, 31, 70.0, null, null, true, 28 }
                 });
 
             migrationBuilder.CreateIndex(

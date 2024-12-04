@@ -92,14 +92,14 @@ public class MajorController : Controller
     }
     
     [Authorize(Roles = "Admin")]
-    public IActionResult Delete(int? id, int facId)
+    public IActionResult Delete(int majorId, int factId, int standFactId, int uniId)
     {
-        if (id is null or 0)
+        if (majorId is 0)
             return BadRequest();
-        var major = _unitOfWork.Major.Get(m => m.Id == id);
+        var major = _unitOfWork.Major.Get(m => m.Id == majorId);
         _unitOfWork.Major.Remove(major);
         _unitOfWork.Save();
-        return RedirectToAction(nameof(Index), new {facultyId = facId});
+        return RedirectToAction("Index", new {facultyId = factId, standardFactId = standFactId, universityId = uniId});
     }
 
     [Authorize(Roles = "Admin,User")]
