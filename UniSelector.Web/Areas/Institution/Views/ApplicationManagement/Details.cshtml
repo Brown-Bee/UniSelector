@@ -65,6 +65,148 @@
                     </div>
                 </div>
             </div>
+            <!-- Personal Information -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="info-card">
+                        <h5 class="border-bottom pb-2 mb-3">Personal Information</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Full Name:</span>
+                                        <span class="fw-medium">@Model.User?.Name</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Civil ID:</span>
+                                        <span class="fw-medium">@Model.User?.CivilID</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Gender:</span>
+                                        <span class="fw-medium">@Model.User?.Gender</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Birth Date:</span>
+                                        <span class="fw-medium">@(Model.User?.BirthDate?.ToString("dd/MM/yyyy"))</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Nationality:</span>
+                                        <span class="fw-medium">@Model.User?.Nationality</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Mother's Nationality:</span>
+                                        <span class="fw-medium">@Model.User?.MothersNationality</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Address:</span>
+                                        <span class="fw-medium">@Model.User?.Address</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Academic Information -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="info-card">
+                        <h5 class="border-bottom pb-2 mb-3">Academic Background</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">High School Path:</span>
+                                <span class="fw-medium">@Model.User?.HighSchoolType</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Grade:</span>
+                                <span class="fw-medium">@Model.User?.Grade%</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Graduation Year:</span>
+                                <span class="fw-medium">@Model.User?.HighSchoolGraduationYear</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">School Type:</span>
+                                <span class="fw-medium">@((bool)Model.User?.IsPublicSchool ? "Public" : "Private")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="info-card">
+                        <h5 class="border-bottom pb-2 mb-3">Test Scores & Requirements</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">IELTS Score:</span>
+                                <span class="fw-medium @(Model.User?.IELTS >= Model.Major?.MinimumIELTS ? "text-success" : "text-danger")">
+                                    @Model.User?.IELTS / @Model.Major?.MinimumIELTS
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">TOEFL Score:</span>
+                                <span class="fw-medium @(Model.User?.TOEFL >= Model.Major?.MinimumTOEFL ? "text-success" : "text-danger")">
+                                    @Model.User?.TOEFL / @Model.Major?.MinimumTOEFL
+                                </span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span class="text-muted">Aptitude Test:</span>
+                                <span class="fw-medium @(Model.User?.HasAptitudeTest == Model.Major?.RequiresAptitudeTest ? "text-success" : "text-danger")">
+                                    @((bool)Model.User?.HasAptitudeTest ? "Yes" : "No") / @((bool)Model.Major?.RequiresAptitudeTest ? "Required" : "Not Required")
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program Details -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <div class="info-card">
+                        <h5 class="border-bottom pb-2 mb-3">Program Details</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Credits Required:</span>
+                                        <span class="fw-medium">@Model.Major?.Credits</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Study Duration:</span>
+                                        <span class="fw-medium">@Model.Major?.StandardMajor?.StudyDuration years</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Average Price:</span>
+                                        <span class="fw-medium">@Model.Major?.AveragePrice KWD</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Employment Rate:</span>
+                                        <span class="fw-medium">@Model.Major?.EmploymentRate%</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Average Starting Salary:</span>
+                                        <span class="fw-medium">@Model.Major?.AverageStartingSalary KWD</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span class="text-muted">Required HS Path:</span>
+                                        <span class="fw-medium">@Model.Major?.StandardMajor?.HighSchoolPath</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Documents Section -->
             <div class="documents-section mb-4">
