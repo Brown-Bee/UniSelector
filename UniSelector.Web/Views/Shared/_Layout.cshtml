@@ -7,6 +7,17 @@
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using UniSelector.Models
+@using System.Security.Claims
+@inject IUnitOfWork UnitOfWork
+
+@functions {
+    private int GetUniversityId()
+    {
+        var userEmail = User.FindFirstValue(ClaimTypes.Email);
+        var university = UnitOfWork.University.Get(u => u.Email == userEmail);
+        return university?.Id ?? 0;
+    }
+}
 @inject SignInManager<ApplicationUser> SignInManager
 
 <!DOCTYPE html>
@@ -88,7 +99,25 @@
                     }
                     else if (User.IsInRole("Institution"))
                     {
-                        <a asp-area="Institution" asp-controller="ApplicationManagement" asp-action="Index">Applications</a>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Management
+                            </a>
+                            <ul>
+                                <li>
+                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Faculty" 
+                                       asp-action="Index" asp-route-universityId="@GetUniversityId()">
+                                        Faculty Management
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" asp-area="Institution" 
+                                       asp-controller="ApplicationManagement" asp-action="Index">
+                                        Applications
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                     }
                     else if (User.IsInRole("User"))
                     {
