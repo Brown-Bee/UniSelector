@@ -1,9 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Security.Claims;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Models.ViewModel;
@@ -12,31 +10,18 @@ using UniSelector.Utility;
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin,University")]
+[Authorize(Roles = "Admin")]
 public class FacultyController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
-    private readonly UserManager<ApplicationUser> _userManager;
 
-    public FacultyController(IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
+    public FacultyController(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
-        _userManager = userManager;
     }
 
     public IActionResult Index(int id, int universityId)    
     {
-        // University role can only access their own data
-        if (User.IsInRole("University"))
-        {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var university = _unitOfWork.University.Get(u => u.Email == userEmail);
-
-            if (university == null || university.Id != universityId)
-            {
-                return Forbid();
-            }
-        }
         if (universityId is 0)
         {
             return BadRequest();
@@ -53,17 +38,6 @@ public class FacultyController : Controller
     [HttpPost]
     public IActionResult Upsert(FacultyVM facultyVm)
     {
-        // Verify university ownership for University role
-        if (User.IsInRole("University"))
-        {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var university = _unitOfWork.University.Get(u => u.Email == userEmail);
-
-            if (university == null || university.Id != facultyVm.faculty.UniversityId)
-            {
-                return Forbid();
-            }
-        }
         var factId = facultyVm.faculty.Id;
         var uniId = facultyVm.faculty.UniversityId;
         if (!ModelState.IsValid)

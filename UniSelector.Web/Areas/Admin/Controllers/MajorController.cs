@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Security.Claims;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Models.ViewModel;
@@ -9,7 +8,7 @@ using UniSelector.Models.ViewModel;
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin,University")]
+[Authorize(Roles = "Admin,User")]
 public class MajorController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -26,24 +25,7 @@ public class MajorController : Controller
         {
             return BadRequest();
         }
-        // Verify ownership for University role
-        if (User.IsInRole("University"))
-        {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var university = _unitOfWork.University.Get(u => u.Email == userEmail);
-
-            if (university == null || university.Id != universityId)
-            {
-                return BadRequest();
-            }
-
-            // Verify faculty belongs to this university
-            var faculty = _unitOfWork.Faculty.Get(f => f.Id == facultyId && f.UniversityId == universityId);
-            if (faculty == null)
-            {
-                return BadRequest();
-            }
-        }
+        
         var majorVm = new MajorVM
         {
             
@@ -68,25 +50,6 @@ public class MajorController : Controller
     [Authorize(Roles = "Admin")]
     public IActionResult Upsert(MajorVM majorVm)
     {
-        // Verify ownership for University role
-        if (User.IsInRole("University"))
-        {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var university = _unitOfWork.University.Get(u => u.Email == userEmail);
-
-            if (university == null || university.Id != majorVm.UniId)
-            {
-                return BadRequest();
-            }
-
-            // Verify faculty belongs to this university
-            var faculty = _unitOfWork.Faculty.Get(f => f.Id == majorVm.Major.FacultyId && f.UniversityId == majorVm.UniId);
-            if (faculty == null)
-            {
-                return BadRequest();
-            }
-        }
-
         var uniId = majorVm.UniId;
         var factId = majorVm.Major.FacultyId;
         var standFactId = majorVm.StandardFacultyId;
@@ -127,28 +90,10 @@ public class MajorController : Controller
         return RedirectToAction("Index", new {facultyId = factId, standardFactId = standFactId, universityId = uniId});
         
     }
-
-    [Authorize(Roles = "Admin,University")]
+    
+    [Authorize(Roles = "Admin")]
     public IActionResult Delete(int majorId, int factId, int standFactId, int uniId)
     {
-        // Verify ownership for University role
-        if (User.IsInRole("University"))
-        {
-            var userEmail = User.FindFirstValue(ClaimTypes.Email);
-            var university = _unitOfWork.University.Get(u => u.Email == userEmail);
-
-            if (university == null || university.Id != uniId)
-            {
-                return BadRequest();
-            }
-
-            // Verify faculty belongs to this university
-            var faculty = _unitOfWork.Faculty.Get(f => f.Id == factId && f.UniversityId == uniId);
-            if (faculty == null)
-            {
-                return BadRequest();
-            }
-        }
         if (majorId is 0)
             return BadRequest();
         var major = _unitOfWork.Major.Get(m => m.Id == majorId);
