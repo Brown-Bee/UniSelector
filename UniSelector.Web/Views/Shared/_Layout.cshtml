@@ -3,7 +3,7 @@
     var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
     var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
     bool isHomePage = currentController == "Home" && currentAction == "Index";
-}
+    }
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using UniSelector.Models
@@ -63,63 +63,73 @@
             </a>
 
             <nav id="navmenu" class="navmenu">
-                <ul>
+    <ul>
                     @if (User.IsInRole("Admin"))
                     {
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Management
-                            </a>
-                            <ul>
-                                <li>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="UserManagement" asp-action="Index">Users Management</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="University" asp-action="Index">Universities Management</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="StandardFaculty" asp-action="Index">Standard Faculties Management</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="StandardMajor" asp-action="Index">Standard Majors Management</a>
-                                </li>
-                            </ul>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Management
+                    </a>
+                    <ul>
+                        <li>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="UserManagement" asp-action="Index">Users Management</a>
                         </li>
+                        <li>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="University" asp-action="Index">Universities Management</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="StandardFaculty" asp-action="Index">Standard Faculties Management</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-area="Admin" asp-controller="StandardMajor" asp-action="Index">Standard Majors Management</a>
+                        </li>
+                    </ul>
+                </li>
                     }
                     else if (User.IsInRole("Institution"))
                     {
-                        <a asp-area="Institution" asp-controller="ApplicationManagement" asp-action="Index">Applications</a>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        University Management
+                    </a>
+                    <ul>
+                        <li>
+                            <a class="dropdown-item"@*  asp-area="" 
+                               asp-controller="" 
+                               asp-action=""
+                               asp-route-universityId="" *@>Manage Faculties</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" asp-area="Institution" asp-controller="ApplicationManagement" asp-action="Index">Applications</a>
+                        </li>
+                    </ul>
+                </li>
                     }
                     else if (User.IsInRole("User"))
                     {
-                        <a asp-area="User" asp-controller="Application" asp-action="myApplications">My Applications</a>
+                <a asp-area="User" asp-controller="Application" asp-action="myApplications">My Applications</a>
                     }
-                    <li>
-                        <a class="nav-link " asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
-                    </li>
+        <li>
+            <a class="nav-link" asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
+        </li>
                     @if (isHomePage)
                     {
-                        <li>
-                            <a asp-area="User" asp-controller="Home" asp-action="Index" class="active">Home</a>
-                        </li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li>
-                            <a href="#features">Features</a>
-                        </li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        @* <li>
-                            <a href="#contact">Contact</a>
-                        </li> *@
+                <li>
+                    <a asp-area="User" asp-controller="Home" asp-action="Index" class="active">Home</a>
+                </li>
+                <li>
+                    <a href="#about">About</a>
+                </li>
+                <li>
+                    <a href="#features">Features</a>
+                </li>
+                <li>
+                    <a href="#services">Services</a>
+                </li>
                     }
-
-
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
+    </ul>
+    <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+</nav>
             @if (SignInManager.IsSignedIn(User))
             {
                 var claimsIdentity = (ClaimsIdentity)User.Identity!;
