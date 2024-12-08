@@ -89,14 +89,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
    new University
    {
        Id = 6,
-       Name = "Australian College of Kuwait (ACK)",
+       Name = "Australian University (AU)",
        type = "Private",
        FullDescription = "Australian-standard technical and vocational education. Strong focus on engineering and maritime studies.",
        SmallDescription = "Australian-standard technical education",
        location = "Mishref, Block 5",
        KuwaitRank = 6,
        PhoneNumber = "1828225",
-       ImageUrl = "/images/University/ACK.png"
+       ImageUrl = "/images/University/AU.png"
    },
    new University
    {
@@ -154,7 +154,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        FullDescription = "Established in 1966, Kuwait's first public university offering comprehensive education across multiple campuses",
        SmallDescription = "Kuwait's premier public higher education institution",
        location = "Multiple campuses - Main in Khaldiya",
-       KuwaitRank = 1,
+       KuwaitRank = 11,
        PhoneNumber = "24987000",
        ImageUrl = "/images/University/KU.png"
    }

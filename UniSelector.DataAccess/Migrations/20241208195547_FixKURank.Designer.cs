@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UniSelector.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241208195547_FixKURank")]
+    partial class FixKURank
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2794,9 +2797,9 @@ namespace UniSelector.DataAccess.Migrations
                         {
                             Id = 6,
                             FullDescription = "Australian-standard technical and vocational education. Strong focus on engineering and maritime studies.",
-                            ImageUrl = "/images/University/AU.png",
+                            ImageUrl = "/images/University/ACK.png",
                             KuwaitRank = 6,
-                            Name = "Australian University (AU)",
+                            Name = "Australian College of Kuwait (ACK)",
                             PhoneNumber = "1828225",
                             SmallDescription = "Australian-standard technical education",
                             location = "Mishref, Block 5",
