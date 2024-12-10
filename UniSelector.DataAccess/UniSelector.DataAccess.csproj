@@ -23,6 +23,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\UniSelector.Models\UniSelector.Models.csproj" />
+        <ProjectReference Include="..\UniSelector.Utility\UniSelector.Utility.csproj" />
     </ItemGroup>
 
     <ItemGroup>

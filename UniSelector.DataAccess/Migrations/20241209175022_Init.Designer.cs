@@ -12,7 +12,7 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241208192721_Init")]
+    [Migration("20241209175022_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -2797,9 +2797,9 @@ namespace UniSelector.DataAccess.Migrations
                         {
                             Id = 6,
                             FullDescription = "Australian-standard technical and vocational education. Strong focus on engineering and maritime studies.",
-                            ImageUrl = "/images/University/ACK.png",
+                            ImageUrl = "/images/University/AU.png",
                             KuwaitRank = 6,
-                            Name = "Australian College of Kuwait (ACK)",
+                            Name = "Australian University (AU)",
                             PhoneNumber = "1828225",
                             SmallDescription = "Australian-standard technical education",
                             location = "Mishref, Block 5",
@@ -2858,7 +2858,7 @@ namespace UniSelector.DataAccess.Migrations
                             Id = 11,
                             FullDescription = "Established in 1966, Kuwait's first public university offering comprehensive education across multiple campuses",
                             ImageUrl = "/images/University/KU.png",
-                            KuwaitRank = 1,
+                            KuwaitRank = 11,
                             Name = "Kuwait University",
                             PhoneNumber = "24987000",
                             SmallDescription = "Kuwait's premier public higher education institution",

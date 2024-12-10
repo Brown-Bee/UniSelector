@@ -6,6 +6,8 @@ using UniSelector.DataAccess.Repository;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Utility;
 using UniSelector.Models;
+using UniSelector.DataAccess.DbInitializer;
+using static System.Formats.Asn1.AsnWriter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +47,7 @@ builder.Services.AddScoped<IEmailSender, EmailSenderAdapter>();
 /*
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 */
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 
 
 
@@ -73,5 +76,8 @@ app.MapControllerRoute(
     name: "areas",
     pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
 
+var scope = app.Services.CreateScope();
+var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+await dbInitializer.Initialize();
 app.Run();
     
