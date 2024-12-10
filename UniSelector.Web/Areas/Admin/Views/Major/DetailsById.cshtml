@@ -162,14 +162,38 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Starting Salary Card -->
+                    <!-- Rejection Rate Card -->
+                    <div class="col-md-6">
+                        <div class="info-card bg-light p-3 rounded shadow-sm">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="bi bi-clipboard-data text-primary fs-4 me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Total Applications</small>
+                                    <span class="fw-medium">@ViewBag.TotalApplications</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Acceptance Rate Card -->
                     <div class="col-md-6">
                         <div class="info-card bg-light p-3 rounded shadow-sm">
                             <div class="d-flex align-items-center">
-                                <i class="bi bi-percent text-primary fs-4 me-2"></i>
+                                <i class="bi bi-check-circle text-success fs-4 me-2"></i>
                                 <div>
-                                    <small class="text-muted d-block">Employment Rate</small>
-                                    <span class="fw-medium">@Model.EmploymentRate</span>
+                                    <small class="text-muted d-block">Acceptance Rate</small>
+                                    <span class="fw-medium">@ViewBag.AcceptanceRate.ToString("F1")%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Rejection Rate Card -->
+                    <div class="col-md-6">
+                        <div class="info-card bg-light p-3 rounded shadow-sm">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-x-circle text-danger fs-4 me-2"></i>
+                                <div>
+                                    <small class="text-muted d-block">Rejection Rate</small>
+                                    <span class="fw-medium">@ViewBag.RejectionRate.ToString("F1")%</span>
                                 </div>
                             </div>
                         </div>

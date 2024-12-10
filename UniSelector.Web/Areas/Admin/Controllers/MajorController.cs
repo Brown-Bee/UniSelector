@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Models.ViewModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
@@ -35,6 +36,11 @@ public class MajorController : Controller
             }
         };
         InitPage(facultyId, standardFactId, universityId, majorVm);
+        if (majorId != 0)
+        {
+            ViewBag.TotalApplications = _unitOfWork.Major.TotalApplications(majorId);
+            ViewBag.AcceptanceRate = _unitOfWork.Major.GetAcceptanceRate(majorId);
+        }
         return View("Upsert", majorVm);
     }
 
@@ -107,6 +113,9 @@ public class MajorController : Controller
     {
         var majors = _unitOfWork.Major.Get(m => m.Id == majorId, 
                 includeProperties:"Faculty.StandardFaculty,StandardMajor");
+        ViewBag.AcceptanceRate = _unitOfWork.Major.GetAcceptanceRate(majorId);
+        ViewBag.RejectionRate = _unitOfWork.Major.GetRejectionRate(majorId);
+        ViewBag.TotalApplications = _unitOfWork.Major.TotalApplications(majorId);
         return View(majors);
     }
 

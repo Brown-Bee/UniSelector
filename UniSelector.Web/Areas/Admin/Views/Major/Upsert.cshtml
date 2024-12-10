@@ -9,6 +9,31 @@
             </div>
         </div>
     </div>
+    @if (Model.Major.Id != 0)
+    {
+        <div class="bg-transparent p-3 mb-4 rounded">
+            <div class="d-flex flex-wrap justify-content-around gap-3">
+                <div class="px-4 py-2 bg-white rounded-pill shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-clipboard-data text-primary me-2"></i>
+                        <span>@ViewBag.TotalApplications Applications</span>
+                    </div>
+                </div>
+                <div class="px-4 py-2 bg-white rounded-pill shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle text-success me-2"></i>
+                        <span>@(ViewBag.AcceptanceRate.ToString("F1"))% Accepted</span>
+                    </div>
+                </div>
+                <div class="px-4 py-2 bg-white rounded-pill shadow-sm">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-x-circle text-danger me-2"></i>
+                        <span>@((100 - ViewBag.AcceptanceRate).ToString("F1"))% Rejected</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <!-- Major Information Form -->
     <form method="post" class="bg-light p-3" asp-action="Upsert">
         <input asp-for="Major.Id" hidden />
