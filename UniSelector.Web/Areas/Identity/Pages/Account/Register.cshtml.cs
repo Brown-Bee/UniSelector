@@ -105,7 +105,7 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account
 
 
             [Display(Name = "Role")]
-            public string Role { get; set; }
+            public string Role { get; set; } = "User";
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }

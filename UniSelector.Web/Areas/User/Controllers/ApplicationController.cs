@@ -30,19 +30,26 @@ namespace UniSelector.Web.Areas.User.Controllers
             if (userId is null) return NotFound("User not found");
             
             var user = _unitOfWork.ApplicationUser.Get(a => a.Id == userId);
+            var university = _unitOfWork.University.Get(u => u.Id == universityId, includeProperties: "Faculties");
+            var faculty = _unitOfWork.Faculty.Get(f => f.Id == facultyId, includeProperties: "Majors,StandardFaculty");
+            var major = _unitOfWork.Major.Get(m => m.Id == majorId, includeProperties: "StandardMajor");
 
             // Create application view model
             var applicationVm = new ApplicationVM
             {
-                ApplicationUser = user, 
+                ApplicationUser = user,
                 Application = new()
                 {
                     UniversityId = universityId,
                     FacultyId = facultyId,
                     MajorId = majorId,
                     UserId = user.Id,
-                    UniEmail = uniEmail
-                }
+                    UniEmail = uniEmail,
+                    University = university,
+                    Faculty = faculty,
+                    Major = major
+                },
+                universityName = university.Name,
             };
             return View(applicationVm);
         }

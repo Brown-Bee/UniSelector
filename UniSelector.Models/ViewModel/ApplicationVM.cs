@@ -23,4 +23,5 @@ public class ApplicationVM
     public bool MeetsGradeRequirement { get; set; }
     [ValidateNever]
     public bool MeetsLanguageRequirement { get; set; }
+    public string? universityName { get; set; }
 }

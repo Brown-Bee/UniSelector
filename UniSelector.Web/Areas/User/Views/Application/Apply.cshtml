@@ -22,21 +22,45 @@
                 <input asp-for="Application.ApplicationDate" hidden />
                 <input asp-for="Application.Response" hidden />
 
-                @* <!-- Application Information Display -->
-                <div class="section-container mb-4">
+                <!-- University Details -->
+                <div class="section-container">
                     <h5 class="section-title">University Details</h5>
-                    <div class="row">
+                    <div class="row g-4">
                         <div class="col-md-4">
-                            <p><strong>University:</strong> @Model.Application.University?.Name</p>
+                            <div class="detail-card">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">University</div>
+                                    <div class="detail-value">@Model.universityName</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <p><strong>Faculty:</strong> @Model.Application.Faculty?.StandardFaculty?.CombinedName</p>
+                            <div class="detail-card">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-book"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Faculty</div>
+                                    <div class="detail-value">@Model.Application.Faculty?.StandardFaculty?.CombinedName</div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <p><strong>Major:</strong> @Model.Application.Major?.StandardMajor?.CombinedName</p>
+                            <div class="detail-card">
+                                <div class="icon-wrapper">
+                                    <i class="bi bi-mortarboard"></i>
+                                </div>
+                                <div class="detail-content">
+                                    <div class="detail-label">Major</div>
+                                    <div class="detail-value">@Model.Application.Major?.StandardMajor?.CombinedName</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div> *@
+                </div>
 
                 <!-- Personal Information -->
                 <div class="section-container mb-4">
@@ -44,40 +68,40 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.Name" class="form-label">Full Name</label>
-                            <input asp-for="ApplicationUser.Name" class="form-control" />
+                            <input asp-for="ApplicationUser.Name" readonly class="form-control" />
                             <span asp-validation-for="ApplicationUser.Name" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.CivilID" class="form-label">Civil ID</label>
-                            <input asp-for="ApplicationUser.CivilID" class="form-control" />
+                            <input asp-for="ApplicationUser.CivilID" readonly class="form-control" />
                             <span asp-validation-for="ApplicationUser.CivilID" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.Gender" class="form-label">Gender</label>
-                            <select asp-for="ApplicationUser.Gender" class="form-select" >
-                                <option value="">Select Gender</option>
+                            <input asp-for="ApplicationUser.Gender" readonly class="form-select">
+                                @* <option value="">Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                            </select>
+                            </select> *@
                             <span asp-validation-for="ApplicationUser.Gender" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.Nationality" class="form-label">Nationality</label>
-                            <input asp-for="ApplicationUser.Nationality" class="form-control" />
+                            <input asp-for="ApplicationUser.Nationality" readonly class="form-control" />
                             <span asp-validation-for="ApplicationUser.Nationality" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.MothersNationality" class="form-label">Mother's Nationality</label>
-                            <input asp-for="ApplicationUser.MothersNationality" class="form-control" />
+                            <input asp-for="ApplicationUser.MothersNationality" readonly class="form-control" />
                             <span asp-validation-for="ApplicationUser.MothersNationality" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.BirthDate" class="form-label">Date of Birth</label>
-                            <input asp-for="ApplicationUser.BirthDate" class="form-control" type="date"  />
+                            <input asp-for="ApplicationUser.BirthDate" class="form-control" readonly type="date" />
                             <span asp-validation-for="ApplicationUser.BirthDate" class="text-danger"></span>
                         </div>
                     </div>
@@ -89,33 +113,29 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.HighSchoolType" class="form-label">High School Path</label>
-                            <select asp-for="ApplicationUser.HighSchoolType" class="form-select">
-                                <option value="">Select Type</option>
-                                <option value="Scientific">Scientific</option>
-                                <option value="Literary">Literary</option>
-                            </select>
+                            <input asp-for="ApplicationUser.HighSchoolType" readonly class="form-select">
                             <span asp-validation-for="ApplicationUser.HighSchoolType" class="text-danger"></span>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label asp-for="ApplicationUser.Grade" class="form-label">High School Grade (%)</label>
-                            <input asp-for="ApplicationUser.Grade" class="form-control" type="number" step="0.01" />
+                            <input asp-for="ApplicationUser.Grade" readonly class="form-control" type="number" step="0.01" />
                             <span asp-validation-for="ApplicationUser.Grade" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4 mb-3">
                             <label asp-for="ApplicationUser.IELTS" class="form-label">IELTS Score</label>
-                            <input asp-for="ApplicationUser.IELTS" class="form-control" type="number" step="0.5" />
+                            <input asp-for="ApplicationUser.IELTS" readonly class="form-control" type="number" step="0.5" />
                             <span asp-validation-for="ApplicationUser.IELTS" class="text-danger"></span>
                         </div>
                         <div class="col-md-4 mb-3">
                             <label asp-for="ApplicationUser.TOEFL" class="form-label">TOEFL Score</label>
-                            <input asp-for="ApplicationUser.TOEFL" class="form-control" type="number" />
+                            <input asp-for="ApplicationUser.TOEFL" readonly class="form-control" type="number" />
                             <span asp-validation-for="ApplicationUser.TOEFL" class="text-danger"></span>
                         </div>
                         <div class="col-md-4 mb-3">
                             <div class="form-check mt-4">
-                                <input asp-for="ApplicationUser.HasAptitudeTest" class="form-check-input" type="checkbox" />
+                                <input asp-for="ApplicationUser.HasAptitudeTest" readonly class="form-check-input" type="checkbox" />
                                 <label asp-for="ApplicationUser.HasAptitudeTest" class="form-check-label">Has Aptitude Test</label>
                             </div>
                         </div>
@@ -244,8 +264,87 @@
         }
     </script>
 }
-@section Styles{
+@section Styles {
     <style>
+        .section-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section-title {
+            color: #495057;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #34495e;
+            margin-bottom: 8px;
+        }
+
+        .btn-primary {
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .document-preview {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px dashed #dee2e6;
+        }
+
+
+
+        .detail-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .detail-content {
+            flex: 1;
+        }
+
+        .detail-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #212529;
+        }
+
+       /*  <!-- old -->
         .section-container {
             background-color: #ffffff;
             border-radius: 8px;
@@ -270,6 +369,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
+        } */
     </style>
 }
