@@ -444,7 +444,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         MinimumIELTS = 6.5,
         MinimumTOEFL = 80,
         RequiresAptitudeTest = false,
-        EmploymentRate = 75,
         AverageStartingSalary = 800
     },
     new Major
@@ -458,7 +457,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         MinimumIELTS = 6.5,
         MinimumTOEFL = 80,
         RequiresAptitudeTest = false,
-        EmploymentRate = 80,
         AverageStartingSalary = 850
     },
     new Major
@@ -472,7 +470,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         MinimumIELTS = 6.5,
         MinimumTOEFL = 80,
         RequiresAptitudeTest = true,
-        EmploymentRate = 90,
         AverageStartingSalary = 1200
     },
 
@@ -488,7 +485,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 85,
        AverageStartingSalary = 1000
    },
    new Major
@@ -502,7 +498,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 88,
        AverageStartingSalary = 1100
    },
    new Major
@@ -516,7 +511,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 82,
        AverageStartingSalary = 950
    },
    new Major
@@ -530,7 +524,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 80,
        AverageStartingSalary = 900
    },
 
@@ -546,7 +539,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 90,
        AverageStartingSalary = 1300
    },
 
@@ -561,7 +553,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 92,
        AverageStartingSalary = 1350
    },
    new Major
@@ -575,7 +566,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 88,
        AverageStartingSalary = 1250
    },
    // AUK Architecture & Design (Faculty 4)
@@ -590,7 +580,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 80,
        AverageStartingSalary = 900
    },
    new Major
@@ -604,7 +593,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 82,
        AverageStartingSalary = 850
    },
    // AUM Engineering & Technology Majors (Faculty 5)
@@ -619,7 +607,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 85,
        AverageStartingSalary = 1200
    },
    new Major
@@ -633,7 +620,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 90,
        AverageStartingSalary = 1300
    },
    new Major
@@ -647,7 +633,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 88,
        AverageStartingSalary = 1250
    },
    new Major
@@ -661,7 +646,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 87,
        AverageStartingSalary = 1200
    },
    new Major
@@ -675,7 +659,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 85,
        AverageStartingSalary = 1150
    },
    // AUM Business Majors (Faculty 6)
@@ -690,7 +673,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 85,
        AverageStartingSalary = 900
    },
    new Major
@@ -704,7 +686,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 87,
        AverageStartingSalary = 950
    },
    new Major
@@ -718,7 +699,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 82,
        AverageStartingSalary = 850
    },
    new Major
@@ -732,7 +712,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = false,
-       EmploymentRate = 85,
        AverageStartingSalary = 900
    },
    // GUST Arts & Sciences Majors (Faculty 7)
@@ -747,7 +726,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 79,
        RequiresAptitudeTest = false,
-       EmploymentRate = 75,
        AverageStartingSalary = 800
    },
    new Major
@@ -761,7 +739,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 79,
        RequiresAptitudeTest = true,
-       EmploymentRate = 90,
        AverageStartingSalary = 1100
    },
    // GUST Business Majors (Faculty 8)
@@ -776,7 +753,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 79,
        RequiresAptitudeTest = false,
-       EmploymentRate = 85,
        AverageStartingSalary = 950
    },
    new Major
@@ -790,7 +766,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 79,
        RequiresAptitudeTest = false,
-       EmploymentRate = 87,
        AverageStartingSalary = 1000
    },
    new Major
@@ -804,7 +779,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.5,
        MinimumTOEFL = 79,
        RequiresAptitudeTest = false,
-       EmploymentRate = 83,
        AverageStartingSalary = 900
    },
    // KCST Engineering & CS Majors (Faculty 9)
@@ -819,7 +793,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 88,
        AverageStartingSalary = 1100
    },
    new Major
@@ -833,7 +806,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        MinimumIELTS = 6.0,
        MinimumTOEFL = 80,
        RequiresAptitudeTest = true,
-       EmploymentRate = 85,
        AverageStartingSalary = 1000
    },
     new Major
@@ -847,7 +819,6 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
         MinimumIELTS = 6.0,
         MinimumTOEFL = 80,
         RequiresAptitudeTest = false,
-        EmploymentRate = 88,
         AverageStartingSalary = 950
     },
 // AOU Business Administration (Faculty 10)
@@ -862,7 +833,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 80,
     AverageStartingSalary = 750
 },
 new Major
@@ -876,7 +846,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 78,
     AverageStartingSalary = 750
 },
 new Major
@@ -890,7 +859,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 85,
     AverageStartingSalary = 800
 },
 new Major
@@ -904,7 +872,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 82,
     AverageStartingSalary = 800
 },
 // AOU IT Faculty (Faculty 11)
@@ -919,7 +886,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 85,
     AverageStartingSalary = 850
 },
 
@@ -935,7 +901,6 @@ new Major
     MinimumIELTS = 6.0,
     MinimumTOEFL = 78,
     RequiresAptitudeTest = false,
-    EmploymentRate = 75,
     AverageStartingSalary = 700
 },
 // ACK Majors (Faculty 12 & 13)
@@ -950,7 +915,6 @@ new Major
     MinimumIELTS = 6.0,
     MinimumTOEFL = 78,
     RequiresAptitudeTest = true,
-    EmploymentRate = 85,
     AverageStartingSalary = 1000
 },
 new Major
@@ -964,7 +928,6 @@ new Major
     MinimumIELTS = 6.0,
     MinimumTOEFL = 78,
     RequiresAptitudeTest = false,
-    EmploymentRate = 80,
     AverageStartingSalary = 850
 },
 // Box Hill Majors (Faculty 14 & 15)
@@ -979,7 +942,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 75,
     AverageStartingSalary = 800
 },
 new Major
@@ -993,7 +955,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = true,
-    EmploymentRate = 70,
     AverageStartingSalary = 750
 },
 new Major
@@ -1007,7 +968,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 85,
     AverageStartingSalary = 900
 },
 // Kuwait Law School (Faculty 16)
@@ -1022,7 +982,6 @@ new Major
     MinimumIELTS = 6.0,
     MinimumTOEFL = 78,
     RequiresAptitudeTest = false,
-    EmploymentRate = 85,
     AverageStartingSalary = 1000
 },
 // Aviation College (Faculty 17)
@@ -1037,7 +996,6 @@ new Major
     MinimumIELTS = 6.0,
     MinimumTOEFL = 80,
     RequiresAptitudeTest = true,
-    EmploymentRate = 88,
     AverageStartingSalary = 1200
 },
 new Major
@@ -1051,7 +1009,6 @@ new Major
     MinimumIELTS = 6.0,
     MinimumTOEFL = 80,
     RequiresAptitudeTest = false,
-    EmploymentRate = 85,
     AverageStartingSalary = 1000
 },
 
@@ -1067,7 +1024,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 80,
     AverageStartingSalary = 850
 },
 new Major
@@ -1081,7 +1037,6 @@ new Major
     MinimumIELTS = 5.5,
     MinimumTOEFL = 75,
     RequiresAptitudeTest = false,
-    EmploymentRate = 75,
     AverageStartingSalary = 800
 },
 // KU Engineering Majors
@@ -1096,7 +1051,6 @@ new Major
     MinimumIELTS = null, // Not required for public
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 90,
     AverageStartingSalary = 1200
 },
 new Major
@@ -1110,7 +1064,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 92,
     AverageStartingSalary = 1200
 },
 new Major
@@ -1124,7 +1077,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 95,
     AverageStartingSalary = 1300
 },
 new Major
@@ -1138,7 +1090,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 93,
     AverageStartingSalary = 1250
 },
 new Major
@@ -1152,7 +1103,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 92,
     AverageStartingSalary = 1200
 },
 // KU Science Majors
@@ -1167,7 +1117,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 80,
     AverageStartingSalary = 900
 },
 new Major
@@ -1181,7 +1130,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 78,
     AverageStartingSalary = 850
 },
 new Major
@@ -1195,7 +1143,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 82,
     AverageStartingSalary = 900
 },
 new Major
@@ -1209,7 +1156,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 80,
     AverageStartingSalary = 850
 },
 
@@ -1225,7 +1171,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 98,
     AverageStartingSalary = 2000
 },
 // KU Allied Health Majors
@@ -1240,7 +1185,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 90,
     AverageStartingSalary = 1100
 },
 new Major
@@ -1254,7 +1198,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 88,
     AverageStartingSalary = 1000
 },
 // KU Pharmacy & Dentistry
@@ -1269,7 +1212,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 95,
     AverageStartingSalary = 1500
 },
 new Major
@@ -1283,7 +1225,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 95,
     AverageStartingSalary = 1800
 },
 // KU Business Majors
@@ -1298,7 +1239,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 90,
     AverageStartingSalary = 1100
 },
 new Major
@@ -1312,7 +1252,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 88,
     AverageStartingSalary = 1200
 },
 new Major
@@ -1326,7 +1265,6 @@ new Major
     MinimumIELTS = null,
     MinimumTOEFL = null,
     RequiresAptitudeTest = true,
-    EmploymentRate = 85,
     AverageStartingSalary = 1000
 },
 // KU Business continued
@@ -1338,7 +1276,6 @@ new Major
     Credits = 130,
     MinimumGrade = 75,
     RequiresAptitudeTest = true,
-    EmploymentRate = 85,
     AverageStartingSalary = 1000
 },
 new Major
@@ -1349,7 +1286,6 @@ new Major
     Credits = 130,
     MinimumGrade = 75,
     RequiresAptitudeTest = true,
-    EmploymentRate = 87,
     AverageStartingSalary = 1100
 },
 
@@ -1362,7 +1298,6 @@ new Major
     Credits = 128,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 75,
     AverageStartingSalary = 800
 },
 new Major
@@ -1373,7 +1308,6 @@ new Major
     Credits = 128,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 80,
     AverageStartingSalary = 850
 },
 new Major
@@ -1384,7 +1318,6 @@ new Major
     Credits = 128,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 78,
     AverageStartingSalary = 900
 },
 // KU Law
@@ -1396,7 +1329,6 @@ new Major
     Credits = 138,
     MinimumGrade = 80,
     RequiresAptitudeTest = true,
-    EmploymentRate = 90,
     AverageStartingSalary = 1200
 },
 // KU Education
@@ -1408,7 +1340,6 @@ new Major
     Credits = 132,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 85,
     AverageStartingSalary = 900
 },
 new Major
@@ -1419,7 +1350,6 @@ new Major
     Credits = 132,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 83,
     AverageStartingSalary = 950
 },
 
@@ -1432,7 +1362,6 @@ new Major
     Credits = 132,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 80,
     AverageStartingSalary = 850
 },
 new Major
@@ -1443,7 +1372,6 @@ new Major
     Credits = 132,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 78,
     AverageStartingSalary = 800
 },
 new Major
@@ -1454,7 +1382,6 @@ new Major
     Credits = 132,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 75,
     AverageStartingSalary = 800
 },
 new Major
@@ -1465,7 +1392,6 @@ new Major
     Credits = 132,
     MinimumGrade = 70,
     RequiresAptitudeTest = true,
-    EmploymentRate = 75,
     AverageStartingSalary = 800
 }
 );

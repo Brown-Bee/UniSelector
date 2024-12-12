@@ -28,10 +28,6 @@ public class Major
     [DisplayName("Requires Aptitude Test")]
     public bool RequiresAptitudeTest { get; set; }
 
-    // Job Market Info
-    [DisplayName("Employment Rate")]
-    [Range(0, 100)]
-    public double EmploymentRate { get; set; }
     [DisplayName("Average Starting Salary")]
     public double AverageStartingSalary { get; set; }
 
