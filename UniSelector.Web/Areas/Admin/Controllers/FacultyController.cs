@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Models.ViewModel;
@@ -10,7 +11,7 @@ using UniSelector.Utility;
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,Institution")]
 public class FacultyController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -24,8 +25,33 @@ public class FacultyController : Controller
     {
         if (universityId is 0)
         {
-            return BadRequest();
+            if (User.IsInRole("Institution"))
+            {
+                var userEmail = User.FindFirstValue(ClaimTypes.Email);
+                var university = _unitOfWork.University.Get(u => u.Email == userEmail);
+                if (university == null)
+                {
+                    return NotFound("University not found");
+                }
+                universityId = university.Id;
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
+
+        /*// If user is institution, verify they own this university
+        if (User.IsInRole("Institution"))
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var university = _unitOfWork.University.Get(u => u.Id == universityId);
+            if (university == null || university.Email != userEmail)
+            {
+                return Unauthorized();
+            }
+        }*/
+
         var facultyVm = new FacultyVM();
 
         InitPage(id, universityId , facultyVm);
@@ -40,14 +66,29 @@ public class FacultyController : Controller
     {
         var factId = facultyVm.faculty.Id;
         var uniId = facultyVm.faculty.UniversityId;
+
+        // Verify user has permission
+        if (User.IsInRole("Institution"))
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var university = _unitOfWork.University.Get(u => u.Id == uniId);
+            if (university == null || university.Email != userEmail)
+            {
+                return Unauthorized();
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             InitPage(factId, uniId , facultyVm);
             return View("Upsert", facultyVm);
         }
+
+        // Check for duplicates
         var uniFromDb = _unitOfWork.University.Get(u => u.Id== facultyVm.faculty.UniversityId, 
                 includeProperties:"Faculties", isTracked: false);
-        
+
+        // For existing faculty (Update)
         if (factId is not 0)
         {
             var excludeCurFact = uniFromDb.Faculties.Where(f => f.Id != factId);
@@ -59,6 +100,7 @@ public class FacultyController : Controller
             }
         }
 
+        // For new faculty (Create)
         if (factId is 0 && uniFromDb.Faculties.Any(faculty => faculty.StandardFacultyId == facultyVm.faculty.StandardFacultyId))
         {
             ModelState.AddModelError("", "The faculty already exists");

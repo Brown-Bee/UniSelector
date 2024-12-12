@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 using UniSelector.DataAccess.Repository.IRepository;
 using UniSelector.Models;
 using UniSelector.Models.ViewModel;
@@ -9,7 +10,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace UniSelector.Web.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[Authorize(Roles = "Admin,User")]
+[Authorize]
 public class MajorController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -19,14 +20,26 @@ public class MajorController : Controller
         _unitOfWork = unitOfWork;
     }
     
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Institution")]
     public IActionResult Index(int majorId, int facultyId, int standardFactId, int universityId)
     {
-        if (facultyId is 0)
+        if (facultyId is 0) 
         {
             return BadRequest();
         }
-        
+
+        // Check if user is institution and verify ownership
+        if (User.IsInRole("Institution"))
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var university = _unitOfWork.University.Get(u => u.Id == universityId);
+
+            if (university == null || university.Email != userEmail)
+            {
+                return Unauthorized();
+            }
+        }
+
         var majorVm = new MajorVM
         {
             
@@ -53,22 +66,38 @@ public class MajorController : Controller
     }
 
     [HttpPost]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Institution")]
     public IActionResult Upsert(MajorVM majorVm)
     {
         var uniId = majorVm.UniId;
         var factId = majorVm.Major.FacultyId;
         var standFactId = majorVm.StandardFacultyId;
         var standMajorId = majorVm.Major.StandardMajorId;
+
+        // Verify ownership for institution users
+        if (User.IsInRole("Institution"))
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var university = _unitOfWork.University.Get(u => u.Id == uniId);
+
+            if (university == null || university.Email != userEmail)
+            {
+                return Unauthorized();
+            }
+        }
+
         if (!ModelState.IsValid)
         {
             InitPage(factId, standFactId, uniId, majorVm);
             return View("Upsert", majorVm);
         }
+
+        // Get faculty to check for duplicate majors
         var facultyFromDb = _unitOfWork.Faculty.Get(f => f.StandardFacultyId == majorVm.StandardFacultyId  
            && f.UniversityId == majorVm.UniId, includeProperties:"Majors"                            
         );
-        // Only perform this check when adding a new major
+
+        // Check for duplicates when adding new major
         if (majorVm.Major.Id == 0)
         {
             foreach (var major in facultyFromDb.Majors)
@@ -82,6 +111,7 @@ public class MajorController : Controller
             }
         }
 
+        // Add or Update major
         if (majorVm.Major.Id is 0)
         {
             _unitOfWork.Major.Add(majorVm.Major);
@@ -90,6 +120,7 @@ public class MajorController : Controller
         {
             _unitOfWork.Major.Update(majorVm.Major);
         }
+
         _unitOfWork.Save();
         TempData["success"] = (majorVm.Major.Id is 0) ? "Major added Successfully" : "Major Updated Successfully";
         InitPage(factId, standFactId, uniId, majorVm);
@@ -97,11 +128,24 @@ public class MajorController : Controller
         
     }
     
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,Institution")]
     public IActionResult Delete(int majorId, int factId, int standFactId, int uniId)
-    {
-        if (majorId is 0)
+    {       
+        if (majorId == 0)
             return BadRequest();
+
+        // Verify ownership for institution users
+        if (User.IsInRole("Institution"))
+        {
+            var userEmail = User.FindFirstValue(ClaimTypes.Email);
+            var university = _unitOfWork.University.Get(u => u.Id == uniId);
+
+            if (university == null || university.Email != userEmail)
+            {
+                return Unauthorized();
+            }
+        }
+
         var major = _unitOfWork.Major.Get(m => m.Id == majorId);
         _unitOfWork.Major.Remove(major);
         _unitOfWork.Save();
