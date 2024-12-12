@@ -50,7 +50,12 @@
                     }
                 </tbody>
             </table>
-            <a asp-area="User" asp-controller="Home" asp-action="UniDetails" class="btn btn-outline-primary col-3 mt-3 ">Back To List</a>
+            <!-- Here the button doesn't work becuase I don't know how to get the universityId -->
+            <a asp-area="User" 
+                asp-controller="Home" 
+                asp-action="UniDetails"
+                asp-route-universityId="" 
+                class="btn btn-outline-primary col-3 mt-3 ">Back</a>
         </div>
     </div>
 </div>
