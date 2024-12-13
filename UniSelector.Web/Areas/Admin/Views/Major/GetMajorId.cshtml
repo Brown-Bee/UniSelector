@@ -23,6 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                
                     @foreach (var obj in Model)
                     {
                         <tr>
@@ -51,10 +52,11 @@
                 </tbody>
             </table>
             <!-- Here the button doesn't work becuase I don't know how to get the universityId -->
+            
             <a asp-area="User" 
                 asp-controller="Home" 
                 asp-action="UniDetails"
-                asp-route-universityId="" 
+                asp-route-universityId="@ViewBag.UniId" 
                 class="btn btn-outline-primary col-3 mt-3 ">Back</a>
         </div>
     </div>

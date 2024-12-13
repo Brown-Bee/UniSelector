@@ -71,7 +71,7 @@
                         {
                             <div class="col-md-4">
                                 <div class="faculty-card bg-light p-3 rounded shadow-sm">
-                                    <a href="@Url.Action("GetMajorId", "Major", new { area = "Admin", facultyId = faculty.Id})"
+                                    <a href="@Url.Action("GetMajorId", "Major", new { area = "Admin", facultyId = faculty.Id, uniId = Model.Id})"
                                        class="text-decoration-none text-dark"
                                        data-bs-toggle="popover"
                                        data-bs-trigger="hover focus"

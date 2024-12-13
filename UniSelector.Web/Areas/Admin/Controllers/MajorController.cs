@@ -57,11 +57,11 @@ public class MajorController : Controller
         return View("Upsert", majorVm);
     }
 
-    public IActionResult GetMajorId(int facultyId)
+    public IActionResult GetMajorId(int facultyId, int uniId)
     {
-        
         var majors = _unitOfWork.Major
             .GetAll(m => m.FacultyId == facultyId, includeProperties:"Faculty.University,StandardMajor").ToList();
+        ViewBag.UniId = uniId;
         return View(majors);
     }
 

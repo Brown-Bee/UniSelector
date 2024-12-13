@@ -101,8 +101,19 @@ $(document).ready(function() {
 
     // Clear all filters
     $('#clearAll').click(function() {
-        $('input').val('');
-        $('select').prop('selectedIndex', 0);
+        // Clear text inputs and number inputs
+        $('input[type="text"], input[type="number"]').val('');
+
+        // Reset select elements to their first option
+        $('select').val($('select option:first').val());
+
+        // If you have any custom inputs or elements that need special handling
+        $('#minPrice, #maxPrice').val('');
+        $('#minGrade').val('');
+        $('#minIELTS').val('');
+        $('#minTOEFL').val('');
+
+        // Trigger the filter update after clearing
         performFilter();
     });
 
