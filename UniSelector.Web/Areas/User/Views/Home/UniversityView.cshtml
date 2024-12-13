@@ -11,122 +11,157 @@
         </div>
         <div class="card-body bg-light p-4">
             <!-- Filters Section -->
-                <h5 class="section-title ">Filters</h5>
-                <!-- Main Filters -->
-                <div class="row mb-3">
-                    <!-- University Type Filter -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">University Type</label>
-                            <select id="universityType" class="form-select filter-input">
-                                <option value="">All Types</option>
-                                <option value="Public">Public</option>
-                                <option value="Private">Private</option>
-                            </select>
-                        </div>
+            <div class="filter-container bg-white rounded-3 p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold m-0">Search Filters</h5>
+                    <button id="clearAll" class="btn btn-light border">
+                        <i class="bi bi-x-circle me-2"></i>Clear All
+                    </button>
+                </div>
+                @if (ViewBag.CurrentUser != null)
+                {
+                    <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Filters have been pre-filled with your academic information.
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+                }
 
-                    <!-- University Rank Filter -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">Maximum Rank</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><i class="bi bi-trophy"></i></span>
-                                <input type="number" id="maxRank" name="maxRank"
-                                       class="form-control filter-input" placeholder="Max Rank"
-                                       min="1" max="30">
+                <!-- University Information -->
+                <div class="filter-group mb-4">
+                    <div class="filter-header bg-light p-3 rounded-3 mb-3">
+                        <h6 class="m-0"><i class="bi bi-building me-2"></i>University Information</h6>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select id="universityType" class="form-select filter-input">
+                                    <option value="">All Types</option>
+                                    <option value="Public">Public</option>
+                                    <option value="Private">Private</option>
+                                </select>
+                                <label>University Type</label>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Faculty Filter -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">Faculty</label>
-                            <select id="faculty" class="form-select filter-input">
-                                <option value="">All Faculties</option>
-                                @foreach (var faculty in ViewBag.Faculties)
-                                {
-                                    <option value="@faculty.Value">@faculty.Text</option>
-                                }
-                            </select>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <input type="number" id="maxRank" class="form-control filter-input" placeholder="Max Rank" min="1" max="30">
+                                <label>Maximum Rank</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-text">KWD</span>
+                                <input type="number" id="minPrice" class="form-control filter-input" placeholder="Min">
+                                <input type="number" id="maxPrice" class="form-control filter-input" placeholder="Max">
+                            </div>
+                            <small class="text-muted">Price Range</small>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Major Filter -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">Major</label>
-                            <select id="major" class="form-select filter-input">
-                            </select>
+                <!-- Program Selection -->
+                <div class="filter-group mb-4">
+                    <div class="filter-header bg-light p-3 rounded-3 mb-3">
+                        <h6 class="m-0"><i class="bi bi-book me-2"></i>Program Selection</h6>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select id="faculty" class="form-select filter-input">
+                                    <option value="">All Faculties</option>
+                                    @foreach (var faculty in ViewBag.Faculties)
+                                    {
+                                        <option value="@faculty.Value">@faculty.Text</option>
+                                    }
+                                </select>
+                                <label>Faculty</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select id="major" class="form-select filter-input">
+                                    <option value="">All Majors</option>
+                                </select>
+                                <label>Major</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select id="studyDuration" class="form-select filter-input">
+                                    <option value="">Any Duration</option>
+                                    <option value="2">2 Years</option>
+                                    <option value="4">4 Years</option>
+                                    <option value="5">5 Years</option>
+                                    <option value="7">7 Years</option>
+                                </select>
+                                <label>Study Duration</label>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Academic Requirements -->
-                <div class="row mb-3">
-                    <!-- High School Path -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                            <label class="form-label">High School Path</label>
-                            <select id="highSchoolPath" class="form-select filter-input">
-                                <option value="">Any Path</option>
-                                <option value="Scientific">Scientific</option>
-                                <option value="Literary">Literary</option>
-                                <option value="Both">Both</option>
-                            </select>
-                        </div>
+                <div class="filter-group mb-4">
+                    <div class="filter-header bg-light p-3 rounded-3 mb-3">
+                        <h6 class="m-0"><i class="bi bi-mortarboard me-2"></i>Academic Requirements</h6>
                     </div>
-
-                    <!-- Minimum Grade -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                        <label class="form-label">Minimum Grade Required</label>
-                            <input type="number" id="minGrade" class="form-control filter-input"
-                                   placeholder="Minimum grade %" min="0" max="100">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <select id="highSchoolPath" class="form-select filter-input">
+                                            <option value="">Any Path</option>
+                                            <option value="Scientific">Scientific</option>
+                                            <option value="Literary">Literary</option>
+                                            <option value="Both">Both</option>
+                                        </select>
+                                        <label>High School Path</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="number" id="minGrade" class="form-control filter-input" placeholder="Min grade" min="0" max="100">
+                                        <label>Minimum Grade (%)</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- IELTS Score -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                        <label class="form-label">Minimum IELTS Required</label>
-                            <input type="number" id="minIELTS" class="form-control filter-input"
-                                   placeholder="Min IELTS score" min="0" max="9" step="0.5">
-                        </div>
-                    </div>
-
-                    <!-- TOEFL Score -->
-                    <div class="col-md-3 mb-3">
-                        <div class="form-group">
-                        <label class="form-label">Minimum TOEFL Required</label>
-                            <input type="number" id="minTOEFL" class="form-control filter-input"
-                                   placeholder="Min TOEFL score" min="0" max="120">
+                        <div class="col-md-6">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="number" id="minIELTS" class="form-control filter-input" placeholder="Min IELTS" min="0" max="9" step="0.5">
+                                        <label>Min IELTS Score</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-floating">
+                                        <input type="number" id="minTOEFL" class="form-control filter-input" placeholder="Min TOEFL" min="0" max="120">
+                                        <label>Min TOEFL Score</label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Price Range -->
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label">Price Range</label>
-                        <div class="input-group">
-                            <span class="input-group-text">KWD</span>
-                            <input type="number" id="minPrice" class="form-control filter-input" placeholder="Min">
-                            <span class="input-group-text">to</span>
-                            <input type="number" id="maxPrice" class="form-control filter-input" placeholder="Max">
-                        </div>
+                <!-- Additional Requirements -->
+                <div class="filter-group">
+                    <div class="filter-header bg-light p-3 rounded-3 mb-3">
+                        <h6 class="m-0"><i class="bi bi-check-circle me-2"></i>Additional Requirements</h6>
                     </div>
-
-                    <div class="col-md-3 d-flex align-items-end">
-                        
-                    </div>
-                    <!-- Filter Buttons -->
-                    <div class="col-md-3 d-flex align-items-end">
-                        <div class="d-grid gap-2 w-100">
-                            <button id="clearAll" class="btn btn-outline-secondary">
-                                <i class="bi bi-x-circle me-2"></i>Clear All
-                            </button>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-floating">
+                                <select id="requiresAptitudeTest" class="form-select filter-input">
+                                    <option value="">Any</option>
+                                    <option value="true">Required</option>
+                                    <option value="false">Not Required</option>
+                                </select>
+                                <label>Aptitude Test</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -180,6 +215,26 @@
         font-weight: 500;
         color: #495057;
     }
+    <!-- ---------------------------- -->
+        .filter-container {
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .filter-header {
+            border-left: 4px solid #0d6efd;
+        }
+
+        .form-floating > label {
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            height: 58px;
+        }
+
+        .input-group-text {
+            background-color: #f8f9fa;
+        }
 </style>
 
 @section Scripts {

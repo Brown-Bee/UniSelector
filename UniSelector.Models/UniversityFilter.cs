@@ -12,4 +12,6 @@ public class UniversityFilter
     public double? MinPrice { get; set; }
     public double? MaxPrice { get; set; }
     public int? MaxRank { get; set; }
+    public int? StudyDuration { get; set; }
+    public bool? RequiresAptitudeTest { get; set; }
 }

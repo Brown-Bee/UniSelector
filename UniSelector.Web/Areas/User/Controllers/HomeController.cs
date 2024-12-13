@@ -1,6 +1,8 @@
 using System.Diagnostics;
+using System.Security.Claims;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using UniSelector.DataAccess.Repository.IRepository;
@@ -14,11 +16,13 @@ namespace UniSelector.Web.Areas.User.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, UserManager<ApplicationUser> userManager)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -36,6 +40,15 @@ namespace UniSelector.Web.Areas.User.Controllers
         /*----------------- University Actions -----------------*/
         public IActionResult UniversityView( int? facultyId)
         {
+
+            // Get current user info only if logged in AND has User role
+            ApplicationUser currentUser = null;
+            if (User.Identity.IsAuthenticated && User.IsInRole("User"))
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                currentUser = _unitOfWork.ApplicationUser.Get(a => a.Id == userId);
+            }
+
             IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
 
             
@@ -52,6 +65,7 @@ namespace UniSelector.Web.Areas.User.Controllers
             });
             
             ViewBag.CurrentFacultyId = facultyId;
+            ViewBag.CurrentUser = currentUser;
             return View(universities);
         }
         public IActionResult UniDetails(int universityId)

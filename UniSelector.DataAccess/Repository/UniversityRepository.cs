@@ -131,6 +131,27 @@ namespace UniSelector.DataAccess.Repository
                     .Where(u => u.KuwaitRank <= filter.MaxRank);
             }
 
+            // Study Duration Filter
+            if (filter.StudyDuration.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .ThenInclude(m => m.StandardMajor)
+                    .Where(u => u.Faculties.Any(f =>
+                        f.Majors.Any(m => m.StandardMajor.StudyDuration == filter.StudyDuration)));
+            }
+
+            // Aptitude Test Filter
+            if (filter.RequiresAptitudeTest.HasValue)
+            {
+                query = query
+                    .Include(u => u.Faculties)
+                    .ThenInclude(f => f.Majors)
+                    .Where(u => u.Faculties.Any(f =>
+                        f.Majors.Any(m => m.RequiresAptitudeTest == filter.RequiresAptitudeTest)));
+            }
+
             return await query.ToListAsync();
         }
         
