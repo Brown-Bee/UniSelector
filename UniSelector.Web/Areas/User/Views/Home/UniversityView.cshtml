@@ -1,4 +1,4 @@
-﻿@model IEnumerable<University>
+﻿@model UniVM
 
 <div class="container" style="padding-top: 6rem;">
     <div class="card shadow border-0">
@@ -175,6 +175,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <style>
     .university-card {
@@ -242,6 +243,22 @@
 
     <script>
         $(document).ready(function () {
+            // Initialize user values
+            const user = {
+                highSchoolType: '@(Model.User.HighSchoolType ?? "Private")',
+                grade: @(Model.User.Grade),
+                ielts: @(Model.User.IELTS),
+                toefl: @(Model.User.TOEFL)
+            };
+
+            console.log(user);
+
+            // Set initial values
+            $('#highSchoolPath').val(user.highSchoolType);
+            $('#minGrade').val(user.grade);
+            $('#minIELTS').val(user.ielts);
+            $('#minTOEFL').val(user.toefl);
+            
             // Faculty dropdown change event
             $('#faculty').on('change', function () {
                 var selectedFacultyId = $(this).val();

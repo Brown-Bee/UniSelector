@@ -41,17 +41,7 @@ namespace UniSelector.Web.Areas.User.Controllers
         public IActionResult UniversityView( int? facultyId)
         {
 
-            // Get current user info only if logged in AND has User role
-            ApplicationUser currentUser = null;
-            if (User.Identity.IsAuthenticated && User.IsInRole("User"))
-            {
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-                currentUser = _unitOfWork.ApplicationUser.Get(a => a.Id == userId);
-            }
-
             IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
-
-            
             // Filter According to the Faculty
             if (facultyId.HasValue)
             {
@@ -65,8 +55,15 @@ namespace UniSelector.Web.Areas.User.Controllers
             });
             
             ViewBag.CurrentFacultyId = facultyId;
-            ViewBag.CurrentUser = currentUser;
-            return View(universities);
+            
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _unitOfWork.ApplicationUser.Get(u => u.Id == userId);
+            var uniVm = new UniVM
+            {
+                Universities = universities.ToList(),
+                User = user
+            };
+            return View(uniVm);
         }
         public IActionResult UniDetails(int universityId)
         {

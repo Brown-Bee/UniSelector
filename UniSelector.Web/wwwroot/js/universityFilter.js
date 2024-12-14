@@ -11,7 +11,7 @@ $(document).ready(function() {
             highSchoolPath: $('#highSchoolPath').val(),
             minPrice: $('#minPrice').val(),
             maxPrice: $('#maxPrice').val(),
-            maxRank: $('#maxRank').val()
+            maxRank: $('#maxRank').val(),
             studyDuration: $('#studyDuration').val(),
             requiresAptitudeTest: $('#requiresAptitudeTest').val()
         };
@@ -88,43 +88,7 @@ $(document).ready(function() {
         })
     }
 
-    // Populate user data if available
-    function populateUserFilters() {
-        const currentUser = @Json.Serialize(ViewBag.CurrentUser); // Get user data
-
-        if (currentUser) {
-            // Set High School Path
-            if (currentUser.HighSchoolType) {
-                $('#highSchoolPath').val(currentUser.HighSchoolType);
-            }
-
-            // Set Grade
-            if (currentUser.Grade) {
-                $('#minGrade').val(currentUser.Grade);
-            }
-
-            // Set IELTS Score
-            if (currentUser.IELTS) {
-                $('#minIELTS').val(currentUser.IELTS);
-            }
-
-            // Set TOEFL Score
-            if (currentUser.TOEFL) {
-                $('#minTOEFL').val(currentUser.TOEFL);
-            }
-
-            // Set Aptitude Test
-            if (currentUser.HasAptitudeTest) {
-                $('#requiresAptitudeTest').val(currentUser.HasAptitudeTest.toString());
-            }
-
-            // Trigger filter update after populating
-            performFilter();
-        }
-    }
-
-    // Call this function when page loads
-    populateUserFilters();
+   
 
     // Event handler for all filter inputs
     $('.filter-input').on('input change', function() {

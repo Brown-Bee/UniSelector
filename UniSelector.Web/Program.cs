@@ -69,6 +69,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+SeedDatabase();
+
 app.MapRazorPages();
 app.MapControllers();
 
@@ -76,8 +78,14 @@ app.MapControllerRoute(
     name: "areas",
     pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");
 
-var scope = app.Services.CreateScope();
-var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
-await dbInitializer.Initialize();
+
 app.Run();
-    
+
+return;
+
+void SeedDatabase()
+{
+    using var scope = app.Services.CreateScope();
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    dbInitializer.Initialize().GetAwaiter().GetResult();
+}
