@@ -57,13 +57,13 @@
 
                     <select class="form-control" asp-for="Major.StandardMajorId" asp-items="Model.StandardMajors" id="standardMajorSelect">
                         <option value="" selected>--Select Standard Major--</option>
-                        @if (Model.StandardMajors != null)
+                        @* @if (Model.StandardMajors != null)
                         {
                             @foreach (var major in Model.StandardMajors)
                             {
                                 <option value="@major.Value">@major.Text</option>
                             }
-                        }
+                        } *@
                     </select>
                     <span asp-validation-for="Major.StandardMajorId" class="text-danger"></span>
                 </div>
@@ -170,39 +170,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @* @if (Model.Majors is not null)
-                    {
-                    foreach (var obj in Model.Majors)
-                    {
-                    <tr>
-                    <td>@(obj.StandardMajor?.CombinedName)</td>
-                    <td>@obj.Credits</td>
-                    <td>@obj.AveragePrice.ToString("c")</td>
-                    <td>@obj.MinimumGrade%</td>
-                    <td>
-                    <div class="w-75 btn-group" role="group">
-                    <a asp-controller="Major" asp-action="Index"
-                    asp-route-majorId="@obj.Id"
-                    asp-route-facultyId="@obj.FacultyId"
-                    asp-route-standardFactId="@Model.StandardFacultyId"
-                    asp-route-universityId="@Model.UniId"
-                    class="btn btn-primary mx-2">
-
-                    <i class="bi bi-pencil-square"></i> Update
-                    </a>
-                    <a asp-controller="Major" asp-action="Delete" asp-route-id="@obj.Id"
-                    asp-route-majorId="@obj.Id"
-                    asp-route-factId="@obj.FacultyId"
-                    asp-route-standFactId="@Model.StandardFacultyId"
-                    asp-route-uniId="@Model.UniId"
-                    class="btn btn-danger mx-2">
-                    <i class="bi bi-trash-fill"></i> Delete
-                    </a>
-                    </div>
-                    </td>
-                    </tr>
-                    }
-                    } *@
                     @if (Model.Majors != null)
                     {
                         @foreach (var obj in Model.Majors)

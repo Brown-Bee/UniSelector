@@ -47,7 +47,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
        SmallDescription = "Premier engineering and business education in Kuwait",
        location = "Egaila, Block 6, Salem Sabah Al-Salem Area",
        KuwaitRank = 2,
-       PhoneNumber = "+965 22251400",
+       PhoneNumber = "22251400",
        ImageUrl = "/images/University/AUM.png"
    },
    new University

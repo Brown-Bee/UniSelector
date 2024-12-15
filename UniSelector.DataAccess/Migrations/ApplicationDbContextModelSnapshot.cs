@@ -2672,7 +2672,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
                             Name = "American University of Middle East (AUM)",
-                            PhoneNumber = "+965 22251400",
+                            PhoneNumber = "22251400",
                             SmallDescription = "Premier engineering and business education in Kuwait",
                             location = "Egaila, Block 6, Salem Sabah Al-Salem Area",
                             type = "Private"
