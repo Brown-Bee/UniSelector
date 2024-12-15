@@ -33,7 +33,7 @@
                             <td>@obj.MinimumGrade</td>
                             <td>
                                 <div class="w-75 btn-group" role="group">
-                                    <a asp-area="User" asp-controller="Application" asp-action="Apply"
+                                    @* <a asp-area="User" asp-controller="Application" asp-action="Apply"
                                        
                                        asp-route-uniEmail="@obj.Faculty!.University!.Email"
                                        asp-route-universityId="@obj.Faculty!.UniversityId"
@@ -41,7 +41,7 @@
                                        asp-route-majorId="@obj.Id"
                                        class="btn btn-primary mx-2">
                                         <i class="bi bi-pencil-square"></i> Apply
-                                    </a>
+                                    </a> *@
                                     <a asp-action="DetailsById" asp-route-majorId="@obj.Id" class="btn btn-primary mx-2">
                                         <i class="bi bi-pencil-square"></i> Details
                                     </a>

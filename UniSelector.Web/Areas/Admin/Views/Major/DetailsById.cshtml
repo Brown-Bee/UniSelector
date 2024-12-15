@@ -209,6 +209,14 @@
                        class="btn btn-outline-primary">
                         <i class="bi bi-arrow-left me-2"></i>Back
                     </a>
+                    <a asp-area="User" asp-controller="Application" asp-action="Apply"
+                       asp-route-uniEmail="@Model.Faculty!.University!.Email"
+                       asp-route-universityId="@Model.Faculty!.UniversityId"
+                       asp-route-facultyId="@Model.Faculty.Id"
+                       asp-route-majorId="@Model.Id"
+                       class="btn btn-primary mx-2">
+                        <i class="bi bi-pencil-square"></i> Apply
+                    </a>
                 </div>
             </div>
         </div>

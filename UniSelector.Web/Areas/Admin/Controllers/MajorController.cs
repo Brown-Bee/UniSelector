@@ -156,7 +156,7 @@ public class MajorController : Controller
     public IActionResult DetailsById(int majorId)
     {
         var majors = _unitOfWork.Major.Get(m => m.Id == majorId, 
-                includeProperties:"Faculty.StandardFaculty,StandardMajor");
+                includeProperties: "Faculty.StandardFaculty,StandardMajor,Faculty.University");
         ViewBag.AcceptanceRate = _unitOfWork.Major.GetAcceptanceRate(majorId);
         ViewBag.RejectionRate = _unitOfWork.Major.GetRejectionRate(majorId);
         ViewBag.TotalApplications = _unitOfWork.Major.TotalApplications(majorId);
