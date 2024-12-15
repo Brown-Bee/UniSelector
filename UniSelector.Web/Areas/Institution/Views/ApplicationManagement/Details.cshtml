@@ -144,20 +144,20 @@
                         <div class="d-flex flex-column gap-2">
                             <div class="d-flex justify-content-between">
                                 <span class="text-muted">IELTS Score:</span>
-                                <span class="fw-medium @(Model.User?.IELTS >= Model.Major?.MinimumIELTS ? "text-success" : "text-danger")">
-                                    @Model.User?.IELTS / @Model.Major?.MinimumIELTS
+                                <span class="fw-medium @(Model.Major?.MinimumIELTS == null ? "text-success" : (Model.User?.IELTS >= Model.Major?.MinimumIELTS ? "text-success" : "text-danger"))">
+                                    Student Score: @(Model.User?.IELTS ?? 0)  /  Required Score: @(Model.Major?.MinimumIELTS ?? 0)
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="text-muted">TOEFL Score:</span>
-                                <span class="fw-medium @(Model.User?.TOEFL >= Model.Major?.MinimumTOEFL ? "text-success" : "text-danger")">
-                                    @Model.User?.TOEFL / @Model.Major?.MinimumTOEFL
+                                <span class="fw-medium @(Model.Major?.MinimumTOEFL == null ? "text-success" : (Model.User?.TOEFL >= Model.Major?.MinimumTOEFL ? "text-success" : "text-danger"))">
+                                    Student Score: @(Model.User?.TOEFL ?? 0)  /  Required Score: @(Model.Major?.MinimumTOEFL ?? 0)
                                 </span>
                             </div>
                             <div class="d-flex justify-content-between">
                                 <span class="text-muted">Aptitude Test:</span>
                                 <span class="fw-medium @(Model.User?.HasAptitudeTest == Model.Major?.RequiresAptitudeTest ? "text-success" : "text-danger")">
-                                    @((bool)Model.User?.HasAptitudeTest ? "Yes" : "No") / @((bool)Model.Major?.RequiresAptitudeTest ? "Required" : "Not Required")
+                                    @((bool)Model.User?.HasAptitudeTest ? "Done" : "Not done") / @((bool)Model.Major?.RequiresAptitudeTest ? "Required for the major" : "Not Required for the major")
                                 </span>
                             </div>
                         </div>
