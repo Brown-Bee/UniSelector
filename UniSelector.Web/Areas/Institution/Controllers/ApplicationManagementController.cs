@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -16,10 +17,12 @@ namespace UniSelector.Areas.Institution.Controllers
     public class ApplicationManagementController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailSender _emailSender;
 
-        public ApplicationManagementController(IUnitOfWork unitOfWork)
+        public ApplicationManagementController(IUnitOfWork unitOfWork, IEmailSender emailSender)
         {
             _unitOfWork = unitOfWork;
+            _emailSender = emailSender;
         }
 
         // GET: List all applications for the university
@@ -76,10 +79,34 @@ namespace UniSelector.Areas.Institution.Controllers
 
         // POST: Update application status
         [HttpPost]
-        public IActionResult UpdateStatus(int id, string status, string? feedback)
+        public async Task<IActionResult> UpdateStatus(int id, string status, string? feedback)
         {
+            // Get application with all needed details
+            var application = _unitOfWork.Application.Get(a => a.Id == id,
+                includeProperties: "User,University,Faculty.StandardFaculty,Major.StandardMajor");
+
+            if (application == null) return NotFound();
+
+            // Update status
             _unitOfWork.Application.UpdateStatus(id, status, feedback);
             _unitOfWork.Save();
+
+            // Send email notification
+            string emailBody = EmailTemplates.GetApplicationResponseEmail(
+                application.User.Name,
+                application.University.Name,
+                application.Faculty.StandardFaculty.CombinedName,
+                application.Major.StandardMajor.CombinedName,
+                status,
+                feedback
+            );
+
+            await _emailSender.SendEmailAsync(
+                application.User.Email,
+                $"Application {status} - {application.University.Name}",
+                emailBody
+            );
+
             return RedirectToAction(nameof(Index));
         }
 
