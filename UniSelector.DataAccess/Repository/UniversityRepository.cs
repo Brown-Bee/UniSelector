@@ -91,7 +91,7 @@ namespace UniSelector.DataAccess.Repository
                 query = query
                     .Include(u => u.Faculties)
                     .ThenInclude(f => f.Majors)
-                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumIELTS >= filter.IeltsScore)));
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumIELTS <= filter.IeltsScore || m.MinimumIELTS == null)));
             }
 
             if (filter.ToeflScore.HasValue)
@@ -99,7 +99,7 @@ namespace UniSelector.DataAccess.Repository
                 query = query
                     .Include(u => u.Faculties)
                     .ThenInclude(f => f.Majors)
-                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumTOEFL >= filter.ToeflScore)));
+                    .Where(u => u.Faculties.Any(f => f.Majors.Any(m => m.MinimumTOEFL <= filter.ToeflScore || m.MinimumTOEFL == null)));
             }
 
             if (!string.IsNullOrEmpty(filter.HighSchoolPath))
