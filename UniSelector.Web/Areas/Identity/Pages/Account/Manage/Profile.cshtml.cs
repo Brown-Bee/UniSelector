@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using UniSelector.Models;
+using UniSelector.Models.CustomeValidation;
 
 namespace UniSelector.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -42,8 +43,8 @@ namespace UniSelector.Web.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Marital Status")]
             public string? MaritalStatus { get; set; }
 
-            [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
+            [AgeRange(15, 100)]
             public DateTime? BirthDate { get; set; }
 
             [Display(Name = "Place of Birth")]

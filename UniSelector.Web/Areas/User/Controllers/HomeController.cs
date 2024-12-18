@@ -38,10 +38,10 @@ namespace UniSelector.Web.Areas.User.Controllers
         }
 
         /*----------------- University Actions -----------------*/
-        public IActionResult UniversityView( int? facultyId)
+        public IActionResult UniversityView(int? facultyId)
         {
 
-            IEnumerable<University> universities = _unitOfWork.University.GetAll(includeProperties: "Faculties");
+            IEnumerable<University> universities = _unitOfWork.University.GetAll(u => u.Email != null, includeProperties: "Faculties");
             // Filter According to the Faculty
             if (facultyId.HasValue)
             {

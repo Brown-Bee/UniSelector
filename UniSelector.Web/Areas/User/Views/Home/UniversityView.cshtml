@@ -249,16 +249,7 @@
                 grade: @(Model.User?.Grade ?? 0),
                 ielts: @(Model.User?.IELTS ?? 0),
                 toefl: @(Model.User?.TOEFL ?? 0)
-            };
-
-            console.log('User data:', user); // Add this to debug
-
-            // Check if values are actually being set
-            console.log('Setting values:');
-            console.log('HighSchool Path:', user.highSchoolType);
-            console.log('Grade:', user.grade);
-            //console.log('IELTS:', user.ielts);
-            //console.log('TOEFL:', user.toefl);
+            }
 
             // Set initial values
             $('#highSchoolPath').val(user.highSchoolType);

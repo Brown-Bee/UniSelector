@@ -52,6 +52,7 @@ namespace UniSelector.DataAccess.Repository
         public async Task<List<University>> FilterUniversities(UniversityFilter filter)
         {
             var query = _db.Universities
+                .Where(u => u.Email != null)
                 .Include(u => u.Faculties)
                 .ThenInclude(f => f.StandardFaculty)
                 .AsQueryable();

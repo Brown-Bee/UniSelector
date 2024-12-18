@@ -96,44 +96,48 @@ namespace UniSelector.Web.Areas.Admin.Controllers
 
             TempData["success"] = "Universities " + (university.Id != 0 ? "Update" : "Create") + " successfully";
 
+            
             var email = university.Email;
-            var institution = await _userManager.FindByEmailAsync(email);
-            if (institution is null)
+            if (email is not null)
             {
-                institution = new ApplicationUser
+                var institution = await _userManager.FindByEmailAsync(email);
+                if (institution is null)
                 {
-                    UserName = email,
-                    Email = email,
-                    Name = university.Name,
-                    PhoneNumber = university.PhoneNumber
-                };
+                    institution = new ApplicationUser
+                    {
+                        UserName = email,
+                        Email = email,
+                        Name = university.Name,
+                        PhoneNumber = university.PhoneNumber
+                    };
 
-                var result = await _userManager.CreateAsync(institution, $"{university.Name}X123#");
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(institution, SD.RoleUniversity);
-                    
-                    var code = await _userManager.GeneratePasswordResetTokenAsync(institution);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    
-                    var resetPasswordUrl = Url.Page(
-                        "/Account/ResetPassword",
-                        null,
-                        new { area = "Identity", code, email = institution.Email },
-                        Request.Scheme);
+                    var result = await _userManager.CreateAsync(institution, $"{university.Name}X123#");
+                    if (result.Succeeded)
+                    {
+                        await _userManager.AddToRoleAsync(institution, SD.RoleUniversity);
 
-                    await SendWelcomeEmailAsync(university.Name, email, resetPasswordUrl);
-                    
-                    return RedirectToAction("Index", "University");
-                }
+                        var code = await _userManager.GeneratePasswordResetTokenAsync(institution);
+                        code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
 
-                // Log the error
-                foreach (var error in result.Errors)
-                {
-                    Console.WriteLine($"Error creating admin user: {error.Description}");
+                        var resetPasswordUrl = Url.Page(
+                            "/Account/ResetPassword",
+                            null,
+                            new { area = "Identity", code, email = institution.Email },
+                            Request.Scheme);
+
+                        await SendWelcomeEmailAsync(university.Name, email, resetPasswordUrl);
+
+                        return RedirectToAction("Index", "University");
+                    }
+
+                    // Log the error
+                    foreach (var error in result.Errors)
+                    {
+                        Console.WriteLine($"Error creating admin user: {error.Description}");
+                    }
                 }
             }
-            return View(university);
+            return RedirectToAction(nameof(Index));
         }
         
         

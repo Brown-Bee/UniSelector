@@ -12,8 +12,8 @@ using UniSelector.DataAccess.Data;
 namespace UniSelector.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241213170705_Init")]
-    partial class Init
+    [Migration("20241218071436_AddCustomeValidation")]
+    partial class AddCustomeValidation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2675,7 +2675,7 @@ namespace UniSelector.DataAccess.Migrations
                             ImageUrl = "/images/University/AUM.png",
                             KuwaitRank = 2,
                             Name = "American University of Middle East (AUM)",
-                            PhoneNumber = "+965 22251400",
+                            PhoneNumber = "22251400",
                             SmallDescription = "Premier engineering and business education in Kuwait",
                             location = "Egaila, Block 6, Salem Sabah Al-Salem Area",
                             type = "Private"

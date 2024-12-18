@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using UniSelector.Models.CustomeValidation;
 
 namespace UniSelector.Models
 {
@@ -15,7 +16,7 @@ namespace UniSelector.Models
         public string? Gender { get; set; }
         [DisplayName("Marital Status")]
         public string? MaritalStatus { get; set; }
-        [DataType(DataType.Date)]
+        [AgeRange(15, 100)]
         [DisplayName("Date of Birth")]
         public DateTime? BirthDate { get; set; }
         [DisplayName("Place of Birth")]

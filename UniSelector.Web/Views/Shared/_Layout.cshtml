@@ -101,7 +101,7 @@
                     {
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                University Management
+                                Management
                             </a>
                             <ul>
                                 <li>
@@ -120,14 +120,14 @@
                     {
                         <a asp-area="User" asp-controller="Application" asp-action="myApplications">My Applications</a>
                     }
-                    <li>
+                    @*<li>
                         <a class="nav-link" asp-area="User" asp-controller="Home" asp-action="UniversityView">Universities</a>
-                    </li>
+                    </li>*@
                     @if (isHomePage)
                     {
-                        <li>
+                        @*<li>
                             <a asp-area="User" asp-controller="Home" asp-action="Index" class="active">Home</a>
-                        </li>
+                        </li>*@
                         <li>
                             <a href="#about">About</a>
                         </li>
