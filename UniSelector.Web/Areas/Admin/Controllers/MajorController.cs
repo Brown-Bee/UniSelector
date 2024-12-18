@@ -52,6 +52,7 @@ public class MajorController : Controller
         if (majorId != 0)
         {
             ViewBag.TotalApplications = _unitOfWork.Major.TotalApplications(majorId);
+            ViewBag.RejectionRate = _unitOfWork.Major.GetRejectionRate(majorId);
             ViewBag.AcceptanceRate = _unitOfWork.Major.GetAcceptanceRate(majorId);
         }
         return View("Upsert", majorVm);
